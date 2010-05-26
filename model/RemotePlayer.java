@@ -1,5 +1,5 @@
 package model;
 
-public class RemotePlayer {
+public class RemotePlayer extends Player {
 
 }

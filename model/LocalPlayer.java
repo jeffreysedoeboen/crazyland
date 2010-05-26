@@ -1,5 +1,5 @@
 package model;
 
-public class LocalPlayer {
+public class LocalPlayer extends Player {
 
 }
