@@ -1,5 +1,7 @@
 package model.bullet;
 
-public class Bullet {
+public abstract class Bullet {
 
+	protected final float BULLET_SPEED = 1.00F;
+	
 }
