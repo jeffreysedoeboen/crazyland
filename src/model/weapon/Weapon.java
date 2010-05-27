@@ -3,10 +3,9 @@ package model.weapon;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.AffineTransform;
-
+import java.awt.image.BufferedImage;
 import model.bullet.*;
 
-import javax.swing.ImageIcon;
 public abstract class Weapon {
 
 	protected final float FIRE_RATE = 1; // The amount of bullets per second
@@ -14,7 +13,7 @@ public abstract class Weapon {
 	protected final boolean UNLIMITED_BULLETS = false;
 	protected final int MAX_BULLETS = 0;
 	protected int currentBullets = 0;
-	protected ImageIcon image = null;
+	protected BufferedImage image = null;
 	
 	// TODO Implement Shoot
 	public Bullet shoot(){
@@ -29,7 +28,7 @@ public abstract class Weapon {
 	}
 	
 	public void turnToPoint( Point point ) {
-		Graphics2D g = (Graphics2D) image.getImage().getGraphics();
+		Graphics2D g = (Graphics2D) image.getGraphics();
 		g.setTransform(AffineTransform.getRotateInstance(point.getX(), point.getY())); //TODO controleren als view er is
 		g.dispose();
 	}

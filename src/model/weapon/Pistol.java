@@ -1,7 +1,9 @@
 package model.weapon;
 
-import javax.swing.ImageIcon;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import model.bullet.Bullet;
 import model.bullet.PistolBullet;
 
@@ -13,7 +15,12 @@ public class Pistol extends Weapon {
 	
 	
 	public Pistol() {
-		this.image = new ImageIcon();//TODO file nog aangeven
+		try {
+			this.image = ImageIO.read(new File("")); //TODO file nog aangeven
+		} catch (IOException e) {
+			System.err.println("Error while reading image for weapon");
+			e.printStackTrace();
+		}
 	}
 	
 }
