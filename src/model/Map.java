@@ -13,13 +13,26 @@ import javax.imageio.ImageIO;
 
 public class Map {
 	private BufferedImage originalimage;
-	private ArrayList<Tile> tiles;
+	private Tile[][] tiles;
 	
 	public Map(){
 		try {
 			originalimage = ImageIO.read(new File("tiles.png"));
+			ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
+			images.add(originalimage.getSubimage(0, 0, 32, 32));
+			images.add(originalimage.getSubimage(0, 32, 32, 32));
+			images.add(originalimage.getSubimage(0, 64, 32, 32));
+			images.add(originalimage.getSubimage(0, 96, 32, 32));
+			images.add(originalimage.getSubimage(32, 32, 32, 32));
+			images.add(originalimage.getSubimage(32, 64, 32, 32));
+			images.add(originalimage.getSubimage(32, 96, 32, 32));
+			images.add(originalimage.getSubimage(64, 32, 32, 32));
+			images.add(originalimage.getSubimage(64, 64, 32, 32));
+			images.add(originalimage.getSubimage(64, 96, 32, 32));
+			images.add(originalimage.getSubimage(96, 32, 32, 32));
+			images.add(originalimage.getSubimage(96, 64, 32, 32));
+			images.add(originalimage.getSubimage(96, 96, 32, 32));
 			
-			BufferedImage tile1 = originalimage.getSubimage(x, y, width, height);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
