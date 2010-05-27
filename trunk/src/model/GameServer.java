@@ -1,6 +1,6 @@
 package model;
 
-public class Game {
+public class GameServer {
 
 	public void init(){
 		
