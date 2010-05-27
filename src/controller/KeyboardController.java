@@ -12,6 +12,10 @@ public class KeyboardController implements KeyListener {
 	private GameServer server;
 	private Player player;
 	
+	public KeyboardController(Player player, GameServer server) {
+		this.server = server;
+		this.player = player;
+	}
 	
 	private void walkLeft(){
 		if(server.checkDirection(player.getPosition(), 'l')) {
