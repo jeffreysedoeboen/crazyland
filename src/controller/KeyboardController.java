@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -19,12 +20,17 @@ public class KeyboardController implements KeyListener {
 	
 	private void walkLeft(){
 		if(server.checkDirection(player.getPosition(), 'l')) {
-			
+			player.setPosition(new Point(player.getPosition().x + 1, player.getPosition().y));
 		}
 	}
 	
 	private void walkRight(){
 		if(server.checkDirection(player.getPosition(), 'r')) {
+			player.setPosition(new Point(player.getPosition().x - 1, player.getPosition().y));			
+		}
+	}
+	private void jump() {
+		if(server.checkDirection(player.getPosition(), 'u')) {
 			
 		}
 	}
@@ -32,6 +38,7 @@ public class KeyboardController implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()) {
 		case(KeyEvent.VK_SPACE): //TODO springen
+			jump();
 			break;
 		case(KeyEvent.VK_A): //TODO naar links lopen
 			walkLeft();
