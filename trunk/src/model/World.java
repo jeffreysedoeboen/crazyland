@@ -2,10 +2,14 @@ package model;
 
 import java.util.Observable;
 
-import view.WorldView;
-
 public class World extends Observable{
 
+	Map map = new Map();
+	
+	public Map getMap() {
+		return map;
+	}
+	
 	public void run(){
 		this.setChanged();
 		this.notifyObservers();
