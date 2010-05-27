@@ -14,40 +14,23 @@ public class MouseController implements MouseListener, MouseMotionListener{
 		this.player = player;
 	}
 	
-	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO schieten
-		
+		player.shoot();		
 	}
 
-	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
 	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void mouseMoved(MouseEvent e) {
