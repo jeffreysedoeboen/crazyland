@@ -21,40 +21,31 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 public class Map {
-	private BufferedImage originalimage;
 	private Tile[][] tiles;
 	
 	public Map(){
-		try {
-			originalimage = ImageIO.read(new File("tiles/grass_main.png"));
-			ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
-			tiles = new Tile[20][20];
-			images.add(originalimage.getSubimage(0, 0, 32, 32));
-			images.add(originalimage.getSubimage(0, 32, 32, 32));
-			images.add(originalimage.getSubimage(0, 64, 32, 32));
-			images.add(originalimage.getSubimage(0, 96, 32, 32));
-			images.add(originalimage.getSubimage(32, 32, 32, 32));
-			images.add(originalimage.getSubimage(32, 64, 32, 32));
-			images.add(originalimage.getSubimage(32, 96, 32, 32));
-			images.add(originalimage.getSubimage(64, 32, 32, 32));
-			images.add(originalimage.getSubimage(64, 64, 32, 32));
-			images.add(originalimage.getSubimage(64, 96, 32, 32));
-			images.add(originalimage.getSubimage(96, 32, 32, 32));
-			images.add(originalimage.getSubimage(96, 64, 32, 32));
-			images.add(originalimage.getSubimage(96, 96, 32, 32));
-			
-			for(BufferedImage image : images) {
-				this.tiles[1][1] = new Tile(1,1,image, true);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+	}
+	
+	public Tile[][] getTiles() {
+		return tiles;
+	}
+
+	public void setTiles(Tile[][] tiles) {
+		this.tiles = tiles;
 	}
 	
 	public static void main(String[] args) {
-		 Mapfactory.getMap("map1");
+		Map map = new Map();
+		map.setTiles(Mapfactory.getMap("map1"));
+		map.tekenMap();
 	}
 	
-	
+	public void tekenMap() {
+		for(Tile[] row : tiles) {
+			for(Tile tile : row) {
+				System.out.println("x: " + tile.getX() + ", y: " + tile.getY());
+			}
+		}
+	}
 }
