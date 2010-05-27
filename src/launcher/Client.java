@@ -1,4 +1,4 @@
-package starter;
+package launcher;
 
 public class Client {
 
