@@ -2,7 +2,7 @@ package model;
 
 import java.util.Observable;
 
-import view.ViewWorld;
+import view.WorldView;
 
 public class World extends Observable{
 
