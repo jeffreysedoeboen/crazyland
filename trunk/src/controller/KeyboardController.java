@@ -2,9 +2,23 @@ package controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import model.Player;
+import view.ViewWorld;
 
 public class KeyboardController implements KeyListener {
 
+	private ViewWorld world;
+	private Player player;
+	
+	
+	public void walkLeft(){
+		
+	}
+	
+	public void walkRight(){
+		
+	}
+	
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()) {
 		case(KeyEvent.VK_SPACE): //TODO springen
