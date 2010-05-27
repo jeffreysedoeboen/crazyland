@@ -16,7 +16,7 @@ import model.tile.Tile;
 public class WorldView extends JPanel implements Observer {
 
 	//private GameServer server;
-	private World world;
+	private World world; 
 	private Map map;
 	
 	public WorldView(World world) {
