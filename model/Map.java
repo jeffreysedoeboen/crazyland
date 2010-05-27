@@ -15,15 +15,11 @@ public class Map {
 	private BufferedImage originalimage;
 	private ArrayList<Tile> tiles;
 	
-	public Map(String imagesource) {
-		originalimage = new BufferedImage();
-	}
-
-	private BufferedImage org;
-	
 	public Map(){
 		try {
-			org = ImageIO.read(new File("kaas.png"));
+			originalimage = ImageIO.read(new File("tiles.png"));
+			
+			BufferedImage tile1 = originalimage.getSubimage(x, y, width, height);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
