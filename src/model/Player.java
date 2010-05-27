@@ -54,11 +54,7 @@ public class Player {
 		return hitpoints;
 	}
 
-	public void setWeapon(Weapon weapon) {
-		this.weapon = weapon;
-	}
-
 	public Weapon getWeapon() {
-		return weapon;
+		return primaryWeapon;
 	}
 }
