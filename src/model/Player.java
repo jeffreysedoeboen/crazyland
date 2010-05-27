@@ -22,6 +22,7 @@ public class Player {
 	}
 	
 	public void shoot() {
+		//standaart wapen op plek 0
 		if(weapons.size() > 0) {
 			weapons.get(0).shoot();
 		}
