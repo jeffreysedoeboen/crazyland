@@ -31,7 +31,7 @@ public class Mapfactory {
 		Tile[][] tiles = new Tile[10][10];
 		
 		try {
-			originalimage = ImageIO.read(new File("tiles/grass_main.png"));
+			originalimage = ImageIO.read(new File("../tiles/tiles.png"));
 			ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
 			/*for(int x = 0; x < 400; x += 64) {
 				for(int y = 0; y < 330; y += 64) {
@@ -57,7 +57,7 @@ public class Mapfactory {
 			
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-            Document doc = docBuilder.parse (new File("maps/" + mapsource + ".tmx"));
+            Document doc = docBuilder.parse (new File("../maps/" + mapsource + ".tmx"));
             doc.getDocumentElement ().normalize ();
             NodeList map = doc.getElementsByTagName("map");
 
@@ -70,6 +70,7 @@ public class Mapfactory {
             	Element firstPersonElement = (Element)firstPersonNode;
             	
             	int tiletype = Integer.valueOf(firstPersonElement.getAttribute("gid")).intValue();
+            	
             	tiles[x][y] = new Tile(x,y,images.get(tiletype), true);
             	x += 1;
             	if(x % 10 == 0) {

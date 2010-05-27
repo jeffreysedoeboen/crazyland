@@ -30,4 +30,12 @@ public class Tile {
 	public void setY(int y) {
 		this.y = y;
 	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
 }
