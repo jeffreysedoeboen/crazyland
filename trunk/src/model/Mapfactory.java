@@ -1,7 +1,5 @@
 package model;
 
-import it.sauronsoftware.base64.Base64;
-
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
