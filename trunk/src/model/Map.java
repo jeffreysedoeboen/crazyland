@@ -24,7 +24,7 @@ public class Map {
 	private Tile[][] tiles;
 	
 	public Map(){
-		
+		setTiles(Mapfactory.getMap("map1"));
 	}
 	
 	public Tile[][] getTiles() {
@@ -33,12 +33,6 @@ public class Map {
 
 	public void setTiles(Tile[][] tiles) {
 		this.tiles = tiles;
-	}
-	
-	public static void main(String[] args) {
-		Map map = new Map();
-		map.setTiles(Mapfactory.getMap("map1"));
-		map.tekenMap();
 	}
 	
 	public void tekenMap() {
