@@ -23,35 +23,19 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 public class Mapfactory {
-	private static BufferedImage originalimage;
+/*	private static BufferedImage originalimage;*/
 	
 	public static Tile[][] getMap(String mapsource) {
 		Tile[][] tiles = new Tile[10][10];
-		
+		BufferedImage originalimage;
 		try {
 			originalimage = ImageIO.read(new File("../tiles/tiles.png"));
 			ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
-			/*for(int x = 0; x < 400; x += 64) {
+			for(int x = 0; x < 400; x += 64) {
 				for(int y = 0; y < 330; y += 64) {
 					images.add(originalimage.getSubimage(x, y, 64, 64));
 				}
-			}*/
-			images.add(originalimage.getSubimage(0, 0, 32, 32));
-			images.add(originalimage.getSubimage(0, 32, 32, 32));
-			images.add(originalimage.getSubimage(0, 64, 32, 32));
-			images.add(originalimage.getSubimage(0, 96, 32, 32));
-			images.add(originalimage.getSubimage(0, 128, 32, 32));
-			images.add(originalimage.getSubimage(0, 160, 32, 32));
-			images.add(originalimage.getSubimage(32, 0, 32, 32));
-			images.add(originalimage.getSubimage(32, 0, 32, 32));
-			images.add(originalimage.getSubimage(32, 0, 32, 32));
-			images.add(originalimage.getSubimage(32, 0, 32, 32));
-			images.add(originalimage.getSubimage(32, 0, 32, 32));
-			images.add(originalimage.getSubimage(32, 0, 32, 32));
-			images.add(originalimage.getSubimage(96, 32, 32, 32));
-			images.add(originalimage.getSubimage(96, 64, 32, 32));
-			images.add(originalimage.getSubimage(96, 96, 32, 32));
-			
+			}
 			
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();

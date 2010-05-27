@@ -12,7 +12,8 @@ public class Tile {
 	public Tile(int x, int y, Image image, boolean solid){
 		this.x = x;
 		this.y = y;
-		
+		this.image = image;
+		this.solid = solid;
 	}
 
 	public int getX() {
