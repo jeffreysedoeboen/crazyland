@@ -5,6 +5,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import model.Player;
+import model.weapon.Weapon;
 
 public class MouseController implements MouseListener, MouseMotionListener{
 	private Player player;
@@ -49,10 +50,9 @@ public class MouseController implements MouseListener, MouseMotionListener{
 		
 	}
 
-	@Override
 	public void mouseMoved(MouseEvent e) {
-		
-		
+		Weapon weapon = player.getWeapon();
+		weapon.turnToPoint(e.getPoint());
 	}
 
 }
