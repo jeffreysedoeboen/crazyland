@@ -22,4 +22,8 @@ public abstract class Weapon {
 		return null;
 	}
 	
+	public float getFireRate(){
+		return this.FIRE_RATE;
+	}
+	
 }
