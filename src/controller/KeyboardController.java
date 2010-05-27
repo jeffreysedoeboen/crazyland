@@ -17,18 +17,6 @@ public class KeyboardController implements KeyListener {
 		this.server = server;
 		this.player = player;
 	}
-	
-	private void walkLeft(){
-		if(server.checkDirection(player.getPosition(), 'l')) {
-			player.setPosition(new Point(player.getPosition().x - 1, player.getPosition().y));
-		}
-	}
-	
-	private void walkRight(){
-		if(server.checkDirection(player.getPosition(), 'r')) {
-			player.setPosition(new Point(player.getPosition().x + 1, player.getPosition().y));			
-		}
-	}
 	private void jump() {
 		if(server.checkDirection(player.getPosition(), 'u')) {
 			
@@ -37,19 +25,23 @@ public class KeyboardController implements KeyListener {
 	
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()) {
-		case(KeyEvent.VK_SPACE): //TODO springen
-			jump();
-			break;
-		case(KeyEvent.VK_A): //TODO naar links lopen
-			walkLeft();
-			break;
-		case(KeyEvent.VK_D): //TODO naar rechts lopen
-			walkRight();
-			break;
-		case(KeyEvent.VK_TAB): //TODO score laten zien
-			break;
-		case(KeyEvent.VK_ESCAPE): System.exit(0);
-			break;
+			case(KeyEvent.VK_SPACE): //TODO springen
+				jump();
+				break;
+			case(KeyEvent.VK_A): //TODO naar links lopen
+				if(server.checkDirection(player.getPosition(), 'l')) {
+					player.setPosition(new Point(player.getPosition().x - 1, player.getPosition().y));
+				}
+				break;
+			case(KeyEvent.VK_D): //TODO naar rechts lopen
+				if(server.checkDirection(player.getPosition(), 'r')) {
+					player.setPosition(new Point(player.getPosition().x + 1, player.getPosition().y));			
+				}
+				break;
+			case(KeyEvent.VK_TAB): //TODO score laten zien
+				break;
+			case(KeyEvent.VK_ESCAPE): System.exit(0);
+				break;
 		}
 	}
 
