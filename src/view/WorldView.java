@@ -15,11 +15,9 @@ public class WorldView implements Observer {
 	
 	public WorldView(World world) {
 		this.world = world;
-		world.addObserver(this);
-	}
-	
-	public void getMap() {
 		map = world.getMap();
+		
+		world.addObserver(this);
 	}
 
 	@Override
