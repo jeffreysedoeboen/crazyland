@@ -15,7 +15,6 @@ public abstract class Weapon {
 	protected int currentBullets = 0;
 	protected BufferedImage image = null;
 	
-	// TODO Implement Shoot
 	public Bullet shoot(){
 		if(UNLIMITED_BULLETS || currentBullets > 0){
 			//Shoot a bullet
