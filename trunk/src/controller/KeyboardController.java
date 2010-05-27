@@ -20,13 +20,13 @@ public class KeyboardController implements KeyListener {
 	
 	private void walkLeft(){
 		if(server.checkDirection(player.getPosition(), 'l')) {
-			player.setPosition(new Point(player.getPosition().x + 1, player.getPosition().y));
+			player.setPosition(new Point(player.getPosition().x - 1, player.getPosition().y));
 		}
 	}
 	
 	private void walkRight(){
 		if(server.checkDirection(player.getPosition(), 'r')) {
-			player.setPosition(new Point(player.getPosition().x - 1, player.getPosition().y));			
+			player.setPosition(new Point(player.getPosition().x + 1, player.getPosition().y));			
 		}
 	}
 	private void jump() {
