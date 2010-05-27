@@ -7,11 +7,11 @@ import model.GameServer;
 import model.Map;
 import model.World;
 
-public class ViewWorld implements Observer {
+public class WorldView implements Observer {
 
 	private GameServer server;
 	
-	public ViewWorld(World world){
+	public WorldView(World world){
 		world.addObserver(this);
 	}
 
