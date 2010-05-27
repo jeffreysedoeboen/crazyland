@@ -10,21 +10,20 @@ public class Player {
 
 	private String name;
 	private Point position;
-	private ArrayList<Weapon> weapons;
+	private Weapon weapon;
 	private int hitpoints;
 	
 	public Player( String name, Point position ) {
-		this.weapons  = new ArrayList<Weapon>();
 		this.name     = name;
 		this.position = position;
 		
 		//standaart pistool
-		weapons.add(new Pistol());
+		setWeapon(new Pistol());
 	}
 	
 	public void shoot() {
-		if(weapons.size() > 0) {
-			weapons.get(0).shoot();
+		if(weapon != null) {
+			weapon.shoot();
 		}
 	}
 	
@@ -38,5 +37,13 @@ public class Player {
 	
 	public int getHitpoints(){
 		return hitpoints;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		this.weapon = weapon;
+	}
+
+	public Weapon getWeapon() {
+		return weapon;
 	}
 }
