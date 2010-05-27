@@ -2,11 +2,11 @@ package model;
 
 import java.awt.Image;
 import java.awt.Point;
-import java.io.File;
-import java.util.ArrayList;
 
+import java.io.File;
 import javax.swing.ImageIcon;
 
+import model.bullet.Bullet;
 import model.weapon.Pistol;
 import model.weapon.Weapon;
 
@@ -14,25 +14,32 @@ public class Player {
 
 	private String name;
 	private Point position;
-	private Weapon weapon;
+	private Weapon primaryWeapon = new Pistol();
+	private long lastTimeShot = 0;
 	private int hitpoints = 10;
 	private static Image playerImage;
 	
-	public Player( String name, Point position ) {
-		this.name     = name;
+	public Player(String name, Point position) {
+		this.name = name;
 		this.position = position;
-
+		
 		ImageIcon playerImage2 = new ImageIcon("../themes/tee/character.png");
 		playerImage = playerImage2.getImage();
-		
-		//standaart pistool
-		setWeapon(new Pistol());
 	}
 	
-	public void shoot() {
-		if(weapon != null) {
-			weapon.shoot();
-		}
+	public Bullet shoot() {
+
+		float fireRate = primaryWeapon.getFireRate();
+		float timePerShot = 1/fireRate;
+		
+		if(System.currentTimeMillis()-lastTimeShot >= timePerShot){
+			
+			lastTimeShot = System.currentTimeMillis();
+			
+			return primaryWeapon.shoot();
+		}		
+		
+		return null;		
 	}
 	
 	public Point getPosition(){
