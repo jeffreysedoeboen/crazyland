@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 import model.GameServer;
 import model.Player;
-import view.ViewWorld;
+import view.WorldView;
 
 public class KeyboardController implements KeyListener {
 
