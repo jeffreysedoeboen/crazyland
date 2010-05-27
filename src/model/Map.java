@@ -34,7 +34,7 @@ public class Map {
 			images.add(originalimage.getSubimage(96, 96, 32, 32));
 			
 			for(BufferedImage image : images) {
-				this.tiles[1][1] = new Tile(1,1,image, true);
+				this.tiles[1][1] = new Tile(1,1,image);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
