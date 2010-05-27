@@ -27,6 +27,10 @@ public class Player {
 		playerImage = playerImage2.getImage();
 	}
 	
+	public void setPosition(Point p) {
+		this.position = p;
+	}
+	
 	public Bullet shoot() {
 
 		float fireRate = primaryWeapon.getFireRate();
