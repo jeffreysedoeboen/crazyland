@@ -2,21 +2,27 @@ package controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import model.GameServer;
 import model.Player;
 import view.ViewWorld;
 
 public class KeyboardController implements KeyListener {
 
-	private ViewWorld world;
+	private GameServer server;
 	private Player player;
 	
 	
-	public void walkLeft(){
-		
+	private void walkLeft(){
+		if(server.checkDirection(player.getPosition(), 'l')) {
+			
+		}
 	}
 	
-	public void walkRight(){
-		
+	private void walkRight(){
+		if(server.checkDirection(player.getPosition(), 'r')) {
+			
+		}
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -24,8 +30,10 @@ public class KeyboardController implements KeyListener {
 		case(KeyEvent.VK_SPACE): //TODO springen
 			break;
 		case(KeyEvent.VK_A): //TODO naar links lopen
+			walkLeft();
 			break;
 		case(KeyEvent.VK_D): //TODO naar rechts lopen
+			walkRight();
 			break;
 		case(KeyEvent.VK_TAB): //TODO score laten zien
 			break;
