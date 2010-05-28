@@ -13,7 +13,7 @@ public class Pistol extends Weapon {
 	
 	public Pistol() {
 		try {
-			this.image = ImageIO.read(new File("../themes/tee/weapon/pistol.jpg")); //TODO file nog aangeven
+			this.image = ImageIO.read(new File("../themes/tee/weapon/gun.png")); //TODO file nog aangeven
 		} catch (IOException e) {
 			System.err.println("Error while reading image for weapon");
 			e.printStackTrace();
