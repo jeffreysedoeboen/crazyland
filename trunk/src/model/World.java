@@ -29,39 +29,6 @@ public class World{
 		return player.getImage();
 		
 	}
-
-	public void walkLeft() {
-		if(checkDirection(player.getPosition(), 'l')) {
-			player.setPosition(new Point(player.getPosition().x - 2, player.getPosition().y));
-		}
-		
-	}
-
-	private boolean checkDirection(Point position, char direction) {
-		//TODO look if player can walk in the direction
-		switch (direction) {
-		case 'l':
-			return map.getTiles()[position.x/32][position.y/32].isSolid() ? false :true;
-		case 'r':
-			return map.getTiles()[position.x/32+1][position.y/32].isSolid() ? false :true;
-		case 'd':
-			return map.getTiles()[position.x/32][position.y/32+1].isSolid() ? false :true;
-		}
-		return true;
-	}
-
-	public void walkRight() {
-		if(checkDirection(player.getPosition(), 'r')) {
-			player.setPosition(new Point(player.getPosition().x + 2, player.getPosition().y));			
-		}
-		
-	}
-
-	public void fall() {
-		if(checkDirection(player.getPosition(), 'd')) {
-			player.setPosition(new Point(player.getPosition().x, player.getPosition().y+2));			
-		}
-	}
 	
 	public void shoot() {
 		//TODO moet nog een lijst worden
@@ -81,7 +48,6 @@ public class World{
 	}
 
 	public void move() {
-		
 		if(player.isMovingLeft()){
 			player.moveLeft();
 		}else if(player.isMovingRight()){
