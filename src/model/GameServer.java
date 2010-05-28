@@ -25,11 +25,6 @@ public class GameServer extends Thread{
 	public Point getPlayerPosition(){
 		return this.world.getPlayerPosition();
 	}
-	
-	public void jump() {
-		world.playerJump();
-		
-	}
 
 	public Image getPlayerImage() {
 
