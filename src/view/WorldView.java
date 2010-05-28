@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import model.GameServer;
 import model.Map;
+import model.Player;
 import model.World;
 import model.bullet.Bullet;
 import model.tile.Tile;
@@ -45,6 +46,16 @@ public class WorldView extends JPanel {
 		if(bullet != null) {
 			g.drawImage(server.getBulletImage(),(int) bullet.getPosition().getX(),(int) bullet.getPosition().getY(), null);
 		}
+		
+		//TODO meerder spelers
+//		Player player1 = server.getPlayer();
+//		if(player1.getWeapon() != null) {
+//			int midPlayerX = (int) (player1.getPosition().getX() + ( player1.getImage().getWidth(null)));
+//			int midPlayerY = (int) (player1.getPosition().getY() + ( player1.getImage().getHeight(null)));
+//			
+//			g.drawImage(player1.getWeapon().getImage(), midPlayerX, midPlayerY, null);
+//		}
+		
 	}
 	
 }
