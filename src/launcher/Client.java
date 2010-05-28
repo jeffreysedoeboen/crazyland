@@ -23,13 +23,13 @@ public class Client extends JApplet{
 	public void init() {
 		
 		server = new GameServer();
-		server.start();
 		
 		this.view = new WorldView(server);
 		setContentPane(this.view);
 		setSize(900, 300);
 		setVisible(true);
 		setFocusable(true);
+		
 		
 		KeyboardController keycontroller = new KeyboardController(server);
 		this.addKeyListener(keycontroller);
