@@ -5,8 +5,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import model.GameServer;
-import model.Player;
-import model.weapon.Weapon;
 
 public class MouseController implements MouseListener, MouseMotionListener{
 	private GameServer server;
