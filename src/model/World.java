@@ -4,12 +4,14 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.Observable;
 
+import model.bullet.Bullet;
 import model.tile.Tile;
 
 public class World{
 
 	Map map;
 	Player player;
+	Bullet bullet;
 	
 	public World(){
 		map = new Map();
@@ -44,7 +46,7 @@ public class World{
 	}
 
 	private boolean checkDirection(Point position, char direction) {
-		//TODO look if player kan walk in the direction
+		//TODO look if player can walk in the direction
 		return true;
 	}
 
@@ -53,5 +55,14 @@ public class World{
 			player.setPosition(new Point(player.getPosition().x + 1, player.getPosition().y));			
 		}
 		
+	}
+
+	public void shoot() {
+		//TODO moet nog een lijst worden
+		bullet = player.shoot();
+	}
+
+	public Image getBulletImage() {
+		return bullet.getBulletImage();
 	}
 }

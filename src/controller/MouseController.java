@@ -4,18 +4,20 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import model.GameServer;
 import model.Player;
 import model.weapon.Weapon;
 
 public class MouseController implements MouseListener, MouseMotionListener{
-	private Player player;
+	private GameServer server;
 	
-	public MouseController(Player player) {
-		this.player = player;
+	public MouseController(GameServer server) {
+		this.server = server;
 	}
 	
 	public void mouseClicked(MouseEvent e) {
-		player.shoot();		
+		server.shoot();	
+		System.out.println("schiet");
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
@@ -34,8 +36,9 @@ public class MouseController implements MouseListener, MouseMotionListener{
 	}
 
 	public void mouseMoved(MouseEvent e) {
-		Weapon weapon = player.getWeapon();
-		weapon.turnToPoint(e.getPoint());
+//		Weapon weapon = player.getWeapon();
+//		weapon.turnToPoint(e.getPoint());
+		server.moveWeapon();
 	}
 
 }

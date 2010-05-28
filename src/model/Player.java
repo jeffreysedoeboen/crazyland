@@ -26,6 +26,8 @@ public class Player {
 		this.name = name;
 		this.position = position;
 		
+		primaryWeapon = new Pistol();
+		
 		try {
 			playerImage = ImageIO.read(new File("../themes/tee/characters/character.png"));
 		} catch (IOException e) {

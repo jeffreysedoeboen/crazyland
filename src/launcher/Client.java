@@ -8,6 +8,7 @@ import javax.swing.JApplet;
 import javax.swing.Timer;
 
 import controller.KeyboardController;
+import controller.MouseController;
 
 import model.GameServer;
 import model.World;
@@ -31,6 +32,10 @@ public class Client extends JApplet{
 		
 		KeyboardController keycontroller = new KeyboardController(server);
 		this.addKeyListener(keycontroller);
+		
+		MouseController mouseController = new MouseController(server);
+		this.addMouseListener(mouseController);
+		this.addMouseMotionListener(mouseController);
 		
 		new Timer(100, taskPerformer).start();
 

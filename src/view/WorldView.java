@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import model.GameServer;
 import model.Map;
 import model.World;
+import model.bullet.Bullet;
 import model.tile.Tile;
 
 public class WorldView extends JPanel {
@@ -35,10 +36,15 @@ public class WorldView extends JPanel {
 			}
 		}
 		
-		Point s = server.getPlayerPosition();
+		Point poistiePlayer1 = server.getPlayerPosition();
 
-		g.drawImage(server.getPlayerImage(),((int)s.getX())*32,((int)s.getY())*32,null);
+		g.drawImage(server.getPlayerImage(),((int)poistiePlayer1.getX())*32,((int)poistiePlayer1.getY())*32,null);
 		
+		//TODO meerdere bullets
+		Bullet bullet = server.getBullet();
+		if(bullet != null) {
+			g.drawImage(server.getBulletImage(),(int) bullet.getPosition().getX(),(int) bullet.getPosition().getY(), null);
+		}
 	}
 	
 }
