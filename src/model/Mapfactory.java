@@ -41,7 +41,6 @@ public class Mapfactory {
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
             Document doc = docBuilder.parse (new File("../maps/" + mapsource + ".tmx"));
             doc.getDocumentElement ().normalize ();
-            NodeList map = doc.getElementsByTagName("map");
 
             NodeList listOfTiles = doc.getElementsByTagName("tile");
             
