@@ -14,6 +14,7 @@ public class Client extends JApplet{
 		setContentPane(new WorldView(new World()));
 		setSize(640, 640);
 		setVisible(true);
+
 	}
 
 }
