@@ -39,7 +39,6 @@ public class WorldView extends JPanel {
 
 		g.drawImage(server.getPlayerImage(),((int)s.getX())*32,((int)s.getY())*32,null);
 		
-		System.out.println("VERF!");
 	}
 	
 }

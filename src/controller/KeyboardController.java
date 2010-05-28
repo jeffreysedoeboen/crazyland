@@ -12,6 +12,7 @@ public class KeyboardController implements KeyListener {
 	
 	public KeyboardController(GameServer server) {
 		this.server = server;
+		server.getWorld();
 	}
 
 	
@@ -21,14 +22,10 @@ public class KeyboardController implements KeyListener {
 				server.jump();
 				break;
 			case(KeyEvent.VK_A): //TODO naar links lopen
-//				if(server.checkDirection(player.getPosition(), 'l')) {
-//					player.setPosition(new Point(player.getPosition().x - 1, player.getPosition().y));
-//				}
+				server.walkLeft();
 				break;
 			case(KeyEvent.VK_D): //TODO naar rechts lopen
-//				if(server.checkDirection(player.getPosition(), 'r')) {
-//					player.setPosition(new Point(player.getPosition().x + 1, player.getPosition().y));			
-//				}
+				server.walkRight();
 				break;
 			case(KeyEvent.VK_TAB): //TODO score laten zien
 				break;

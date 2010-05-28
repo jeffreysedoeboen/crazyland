@@ -22,7 +22,6 @@ public class GameServer {
 	}
 	
 	public void jump() {
-		// TODO Creating jump
 		world.playerJump();
 		
 	}
@@ -31,6 +30,14 @@ public class GameServer {
 
 		return world.getPlayerImage();
 	
+	}
+
+	public void walkLeft() {
+		world.walkLeft();
+	}
+
+	public void walkRight() {
+		world.walkRight();
 	}
 		
 }
