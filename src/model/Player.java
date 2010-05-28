@@ -94,11 +94,11 @@ public class Player {
 	}
 
 	public void moveRight() {
-		position.setLocation(position.getX()+1,position.getY());
+		position.setLocation(position.getX()+2,position.getY());
 	}
 	
 	public void moveLeft() {
-		position.setLocation(position.getX()-1,position.getY());
+		position.setLocation(position.getX()-2,position.getY());
 	}
 	
 }
