@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -26,7 +27,8 @@ public class Mapfactory {
 		BufferedImage originalimage;
 		try {
 			originalimage = ImageIO.read(new File("../tiles/tiles.png"));
-			ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
+			//ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
+			ArrayList<Image> images = new ArrayList<Image>();
 			
 			
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -52,6 +54,7 @@ public class Mapfactory {
 						}
 					}
 					images.add(originalimage.getSubimage(x, y, 32, 32));
+					System.out.println("Im Size: "+originalimage.getSubimage(x, y, 32, 32).getWidth());
 					counter++;
 				}
 			}
