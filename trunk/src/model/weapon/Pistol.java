@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import model.bullet.Bullet;
-import model.bullet.PistolBullet;
 
 public class Pistol extends Weapon {
 
