@@ -48,7 +48,9 @@ public class World{
 		case 'l':
 			return map.getTiles()[position.x/32][position.y/32].isSolid() ? false :true;
 		case 'r':
-			return map.getTiles()[position.x/32+1][position.y/32].isSolid() ? false :true; 
+			return map.getTiles()[position.x/32+1][position.y/32].isSolid() ? false :true;
+		case 'd':
+			return map.getTiles()[position.x/32][position.y/32+1].isSolid() ? false :true;
 		}
 		return true;
 	}
@@ -60,6 +62,12 @@ public class World{
 		
 	}
 
+	public void fall() {
+		if(checkDirection(player.getPosition(), 'd')) {
+			player.setPosition(new Point(player.getPosition().x, player.getPosition().y+2));			
+		}
+	}
+	
 	public void shoot() {
 		//TODO moet nog een lijst worden
 		bullet = player.shoot();

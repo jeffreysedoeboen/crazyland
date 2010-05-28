@@ -44,6 +44,10 @@ public class GameServer {
 	public void walkRight() {
 		world.walkRight();
 	}
+	
+	public void fall() {
+		world.fall();
+	}
 
 	public void moveWeapon() {
 		// TODO Auto-generated method stub
