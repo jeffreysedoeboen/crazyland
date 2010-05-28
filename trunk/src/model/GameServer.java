@@ -36,19 +36,23 @@ public class GameServer extends Thread{
 		return world.getPlayerImage();
 	
 	}
-
-	public void walkLeft() {
-		world.walkLeft();
-	}
-
-	public void walkRight() {
-		world.walkRight();
+	
+	public void startMovingRight(){
+		world.startMovingRight();
 	}
 	
-	public void fall() {
-		world.fall();
+	public void stopMovingRight(){
+		world.stopMovingRight();
 	}
 
+	public void startMovingLeft(){
+		world.startMovingLeft();
+	}
+	
+	public void stopMovingLeft(){
+		world.stopMovingLeft();
+	}
+	
 	public void moveWeapon() {
 		// TODO Auto-generated method stub
 		
@@ -69,7 +73,9 @@ public class GameServer extends Thread{
 	
 	public void run(){
 		while(true){
-			fall();
+			
+			world.move();
+			
 			Thread.currentThread();
 			try{
 				Thread.sleep(50);

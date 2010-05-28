@@ -16,15 +16,19 @@ public class KeyboardController implements KeyListener {
 
 	
 	public void keyPressed(KeyEvent e) {
+
+	}
+
+	public void keyReleased(KeyEvent e) {
 		switch(e.getKeyCode()) {
 			case(KeyEvent.VK_SPACE):
-				server.jump();
+				//server.jump();
 				break;
 			case(KeyEvent.VK_A): //TODO naar links lopen
-				server.walkLeft();
+				server.stopMovingLeft();
 				break;
 			case(KeyEvent.VK_D): //TODO naar rechts lopen
-				server.walkRight();
+				server.stopMovingRight();
 				break;
 			case(KeyEvent.VK_TAB): //TODO score laten zien
 				break;
@@ -33,12 +37,23 @@ public class KeyboardController implements KeyListener {
 		}
 	}
 
-	public void keyReleased(KeyEvent e) {
-		
-	}
-
 	public void keyTyped(KeyEvent e) {
 		
+		switch(e.getKeyChar()) {
+			case(KeyEvent.VK_SPACE):
+				//server.jump();
+				break;
+			case('a'): //TODO naar links lopen
+				server.startMovingLeft();
+				break;
+			case('d'): //TODO naar rechts lopen
+				server.startMovingRight();
+				break;
+			case(KeyEvent.VK_TAB): //TODO score laten zien
+				break;
+			case(KeyEvent.VK_ESCAPE): System.exit(0);
+				break;
+		}
 	}
 
 }
