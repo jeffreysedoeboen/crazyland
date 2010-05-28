@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -36,7 +37,8 @@ public class MouseController implements MouseListener, MouseMotionListener{
 	public void mouseMoved(MouseEvent e) {
 //		Weapon weapon = player.getWeapon();
 //		weapon.turnToPoint(e.getPoint());
-		server.moveWeapon();
+		Point mouseDot = e.getPoint();
+		server.moveWeapon(mouseDot);
 	}
 
 }

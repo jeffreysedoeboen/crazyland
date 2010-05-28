@@ -53,8 +53,8 @@ public class GameServer extends Thread{
 		world.stopMovingLeft();
 	}
 	
-	public void moveWeapon() {
-		// TODO Auto-generated method stub
+	public void moveWeapon(Point mousePoint) {
+		world.moveWeapon(mousePoint);
 		
 	}
 
