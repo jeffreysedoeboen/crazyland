@@ -27,6 +27,7 @@ public class Client extends JApplet{
 		setContentPane(this.view);
 		setSize(320, 320);
 		setVisible(true);
+		setFocusable(true);
 		
 		KeyboardController keycontroller = new KeyboardController(server);
 		this.addKeyListener(keycontroller);
