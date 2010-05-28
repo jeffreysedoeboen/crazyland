@@ -30,7 +30,7 @@ public class WorldView extends JPanel {
 		super.paintComponent(g);
 		for(Tile[] rows : map.getTiles()) {
 			for(Tile tile : rows) {
-				g.drawImage(tile.getImage(), tile.getX()*64, tile.getY()*64, null);
+				g.drawImage(tile.getImage(), tile.getX()*32, tile.getY()*32, null);
 			}
 		}
 	}

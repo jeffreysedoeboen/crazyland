@@ -31,9 +31,9 @@ public class Mapfactory {
 		try {
 			originalimage = ImageIO.read(new File("../tiles/tiles.png"));
 			ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
-			for(int y = 0; y < 384; y += 64) {
-				for(int x = 0; x < 448; x += 64) {
-					images.add(originalimage.getSubimage(x, y, 64, 64));
+			for(int y = 0; y < 192; y += 32) {
+				for(int x = 0; x < 224; x += 32) {
+					images.add(originalimage.getSubimage(x, y, 32, 32));
 				}
 			}
 			
@@ -58,6 +58,7 @@ public class Mapfactory {
             	} else {
             		tiles[x][y] = new Tile(x,y,images.get(tiletype), true);
             	}
+            	
             	x += 1;
             	if(x % 10 == 0) {
             		x = 0;

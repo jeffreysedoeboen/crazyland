@@ -12,7 +12,7 @@ public class Client extends JApplet{
 	public void init() {
 		// TODO Auto-generated method stub
 		setContentPane(new WorldView(new World()));
-		setSize(640, 640);
+		setSize(320, 320);
 		setVisible(true);
 
 	}
