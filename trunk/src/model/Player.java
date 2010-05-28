@@ -29,7 +29,6 @@ public class Player {
 		try {
 			playerImage = ImageIO.read(new File("../themes/tee/characters/character.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -47,7 +46,7 @@ public class Player {
 			
 			lastTimeShot = System.currentTimeMillis();
 			
-			return primaryWeapon.shoot();
+			return primaryWeapon.shoot(position);
 		}		
 		
 		return null;		
