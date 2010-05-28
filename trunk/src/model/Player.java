@@ -46,7 +46,7 @@ public class Player {
 			
 			lastTimeShot = System.currentTimeMillis();
 			
-			return primaryWeapon.shoot(position);
+			return primaryWeapon.shoot();
 		}		
 		
 		return null;		
