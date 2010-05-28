@@ -4,6 +4,9 @@ import java.awt.Image;
 import java.awt.Point;
 
 import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import model.bullet.Bullet;
@@ -14,17 +17,21 @@ public class Player {
 
 	private String name;
 	private Point position;
-	private Weapon primaryWeapon = new Pistol();
+	private Weapon primaryWeapon;
 	private long lastTimeShot = 0;
 	private int hitpoints = 10;
-	private static Image playerImage;
+	private Image playerImage;
 	
 	public Player(String name, Point position) {
 		this.name = name;
 		this.position = position;
 		
-		ImageIcon playerImage2 = new ImageIcon("../themes/tee/character.png");
-		playerImage = playerImage2.getImage();
+		try {
+			playerImage = ImageIO.read(new File("../themes/tee/characters/character.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void setPosition(Point p) {
@@ -60,5 +67,9 @@ public class Player {
 
 	public Weapon getWeapon() {
 		return primaryWeapon;
+	}
+
+	public Image getImage() {
+		return playerImage;
 	}
 }

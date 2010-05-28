@@ -55,7 +55,7 @@ public class Mapfactory {
             	if (tiletype != 0) {
             		tiles[x][y] = new Tile(x,y,images.get(tiletype - 1), true);
             	} else {
-            		tiles[x][y] = new Tile(x,y,images.get(tiletype), true);
+            		tiles[x][y] = new Tile(x,y,images.get(tiletype), false);
             	}
             	
             	x += 1;

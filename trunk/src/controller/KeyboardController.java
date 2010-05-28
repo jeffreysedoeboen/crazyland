@@ -5,38 +5,30 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import model.GameServer;
-import model.Player;
-import view.WorldView;
 
 public class KeyboardController implements KeyListener {
 
 	private GameServer server;
-	private Player player;
 	
-	public KeyboardController(Player player, GameServer server) {
+	public KeyboardController(GameServer server) {
 		this.server = server;
-		this.player = player;
 	}
-	private void jump() {
-		if(server.checkDirection(player.getPosition(), 'u')) {
-			
-		}
-	}
+
 	
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()) {
-			case(KeyEvent.VK_SPACE): //TODO springen
-				jump();
+			case(KeyEvent.VK_SPACE):
+				server.jump();
 				break;
 			case(KeyEvent.VK_A): //TODO naar links lopen
-				if(server.checkDirection(player.getPosition(), 'l')) {
-					player.setPosition(new Point(player.getPosition().x - 1, player.getPosition().y));
-				}
+//				if(server.checkDirection(player.getPosition(), 'l')) {
+//					player.setPosition(new Point(player.getPosition().x - 1, player.getPosition().y));
+//				}
 				break;
 			case(KeyEvent.VK_D): //TODO naar rechts lopen
-				if(server.checkDirection(player.getPosition(), 'r')) {
-					player.setPosition(new Point(player.getPosition().x + 1, player.getPosition().y));			
-				}
+//				if(server.checkDirection(player.getPosition(), 'r')) {
+//					player.setPosition(new Point(player.getPosition().x + 1, player.getPosition().y));			
+//				}
 				break;
 			case(KeyEvent.VK_TAB): //TODO score laten zien
 				break;
