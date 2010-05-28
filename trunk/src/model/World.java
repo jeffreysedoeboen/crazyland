@@ -81,6 +81,10 @@ public class World{
 		return player;
 	}
 
+	public void moveWeapon(Point mousePoint) {
+		player.getWeapon().turnToPoint(mousePoint);
+	}
+
 	public void move() {
 		
 		if(player.isMovingLeft()){

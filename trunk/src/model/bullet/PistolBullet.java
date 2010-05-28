@@ -11,6 +11,7 @@ public class PistolBullet extends Bullet {
 	
 	public PistolBullet(double direction, Point startPosition) {
 		super(direction, startPosition);
+		System.out.println("new pistol bullet");
 		
 		try {
 			bulletImage = ImageIO.read(new File("../themes/tee/characters/character.png"));
