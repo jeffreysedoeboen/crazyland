@@ -39,4 +39,8 @@ public class Tile {
 	public void setImage(Image image) {
 		this.image = image;
 	}
+	
+	public boolean isSolid() {
+		return solid;
+	}
 }
