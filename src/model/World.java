@@ -15,7 +15,7 @@ public class World{
 	
 	public World(){
 		map = new Map();
-		player = new Player("Henk", new Point(2,2));
+		player = new Player("Henk", new Point(100,100));
 	}
 	
 	public Map getMap() {
@@ -40,7 +40,7 @@ public class World{
 
 	public void walkLeft() {
 		if(checkDirection(player.getPosition(), 'l')) {
-			player.setPosition(new Point(player.getPosition().x - 1, player.getPosition().y));
+			player.setPosition(new Point(player.getPosition().x - 2, player.getPosition().y));
 		}
 		
 	}
@@ -49,16 +49,16 @@ public class World{
 		//TODO look if player can walk in the direction
 		switch (direction) {
 		case 'l':
-			return map.getTiles()[position.x-1][position.y].isSolid() ? false :true;
+			return map.getTiles()[position.x/32][position.y/32].isSolid() ? false :true;
 		case 'r':
-			return map.getTiles()[position.x+1][position.y].isSolid() ? false :true; 
+			return map.getTiles()[position.x/32+1][position.y/32].isSolid() ? false :true; 
 		}
 		return true;
 	}
 
 	public void walkRight() {
 		if(checkDirection(player.getPosition(), 'r')) {
-			player.setPosition(new Point(player.getPosition().x + 1, player.getPosition().y));			
+			player.setPosition(new Point(player.getPosition().x + 2, player.getPosition().y));			
 		}
 		
 	}

@@ -39,7 +39,7 @@ public class WorldView extends JPanel {
 		
 		Point poistiePlayer1 = server.getPlayerPosition();
 
-		g.drawImage(server.getPlayerImage(),((int)poistiePlayer1.getX())*32,((int)poistiePlayer1.getY())*32,null);
+		g.drawImage(server.getPlayerImage(),((int)poistiePlayer1.getX()),((int)poistiePlayer1.getY()),null);
 		
 		//TODO meerdere bullets
 		Bullet bullet = server.getBullet();
