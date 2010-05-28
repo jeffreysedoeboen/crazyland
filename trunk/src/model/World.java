@@ -71,4 +71,8 @@ public class World{
 	public Image getBulletImage() {
 		return bullet.getBulletImage();
 	}
+	
+	public Player getPlayer() {
+		return player;
+	}
 }

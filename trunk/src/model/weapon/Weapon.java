@@ -1,6 +1,7 @@
 package model.weapon;
 
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -34,6 +35,10 @@ public abstract class Weapon {
 	
 	public float getFireRate(){
 		return this.FIRE_RATE;
+	}
+	
+	public Image getImage() {
+		return image;
 	}
 	
 }
