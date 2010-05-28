@@ -23,6 +23,7 @@ public class Client extends JApplet{
 	public void init() {
 		
 		server = new GameServer();
+		server.start();
 		
 		this.view = new WorldView(server);
 		setContentPane(this.view);
@@ -47,7 +48,6 @@ public class Client extends JApplet{
 
 			
 			view.repaint();
-			server.fall();
 			
 		}
 		

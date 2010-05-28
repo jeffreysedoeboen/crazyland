@@ -5,7 +5,7 @@ import java.awt.Point;
 
 import model.bullet.Bullet;
 
-public class GameServer {
+public class GameServer extends Thread{
 	
 	World world;
 	
@@ -65,6 +65,19 @@ public class GameServer {
 	
 	public Player getPlayer() {
 		return world.getPlayer();
+	}
+	
+	public void run(){
+		while(true){
+			fall();
+			Thread.currentThread();
+			try{
+				Thread.sleep(50);
+			}catch(InterruptedException e){
+				e.printStackTrace();
+			}
+		}
+		
 	}
 		
 }
