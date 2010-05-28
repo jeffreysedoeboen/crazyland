@@ -47,6 +47,12 @@ public class World{
 
 	private boolean checkDirection(Point position, char direction) {
 		//TODO look if player can walk in the direction
+		switch (direction) {
+		case 'l':
+			return map.getTiles()[position.x-1][position.y].isSolid() ? false :true;
+		case 'r':
+			return map.getTiles()[position.x+1][position.y].isSolid() ? false :true; 
+		}
 		return true;
 	}
 
