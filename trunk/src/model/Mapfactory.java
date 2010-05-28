@@ -38,12 +38,6 @@ public class Mapfactory {
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
             Document doc = docBuilder.parse (new File("../maps/" + mapsource + ".tmx"));
             doc.getDocumentElement ().normalize ();
-<<<<<<< .mine
-            
-=======
-
-            NodeList listOfTiles = doc.getElementsByTagName("tile");
->>>>>>> .r97
             
             NodeList tilesetNode = doc.getElementsByTagName("tileset");
 			Element tilesetElement = (Element) tilesetNode.item(0);
@@ -73,7 +67,6 @@ public class Mapfactory {
             int x = 0;
             int y = 0;
             for(int s = 0; s < listOfTiles.getLength(); s++) {
-<<<<<<< .mine
             	Node tileNode = listOfTiles.item(s);
             	if (tileNode.getNodeType() == Node.ELEMENT_NODE) {
             		Element firstPersonElement = (Element)tileNode;
@@ -85,17 +78,6 @@ public class Mapfactory {
                 	} else {
                 		tiles[x][y] = new Tile(x,y,images.get(tiletype), false);
                 	}
-=======
-            	Node firstPersonNode = listOfTiles.item(s);
-            	Element firstPersonElement = (Element)firstPersonNode;
-            	
-            	int tiletype = Integer.valueOf(firstPersonElement.getAttribute("gid")).intValue();
-            	
-            	if (tiletype != 0) {
-            		tiles[x][y] = new Tile(x,y,images.get(tiletype - 1), true);
-            	} else {
-            		tiles[x][y] = new Tile(x,y,images.get(tiletype), false);
->>>>>>> .r97
             	}
             	x += 1;
             	if(x % 50 == 0) {
