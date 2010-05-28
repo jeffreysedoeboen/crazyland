@@ -31,8 +31,8 @@ public class Mapfactory {
 		try {
 			originalimage = ImageIO.read(new File("../tiles/tiles.png"));
 			ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
-			for(int x = 0; x < 400; x += 64) {
-				for(int y = 0; y < 330; y += 64) {
+			for(int y = 0; y < 384; y += 64) {
+				for(int x = 0; x < 448; x += 64) {
 					images.add(originalimage.getSubimage(x, y, 64, 64));
 				}
 			}
@@ -53,7 +53,11 @@ public class Mapfactory {
             	
             	int tiletype = Integer.valueOf(firstPersonElement.getAttribute("gid")).intValue();
             	
-            	tiles[x][y] = new Tile(x,y,images.get(tiletype), true);
+            	if (tiletype != 0) {
+            		tiles[x][y] = new Tile(x,y,images.get(tiletype - 1), true);
+            	} else {
+            		tiles[x][y] = new Tile(x,y,images.get(tiletype), true);
+            	}
             	x += 1;
             	if(x % 10 == 0) {
             		x = 0;
