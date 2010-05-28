@@ -13,7 +13,7 @@ import model.Map;
 import model.World;
 import model.tile.Tile;
 
-public class WorldView extends JPanel implements Observer {
+public class WorldView extends JPanel {
 
 	//private GameServer server;
 	private World world; 
@@ -22,13 +22,6 @@ public class WorldView extends JPanel implements Observer {
 	public WorldView(World world) {
 		this.world = world;
 		map = world.getMap();
-		world.addObserver(this);
-	}
-
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		
-		//timer wat is de map, map tekenen, waar staan alle spelers, teken alle spelers.
 	}
 	
 	public void paintComponent(Graphics g){
@@ -37,7 +30,7 @@ public class WorldView extends JPanel implements Observer {
 		super.paintComponent(g);
 		for(Tile[] rows : map.getTiles()) {
 			for(Tile tile : rows) {
-				g.drawImage(tile.getImage(), tile.getX()*64, tile.getY()*64, tile.getX()*64+64, tile.getY()*64+64, this);
+				g.drawImage(tile.getImage(), tile.getX()*64, tile.getY()*64, null);
 			}
 		}
 	}
