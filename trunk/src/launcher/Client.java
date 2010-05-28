@@ -46,7 +46,6 @@ public class Client extends JApplet{
 
 		public void actionPerformed(ActionEvent arg0) {
 
-			
 			view.repaint();
 			
 		}
