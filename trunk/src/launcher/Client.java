@@ -27,7 +27,7 @@ public class Client extends JApplet{
 		
 		this.view = new WorldView(server);
 		setContentPane(this.view);
-		setSize(600, 600);
+		setSize(900, 300);
 		setVisible(true);
 		setFocusable(true);
 		
@@ -38,7 +38,7 @@ public class Client extends JApplet{
 		this.addMouseListener(mouseController);
 		this.addMouseMotionListener(mouseController);
 		
-		new Timer(10, taskPerformer).start();
+		new Timer(33, taskPerformer).start();
 
 	}
 	
