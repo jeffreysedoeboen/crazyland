@@ -12,7 +12,7 @@ public class World{
 	
 	public World(){
 		map = new Map();
-		player = new Player("Henk", new Point(100,100));
+		player = new Player("Henk", new Point(200,100));
 	}
 	
 	public Map getMap() {
@@ -79,5 +79,38 @@ public class World{
 	
 	public Player getPlayer() {
 		return player;
+	}
+
+	public void move() {
+		
+		if(player.isMovingLeft()){
+			player.moveLeft();
+		}else if(player.isMovingRight()){
+			player.moveRight();
+		}
+		if(!onGround()){
+			//player.fall();
+		}
+		
+	}
+	
+	public boolean onGround(){
+		return true;
+	}
+
+	public void startMovingRight() {
+		player.setMovingRight(true);
+	}
+	
+	public void stopMovingRight() {
+		player.setMovingRight(false);		
+	}
+	
+	public void startMovingLeft() {
+		player.setMovingLeft(true);		
+	}
+	
+	public void stopMovingLeft() {
+		player.setMovingLeft(false);		
 	}
 }

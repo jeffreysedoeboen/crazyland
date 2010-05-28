@@ -17,6 +17,8 @@ public class Player {
 	private long lastTimeShot = 0;
 	private int hitpoints = 10;
 	private Image playerImage;
+	private boolean movingRight = false;
+	private boolean movingLeft = false;
 	
 	public Player(String name, Point position) {
 		this.name = name;
@@ -70,4 +72,33 @@ public class Player {
 	public Image getImage() {
 		return playerImage;
 	}
+
+	public void setMovingRight(boolean b) {
+		movingRight = b;
+	}
+
+	public void setMovingLeft(boolean b) {
+		movingLeft = b;
+	}
+	
+	public boolean isMovingLeft(){
+		return movingLeft;
+	}
+	
+	public boolean isMovingRight(){
+		return movingRight;
+	}
+	
+	public boolean onGround(){
+		return true;
+	}
+
+	public void moveRight() {
+		position.setLocation(position.getX()+1,position.getY());
+	}
+	
+	public void moveLeft() {
+		position.setLocation(position.getX()-1,position.getY());
+	}
+	
 }
