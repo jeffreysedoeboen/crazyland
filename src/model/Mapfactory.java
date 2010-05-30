@@ -1,8 +1,10 @@
 package model;
 
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -53,7 +55,12 @@ public class Mapfactory {
 			            	tileproperties.put(counter, tileproperty);
 						}
 					}
-					images.add(originalimage.getSubimage(x, y, 32, 32));
+					//HELE OPLOSSING JEZUS :S
+					BufferedImage img = new BufferedImage(32, 32, 1);
+					Graphics2D gr = img.createGraphics();
+					gr.drawImage(originalimage.getSubimage(x, y, 32, 32), 0, 0, null);
+					images.add(img);
+					//TOT HIER
 					System.out.println("Im Size: "+originalimage.getSubimage(x, y, 32, 32).getWidth());
 					counter++;
 				}
