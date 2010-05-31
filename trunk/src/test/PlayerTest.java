@@ -66,4 +66,9 @@ public class PlayerTest {
 		assertEquals(2,player.getY(),0);
 	}
 	
+	@Test
+	public void testJumping(){
+		
+	}
+	
 }
