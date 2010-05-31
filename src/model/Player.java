@@ -49,16 +49,17 @@ public class Player {
 		return this.verticalSpeed;
 	}
 	
-	public Bullet shoot(Point mouseDot) {
+	public Bullet shoot() {
 
 		float fireRate = primaryWeapon.getFireRate();
 		float timePerShot = 1/fireRate;
+		timePerShot = timePerShot*1000;
 		
 		if(System.currentTimeMillis()-lastTimeShot >= timePerShot){
-			
+
 			lastTimeShot = System.currentTimeMillis();
 			
-			return primaryWeapon.shoot(mouseDot);
+			return primaryWeapon.shoot();
 		}		
 		
 		return null;		

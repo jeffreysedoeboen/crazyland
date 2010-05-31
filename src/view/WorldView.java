@@ -45,14 +45,15 @@ public class WorldView extends JPanel {
 		offsetY = Math.max(offsetY, this.getHeight() - mapHeight);
 		
 		int firstTileX = pixelsToTiles(-offsetX);
-		int lastTileX = Math.min(server.getWorld().getMap().getWidth(), 
-				firstTileX + pixelsToTiles(this.getWidth()+32) + 1);
+		int lastTileX = firstTileX + pixelsToTiles(this.getWidth()) + 1;
 		int firstTileY = pixelsToTiles(-offsetY);
 		int lastTileY = firstTileY + pixelsToTiles(this.getHeight()) + 1;
 		
 		for (int y=firstTileY; y < lastTileY; y++) {
-		    for (int x=firstTileX; x < lastTileX ; x++) {
-		        g.drawImage(tiles[x][y].getImage(),tilesToPixels(x) + offsetX, tilesToPixels(y) + offsetY, null);
+		    for (int x=firstTileX; x < lastTileX + 1; x++) {
+		    	if(x < pixelsToTiles(mapWidth)){
+		        	g.drawImage(tiles[x][y].getImage(),tilesToPixels(x) + offsetX, tilesToPixels(y) + offsetY, null);
+		        }
 		    }
 		}
 

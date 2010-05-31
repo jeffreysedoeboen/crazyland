@@ -2,7 +2,6 @@ package model;
 
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import model.bullet.Bullet;
@@ -38,42 +37,12 @@ public class World{
 	}
 
 	public void shoot(Point mouseDot) {
-		float playerX = getPlayerX() + 16;
-		float playerY = getPlayerY() + 16;
-		float dx = (float) (playerX - mouseDot.getX());
-		float dy = (float) (playerY - mouseDot.getY());
-		double angle = 0.0d;
-
-		if (dx == 0.0) {
-			if(dy == 0.0) {
-				angle = 0.0;
-			} else if(dy > 0.0) {
-				angle = Math.PI / 2.0;
-			} else {
-				angle = (Math.PI * 3.0) / 2.0;
-			}
-		} else if(dy == 0.0) {
-			if(dx > 0.0) {
-				angle = 0.0;
-			} else {
-				angle = Math.PI;
-			}
-		} else {
-			if(dx < 0.0) {
-				angle = Math.atan(dy/dx) + Math.PI;
-			} else if(dy < 0.0) {
-				angle = Math.atan(dy/dx) + (2*Math.PI);
-			} else {
-				angle = Math.atan(dy/dx);
-			}
-		}
-		float direction = (float) ((angle * 180) / Math.PI);
-
-		Bullet bullet = player.shoot(mouseDot);
-		if(bullet != null) {
-			bullet.setDirection(direction);
-			bullet.setPosition(getPlayerX(), getPlayerY());
-			bullets.add( bullet );
+		float distanceFromPlayerX = (float) (player.getX()-mouseDot.getX());
+		float distanceFromPlayerY = (float) (player.getY()-mouseDot.getY());
+		Bullet b = player.shoot();
+		if(b != null){
+			b.setBullet(player.getX(),player.getY(),Math.atan2(distanceFromPlayerY, distanceFromPlayerX));
+			bullets.add(b);
 		}
 	}
 
@@ -89,6 +58,7 @@ public class World{
 		player.getWeapon().turnToPoint(mousePoint);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void move() {
 		if(player.isMovingLeft() && canMoveLeft()){
 			player.moveLeft(onGround());
@@ -100,7 +70,10 @@ public class World{
 		if(collisionCeiling()){
 			player.setVerticalSpeed(-0.5f);
 		}
-		updateBulletPositions();
+		ArrayList<Bullet> bulletsclone = (ArrayList<Bullet>) bullets.clone();
+		for(Bullet b : bulletsclone){
+			b.move();
+		}
 		//		Tile[][] tiles = map.getTiles();
 		//		for(boolean[] pmap2 : tiles[0][1].getPixelMap()){
 			//			for(boolean pma : pmap2){
@@ -110,12 +83,7 @@ public class World{
 			//		}
 
 	}
-	private void updateBulletPositions() {
-		for(Bullet b : bullets) {
-			b.step();
-			System.out.println("Direction: " + b.getDirection() + "\nPosition: (" + b.getX() + "," + b.getY() + ")\nVerticalSpeed: " + b.getVerticalSpeed() + "\nHorizontalSpeed: " + b.getHorizontalSpeed());
-		}
-	}
+
 	private boolean canMoveLeft() {
 		Tile[][] tiles = map.getTiles();
 		if(tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY())/32)].isSolid() || tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].isSolid()){

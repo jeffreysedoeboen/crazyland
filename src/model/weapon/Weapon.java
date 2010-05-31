@@ -9,25 +9,22 @@ import model.bullet.*;
 
 public abstract class Weapon {
 
-	protected final float FIRE_RATE = 1; // The amount of bullets per second
-	protected Bullet BULLETTYPE = null; 
-	protected final boolean UNLIMITED_BULLETS = false;
-	protected final int MAX_BULLETS = 0;
+	protected float fireRate = 1; // The amount of bullets per second
+	protected Bullet bulletType = null; 
+	protected boolean unlimitedBullets = false;
+	protected int maxBullets = 0;
 	protected int currentBullets = 0;
 	protected BufferedImage image = null;
 	
-	public Bullet shoot(Point mouseDot){
-		if(isUNLIMITED_BULLETS() || currentBullets > 0){
+	public Bullet shoot(){
+		
+		if(isUnlimitedBullets() || currentBullets > 0){
 			//Shoot a bullet
-			if(!UNLIMITED_BULLETS){
+			if(!unlimitedBullets){
 				currentBullets--;
 			}
-			return createBullet(mouseDot);
+			return this.createBullet();
 		}
-		return null;
-	}
-	
-	private Bullet createBullet(Point mouseDot) {
 		return null;
 	}
 
@@ -38,15 +35,19 @@ public abstract class Weapon {
 	}
 	
 	public float getFireRate(){
-		return this.FIRE_RATE;
+		return this.fireRate;
 	}
 	
 	public Image getImage() {
 		return image;
 	}
 	
-	public boolean isUNLIMITED_BULLETS() {
-		return UNLIMITED_BULLETS;
+	public boolean isUnlimitedBullets() {
+		return unlimitedBullets;
+	}
+	
+	public Bullet createBullet(){
+		return this.bulletType;
 	}
 	
 }

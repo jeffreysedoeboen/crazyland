@@ -1,18 +1,17 @@
 package model.weapon;
-
-import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import model.bullet.Bullet;
 import model.bullet.PistolBullet;
 
 public class Pistol extends Weapon {
 
-	private final float FIRE_RATE = 1.50F;
-	private final boolean UNLIMITED_BULLETS = true;
-	
+	protected final Bullet bulletType = new PistolBullet();
+	protected float fireRate = 3F;
+	protected boolean unlimitedBullets = true;
 	
 	public Pistol() {	
 		try {
@@ -22,12 +21,17 @@ public class Pistol extends Weapon {
 			e.printStackTrace();
 		}
 	}
-	public PistolBullet createBullet(Point mouseDot) {
-		return new PistolBullet(mouseDot);
-	}
 
-	public boolean isUNLIMITED_BULLETS() {
-		return UNLIMITED_BULLETS;
+	public boolean isUnlimitedBullets() {
+		return unlimitedBullets;
+	}
+	
+	public Bullet createBullet(){
+		return new PistolBullet();
+	}
+	
+	public float getFireRate(){
+		return this.fireRate;
 	}
 	
 }
