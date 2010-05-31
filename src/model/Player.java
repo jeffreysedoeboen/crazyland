@@ -20,6 +20,7 @@ public class Player {
 	private Image playerImage;
 	private boolean movingRight = false;
 	private boolean movingLeft = false;
+	private float verticalSpeed = 0;
 	
 	public Player(String name, float x, float y) {
 		this.name = name;
@@ -38,6 +39,14 @@ public class Player {
 	public void setPosition(float x, float y) {
 		this.x = x;
 		this.y = y;
+	}
+	
+	public void setVerticalSpeed(float x){
+		this.verticalSpeed = x;
+	}
+	
+	public float getVerticalSpeed(){
+		return this.verticalSpeed;
 	}
 	
 	public Bullet shoot() {
@@ -98,12 +107,37 @@ public class Player {
 		return true;
 	}
 
-	public void moveRight() {
-		this.x += 2.5;
+	public void moveRight(boolean onGround) {
+		if(onGround){
+			this.x += 2.5;
+		}else{
+			this.x += 2;
+		}
 	}
 	
-	public void moveLeft() {
-		this.x -= 2.5;
+	public void moveLeft(boolean onGround) {
+		if(onGround){
+			this.x -= 2.5;
+		}else{
+			this.x -= 2;
+		}
+	}
+
+	public void moveVertical() {
+		this.y -= this.verticalSpeed;
+	}
+
+	public void calcVerticalSpeed(boolean onGround) {
+		
+		if(!onGround){
+			if(this.verticalSpeed > -2.5){
+				this.verticalSpeed += -0.1;
+			}
+		}else{
+			this.verticalSpeed = 0;
+		}
+		
+		
 	}
 	
 }

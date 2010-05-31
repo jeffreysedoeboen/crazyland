@@ -3,6 +3,7 @@ package model;
 import java.awt.Image;
 import java.awt.Point;
 import model.bullet.Bullet;
+import model.tile.Tile;
 
 public class World{
 
@@ -52,18 +53,34 @@ public class World{
 
 	public void move() {
 		if(player.isMovingLeft()){
-			player.moveLeft();
+			player.moveLeft(onGround());
 		}else if(player.isMovingRight()){
-			player.moveRight();
+			player.moveRight(onGround());
 		}
-		if(!onGround()){
-			//player.fall();
+		player.moveVertical();
+		player.calcVerticalSpeed(onGround());
+		if(collisionCeiling()){
+			player.setVerticalSpeed(-0.1f);
 		}
+		System.out.println("Onground: " + onGround());
+		System.out.println("OnCeiling: " + collisionCeiling());
 		
 	}
 	
+	private boolean collisionCeiling() {
+		Tile[][] tiles = map.getTiles();
+		if(tiles[(int) (player.getX()/32)][(int) ((player.getY())/32)].isSolid() || tiles[(int) ((player.getX()+32)/32)][(int) ((player.getY())/32)].isSolid()){
+			return true;
+		}
+		return false;
+	}
+
 	public boolean onGround(){
-		return true;
+		Tile[][] tiles = map.getTiles();
+		if(tiles[(int) (player.getX()/32)][(int) ((player.getY()+32)/32)].isSolid() || tiles[(int) ((player.getX()+32)/32)][(int) ((player.getY()+32)/32)].isSolid()){
+			return true;
+		}
+		return false;
 	}
 
 	public void startMovingRight() {
@@ -80,5 +97,11 @@ public class World{
 	
 	public void stopMovingLeft() {
 		player.setMovingLeft(false);		
+	}
+
+	public void jump() {
+		if(onGround()){
+			player.setVerticalSpeed(4.5f);
+		}
 	}
 }

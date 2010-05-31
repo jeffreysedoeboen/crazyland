@@ -61,6 +61,10 @@ public class GameServer extends Thread{
 		world.shoot();
 		
 	}
+	
+	public void jump(){
+		world.jump();
+	}
 
 	public Image getBulletImage() {
 		return world.getBulletImage();

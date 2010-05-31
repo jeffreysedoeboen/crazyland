@@ -41,7 +41,7 @@ public class KeyboardController implements KeyListener {
 		
 		switch(e.getKeyChar()) {
 			case(KeyEvent.VK_SPACE):
-				//server.jump();
+				server.jump();
 				break;
 			case('a'): //TODO naar links lopen
 				server.startMovingLeft();
