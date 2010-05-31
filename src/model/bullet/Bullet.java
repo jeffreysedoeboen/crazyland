@@ -10,10 +10,7 @@ public abstract class Bullet {
 	protected double direction;
 	protected Point position;
 	
-	public Bullet(double direction, Point startPosition) {
-		this.position = startPosition;
-		this.direction = direction;
-	}
+
 	
 	public double getDirection() {
 		return direction;
