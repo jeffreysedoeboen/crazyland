@@ -12,18 +12,21 @@ public class World{
 	
 	public World(){
 		map = new Map();
-		player = new Player("Henk", new Point(200,100));
+		player = new Player("Henk", 200f,100f);
 	}
 	
 	public Map getMap() {
 		return map;
 	}
 	
-	public Point getPlayerPosition(){
-		return player.getPosition();
+	public float getPlayerX(){
+		return player.getX();
 	}
 
-
+	public float getPlayerY(){
+		return player.getY();
+	}
+	
 	public Image getPlayerImage() {
 		
 		return player.getImage();
