@@ -15,18 +15,55 @@ public class PlayerTest {
 	
 	@Before
 	public void beforeTest(){
-		//player = new Player("Jan", new Point(2,2));
+		player = new Player("Jan",2,2);
 	}
 	
 	@Test
-	public void testwalkLeft(){
-		//player.moveLeft();
-		//assertEquals(0,player.getPosition().getX(),0);
+	public void testwalkLeftTrueX(){
+		player.moveLeft(true);
+		assertEquals(-0.5,player.getX(),0);
 	}
 	
 	@Test
-	public void testwalkRight(){
-		//player.moveRight();
-		//assertEquals(4,player.getPosition().getX(),0);
+	public void testwalkLeftTrueY(){
+		player.moveLeft(true);
+		assertEquals(2,player.getY(),0);
 	}
+	
+	@Test
+	public void testwalkLeftFalseX(){
+		player.moveLeft(false);
+		assertEquals(0,player.getX(),0);
+	}
+	
+	@Test
+	public void testwalkLeftFalseY(){
+		player.moveLeft(false);
+		assertEquals(2,player.getY(),0);
+	}
+	
+	@Test
+	public void testwalkRightTrueX(){
+		player.moveRight(true);
+		assertEquals(4.5,player.getX(),0);
+	}
+	
+	@Test
+	public void testwalkRightTrueY(){
+		player.moveRight(true);
+		assertEquals(2,player.getY(),0);
+	}
+	
+	@Test
+	public void testwalkRightFalseX(){
+		player.moveRight(false);
+		assertEquals(4,player.getX(),0);
+	}
+	
+	@Test
+	public void testwalkRightFalseY(){
+		player.moveRight(false);
+		assertEquals(2,player.getY(),0);
+	}
+	
 }
