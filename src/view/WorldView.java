@@ -55,6 +55,7 @@ public class WorldView extends JPanel {
 		    }
 		}
 
+		
 		float playerX = server.getPlayerX();
 		float playerY = server.getPlayerY();
 
