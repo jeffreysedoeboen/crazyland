@@ -34,12 +34,12 @@ public class WorldView extends JPanel {
 		Tile[][] tiles = server.getWorld().getMap().getTiles();
 		
 		//nieuwe shit
-		int offsetX = this.getWidth() / 2 - Math.round(server.getPlayerX());
+		int offsetX = this.getWidth() / 2 - Math.round(server.getPlayerX()) - 32;
 		int mapWidth = tilesToPixels(server.getWorld().getMap().getWidth());
 		offsetX = Math.min(offsetX, 0);
 		offsetX = Math.max(offsetX, this.getWidth() - mapWidth);
 		
-		int offsetY = this.getHeight() - tilesToPixels(server.getWorld().getMap().getHeight());
+		int offsetY = this.getHeight() / 2 - Math.round(server.getPlayerY()) - 32;
 		int mapHeight = tilesToPixels(server.getWorld().getMap().getHeight());
 		offsetY = Math.min(offsetY, 0);
 		offsetY = Math.max(offsetY, this.getHeight() - mapHeight);
@@ -59,7 +59,7 @@ public class WorldView extends JPanel {
 		float playerX = server.getPlayerX();
 		float playerY = server.getPlayerY();
 
-		g.drawImage(server.getPlayerImage(),Math.round(playerX) + offsetX,Math.round(playerY) + offsetY,null);
+		g.drawImage(server.getPlayerImage(),Math.round(playerX + offsetX),Math.round(playerY + offsetY),null);
 		
 		ArrayList<Bullet> bullets = server.getBullets();
 		for(Bullet b : bullets) {
