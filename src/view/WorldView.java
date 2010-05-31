@@ -67,6 +67,7 @@ public class WorldView extends JPanel {
 			if(b != null) {
 				g.drawImage(server.getBulletImage(),(int) b.getX(),(int) b.getY(), null);
 			}
+			
 		}
 		
 		//TODO meerder spelers

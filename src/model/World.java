@@ -69,7 +69,7 @@ public class World{
 		}
 		float direction = (float) ((angle * 180) / Math.PI);
 
-		Bullet bullet = player.shoot();
+		Bullet bullet = player.shoot(mouseDot);
 		if(bullet != null) {
 			bullet.setDirection(direction);
 			bullet.setPosition(getPlayerX(), getPlayerY());
@@ -100,7 +100,7 @@ public class World{
 		if(collisionCeiling()){
 			player.setVerticalSpeed(-0.5f);
 		}
-
+		updateBulletPositions();
 		//		Tile[][] tiles = map.getTiles();
 		//		for(boolean[] pmap2 : tiles[0][1].getPixelMap()){
 			//			for(boolean pma : pmap2){
@@ -110,7 +110,12 @@ public class World{
 			//		}
 
 	}
-
+	private void updateBulletPositions() {
+		for(Bullet b : bullets) {
+			b.step();
+			System.out.println("Direction: " + b.getDirection() + "\nPosition: (" + b.getX() + "," + b.getY() + ")\nVerticalSpeed: " + b.getVerticalSpeed() + "\nHorizontalSpeed: " + b.getHorizontalSpeed());
+		}
+	}
 	private boolean canMoveLeft() {
 		Tile[][] tiles = map.getTiles();
 		if(tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY())/32)].isSolid() || tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].isSolid()){

@@ -1,5 +1,6 @@
 package model.weapon;
 
+import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
 
@@ -13,8 +14,7 @@ public class Pistol extends Weapon {
 	private final boolean UNLIMITED_BULLETS = true;
 	
 	
-	public Pistol() {
-		BULLETTYPE = new PistolBullet();	
+	public Pistol() {	
 		try {
 			this.image = ImageIO.read(new File("../themes/tee/weapon/gun.png"));
 		} catch (IOException e) {
@@ -22,7 +22,9 @@ public class Pistol extends Weapon {
 			e.printStackTrace();
 		}
 	}
-
+	public PistolBullet createBullet(Point mouseDot) {
+		return new PistolBullet(mouseDot);
+	}
 
 	public boolean isUNLIMITED_BULLETS() {
 		return UNLIMITED_BULLETS;
