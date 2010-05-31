@@ -17,7 +17,7 @@ import view.WorldView;
 
 public class Client extends JApplet{
 
-	WorldView view;
+	WorldView view;     
 	GameServer server;
 	
 	public void init() {
