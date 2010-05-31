@@ -19,8 +19,6 @@ public class Client extends JApplet{
 
 	WorldView view;
 	GameServer server;
-	long time;
-	long frames;
 	
 	public void init() {
 		
@@ -40,17 +38,13 @@ public class Client extends JApplet{
 		this.addMouseListener(mouseController);
 		this.addMouseMotionListener(mouseController);
 		
-		time = System.currentTimeMillis();
 		new Timer(1,taskPerformer).start();
-		//while(true) view.repaint() ;
 	}
 	
 	ActionListener taskPerformer = new ActionListener() {
 
 		public void actionPerformed(ActionEvent arg0) {
-			System.out.println(frames);
 			view.repaint();
-			frames++;
 		}
 		
 	  };

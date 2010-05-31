@@ -55,13 +55,10 @@ public class Mapfactory {
 			            	tileproperties.put(counter, tileproperty);
 						}
 					}
-					//HELE OPLOSSING JEZUS :S
-					BufferedImage img = new BufferedImage(32, 32, 1);
+					BufferedImage img = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB); ;
 					Graphics2D gr = img.createGraphics();
 					gr.drawImage(originalimage.getSubimage(x, y, 32, 32), 0, 0, null);
 					images.add(img);
-					//TOT HIER
-					System.out.println("Im Size: "+originalimage.getSubimage(x, y, 32, 32).getWidth());
 					counter++;
 				}
 			}
