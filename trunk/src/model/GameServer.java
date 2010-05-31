@@ -57,8 +57,8 @@ public class GameServer extends Thread{
 		
 	}
 
-	public void shoot() {
-		world.shoot();
+	public void shoot(Point mouseDot) {
+		world.shoot(mouseDot);
 		
 	}
 	

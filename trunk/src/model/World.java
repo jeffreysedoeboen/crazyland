@@ -34,7 +34,41 @@ public class World{
 		
 	}
 	
-	public void shoot() {
+	public void shoot(Point mouseDot) {
+		float playerX = getPlayerX();
+		float playerY = getPlayerY();
+		Point playerPosition = new Point((int)playerX, (int)playerY);
+		float direction;
+		float schuin =   (float) playerPosition.distance(mouseDot) ;
+		float overkant =  mouseDot.y - playerY;
+		float newDirection;
+		//float dx =  Math.abs(mouseDot.x - playerX);
+		//float dy =  Math.abs(playerY -  mouseDot.y);
+		direction = (float) Math.sin(overkant/schuin);
+		
+		if (direction < 0) {
+			direction = Math.abs(direction) + 3.60f;
+		}
+		
+//		if(dx > 0 && dy < 0) {
+//			newDirection = 180 - direction;
+//		} else if(dx < 0 && dy < 0) {
+//			newDirection = 270 - direction;
+//		} else if(dx < 0 && dy > 0) {
+//			newDirection = 360 - direction;
+//		}
+//		else {
+//			newDirection = direction;
+//		}
+		
+		
+		
+		//System.out.println("dx: " + dx);
+		//System.out.println("dy: " + dy);
+		System.out.println("Direction: " + direction *100);
+		
+		
+		
 		//TODO moet nog een lijst worden
 		bullet = player.shoot();
 	}
