@@ -64,7 +64,7 @@ public class WorldView extends JPanel {
 		ArrayList<Bullet> bullets = server.getBullets();
 		for(Bullet b : bullets) {
 			if(b != null) {
-				g.drawImage(server.getBulletImage(),(int) b.getPosition().getX(),(int) b.getPosition().getY(), null);
+				g.drawImage(server.getBulletImage(),(int) b.getX(),(int) b.getY(), null);
 			}
 		}
 		
