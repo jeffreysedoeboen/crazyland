@@ -2,7 +2,7 @@ package model;
 
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import model.bullet.Bullet;
 import model.tile.Tile;
@@ -11,7 +11,7 @@ public class World{
 
 	Map map;
 	Player player;
-	Bullet bullet;
+	ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	
 	public World(){
 		map = new Map();
@@ -36,13 +36,47 @@ public class World{
 		
 	}
 	
-	public void shoot() {
-		//TODO moet nog een lijst worden
-		bullet = player.shoot();
+	public void shoot(Point mouseDot) {
+		float playerX = getPlayerX() + 16;
+        float playerY = getPlayerY() + 16;
+        float dx = (float) (playerX - mouseDot.getX());
+        float dy = (float) (playerY - mouseDot.getY());
+        double angle = 0.0d;
+        
+        if (dx == 0.0) {
+                if(dy == 0.0) {
+                        angle = 0.0;
+                } else if(dy > 0.0) {
+                        angle = Math.PI / 2.0;
+                } else {
+                        angle = (Math.PI * 3.0) / 2.0;
+                }
+        } else if(dy == 0.0) {
+                if(dx > 0.0) {
+                        angle = 0.0;
+                } else {
+                        angle = Math.PI;
+                }
+        } else {
+                if(dx < 0.0) {
+                        angle = Math.atan(dy/dx) + Math.PI;
+                } else if(dy < 0.0) {
+                        angle = Math.atan(dy/dx) + (2*Math.PI);
+                } else {
+                        angle = Math.atan(dy/dx);
+                }
+        }
+        float direction = (float) ((angle * 180) / Math.PI);
+
+        bullets.add( player.shoot() );
+        if(bullets.size() > 0) {
+        	System.out.println(bullets.size());
+        }
 	}
 
+	//TODO snap niet wat deze methode moet doen
 	public Image getBulletImage() {
-		return bullet.getBulletImage();
+		return bullets.get(0).getBulletImage();
 	}
 	
 	public Player getPlayer() {
@@ -64,10 +98,10 @@ public class World{
 		if(collisionCeiling()){
 			player.setVerticalSpeed(-0.5f);
 		}
-		System.out.println("Onground: " + onGround());
-		System.out.println("OnCeiling: " + collisionCeiling());
-		System.out.println("left: " + canMoveLeft());
-		System.out.println("right: " + canMoveRight());
+//		System.out.println("Onground: " + onGround());
+//		System.out.println("OnCeiling: " + collisionCeiling());
+//		System.out.println("left: " + canMoveLeft());
+//		System.out.println("right: " + canMoveRight());
 		
 //		Tile[][] tiles = map.getTiles();
 //		for(boolean[] pmap2 : tiles[0][1].getPixelMap()){
@@ -135,5 +169,9 @@ public class World{
 		if(onGround()){
 			player.setVerticalSpeed(4.5f);
 		}
+	}
+
+	public ArrayList<Bullet> getBullets() {
+		return bullets;
 	}
 }
