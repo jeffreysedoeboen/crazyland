@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import model.bullet.Bullet;
@@ -74,7 +75,6 @@ public class World{
         }
 	}
 
-	//TODO snap niet wat deze methode moet doen
 	public Image getBulletImage() {
 		return bullets.get(0).getBulletImage();
 	}
@@ -98,10 +98,6 @@ public class World{
 		if(collisionCeiling()){
 			player.setVerticalSpeed(-0.5f);
 		}
-//		System.out.println("Onground: " + onGround());
-//		System.out.println("OnCeiling: " + collisionCeiling());
-//		System.out.println("left: " + canMoveLeft());
-//		System.out.println("right: " + canMoveRight());
 		
 //		Tile[][] tiles = map.getTiles();
 //		for(boolean[] pmap2 : tiles[0][1].getPixelMap()){
@@ -115,9 +111,7 @@ public class World{
 	
 	private boolean canMoveLeft() {
 		Tile[][] tiles = map.getTiles();
-		if(tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY())/32)].isSolid() || tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+30)/32)].isSolid()){
-			System.out.println(tiles[(int) ((player.getX()-3)/35)][(int) ((player.getY())/32)].isSolid());
-			System.out.println(tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+30)/32)].isSolid());
+		if(tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY())/32)].isSolid() || tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].isSolid()){
 			return false;
 		}
 		return true;
@@ -125,9 +119,7 @@ public class World{
 	
 	private boolean canMoveRight() {
 		Tile[][] tiles = map.getTiles();
-		if(tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY())/32)].isSolid() || tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY()+30)/32)].isSolid()){
-			System.out.println(tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY())/32)].isSolid());
-			System.out.println(tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY()+32)/32)].isSolid());
+		if(tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY())/32)].isSolid() || tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY()+29)/32)].isSolid()){
 			return false;
 		}
 		return true;
@@ -170,7 +162,7 @@ public class World{
 			player.setVerticalSpeed(4.5f);
 		}
 	}
-
+	
 	public ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
