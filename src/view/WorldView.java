@@ -3,6 +3,9 @@ package view;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.util.ArrayList;
+import javax.swing.JPanel;
+
 import javax.swing.JPanel;
 
 import model.GameServer;
@@ -57,10 +60,11 @@ public class WorldView extends JPanel {
 
 		g.drawImage(server.getPlayerImage(),Math.round(playerX) + offsetX,Math.round(playerY) + offsetY,null);
 		
-		//TODO meerdere bullets
-		Bullet bullet = server.getBullet();
-		if(bullet != null) {
-			g.drawImage(server.getBulletImage(),(int) bullet.getPosition().getX() + offsetX,(int) bullet.getPosition().getY() + offsetY, null);
+		ArrayList<Bullet> bullets = server.getBullets();
+		for(Bullet b : bullets) {
+			if(b != null) {
+				g.drawImage(server.getBulletImage(),(int) b.getPosition().getX(),(int) b.getPosition().getY(), null);
+			}
 		}
 		
 		//TODO meerder spelers
