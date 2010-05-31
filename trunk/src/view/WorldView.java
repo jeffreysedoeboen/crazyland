@@ -36,9 +36,10 @@ public class WorldView extends JPanel {
 			}
 		}
 		
-		Point poistiePlayer1 = server.getPlayerPosition();
+		float playerX = server.getPlayerX();
+		float playerY = server.getPlayerY();
 
-		g.drawImage(server.getPlayerImage(),((int)poistiePlayer1.getX()),((int)poistiePlayer1.getY()),null);
+		g.drawImage(server.getPlayerImage(),(int)playerX,(int)playerY,null);
 		
 		//TODO meerdere bullets
 		Bullet bullet = server.getBullet();
@@ -49,8 +50,8 @@ public class WorldView extends JPanel {
 		//TODO meerder spelers
 		Player player1 = server.getPlayer();
 		if(player1.getWeapon() != null) {
-			int midPlayerX = (int) (player1.getPosition().getX() + ( player1.getImage().getWidth(null) / 2));
-			int midPlayerY = (int) (player1.getPosition().getY() + ( player1.getImage().getHeight(null) / 2));
+			int midPlayerX = (int) (player1.getX() + ( player1.getImage().getWidth(null) / 2));
+			int midPlayerY = (int) (player1.getY() + ( player1.getImage().getHeight(null) / 2));
 			
 			g.drawImage(player1.getWeapon().getImage(), midPlayerX, midPlayerY, null);
 		}

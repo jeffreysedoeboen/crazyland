@@ -12,7 +12,8 @@ import model.weapon.Weapon;
 public class Player {
 
 	private String name;
-	private Point position;
+	private float x;
+	private float y;
 	private Weapon primaryWeapon;
 	private long lastTimeShot = 0;
 	private int hitpoints = 10;
@@ -20,9 +21,10 @@ public class Player {
 	private boolean movingRight = false;
 	private boolean movingLeft = false;
 	
-	public Player(String name, Point position) {
+	public Player(String name, float x, float y) {
 		this.name = name;
-		this.position = position;
+		this.x = x;
+		this.y = y;
 		
 		primaryWeapon = new Pistol();
 		
@@ -33,8 +35,9 @@ public class Player {
 		}
 	}
 	
-	public void setPosition(Point p) {
-		this.position = p;
+	public void setPosition(float x, float y) {
+		this.x = x;
+		this.y = y;
 	}
 	
 	public Bullet shoot() {
@@ -52,8 +55,11 @@ public class Player {
 		return null;		
 	}
 	
-	public Point getPosition(){
-		return position;	
+	public float getX(){
+		return this.x;	
+	}
+	public float getY(){
+		return this.y;
 	}
 	
 	public String getName(){
@@ -93,11 +99,11 @@ public class Player {
 	}
 
 	public void moveRight() {
-		position.setLocation(position.getX()+2,position.getY());
+		this.x += 2.5;
 	}
 	
 	public void moveLeft() {
-		position.setLocation(position.getX()-2,position.getY());
+		this.x -= 2.5;
 	}
 	
 }

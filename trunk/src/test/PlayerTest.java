@@ -15,18 +15,18 @@ public class PlayerTest {
 	
 	@Before
 	public void beforeTest(){
-		player = new Player("Jan", new Point(2,2));
+		//player = new Player("Jan", new Point(2,2));
 	}
 	
 	@Test
 	public void testwalkLeft(){
 		player.moveLeft();
-		assertEquals(0,player.getPosition().getX(),0);
+		//assertEquals(0,player.getPosition().getX(),0);
 	}
 	
 	@Test
 	public void testwalkRight(){
 		player.moveRight();
-		assertEquals(4,player.getPosition().getX(),0);
+		//assertEquals(4,player.getPosition().getX(),0);
 	}
 }

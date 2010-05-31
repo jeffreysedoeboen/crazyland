@@ -22,8 +22,12 @@ public class GameServer extends Thread{
 		return this.world;
 	}
 
-	public Point getPlayerPosition(){
-		return this.world.getPlayerPosition();
+	public float getPlayerX(){
+		return this.world.getPlayerX();
+	}
+
+	public float getPlayerY(){
+		return this.world.getPlayerY();
 	}
 
 	public Image getPlayerImage() {
