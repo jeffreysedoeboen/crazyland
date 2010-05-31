@@ -16,17 +16,21 @@ public abstract class Weapon {
 	protected int currentBullets = 0;
 	protected BufferedImage image = null;
 	
-	public Bullet shoot(){
+	public Bullet shoot(Point mouseDot){
 		if(isUNLIMITED_BULLETS() || currentBullets > 0){
 			//Shoot a bullet
 			if(!UNLIMITED_BULLETS){
 				currentBullets--;
 			}
-			return BULLETTYPE;
+			return createBullet(mouseDot);
 		}
 		return null;
 	}
 	
+	private Bullet createBullet(Point mouseDot) {
+		return null;
+	}
+
 	public void turnToPoint( Point point ) {
 		Graphics2D g = (Graphics2D) image.getGraphics();
 		g.setTransform(AffineTransform.getRotateInstance(point.getX(), point.getY())); //TODO controleren als view er is

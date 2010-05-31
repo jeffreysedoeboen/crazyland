@@ -16,7 +16,7 @@ public class MouseController implements MouseListener, MouseMotionListener{
 	
 	public void mouseClicked(MouseEvent e) {
 		Point mouseDot = e.getPoint();
-		
+
 		server.shoot(mouseDot);	
 	}
 
