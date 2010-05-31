@@ -10,7 +10,7 @@ public class PistolBullet extends Bullet {
 	
 	public PistolBullet() {		
 		try {
-			bulletImage = ImageIO.read(new File("../themes/tee/weapons/bullet.png"));
+			bulletImage = ImageIO.read(new File("../themes/tee/weapon/bullet.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

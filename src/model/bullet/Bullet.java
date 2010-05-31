@@ -8,7 +8,7 @@ public abstract class Bullet {
 	protected final float BULLET_SPEED = 1.00F;
 	protected Image bulletImage;
 	protected double direction;
-	protected Point position;
+	protected float x, y;
 	
 
 	
@@ -16,12 +16,17 @@ public abstract class Bullet {
 		return direction;
 	}
 
-	public Point getPosition() {
-		return position;
+	public float getX() {
+		return x;
+	}
+	
+	public float getY() {
+		return y;
 	}
 
-	public void setPosition(Point position) {
-		this.position = position;
+	public void setPosition(float x, float y) {
+		this.x = x;
+		this.y = y;
 	}
 
 	public void setDirection(double direction) {
