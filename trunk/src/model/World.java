@@ -37,37 +37,35 @@ public class World{
 	public void shoot(Point mouseDot) {
 		float playerX = getPlayerX() + 16;
 		float playerY = getPlayerY() + 16;
-		float direction = 0;
-		float dx =  Math.abs(playerX - mouseDot.x );
-		float dy =  Math.abs(playerY -  mouseDot.y);
-
-		dx = (float) (playerX - mouseDot.getX());
-		dy = (float) (playerX - mouseDot.getY());
+		float dx = (float) (playerX - mouseDot.getX());
+		float dy = (float) (playerY - mouseDot.getY());
 		double angle = 0.0d;
+		
 		if (dx == 0.0) {
-			if(dy == 0.0)angle = 0.0;
-			else if(dy > 0.0) angle = Math.PI / 2.0;
-			else angle = (Math.PI * 3.0) / 2.0;
+			if(dy == 0.0) {
+				angle = 0.0;
+			} else if(dy > 0.0) {
+				angle = Math.PI / 2.0;
+			} else {
+				angle = (Math.PI * 3.0) / 2.0;
+			}
+		} else if(dy == 0.0) {
+			if(dx > 0.0) {
+				angle = 0.0;
+			} else {
+				angle = Math.PI;
+			}
+		} else {
+			if(dx < 0.0) {
+				angle = Math.atan(dy/dx) + Math.PI;
+			} else if(dy < 0.0) {
+				angle = Math.atan(dy/dx) + (2*Math.PI);
+			} else {
+				angle = Math.atan(dy/dx);
+			}
 		}
-		else if(dy == 0.0) {
-			if(dx > 0.0)angle = 0.0;
-			else angle = Math.PI;
-		}
-		else {
-			if(dx < 0.0)angle = Math.atan(dy/dx) + Math.PI;
-			else if(dy < 0.0) angle = Math.atan(dy/dx) + (2*Math.PI);
-			else angle = Math.atan(dy/dx);
-		}
-		direction = (float) ((angle * 180) / Math.PI);
+		float direction = (float) ((angle * 180) / Math.PI);
 
-
-//	System.out.println("dx: " + dx);
-//	System.out.println("dy: " + dy);
-//	System.out.println("Direction: " + direction);
-
-
-
-	//TODO moet nog een lijst worden
 	bullet = player.shoot();
 }
 
