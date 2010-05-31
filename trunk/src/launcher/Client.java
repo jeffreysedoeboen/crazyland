@@ -1,6 +1,7 @@
 package launcher;
 
 
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -30,6 +31,7 @@ public class Client extends JApplet{
 		setSize(900, 300);
 		setVisible(true);
 		setFocusable(true);
+		
 		
 		KeyboardController keycontroller = new KeyboardController(server);
 		this.addKeyListener(keycontroller);
