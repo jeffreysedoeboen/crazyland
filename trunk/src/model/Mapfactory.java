@@ -30,7 +30,7 @@ public class Mapfactory {
 		try {
 			originalimage = ImageIO.read(new File("../tiles/tiles.png"));
 			//ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
-			ArrayList<Image> images = new ArrayList<Image>();
+			ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
 			
 			
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
