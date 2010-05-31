@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Image;
 import java.awt.Point;
+import java.util.ArrayList;
 
 import model.bullet.Bullet;
 
@@ -13,9 +14,8 @@ public class GameServer extends Thread{
 		world = new World();
 	}
 	
-	public Bullet getBullet() {
-		//TODO moet nog meerdere bullets worden
-		return world.bullet;
+	public ArrayList<Bullet> getBullets() {
+		return world.getBullets();
 	}
 	
 	public World getWorld(){
