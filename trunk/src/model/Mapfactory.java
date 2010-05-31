@@ -25,8 +25,8 @@ public class Mapfactory {
 /*	private static BufferedImage originalimage;*/
 	
 	public static Tile[][] getMap(String mapsource) {
-		Tile[][] tiles = new Tile[50][10];
 		BufferedImage originalimage;
+		Tile[][] tiles = null;
 		try {
 			originalimage = ImageIO.read(new File("../tiles/tiles.png"));
 			//ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
@@ -37,6 +37,12 @@ public class Mapfactory {
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
             Document doc = docBuilder.parse (new File("../maps/" + mapsource + ".tmx"));
             doc.getDocumentElement ().normalize ();
+            
+            NodeList mapNode = doc.getElementsByTagName("map");
+            Element mapElement = (Element) mapNode.item(0);
+            int width = Integer.valueOf(mapElement.getAttribute("width")).intValue();
+            int height = Integer.valueOf(mapElement.getAttribute("height")).intValue();
+            tiles = new Tile[width][height];
             
             NodeList tilesetNode = doc.getElementsByTagName("tileset");
 			Element tilesetElement = (Element) tilesetNode.item(0);
