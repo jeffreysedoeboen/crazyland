@@ -13,11 +13,13 @@ import controller.MouseController;
 import model.GameServer;
 import model.World;
 
+import view.LobbyView;
 import view.WorldView;
 
 public class Client extends JApplet{
 
-	WorldView view;     
+	/*LobbyView view;*/
+	WorldView view;
 	GameServer server;
 	
 	public void init() {
@@ -25,7 +27,11 @@ public class Client extends JApplet{
 		server = new GameServer();
 		server.start();
 		
+		
+		
 		this.view = new WorldView(server);
+		
+		/*this.view = new WorldView(server);*/
 		setContentPane(this.view);
 		setSize(900, 300);
 		setVisible(true);
