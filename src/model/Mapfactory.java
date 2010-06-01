@@ -88,7 +88,7 @@ public class Mapfactory {
                 	}
             	}
             	x += 1;
-            	if(x % 50 == 0) {
+            	if(x % width == 0) {
             		x = 0;
             		y += 1;
             	}
