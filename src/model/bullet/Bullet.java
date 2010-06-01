@@ -1,10 +1,9 @@
 package model.bullet;
 
-import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
+
+import view.WorldView;
 
 public abstract class Bullet {
 
@@ -34,6 +33,10 @@ public abstract class Bullet {
 		this.direction = direction;
 	}
 	
+	public float getDirection () {
+		return direction;
+	}
+	
 	public BufferedImage getBulletImage() {
 		return bulletImage;
 	}
@@ -46,23 +49,10 @@ public abstract class Bullet {
 	public void setBullet(int clickedX, int clickedY, float x, float y, double dir) {
 		this.x = x;
 		this.y = y;
-		this.bulletImage = rotateImage(bulletImage, (float) (Math.toDegrees((Math.atan2(Math.toRadians(clickedY - y), Math.toRadians(clickedX - x))))));
+		this.bulletImage = WorldView.rotateImage(bulletImage, (float) (Math.toDegrees((Math.atan2(Math.toRadians(clickedY - y), Math.toRadians(clickedX - x))))));
 		this.direction = (float) dir;
 		//bulletImage = rotateImage(baseBulletImage, (float) Math.toDegrees((Math.atan2(Math.toRadians(mouseDot.y - y), Math.toRadians(mouseDot.x - x)))));
 		//(float) Math.toDegrees((Math.atan2(Math.toRadians(mouseDot.y - y), Math.toRadians(mouseDot.x - x)))));
 		
 	}
-	
-	public BufferedImage rotateImage(BufferedImage src, float degrees) {
-        AffineTransform affineTransform = AffineTransform.getRotateInstance(
-                Math.toRadians(degrees),
-                src.getWidth() / 2,
-                src.getHeight() / 2);
-        BufferedImage rotatedImage = new BufferedImage(src.getWidth(), src
-                .getHeight(), src.getType());
-        Graphics2D g = (Graphics2D) rotatedImage.getGraphics();
-        g.setTransform(affineTransform);
-        g.drawImage(src, 0, 0, null);
-        return rotatedImage;
-    }
 }

@@ -3,6 +3,8 @@ package view;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
@@ -16,17 +18,18 @@ import model.tile.Tile;
 public class WorldView extends JPanel {
 
 	private GameServer server;
-	int offsetX, offsetY;
+	
+	static int offsetX, offsetY;
 	
 	public WorldView(GameServer server) {
 		this.server = server;
 	}
 	
-	public int getOffsetX() {
+	public static int getOffsetX() {
 		return offsetX;
 	}
 
-	public int getOffsetY() {
+	public static int getOffsetY() {
 		return offsetY;
 	}
 	
@@ -88,12 +91,9 @@ public class WorldView extends JPanel {
 		//TODO meerder spelers
 		Player player1 = server.getPlayer();
 		if(player1.getWeapon() != null) {
-			int midPlayerX = (int) (player1.getX() + ( player1.getImage().getWidth(null) / 2));
-			int midPlayerY = (int) (player1.getY() + ( player1.getImage().getHeight(null) / 2));
-			
-			g.drawImage(player1.getWeapon().getImage(), midPlayerX + offsetX, midPlayerY + offsetY, null);
+			//System.out.println("x: " + player1.getWeapon().getX() + ", y: " + player1.getWeapon().getY());
+			g.drawImage(player1.getWeapon().getImage(), player1.getWeapon().getX() + offsetX, player1.getWeapon().getY() + offsetY, null);
 		}
-		
 	}
 	
 	public int pixelsToTiles(float pixels) {
@@ -107,4 +107,18 @@ public class WorldView extends JPanel {
 	public int tilesToPixels(int numTiles) {
 		return numTiles * 32;
 	}
+	
+	public static BufferedImage rotateImage(BufferedImage src, float degrees) {
+        AffineTransform affineTransform = AffineTransform.getRotateInstance(
+                Math.toRadians(degrees),
+                src.getWidth() / 2,
+                src.getHeight() / 2);
+        BufferedImage rotatedImage = new BufferedImage(src.getWidth(), src
+                .getHeight(), src.getType());
+        Graphics2D g = (Graphics2D) rotatedImage.getGraphics();
+        g.setTransform(affineTransform);
+        g.drawImage(src, 0, 0, null);
+        return rotatedImage;
+    }
+	
 }

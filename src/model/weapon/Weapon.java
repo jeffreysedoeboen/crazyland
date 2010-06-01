@@ -5,6 +5,8 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+
+import view.WorldView;
 import model.bullet.*;
 
 public abstract class Weapon {
@@ -14,7 +16,19 @@ public abstract class Weapon {
 	protected boolean unlimitedBullets = false;
 	protected int maxBullets = 0;
 	protected int currentBullets = 0;
-	protected BufferedImage image = null;
+	protected BufferedImage image = null, baseImage;
+	protected int x;
+	protected int y;
+	protected float angle;
+	
+	public Weapon(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	public float getAngle() {
+		return angle;
+	}
 	
 	public Bullet shoot(){
 		
@@ -28,10 +42,10 @@ public abstract class Weapon {
 		return null;
 	}
 
-	public void turnToPoint( Point point ) {
-		Graphics2D g = (Graphics2D) image.getGraphics();
-		g.setTransform(AffineTransform.getRotateInstance(point.getX(), point.getY())); //TODO controleren als view er is
-		g.dispose();
+	public BufferedImage turnToPoint( int mouseX, int mouseY, int offsetX, int offsetY) {
+		float angle = (float) (Math.toDegrees((Math.atan2(Math.toRadians(mouseY - (y + offsetY)), Math.toRadians(mouseX - (x + offsetX))))));
+		image = WorldView.rotateImage(baseImage,angle);
+		return image;
 	}
 	
 	public float getFireRate(){
@@ -48,6 +62,22 @@ public abstract class Weapon {
 	
 	public Bullet createBullet(){
 		return this.bulletType;
+	}
+	
+	public void setX(int x) {
+		this.x = x;
+	}
+	
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
 	}
 	
 }
