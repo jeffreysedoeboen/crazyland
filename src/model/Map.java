@@ -8,7 +8,7 @@ public class Map {
 	private int height;
 	
 	public Map(){
-		setTiles(Mapfactory.getMap("crazyland1"));
+		setTiles(Mapfactory.getMap("crazyland2"));
 	}
 	
 	public int getWidth() {
