@@ -50,8 +50,8 @@ public class World{
 		return player;
 	}
 
-	public void moveWeapon(int mouseX, int mouseY, int offsetX, int offsetY) {
-		player.getWeapon().turnToPoint(mouseX, mouseY, offsetX, offsetY);
+	public void moveWeapon(int mouseX, int mouseY) {
+		player.getWeapon().turnToPoint(mouseX, mouseY);
 	}
 
 	@SuppressWarnings("unchecked")

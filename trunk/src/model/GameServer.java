@@ -52,8 +52,8 @@ public class GameServer extends Thread{
 		world.stopMovingLeft();
 	}
 	
-	public void moveWeapon(int mouseX, int mouseY, int offsetX, int offsetY) {
-		world.moveWeapon(mouseX, mouseY, offsetX, offsetY);
+	public void moveWeapon(int mouseX, int mouseY) {
+		world.moveWeapon(mouseX, mouseY);
 		
 	}
 	public void shoot(int clickedX, int clickedY) {
