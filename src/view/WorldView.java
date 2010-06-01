@@ -44,6 +44,9 @@ public class WorldView extends JPanel {
 		offsetY = Math.min(offsetY, 0);
 		offsetY = Math.max(offsetY, this.getHeight() - mapHeight);
 		
+		server.getWorld().setOffsetX(offsetX);
+		server.getWorld().setOffsetY(offsetY);
+		
 		int firstTileX = pixelsToTiles(-offsetX);
 		int lastTileX = firstTileX + pixelsToTiles(this.getWidth()) + 1;
 		int firstTileY = pixelsToTiles(-offsetY);
@@ -66,7 +69,7 @@ public class WorldView extends JPanel {
 		ArrayList<Bullet> bullets = server.getBullets();
 		for(Bullet b : bullets) {
 			if(b != null) {
-				g.drawImage(server.getBulletImage(),(int) b.getX(),(int) b.getY(), null);
+				g.drawImage(server.getBulletImage(),(int) b.getX() + offsetX,(int) b.getY() + offsetY, null);
 			}
 			
 		}
