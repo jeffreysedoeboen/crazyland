@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.awt.Point;
 
 import model.Player;
+import model.World;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,10 +13,12 @@ import org.junit.Test;
 public class PlayerTest {
 
 	private Player player;
+	private World world;
 	
 	@Before
 	public void beforeTest(){
 		player = new Player("Jan",2,2);
+		world = new World();
 	}
 	
 	@Test
@@ -67,14 +70,21 @@ public class PlayerTest {
 	}
 	
 	@Test
-	public void testJumpingTrue(){
-		player.calcVerticalSpeed(true);
-		assertEquals(2,player.getY(),0);
+	public void testmovingLeft(){
+		player.moveLeft(true);
+		assertFalse(player.isMovingLeft());
 	}
 	
 	@Test
-	public void testJumpingFalse(){
-		player.calcVerticalSpeed(false);
-		assertEquals(2,player.getY(),0);
+	public void testmovingRight(){
+		player.moveRight(true);
+		assertFalse(player.isMovingRight());
+	}
+	
+	@Test
+	public void testVerticalSpeed(){
+		world.getPlayer().onGround();
+		world.jump();
+		assertEquals(4.5f, world.getPlayer().getVerticalSpeed(),0);
 	}
 }
