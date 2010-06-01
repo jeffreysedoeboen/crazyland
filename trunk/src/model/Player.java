@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -26,7 +27,6 @@ public class Player {
 		this.name = name;
 		this.x = x;
 		this.y = y;
-		
 		primaryWeapon = new Pistol();
 		
 		try {

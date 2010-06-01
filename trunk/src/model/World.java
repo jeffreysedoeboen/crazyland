@@ -50,11 +50,11 @@ public class World{
 		float distanceFromPlayerY = (float) (player.getY()- mouseDot.getY() + offsetY);
 		Bullet b = player.shoot();
 		if(b != null){
-			b.setBullet(player.getX(),player.getY(),Math.atan2(distanceFromPlayerY, distanceFromPlayerX));
+			b.setBullet(mouseDot, player.getX(),player.getY(),Math.atan2(distanceFromPlayerY, distanceFromPlayerX));
 			bullets.add(b);
 		}
 	}
-
+	
 	public Image getBulletImage() {
 		return bullets.get(0).getBulletImage();
 	}
@@ -71,7 +71,7 @@ public class World{
 	public void move() {
 		if(player.isMovingLeft() && canMoveLeft()){
 			player.moveLeft(onGround());
-		}else if(player.isMovingRight() && canMoveRight()){
+		} else if(player.isMovingRight() && canMoveRight()){
 			player.moveRight(onGround());
 		}
 		player.moveVertical();
@@ -92,7 +92,7 @@ public class World{
 			//		}
 
 	}
-
+	
 	private boolean canMoveLeft() {
 		Tile[][] tiles = map.getTiles();
 		if(tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY())/32)].isSolid() || tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].isSolid()){
