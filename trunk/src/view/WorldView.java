@@ -61,11 +61,13 @@ public class WorldView extends JPanel {
 		int firstTileY = pixelsToTiles(-offsetY);
 		int lastTileY = firstTileY + pixelsToTiles(this.getHeight()) + 1;
 		
-		for (int y=firstTileY; y < lastTileY; y++) {
-		    for (int x=firstTileX; x < lastTileX + 1; x++) {
-		    	if(x < pixelsToTiles(mapWidth)){
-		        	g.drawImage(tiles[x][y].getImage(),tilesToPixels(x) + offsetX, tilesToPixels(y) + offsetY, null);
-		        }
+		for (int y=firstTileY; y <= lastTileY; y++) {
+		    if( y < pixelsToTiles(mapHeight)) {
+				for (int x=firstTileX; x <= lastTileX; x++) {
+			    	if(x < pixelsToTiles(mapWidth)){
+			        	g.drawImage(tiles[x][y].getImage(),tilesToPixels(x) + offsetX, tilesToPixels(y) + offsetY, null);
+			        }
+			    }
 		    }
 		}
 
