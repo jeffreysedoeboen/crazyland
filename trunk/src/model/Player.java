@@ -12,7 +12,7 @@ import model.weapon.Weapon;
 
 public class Player {
 
-	private String name;
+	private String username;
 	private float x;
 	private float y;
 	private Weapon primaryWeapon;
@@ -24,7 +24,7 @@ public class Player {
 	private float verticalSpeed = 0;
 	
 	public Player(String name, float x, float y) {
-		this.name = name;
+		this.username = name;
 		this.x = x;
 		this.y = y;
 		primaryWeapon = new Pistol();
@@ -73,7 +73,7 @@ public class Player {
 	}
 	
 	public String getName(){
-		return name;
+		return username;
 	}
 	
 	public int getHitpoints(){
