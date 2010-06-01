@@ -1,5 +1,7 @@
 package model.bullet;
 
+import java.awt.Image;
+import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
 
@@ -14,5 +16,4 @@ public class PistolBullet extends Bullet {
 			e.printStackTrace();
 		}
 	}
-	
 }

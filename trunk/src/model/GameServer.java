@@ -63,10 +63,6 @@ public class GameServer extends Thread{
 	public void jump(){
 		world.jump();
 	}
-
-	public Image getBulletImage() {
-		return world.getBulletImage();
-	}
 	
 	public Player getPlayer() {
 		return world.getPlayer();
