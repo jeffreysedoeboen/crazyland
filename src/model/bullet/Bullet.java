@@ -51,10 +51,10 @@ public abstract class Bullet {
 		this.y -= 3*Math.sin(this.direction);
 	}
 	
-	public void setBullet(Point mouseDot, float x, float y, double dir) {
+	public void setBullet(int clickedX, int clickedY, float x, float y, double dir) {
 		this.x = x;
 		this.y = y;
-		this.bulletImage = rotateImage(bulletImage, (float) (Math.toDegrees((Math.atan2(Math.toRadians(mouseDot.y - y), Math.toRadians(mouseDot.x - x))))));
+		this.bulletImage = rotateImage(bulletImage, (float) (Math.toDegrees((Math.atan2(Math.toRadians(clickedY - y), Math.toRadians(clickedX - x))))));
 		this.direction = (float) dir;
 	}
 	

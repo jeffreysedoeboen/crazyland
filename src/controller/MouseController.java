@@ -8,21 +8,23 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import view.WorldView;
+
 import model.GameServer;
 
 public class MouseController implements MouseListener, MouseMotionListener{
 	private GameServer server;
+	private WorldView worldView;
 	
-	public MouseController(GameServer server) {
+	public MouseController(GameServer server, WorldView worldView) {
 		this.server = server;
+		this.worldView = worldView;
 	}
 	
 	public void mouseClicked(MouseEvent e) {
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-    	
-		
     }
 	
 
@@ -30,9 +32,7 @@ public class MouseController implements MouseListener, MouseMotionListener{
 	}
 
 	public void mousePressed(MouseEvent e) {
-		Point mouseDot = e.getPoint() ;
-
-		server.shoot(mouseDot);	
+		server.shoot(e.getX() - worldView.getOffsetX(), e.getY() - worldView.getOffsetY());
 	}
 
 	public void mouseReleased(MouseEvent arg0) {

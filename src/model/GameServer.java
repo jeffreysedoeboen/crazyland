@@ -56,8 +56,8 @@ public class GameServer extends Thread{
 		world.moveWeapon(mousePoint);
 		
 	}
-	public void shoot(Point mouseDot) {
-		world.shoot(mouseDot);
+	public void shoot(int clickedX, int clickedY) {
+		world.shoot(clickedX, clickedY);
 	}
 	
 	public void jump(){

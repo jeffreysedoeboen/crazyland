@@ -48,7 +48,7 @@ public class Client extends JApplet{
 		KeyboardController keycontroller = new KeyboardController(server);
 		this.addKeyListener(keycontroller);
 		
-		MouseController mouseController = new MouseController(server);
+		MouseController mouseController = new MouseController(server, view);
 		this.addMouseListener(mouseController);
 		this.addMouseMotionListener(mouseController);
 		
