@@ -1,8 +1,6 @@
 package model;
 
 import java.awt.Image;
-import java.awt.Point;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -27,13 +25,14 @@ public class Player {
 		this.username = name;
 		this.x = x;
 		this.y = y;
-		primaryWeapon = new Pistol();
 		
 		try {
 			playerImage = ImageIO.read(new File("../themes/tee/characters/character.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		primaryWeapon = new Pistol(this.getMidPlayerX(), this.getMidPlayerY());
 	}
 	
 	public void setPosition(float x, float y) {
@@ -48,6 +47,15 @@ public class Player {
 	public float getVerticalSpeed(){
 		return this.verticalSpeed;
 	}
+	
+	public int getMidPlayerX() {
+		return (int) (x + (this.getImage().getWidth(null) / 2));
+	}
+	
+	public int getMidPlayerY() {
+		return (int) (y + ( this.getImage().getHeight(null) / 2));
+	}
+	
 	
 	public Bullet shoot() {
 
@@ -114,6 +122,7 @@ public class Player {
 		}else{
 			this.x += 2;
 		}
+		this.getWeapon().setX(this.getMidPlayerX());
 	}
 	
 	public void moveLeft(boolean onGround) {
@@ -122,6 +131,7 @@ public class Player {
 		}else{
 			this.x -= 2;
 		}
+		this.getWeapon().setX(this.getMidPlayerX());
 	}
 
 	public void moveVertical() {
@@ -137,5 +147,6 @@ public class Player {
 		}else{
 			this.verticalSpeed = 0;
 		}
+		this.getWeapon().setY(this.getMidPlayerY() - 18);
 	}	
 }

@@ -39,10 +39,7 @@ public class MouseController implements MouseListener, MouseMotionListener{
 	}
 
 	public void mouseMoved(MouseEvent e) {
-//		Weapon weapon = player.getWeapon();
-//		weapon.turnToPoint(e.getPoint());
-		Point mouseDot = e.getPoint();
-		server.moveWeapon(mouseDot);
+		server.moveWeapon(e.getX(), e.getY(), worldView.getOffsetX(), worldView.getOffsetY());
 	}
 
 }
