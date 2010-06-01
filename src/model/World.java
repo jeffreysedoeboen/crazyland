@@ -45,10 +45,6 @@ public class World{
 			bullets.add(b);
 		}
 	}
-	
-	public Image getBulletImage() {
-		return bullets.get(0).getBulletImage();
-	}
 
 	public Player getPlayer() {
 		return player;

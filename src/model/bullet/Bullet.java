@@ -1,19 +1,10 @@
 package model.bullet;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
-import javax.imageio.ImageIO;
 
 public abstract class Bullet {
 
@@ -24,7 +15,8 @@ public abstract class Bullet {
 	protected float verticalSpeed = 0;
 	protected float horizontalSpeed = 0;
 	protected Point destination;
-
+	
+	
 	public float getX() {
 		return x;
 	}
@@ -56,9 +48,12 @@ public abstract class Bullet {
 		this.y = y;
 		this.bulletImage = rotateImage(bulletImage, (float) (Math.toDegrees((Math.atan2(Math.toRadians(clickedY - y), Math.toRadians(clickedX - x))))));
 		this.direction = (float) dir;
+		//bulletImage = rotateImage(baseBulletImage, (float) Math.toDegrees((Math.atan2(Math.toRadians(mouseDot.y - y), Math.toRadians(mouseDot.x - x)))));
+		//(float) Math.toDegrees((Math.atan2(Math.toRadians(mouseDot.y - y), Math.toRadians(mouseDot.x - x)))));
+		
 	}
 	
-	private BufferedImage rotateImage(BufferedImage src, float degrees) {
+	public BufferedImage rotateImage(BufferedImage src, float degrees) {
         AffineTransform affineTransform = AffineTransform.getRotateInstance(
                 Math.toRadians(degrees),
                 src.getWidth() / 2,
