@@ -42,8 +42,8 @@ public abstract class Weapon {
 		return null;
 	}
 
-	public BufferedImage turnToPoint( int mouseX, int mouseY, int offsetX, int offsetY) {
-		float angle = (float) (Math.toDegrees((Math.atan2(Math.toRadians(mouseY - (y + offsetY)), Math.toRadians(mouseX - (x + offsetX))))));
+	public BufferedImage turnToPoint( int mouseX, int mouseY) {
+		float angle = (float) (Math.toDegrees((Math.atan2(Math.toRadians(mouseY - y), Math.toRadians(mouseX - x)))));
 		image = WorldView.rotateImage(baseImage,angle);
 		return image;
 	}
