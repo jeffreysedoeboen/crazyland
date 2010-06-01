@@ -16,9 +16,18 @@ import model.tile.Tile;
 public class WorldView extends JPanel {
 
 	private GameServer server;
+	int offsetX, offsetY;
 	
 	public WorldView(GameServer server) {
 		this.server = server;
+	}
+	
+	public int getOffsetX() {
+		return offsetX;
+	}
+
+	public int getOffsetY() {
+		return offsetY;
 	}
 	
 	public void paintComponent(Graphics g){
@@ -44,8 +53,8 @@ public class WorldView extends JPanel {
 		offsetY = Math.min(offsetY, 0);
 		offsetY = Math.max(offsetY, this.getHeight() - mapHeight);
 		
-		server.getWorld().setOffsetX(offsetX);
-		server.getWorld().setOffsetY(offsetY);
+		this.offsetX = offsetX;
+		this.offsetY = offsetY;
 		
 		int firstTileX = pixelsToTiles(-offsetX);
 		int lastTileX = firstTileX + pixelsToTiles(this.getWidth()) + 1;

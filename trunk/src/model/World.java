@@ -12,7 +12,6 @@ public class World{
 	Map map;
 	Player player;
 	ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-	int offsetX = 0, offsetY = 0;
 
 	public World(){
 		map = new Map();
@@ -36,21 +35,13 @@ public class World{
 		return player.getImage();
 
 	}
-	
-	public void setOffsetX(int ox) {
-		offsetX = ox;
-	}
-	
-	public void setOffsetY(int oY) {
-		offsetY = oY;
-	}
 
-	public void shoot(Point mouseDot) {
-		float distanceFromPlayerX = (float) (player.getX()- mouseDot.getX() + offsetX);
-		float distanceFromPlayerY = (float) (player.getY()- mouseDot.getY() + offsetY);
+	public void shoot(int clickedX, int clickedY) {
+		float distanceFromPlayerX = (float) (player.getX()- clickedX);
+		float distanceFromPlayerY = (float) (player.getY()- clickedY);
 		Bullet b = player.shoot();
 		if(b != null){
-			b.setBullet(mouseDot, player.getX(),player.getY(),Math.atan2(distanceFromPlayerY, distanceFromPlayerX));
+			b.setBullet(clickedX, clickedY, player.getX(),player.getY(),Math.atan2(distanceFromPlayerY, distanceFromPlayerX));
 			bullets.add(b);
 		}
 	}
