@@ -137,8 +137,5 @@ public class Player {
 		}else{
 			this.verticalSpeed = 0;
 		}
-		
-		
-	}
-	
+	}	
 }

@@ -67,8 +67,14 @@ public class PlayerTest {
 	}
 	
 	@Test
-	public void testJumping(){
-		
+	public void testJumpingTrue(){
+		player.calcVerticalSpeed(true);
+		assertEquals(2,player.getY(),0);
 	}
 	
+	@Test
+	public void testJumpingFalse(){
+		player.calcVerticalSpeed(false);
+		assertEquals(2,player.getY(),0);
+	}
 }

@@ -46,8 +46,8 @@ public class World{
 	}
 
 	public void shoot(Point mouseDot) {
-		float distanceFromPlayerX = (float) (player.getX()-mouseDot.getX() + offsetX);
-		float distanceFromPlayerY = (float) (player.getY()-mouseDot.getY() + offsetY);
+		float distanceFromPlayerX = (float) (player.getX()- mouseDot.getX() + offsetX);
+		float distanceFromPlayerY = (float) (player.getY()- mouseDot.getY() + offsetY);
 		Bullet b = player.shoot();
 		if(b != null){
 			b.setBullet(player.getX(),player.getY(),Math.atan2(distanceFromPlayerY, distanceFromPlayerX));
