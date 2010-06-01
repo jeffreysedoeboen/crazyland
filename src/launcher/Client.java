@@ -1,6 +1,10 @@
 package launcher;
 
 
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,7 +31,10 @@ public class Client extends JApplet{
 		server = new GameServer();
 		server.start();
 		
-		
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+    	Image image = toolkit.getImage("../themes/tee/weapon/cursor.png");
+    	Cursor c = toolkit.createCustomCursor(image , new Point(0,0), "cursor");
+    	setCursor (c);
 		
 		this.view = new WorldView(server);
 		

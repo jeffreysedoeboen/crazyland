@@ -1,6 +1,9 @@
 package controller;
 
+import java.awt.Cursor;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -18,13 +21,16 @@ public class MouseController implements MouseListener, MouseMotionListener{
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-	}
+    	
+		
+    }
+	
 
 	public void mouseExited(MouseEvent arg0) {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		Point mouseDot = e.getPoint();
+		Point mouseDot = e.getPoint() ;
 
 		server.shoot(mouseDot);	
 	}
