@@ -24,10 +24,10 @@ public class KeyboardController implements KeyListener {
 			case(KeyEvent.VK_SPACE):
 				//server.jump();
 				break;
-			case(KeyEvent.VK_A): //TODO naar links lopen
+			case(KeyEvent.VK_A):
 				server.stopMovingLeft();
 				break;
-			case(KeyEvent.VK_D): //TODO naar rechts lopen
+			case(KeyEvent.VK_D):
 				server.stopMovingRight();
 				break;
 			case(KeyEvent.VK_TAB): //TODO score laten zien
@@ -43,10 +43,10 @@ public class KeyboardController implements KeyListener {
 			case(KeyEvent.VK_SPACE):
 				server.jump();
 				break;
-			case('a'): //TODO naar links lopen
+			case('a'):
 				server.startMovingLeft();
 				break;
-			case('d'): //TODO naar rechts lopen
+			case('d'):
 				server.startMovingRight();
 				break;
 			case(KeyEvent.VK_TAB): //TODO score laten zien
