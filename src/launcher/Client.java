@@ -19,6 +19,7 @@ import model.GameServer;
 import model.MP3;
 import model.World;
 
+import view.SignupView;
 import view.InlogView;
 import view.LobbyView;
 import view.WorldView;
@@ -27,7 +28,8 @@ public class Client extends JApplet{
 
 	/*LobbyView view;*/
 	/*InlogView view;*/
-	WorldView view;
+	SignupView view;
+	/*WorldView view;*/
 	GameServer server;
 	
 	public void init() {
@@ -41,7 +43,7 @@ public class Client extends JApplet{
     	Cursor c = toolkit.createCustomCursor(image , new Point(0,0), "cursor");
     	setCursor (c);
 		
-		this.view = new WorldView(server);
+		this.view = new SignupView(server);
 		
 		/*this.view = new WorldView(server);*/
 		setContentPane(this.view);
@@ -52,12 +54,12 @@ public class Client extends JApplet{
 		MP3 mp3 = new MP3("../sound/mario.mp3");
         mp3.play();
 		
-		KeyboardController keycontroller = new KeyboardController(server);
+/*		KeyboardController keycontroller = new KeyboardController(server);
 		this.addKeyListener(keycontroller);
 		
 		MouseController mouseController = new MouseController(server, view);
 		this.addMouseListener(mouseController);
-		this.addMouseMotionListener(mouseController);
+		this.addMouseMotionListener(mouseController);*/
 		
 		new Timer(1,taskPerformer).start();
 	}
