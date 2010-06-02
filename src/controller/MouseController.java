@@ -45,7 +45,6 @@ public class MouseController implements MouseListener, MouseMotionListener, Mous
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent arg0) {
-		System.out.println("test");
 		server.changeWeapon();
 	}
 
