@@ -38,5 +38,10 @@ public class Sender {
 	public void stopMovingRight() {
 		out.println("player_stop_moving_right");
 	}
+
+	public void changeWeapon() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

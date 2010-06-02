@@ -19,7 +19,8 @@ import javax.sound.midi.Sequencer;
 import javax.swing.JApplet;
 import javax.swing.Timer;
 
-import controller.ButtonController;
+import client.controller.ButtonController;
+
 import controller.KeyboardController;
 import controller.MouseController;
 import db.AccountDAO;
