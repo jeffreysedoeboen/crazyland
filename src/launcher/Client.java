@@ -68,6 +68,7 @@ public class Client extends JApplet{
 		MouseController mouseController = new MouseController(server, worldview);
 		this.addMouseListener(mouseController);
 		this.addMouseMotionListener(mouseController);
+		this.addMouseWheelListener(mouseController);
 		
 		AccountDAO accountDao = new AccountDAO();
 		ButtonController buttonController = new ButtonController(signupview, inlogview, accountDao);
