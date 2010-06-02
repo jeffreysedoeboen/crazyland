@@ -123,10 +123,14 @@ public class Player {
 		}else{
 			this.x += 2;
 		}
+		updateWeaponPosition();
+	}
+	
+	public void updateWeaponPosition() {
 		if(this.getWeapon().getWeaponDirection() == 0) {
-			this.getWeapon().setX(this.getMidPlayerX() +10);
+			this.getWeapon().setX(this.getMidPlayerX()- 5);
 		} else {
-			this.getWeapon().setX(this.getMidPlayerX() -45);
+			this.getWeapon().setX(this.getMidPlayerX() -30);
 		}
 	}
 	
@@ -136,11 +140,7 @@ public class Player {
 		}else{
 			this.x -= 2;
 		}
-		if(this.getWeapon().getWeaponDirection() == 0) {
-			this.getWeapon().setX(this.getMidPlayerX() +10);
-		} else {
-			this.getWeapon().setX(this.getMidPlayerX() -45);
-		}
+		updateWeaponPosition();
 	}
 
 	public void moveVertical() {

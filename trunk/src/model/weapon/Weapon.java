@@ -47,9 +47,14 @@ public abstract class Weapon {
 
 	public BufferedImage turnToPoint(int mouseX, int mouseY) {
 		float angle = (float) (Math.toDegrees((Math.atan2(Math.toRadians(mouseY - y), Math.toRadians(mouseX - x)))));
-		if(Math.abs(angle) > 90f) setWeaponDir(1);
-		else setWeaponDir(0);
-		image = WorldView.rotateImage(baseImage,angle,true);
+		if(Math.abs(angle) > 90.00000f) {
+			setWeaponDir(1);
+			image = WorldView.rotateImage(baseImage,angle,true);
+		} else {
+			setWeaponDir(0);
+			image = WorldView.rotateImage(baseImage,angle,true);
+		}
+		
 		return image;
 	}
 	
