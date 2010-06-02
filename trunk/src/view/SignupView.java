@@ -1,10 +1,13 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -12,42 +15,69 @@ import javax.swing.JTextField;
 
 import model.GameServer;
 
-public class SignupView extends JPanel{
+public class SignupView extends JFrame {
 	
-	GameServer server;
+	private JButton create;
+	private JTextField usernameinput;
+	private JPasswordField passwordinput;
+	private JPasswordField passwordcheckinput;
 	
-	public SignupView(GameServer server){
-		this.server = server;
-		
-		this.setLayout(new GridLayout(5,2));
-		
-		JLabel header = new JLabel("Sign up form");
-		header.setFont(new Font("sansserif", Font.BOLD, 32));
+	public SignupView(){
+		this.setTitle("Sign Up Form");
+		this.setSize(400, 320);
+		this.setLayout(null);
 		
 		JLabel username = new JLabel("Username:");
-		JTextField usernameinput = new JTextField (20);
-		usernameinput.setBackground(Color.RED);
+		username.setSize(150, 20);
+		username.setLocation(10, 50);
+		
+		usernameinput = new JTextField (20);
+		usernameinput.setSize(200, 20);
+		usernameinput.setLocation(150, 50);
 		
 		JLabel password = new JLabel("Password:");
-		JPasswordField passwordinput = new JPasswordField (20);
+		password.setSize(150, 20);
+		password.setLocation(10, 100);
+		
+		passwordinput = new JPasswordField (20);
+		passwordinput.setSize(200, 20);
+		passwordinput.setLocation(150, 100);
 		
 		JLabel passwordcheck = new JLabel("Confirm password:");
-		JPasswordField passwordcheckinput = new JPasswordField (20);
-		passwordcheckinput.setBackground(Color.BLUE);
+		passwordcheck.setSize(150, 20);
+		passwordcheck.setLocation(10, 150);
 		
-		JButton create = new JButton("Sign up!");
+		passwordcheckinput = new JPasswordField (20);
+		passwordcheckinput.setSize(200, 20);
+		passwordcheckinput.setLocation(150, 150);
 		
-		this.add(header);
-		this.add(new JLabel(""));
-		this.add(username);
-		this.add(usernameinput);
-		this.add(password);
-		this.add(passwordinput);
-		this.add(passwordcheck);
-		this.add(passwordcheckinput);
-		this.add(new JLabel(""));
-		this.add(create);
+		create = new JButton("Sign up!");
+		create.setSize(150, 20);
+		create.setLocation(150, 200);
 		
+		add(username);
+		add(usernameinput);
+		add(password);
+		add(passwordinput);
+		add(passwordcheck);
+		add(passwordcheckinput);
+		add(create);
+	}
+	
+	public JTextField getUsernameinput() {
+		return usernameinput;
+	}
+	
+	public JTextField getPasswordinput() {
+		return passwordinput;
+	}
+	
+	public JTextField getPasswordcheckinput() {
+		return passwordcheckinput;
+	}
+	
+	public void addListener(ActionListener listener) {
+		create.addActionListener(listener);
 	}
 
 }

@@ -6,16 +6,12 @@ import javax.sound.midi.*;
 
 public class MidiPlayer implements MetaEventListener {
 
-    // Midi meta event
     public static final int END_OF_TRACK_MESSAGE = 47;
 
     private Sequencer sequencer;
     private boolean loop;
     private boolean paused;
 
-    /**
-        Creates a new MidiPlayer object.
-    */
     public MidiPlayer() {
 //        try {
 //            sequencer = MidiSystem.getSequencer();
@@ -27,11 +23,6 @@ public class MidiPlayer implements MetaEventListener {
 //        }
     }
 
-
-    /**
-        Loads a sequence from the file system. Returns null if
-        an error occurs.
-    */
     public Sequence getSequence(String filename) {
 		return null;
 //        try {
@@ -47,11 +38,6 @@ public class MidiPlayer implements MetaEventListener {
 //        }
     }
 
-
-    /**
-        Plays a sequence, optionally looping. This method returns
-        immediately. The sequence is not played if it is invalid.
-    */
     public void play(Sequence sequence, boolean loop) {
 //        if (sequencer != null && sequence != null) {
 //            try {
@@ -65,13 +51,6 @@ public class MidiPlayer implements MetaEventListener {
 //        }
     }
 
-
-    /**
-        This method is called by the sound system when a meta
-        event occurs. In this case, when the end-of-track meta
-        event is received, the sequence is restarted if
-        looping is on.
-    */
     public void meta(MetaMessage event) {
 //        if (event.getType() == END_OF_TRACK_MESSAGE) {
 //            if (sequencer != null && sequencer.isOpen() && loop) {
@@ -81,10 +60,6 @@ public class MidiPlayer implements MetaEventListener {
 //        }
     }
 
-
-    /**
-        Stops the sequencer and resets its position to 0.
-    */
     public void stop() {
 //         if (sequencer != null && sequencer.isOpen()) {
 //             sequencer.stop();
@@ -92,29 +67,17 @@ public class MidiPlayer implements MetaEventListener {
 //         }
     }
 
-
-    /**
-        Closes the sequencer.
-    */
     public void close() {
 //         if (sequencer != null && sequencer.isOpen()) {
 //             sequencer.close();
 //         }
     }
 
-
-    /**
-        Gets the sequencer.
-    */
     public Sequencer getSequencer() {
 		return sequencer;
 //        return sequencer;
     }
 
-
-    /**
-        Sets the paused state. Music may not immediately pause.
-    */
     public void setPaused(boolean paused) {
 //        if (this.paused != paused && sequencer != null) {
 //            this.paused = paused;
@@ -127,10 +90,6 @@ public class MidiPlayer implements MetaEventListener {
 //        }
     }
 
-
-    /**
-        Returns the paused state.
-    */
     public boolean isPaused() {
 		return loop;
 //        return paused;
