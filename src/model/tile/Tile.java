@@ -1,6 +1,5 @@
 package model.tile;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class Tile {
@@ -38,21 +37,6 @@ public class Tile {
 
 	public void setImage(BufferedImage image) {
 		this.image = image;
-	}
-	
-	public boolean[][] getPixelMap(){
-		boolean[][] pmap = new boolean[32][32];
-		for(int i = 0; i < 32; i++){
-			for(int i2 = 0; i2 < 32; i2++){
-				if(this.image.getRGB(i, i2) == 0){
-					pmap[i2][i] = true;
-				}else{
-					pmap[i2][i] = false;
-				}
-			}
-		}
-		
-		return pmap;
 	}
 	
 	public boolean isSolid() {
