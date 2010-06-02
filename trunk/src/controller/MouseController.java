@@ -3,12 +3,14 @@ package controller;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
 import view.WorldView;
 
 import model.GameServer;
 
-public class MouseController implements MouseListener, MouseMotionListener{
+public class MouseController implements MouseListener, MouseMotionListener, MouseWheelListener{
 	private GameServer server;
 	private WorldView worldView;
 	
@@ -39,6 +41,12 @@ public class MouseController implements MouseListener, MouseMotionListener{
 
 	public void mouseMoved(MouseEvent e) {
 		server.moveWeapon(e.getX() - worldView.getOffsetX(), e.getY() -worldView.getOffsetY());
+	}
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent arg0) {
+		System.out.println("test");
+		server.changeWeapon();
 	}
 
 }

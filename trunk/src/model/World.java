@@ -137,4 +137,8 @@ public class World{
 	public ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
+	
+	public void changeWeapon() {
+		player.changeWeapon();
+	}
 }

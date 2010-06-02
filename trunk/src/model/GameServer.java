@@ -81,5 +81,9 @@ public class GameServer extends Thread{
 		}
 		
 	}
+	
+	public void changeWeapon() {
+		world.changeWeapon();
+	}
 		
 }

@@ -3,8 +3,11 @@ package model;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import model.bullet.Bullet;
+import model.weapon.Grenade;
 import model.weapon.Pistol;
 import model.weapon.Weapon;
 
@@ -22,8 +25,10 @@ public class Player {
 	private boolean shooting = false;
 	private int shootCounter;
 	private float verticalSpeed = 0;
+	private ArrayList<Weapon> weaponlist;
 	
 	public Player(String name, float x, float y) {
+		weaponlist = new ArrayList<Weapon>();
 		this.username = name;
 		this.x = x;
 		this.y = y;
@@ -37,7 +42,10 @@ public class Player {
 			e.printStackTrace();
 			}
 		
-		primaryWeapon = new Pistol(this.getMidPlayerX() + 5, this.getMidPlayerY());
+		//primaryWeapon = new Grenade(this.getMidPlayerX() + 5, this.getMidPlayerY());
+		weaponlist.add(new Pistol(this.getMidPlayerX() + 5, this.getMidPlayerY()));
+		weaponlist.add(new Grenade(this.getMidPlayerX() + 5, this.getMidPlayerY()));
+		primaryWeapon = weaponlist.get(0);
 	}
 	
 	public void setPosition(float x, float y) {
@@ -174,4 +182,18 @@ public class Player {
 		}
 		this.getWeapon().setY(this.getMidPlayerY() - 18);
 	}	
+	
+	public void changeWeapon() {
+		if(weaponlist.size()>1) {
+			if(primaryWeapon.equals(weaponlist.get(weaponlist.size()-1))) {
+				primaryWeapon = weaponlist.get(0);
+			} else {
+				for(int i = 0; i < weaponlist.size()-1; i++) {
+					if(weaponlist.get(i).equals(primaryWeapon)) {
+						primaryWeapon = weaponlist.get(i+1);
+					}
+				}
+			}
+		}
+	}
 }
