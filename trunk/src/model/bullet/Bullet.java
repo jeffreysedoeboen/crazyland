@@ -49,10 +49,7 @@ public abstract class Bullet {
 	public void setBullet(int clickedX, int clickedY, float x, float y, double dir) {
 		this.x = x;
 		this.y = y;
-		this.bulletImage = WorldView.rotateImage(bulletImage, (float) (Math.toDegrees((Math.atan2(Math.toRadians(clickedY - y), Math.toRadians(clickedX - x))))));
-		this.direction = (float) dir;
-		//bulletImage = rotateImage(baseBulletImage, (float) Math.toDegrees((Math.atan2(Math.toRadians(mouseDot.y - y), Math.toRadians(mouseDot.x - x)))));
-		//(float) Math.toDegrees((Math.atan2(Math.toRadians(mouseDot.y - y), Math.toRadians(mouseDot.x - x)))));
-		
+		this.bulletImage = WorldView.rotateImage(bulletImage, (float) (Math.toDegrees((Math.atan2(Math.toRadians(clickedY - y), Math.toRadians(clickedX - x))))),false);
+		this.direction = (float) dir;		
 	}
 }

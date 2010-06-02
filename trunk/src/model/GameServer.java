@@ -1,7 +1,6 @@
 package model;
 
 import java.awt.Image;
-import java.awt.Point;
 import java.util.ArrayList;
 
 import model.bullet.Bullet;
