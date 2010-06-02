@@ -1,8 +1,5 @@
 package model;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-
 import model.tile.Tile;
 
 public class Map {
