@@ -8,7 +8,14 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.MidiUnavailableException;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.Sequencer;
 import javax.swing.JApplet;
 import javax.swing.Timer;
 
@@ -16,7 +23,7 @@ import controller.KeyboardController;
 import controller.MouseController;
 
 import model.GameServer;
-import model.MP3;
+import model.MidiPlayer;
 import model.World;
 
 import view.SignupView;
@@ -51,8 +58,9 @@ public class Client extends JApplet{
 		setVisible(true);
 		setFocusable(true);
 		
-		MP3 mp3 = new MP3("../sound/mario.mp3");
-        mp3.play();
+		MidiPlayer midiplayer = new MidiPlayer();
+		Sequence sequence = midiplayer.getSequence("../sound/mario.mid");
+		midiplayer.play(sequence, true);
 		
 		KeyboardController keycontroller = new KeyboardController(server);
 		this.addKeyListener(keycontroller);
