@@ -5,11 +5,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -144,21 +140,15 @@ public class World{
 				tilePosY = 32-tilePosY;
 			}
 			
-			// create tile pixelmaps
+			// create tile pixelmaps // true is leeg
 			boolean[] pixelMapLeft  = getPixelMap(tileLeft.getImage())[tilePosY];
 			boolean[] pixelMapRight = getPixelMap(tileRight.getImage())[tilePosY];
-			
-			// create de player pixelmap
-			try {
-				boolean[][] pixelMapPlayer = getPixelMap(ImageIO.read(new File("../themes/tee/pixelmaps/character.png")));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 			
 			// left map is voor de rechte kant
 			int i = tileLeft.getX()*32;
 			for( boolean pixel : pixelMapLeft ) {
-				if( i >= playerX && i <= tileLeft.getX()*32+32 && pixel == false ) {
+				if( i >= playerX && i <= tileLeft.getX()*32+32 && pixel == false) {
+					
 					return true;
 				}
 				i++;
@@ -169,6 +159,7 @@ public class World{
 			playerX += 32;
 			for( boolean pixel : pixelMapRight ) {
 				if( i <= playerX && i <= tileRight.getX()*32+32 && pixel == false ) {
+					
 					return true;
 				}
 				i++;
