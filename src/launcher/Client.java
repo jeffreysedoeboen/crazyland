@@ -1,11 +1,7 @@
 package launcher;
 
 
-import java.applet.AudioClip;
 import java.awt.Cursor;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,19 +12,12 @@ import controller.KeyboardController;
 import controller.MouseController;
 
 import model.GameServer;
-import model.MP3;
 import model.World;
 
-import view.SignupView;
-import view.InlogView;
-import view.LobbyView;
 import view.WorldView;
 
 public class Client extends JApplet{
 
-	/*LobbyView view;*/
-	/*InlogView view;*/
-	/*SignupView view;*/
 	WorldView view;
 	GameServer server;
 	
@@ -37,31 +26,21 @@ public class Client extends JApplet{
 		server = new GameServer();
 		server.start();
 		
-
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-    	Image image = toolkit.getImage("../themes/tee/weapon/cursor.png");
-    	Cursor c = toolkit.createCustomCursor(image , new Point(0,0), "cursor");
-    	setCursor (c);
-		
 		this.view = new WorldView(server);
-		
-		/*this.view = new WorldView(server);*/
 		setContentPane(this.view);
 		setSize(900, 300);
 		setVisible(true);
 		setFocusable(true);
 		
-		MP3 mp3 = new MP3("../sound/mario.mp3");
-        mp3.play();
 		
 		KeyboardController keycontroller = new KeyboardController(server);
 		this.addKeyListener(keycontroller);
 		
-		MouseController mouseController = new MouseController(server, view);
+		MouseController mouseController = new MouseController(server);
 		this.addMouseListener(mouseController);
 		this.addMouseMotionListener(mouseController);
 		
-		new Timer(1,taskPerformer).start();
+		new Timer(20,taskPerformer).start();
 	}
 	
 	ActionListener taskPerformer = new ActionListener() {

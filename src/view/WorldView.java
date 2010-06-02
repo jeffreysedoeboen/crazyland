@@ -3,13 +3,7 @@ package view;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import javax.swing.JPanel;
@@ -22,26 +16,9 @@ import model.tile.Tile;
 public class WorldView extends JPanel {
 
 	private GameServer server;
-	BufferedImage bg = null;
-	
-	static int offsetX, offsetY;
 	
 	public WorldView(GameServer server) {
 		this.server = server;
-		try {
-			bg = ImageIO.read(new File("../themes/tee/background/background.jpg"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public static int getOffsetX() {
-		return offsetX;
-	}
-
-	public static int getOffsetY() {
-		return offsetY;
 	}
 	
 	public void paintComponent(Graphics g){
@@ -53,7 +30,6 @@ public class WorldView extends JPanel {
 //				g.drawImage(tile.getImage(), tile.getX()*32, tile.getY()*32, null);
 //			}
 //		}
-		
 		
 		Tile[][] tiles = server.getWorld().getMap().getTiles();
 		
@@ -68,27 +44,14 @@ public class WorldView extends JPanel {
 		offsetY = Math.min(offsetY, 0);
 		offsetY = Math.max(offsetY, this.getHeight() - mapHeight);
 		
-		this.offsetX = offsetX;
-		this.offsetY = offsetY;
-		
-		for (int i = offsetX/3; i<=this.getWidth()-offsetX; i += 300) {
-			for (int j = offsetY/3; j<=this.getHeight()-offsetY; j += 300) {	
-				g.drawImage(bg, i, j, null);
-			}
-		}
-		
 		int firstTileX = pixelsToTiles(-offsetX);
 		int lastTileX = firstTileX + pixelsToTiles(this.getWidth()) + 1;
 		int firstTileY = pixelsToTiles(-offsetY);
 		int lastTileY = firstTileY + pixelsToTiles(this.getHeight()) + 1;
 		
-		for (int y=firstTileY; y <= lastTileY; y++) {
-		    if( y < pixelsToTiles(mapHeight)) {
-				for (int x=firstTileX; x <= lastTileX; x++) {
-			    	if(x < pixelsToTiles(mapWidth)){
-			        	g.drawImage(tiles[x][y].getImage(),tilesToPixels(x) + offsetX, tilesToPixels(y) + offsetY, null);
-			        }
-			    }
+		for (int y=firstTileY; y < lastTileY; y++) {
+		    for (int x=firstTileX; x < lastTileX; x++) {
+		        g.drawImage(tiles[x][y].getImage(),tilesToPixels(x) + offsetX, tilesToPixels(y) + offsetY, null);
 		    }
 		}
 
@@ -101,17 +64,19 @@ public class WorldView extends JPanel {
 		ArrayList<Bullet> bullets = server.getBullets();
 		for(Bullet b : bullets) {
 			if(b != null) {
-				g.drawImage(b.getBulletImage(),(int) b.getX() + offsetX,(int) b.getY() + offsetY, null);
+				g.drawImage(server.getBulletImage(),(int) b.getPosition().getX(),(int) b.getPosition().getY(), null);
 			}
-			
 		}
 		
 		//TODO meerder spelers
 		Player player1 = server.getPlayer();
 		if(player1.getWeapon() != null) {
-			//System.out.println("x: " + player1.getWeapon().getX() + ", y: " + player1.getWeapon().getY());
-			g.drawImage(player1.getWeapon().getImage(), player1.getWeapon().getX() + offsetX, player1.getWeapon().getY() + offsetY, null);
+			int midPlayerX = (int) (player1.getX() + ( player1.getImage().getWidth(null) / 2));
+			int midPlayerY = (int) (player1.getY() + ( player1.getImage().getHeight(null) / 2));
+			
+			g.drawImage(player1.getWeapon().getImage(), midPlayerX + offsetX, midPlayerY + offsetY, null);
 		}
+		
 	}
 	
 	public int pixelsToTiles(float pixels) {
@@ -125,19 +90,4 @@ public class WorldView extends JPanel {
 	public int tilesToPixels(int numTiles) {
 		return numTiles * 32;
 	}
-	
-	public static BufferedImage rotateImage(BufferedImage src, float degrees) {
-        AffineTransform affineTransform = AffineTransform.getRotateInstance(
-                Math.toRadians(degrees),
-                src.getWidth() / 2,
-                src.getHeight() / 2);
-        BufferedImage rotatedImage = new BufferedImage(src.getWidth(), src
-                .getHeight(), src.getType());
-        Graphics2D g = (Graphics2D) rotatedImage.getGraphics();
-        g.setTransform(affineTransform);
-        g.drawImage(src, 0, 0, null);
-        return rotatedImage;
-    }
-	
-	
 }

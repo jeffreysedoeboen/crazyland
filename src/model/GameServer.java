@@ -52,16 +52,22 @@ public class GameServer extends Thread{
 		world.stopMovingLeft();
 	}
 	
-	public void moveWeapon(int mouseX, int mouseY) {
-		world.moveWeapon(mouseX, mouseY);
+	public void moveWeapon(Point mousePoint) {
+		world.moveWeapon(mousePoint);
 		
 	}
-	public void shoot(int clickedX, int clickedY) {
-		world.shoot(clickedX, clickedY);
+
+	public void shoot(Point mouseDot) {
+		world.shoot(mouseDot);
+		
 	}
 	
 	public void jump(){
 		world.jump();
+	}
+
+	public Image getBulletImage() {
+		return world.getBulletImage();
 	}
 	
 	public Player getPlayer() {

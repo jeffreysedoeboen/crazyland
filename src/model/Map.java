@@ -1,5 +1,8 @@
 package model;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+
 import model.tile.Tile;
 
 public class Map {
@@ -8,7 +11,7 @@ public class Map {
 	private int height;
 	
 	public Map(){
-		setTiles(Mapfactory.getMap("crazyland2"));
+		setTiles(Mapfactory.getMap("crazyland1"));
 	}
 	
 	public int getWidth() {
