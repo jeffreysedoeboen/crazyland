@@ -22,7 +22,8 @@ import model.tile.Tile;
 public class WorldView extends JPanel {
 
 	private GameServer server;
-	BufferedImage bg = null;
+	private BufferedImage bg = null;
+	private int bgWidth, bgHeight;
 	
 	static int offsetX, offsetY;
 	
@@ -30,6 +31,8 @@ public class WorldView extends JPanel {
 		this.server = server;
 		try {
 			bg = ImageIO.read(new File("../themes/tee/background/background.jpg"));
+			bgWidth = bg.getWidth();
+			bgHeight = bg.getHeight();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,8 +74,8 @@ public class WorldView extends JPanel {
 		this.offsetX = offsetX;
 		this.offsetY = offsetY;
 		
-		for (int i = offsetX/3; i<=this.getWidth()-offsetX; i += 300) {
-			for (int j = offsetY/3; j<=this.getHeight()-offsetY; j += 300) {	
+		for (int i = offsetX/3; i<=this.getWidth()-offsetX; i += bgWidth) {
+			for (int j = offsetY/3; j<=this.getHeight()-offsetY; j += bgHeight) {	
 				g.drawImage(bg, i, j, null);
 			}
 		}
