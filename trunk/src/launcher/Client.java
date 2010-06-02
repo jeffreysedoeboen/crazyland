@@ -44,7 +44,6 @@ public class Client extends JApplet{
 		server = new GameServer();
 		server.start();
 		
-
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
     	Image image = toolkit.getImage("../themes/tee/weapon/cursor.png");
     	Cursor c = toolkit.createCustomCursor(image , new Point(0,0), "cursor");
@@ -58,9 +57,9 @@ public class Client extends JApplet{
 		setVisible(true);
 		setFocusable(true);
 		
-		MidiPlayer midiplayer = new MidiPlayer();
-		Sequence sequence = midiplayer.getSequence("../sound/background.mid");
-		midiplayer.play(sequence, true);
+//		MidiPlayer midiplayer = new MidiPlayer();
+//		Sequence sequence = midiplayer.getSequence("../sound/background.mid");
+//		midiplayer.play(sequence, true);
 		
 		KeyboardController keycontroller = new KeyboardController(server);
 		this.addKeyListener(keycontroller);
