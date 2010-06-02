@@ -17,14 +17,14 @@ public class MidiPlayer implements MetaEventListener {
         Creates a new MidiPlayer object.
     */
     public MidiPlayer() {
-        try {
-            sequencer = MidiSystem.getSequencer();
-            sequencer.open();
-            sequencer.addMetaEventListener(this);
-        }
-        catch ( MidiUnavailableException ex) {
-            sequencer = null;
-        }
+//        try {
+//            sequencer = MidiSystem.getSequencer();
+//            sequencer.open();
+//            sequencer.addMetaEventListener(this);
+//        }
+//        catch ( MidiUnavailableException ex) {
+//            sequencer = null;
+//        }
     }
 
 
@@ -33,17 +33,18 @@ public class MidiPlayer implements MetaEventListener {
         an error occurs.
     */
     public Sequence getSequence(String filename) {
-        try {
-            return MidiSystem.getSequence(new File(filename));
-        }
-        catch (InvalidMidiDataException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+		return null;
+//        try {
+//            return MidiSystem.getSequence(new File(filename));
+//        }
+//        catch (InvalidMidiDataException ex) {
+//            ex.printStackTrace();
+//            return null;
+//        }
+//        catch (IOException ex) {
+//            ex.printStackTrace();
+//            return null;
+//        }
     }
 
 
@@ -52,16 +53,16 @@ public class MidiPlayer implements MetaEventListener {
         immediately. The sequence is not played if it is invalid.
     */
     public void play(Sequence sequence, boolean loop) {
-        if (sequencer != null && sequence != null) {
-            try {
-                sequencer.setSequence(sequence);
-                sequencer.start();
-                this.loop = loop;
-            }
-            catch (InvalidMidiDataException ex) {
-                ex.printStackTrace();
-            }
-        }
+//        if (sequencer != null && sequence != null) {
+//            try {
+//                sequencer.setSequence(sequence);
+//                sequencer.start();
+//                this.loop = loop;
+//            }
+//            catch (InvalidMidiDataException ex) {
+//                ex.printStackTrace();
+//            }
+//        }
     }
 
 
@@ -72,12 +73,12 @@ public class MidiPlayer implements MetaEventListener {
         looping is on.
     */
     public void meta(MetaMessage event) {
-        if (event.getType() == END_OF_TRACK_MESSAGE) {
-            if (sequencer != null && sequencer.isOpen() && loop) {
-            	sequencer.setTickPosition(0);
-                sequencer.start();
-            }
-        }
+//        if (event.getType() == END_OF_TRACK_MESSAGE) {
+//            if (sequencer != null && sequencer.isOpen() && loop) {
+//            	sequencer.setTickPosition(0);
+//                sequencer.start();
+//            }
+//        }
     }
 
 
@@ -85,10 +86,10 @@ public class MidiPlayer implements MetaEventListener {
         Stops the sequencer and resets its position to 0.
     */
     public void stop() {
-         if (sequencer != null && sequencer.isOpen()) {
-             sequencer.stop();
-             sequencer.setMicrosecondPosition(0);
-         }
+//         if (sequencer != null && sequencer.isOpen()) {
+//             sequencer.stop();
+//             sequencer.setMicrosecondPosition(0);
+//         }
     }
 
 
@@ -96,9 +97,9 @@ public class MidiPlayer implements MetaEventListener {
         Closes the sequencer.
     */
     public void close() {
-         if (sequencer != null && sequencer.isOpen()) {
-             sequencer.close();
-         }
+//         if (sequencer != null && sequencer.isOpen()) {
+//             sequencer.close();
+//         }
     }
 
 
@@ -106,7 +107,8 @@ public class MidiPlayer implements MetaEventListener {
         Gets the sequencer.
     */
     public Sequencer getSequencer() {
-        return sequencer;
+		return sequencer;
+//        return sequencer;
     }
 
 
@@ -114,15 +116,15 @@ public class MidiPlayer implements MetaEventListener {
         Sets the paused state. Music may not immediately pause.
     */
     public void setPaused(boolean paused) {
-        if (this.paused != paused && sequencer != null) {
-            this.paused = paused;
-            if (paused) {
-                sequencer.stop();
-            }
-            else {
-                sequencer.start();
-            }
-        }
+//        if (this.paused != paused && sequencer != null) {
+//            this.paused = paused;
+//            if (paused) {
+//                sequencer.stop();
+//            }
+//            else {
+//                sequencer.start();
+//            }
+//        }
     }
 
 
@@ -130,7 +132,8 @@ public class MidiPlayer implements MetaEventListener {
         Returns the paused state.
     */
     public boolean isPaused() {
-        return paused;
+		return loop;
+//        return paused;
     }
 
 }
