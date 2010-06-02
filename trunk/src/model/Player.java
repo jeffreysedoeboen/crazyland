@@ -16,19 +16,23 @@ public class Player {
 	private Weapon primaryWeapon;
 	private long lastTimeShot = 0;
 	private int hitpoints = 10;
-	private Image playerImage;
+	private Image playerImage, shootImage;
 	private boolean movingRight = false;
 	private boolean movingLeft = false;
+	private boolean shooting = false;
+	private int shootCounter;
 	private float verticalSpeed = 0;
 	
 	public Player(String name, float x, float y) {
 		this.username = name;
 		this.x = x;
 		this.y = y;
+		this.shootCounter = 0;
 		
 		
 			try {
 				playerImage = ImageIO.read(new File("../themes/tee/characters/character.png"));
+				shootImage = ImageIO.read(new File("../themes/tee/characters/charactershoot.png"));
 			} catch (IOException e) {
 			e.printStackTrace();
 			}
@@ -68,6 +72,8 @@ public class Player {
 
 			lastTimeShot = System.currentTimeMillis();
 			
+			shooting = true;
+			shootCounter = 100; //TODO moet naar server
 			return primaryWeapon.shoot();
 		}		
 		
@@ -93,8 +99,17 @@ public class Player {
 		return primaryWeapon;
 	}
 
-	public Image getImage() {
-		return playerImage;
+	public Image getImage() {	
+		if(shootCounter > 1) {
+			shootCounter--;
+		} else {
+			shooting = false;
+		}
+		return isShooting() ? shootImage: playerImage;
+	}
+
+	private boolean isShooting() {
+		return shooting;
 	}
 
 	public void setMovingRight(boolean b) {
