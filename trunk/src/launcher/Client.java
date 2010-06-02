@@ -59,7 +59,7 @@ public class Client extends JApplet{
 		setFocusable(true);
 		
 		MidiPlayer midiplayer = new MidiPlayer();
-		Sequence sequence = midiplayer.getSequence("../sound/mario.mid");
+		Sequence sequence = midiplayer.getSequence("../sound/background.mid");
 		midiplayer.play(sequence, true);
 		
 		KeyboardController keycontroller = new KeyboardController(server);
