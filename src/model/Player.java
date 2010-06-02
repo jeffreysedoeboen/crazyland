@@ -33,7 +33,7 @@ public class Player {
 			e.printStackTrace();
 			}
 		
-		primaryWeapon = new Pistol(this.getMidPlayerX(), this.getMidPlayerY());
+		primaryWeapon = new Pistol(this.getMidPlayerX() + 5, this.getMidPlayerY());
 	}
 	
 	public void setPosition(float x, float y) {
@@ -123,7 +123,11 @@ public class Player {
 		}else{
 			this.x += 2;
 		}
-		this.getWeapon().setX(this.getMidPlayerX());
+		if(this.getWeapon().getWeaponDirection() == 0) {
+			this.getWeapon().setX(this.getMidPlayerX() +10);
+		} else {
+			this.getWeapon().setX(this.getMidPlayerX() -45);
+		}
 	}
 	
 	public void moveLeft(boolean onGround) {
@@ -132,11 +136,16 @@ public class Player {
 		}else{
 			this.x -= 2;
 		}
-		this.getWeapon().setX(this.getMidPlayerX());
+		if(this.getWeapon().getWeaponDirection() == 0) {
+			this.getWeapon().setX(this.getMidPlayerX() +10);
+		} else {
+			this.getWeapon().setX(this.getMidPlayerX() -45);
+		}
 	}
 
 	public void moveVertical() {
 		this.y -= this.verticalSpeed;
+		this.getWeapon().setY(this.getMidPlayerY() - 18);
 	}
 
 	public void calcVerticalSpeed(boolean onGround) {

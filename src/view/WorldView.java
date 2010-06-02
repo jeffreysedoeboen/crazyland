@@ -2,18 +2,13 @@ package view;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
-import javax.swing.JPanel;
-
 import model.GameServer;
 import model.Player;
 import model.bullet.Bullet;
@@ -129,18 +124,26 @@ public class WorldView extends JPanel {
 		return numTiles * 32;
 	}
 	
-	public static BufferedImage rotateImage(BufferedImage src, float degrees) {
+	public static BufferedImage verticalflip(BufferedImage img) {   
+        int w = img.getWidth();   
+        int h = img.getHeight();   
+        BufferedImage dimg = new BufferedImage(w, h, img.getColorModel().getTransparency());   
+        Graphics2D g = dimg.createGraphics();   
+        g.drawImage(img, 0, 0, w, h, 0, h, w, 0, null);   
+        g.dispose();   
+        return dimg;   
+    }  
+	
+	public static BufferedImage rotateImage(BufferedImage src, float degrees, boolean isWeapon) {
         AffineTransform affineTransform = AffineTransform.getRotateInstance(
-                Math.toRadians(degrees),
-                src.getWidth() / 2,
-                src.getHeight() / 2);
+            Math.toRadians(degrees),
+            src.getWidth() / 2,
+            src.getHeight() / 2);
         BufferedImage rotatedImage = new BufferedImage(src.getWidth(), src
                 .getHeight(), src.getType());
         Graphics2D g = (Graphics2D) rotatedImage.getGraphics();
         g.setTransform(affineTransform);
         g.drawImage(src, 0, 0, null);
         return rotatedImage;
-    }
-	
-	
+	}
 }

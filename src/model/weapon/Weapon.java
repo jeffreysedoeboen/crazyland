@@ -1,11 +1,7 @@
 package model.weapon;
 
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Point;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-
 import view.WorldView;
 import model.bullet.*;
 
@@ -21,13 +17,20 @@ public abstract class Weapon {
 	protected int y;
 	protected float angle;
 	
+	private int weaponDirection  =0 ;
+	private boolean posChanged = false;
+	
 	public Weapon(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 	
-	public float getAngle() {
-		return angle;
+	public int getWeaponDirection () {
+		return weaponDirection;
+	}
+	
+	public boolean getPosChanged() {
+		return posChanged;
 	}
 	
 	public Bullet shoot(){
@@ -42,10 +45,19 @@ public abstract class Weapon {
 		return null;
 	}
 
-	public BufferedImage turnToPoint( int mouseX, int mouseY) {
+	public BufferedImage turnToPoint(int mouseX, int mouseY) {
 		float angle = (float) (Math.toDegrees((Math.atan2(Math.toRadians(mouseY - y), Math.toRadians(mouseX - x)))));
-		image = WorldView.rotateImage(baseImage,angle);
+		if(Math.abs(angle) > 90f) setWeaponDir(1);
+		else setWeaponDir(0);
+		image = WorldView.rotateImage(baseImage,angle,true);
 		return image;
+	}
+	
+	public void setWeaponDir(int value) {
+		if(weaponDirection != value) {
+			baseImage = WorldView.verticalflip(baseImage);
+			weaponDirection = value;
+		}
 	}
 	
 	public float getFireRate(){
@@ -70,6 +82,7 @@ public abstract class Weapon {
 	
 	public void setY(int y) {
 		this.y = y;
+		
 	}
 	
 	public int getX() {

@@ -2,8 +2,6 @@ package model;
 
 import java.awt.Image;
 import java.util.ArrayList;
-
-import view.WorldView;
 import model.bullet.Bullet;
 import model.tile.Tile;
 
@@ -41,7 +39,7 @@ public class World{
 		float distanceFromPlayerY = (float) (player.getY()- clickedY);
 		Bullet b = player.shoot();
 		if(b != null){
-			b.setBullet(clickedX, clickedY, player.getX() +20,player.getY()+5,Math.atan2(distanceFromPlayerY, distanceFromPlayerX));
+			b.setBullet(clickedX, clickedY, player.getWeapon().getX(),player.getWeapon().getY()+6,Math.atan2(distanceFromPlayerY, distanceFromPlayerX));
 			bullets.add(b);
 		}
 	}
@@ -52,6 +50,12 @@ public class World{
 
 	public void moveWeapon(int mouseX, int mouseY) {
 		player.getWeapon().turnToPoint(mouseX, mouseY);
+		//player.getWeapon().setX(player.getMidPlayerX() + 5);
+		if(player.getWeapon().getWeaponDirection() == 0) {
+			player.getWeapon().setX(player.getMidPlayerX() +10);
+		} else {
+			player.getWeapon().setX(player.getMidPlayerX() -45);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
