@@ -51,11 +51,7 @@ public class World{
 	public void moveWeapon(int mouseX, int mouseY) {
 		player.getWeapon().turnToPoint(mouseX, mouseY);
 		//player.getWeapon().setX(player.getMidPlayerX() + 5);
-		if(player.getWeapon().getWeaponDirection() == 0) {
-			player.getWeapon().setX(player.getMidPlayerX() +10);
-		} else {
-			player.getWeapon().setX(player.getMidPlayerX() -45);
-		}
+		player.updateWeaponPosition();
 	}
 
 	@SuppressWarnings("unchecked")
