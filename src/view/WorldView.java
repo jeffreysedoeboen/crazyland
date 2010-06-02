@@ -5,7 +5,11 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import javax.swing.JPanel;
@@ -18,11 +22,18 @@ import model.tile.Tile;
 public class WorldView extends JPanel {
 
 	private GameServer server;
+	BufferedImage bg = null;
 	
 	static int offsetX, offsetY;
 	
 	public WorldView(GameServer server) {
 		this.server = server;
+		try {
+			bg = ImageIO.read(new File("../themes/tee/background/background.jpg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static int getOffsetX() {
@@ -43,6 +54,7 @@ public class WorldView extends JPanel {
 //			}
 //		}
 		
+		
 		Tile[][] tiles = server.getWorld().getMap().getTiles();
 		
 		//nieuwe shit
@@ -58,6 +70,12 @@ public class WorldView extends JPanel {
 		
 		this.offsetX = offsetX;
 		this.offsetY = offsetY;
+		
+		for (int i = offsetX/3; i<=this.getWidth()-offsetX; i += 300) {
+			for (int j = offsetY/3; j<=this.getHeight()-offsetY; j += 300) {	
+				g.drawImage(bg, i, j, null);
+			}
+		}
 		
 		int firstTileX = pixelsToTiles(-offsetX);
 		int lastTileX = firstTileX + pixelsToTiles(this.getWidth()) + 1;
