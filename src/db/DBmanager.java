@@ -71,28 +71,12 @@ public class DBmanager {
         }
     }
 	
-	public void printSQLWarning(SQLWarning sw) {
-        while(sw != null) {
-
-            System.out.print("SQLWarning: State=" + sw.getSQLState()) ;
-            System.out.println(", Severity = " + sw.getErrorCode()) ;
-            System.out.println(sw.getMessage()); 
-            
-            sw = sw.getNextWarning();
-        }
-    }
-	
 	public Connection getConnection() throws SQLException
 	{
 		try {
             Class.forName(driver) ;
             con = DriverManager.getConnection(url);
 
-            SQLWarning swarn = con. getWarnings() ;
-            
-            if(swarn != null){
-                printSQLWarning(swarn) ;
-            }
 		} catch (SQLException se) {
             printSQLException(se) ;
         } catch(ClassNotFoundException e){

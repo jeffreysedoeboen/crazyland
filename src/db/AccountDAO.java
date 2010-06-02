@@ -83,14 +83,14 @@ public class AccountDAO {
 		}
 	}
 	
-	/*public static void main(String args[]) throws NoSuchAlgorithmException, SQLException
+	public static void main(String args[]) throws NoSuchAlgorithmException, SQLException
 	{
 		AccountDAO accountDao = new AccountDAO();
-		accountDao.addAccount("gromberg8", "lalala2", "lalala2");
+		accountDao.addAccount("gromberg6", "lalala2", "lalala2");
 		
 		accountDao.getAccounts();
 		if(accountDao.login("gromberg5", "lalala")) {
 			System.out.println("test");
 		}
-	}*/
+	}
 }

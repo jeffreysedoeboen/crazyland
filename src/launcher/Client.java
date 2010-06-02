@@ -19,8 +19,10 @@ import javax.sound.midi.Sequencer;
 import javax.swing.JApplet;
 import javax.swing.Timer;
 
+import controller.ButtonController;
 import controller.KeyboardController;
 import controller.MouseController;
+import db.AccountDAO;
 
 import model.GameServer;
 import model.MidiPlayer;
@@ -33,10 +35,10 @@ import view.WorldView;
 
 public class Client extends JApplet{
 
-	/*LobbyView view;*/
-	/*InlogView view;*/
-	/*SignupView view;*/
-	WorldView view;
+	LobbyView lobbyview;
+	InlogView inlogview;
+	SignupView signupview;
+	WorldView worldview;
 	GameServer server;
 	
 	public void init() {
@@ -49,10 +51,9 @@ public class Client extends JApplet{
     	Cursor c = toolkit.createCustomCursor(image , new Point(0,0), "cursor");
     	setCursor (c);
 		
-		this.view = new WorldView(server);
-		
-		/*this.view = new WorldView(server);*/
-		setContentPane(this.view);
+		this.worldview = new WorldView(server);
+		/*this.view = new SignupView(server);*/
+		setContentPane(this.worldview);
 		setSize(900, 300);
 		setVisible(true);
 		setFocusable(true);
@@ -64,9 +65,16 @@ public class Client extends JApplet{
 		KeyboardController keycontroller = new KeyboardController(server);
 		this.addKeyListener(keycontroller);
 		
-		MouseController mouseController = new MouseController(server, view);
+		MouseController mouseController = new MouseController(server, worldview);
 		this.addMouseListener(mouseController);
 		this.addMouseMotionListener(mouseController);
+		
+		AccountDAO accountDao = new AccountDAO();
+		ButtonController buttonController = new ButtonController(signupview, inlogview, accountDao);
+		
+		this.inlogview = new InlogView();
+		inlogview.setVisible(true);
+		inlogview.addListener(buttonController);
 		
 		new Timer(1,taskPerformer).start();
 	}
@@ -74,7 +82,7 @@ public class Client extends JApplet{
 	ActionListener taskPerformer = new ActionListener() {
 
 		public void actionPerformed(ActionEvent arg0) {
-			view.repaint();
+			worldview.repaint();
 		}
 		
 	  };

@@ -3,7 +3,10 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -11,47 +14,56 @@ import javax.swing.JTextField;
 
 import model.GameServer;
 
-public class InlogView extends JPanel {
+public class InlogView extends JFrame {
 
-	private GameServer server;
+	private JButton guest, create, login;
 
-	public InlogView(GameServer server){
-		this.server = server;
-
-		this.setLayout(new BorderLayout());
-		this.setBackground(Color.RED);
-
-		JLabel label = new JLabel("Login");
-		this.add(label, BorderLayout.NORTH);
-
-		JPanel inlog = new JPanel();
-		inlog.setLayout(new GridLayout(2,2));
+	public InlogView(){
+		this.setTitle("Log in");
+		this.setSize(400, 320);
+		this.setLayout(null);
 
 		JLabel username = new JLabel("Username:");
+		username.setSize(150, 20);
+		username.setLocation(10, 50);
+		
 		JTextField usernameinput = new JTextField(20);
+		usernameinput.setSize(200, 20);
+		usernameinput.setLocation(150, 50);
 
 		JLabel password = new JLabel("Password:");
+		password.setSize(150, 20);
+		password.setLocation(10, 100);
+		
 		JPasswordField passwordinput = new JPasswordField(20);
+		passwordinput.setSize(200, 20);
+		passwordinput.setLocation(150, 100);
+		
+		login = new JButton("Login");
+		login.setSize(200, 20);
+		login.setLocation(150, 150);
+		
+		guest = new JButton("Guest Account");
+		guest.setSize(140, 20);
+		guest.setLocation(10, 220);
+		
+		create = new JButton("Create Account");
+		create.setSize(140, 20);
+		create.setLocation(240, 220);
 
-		inlog.add(username);
-		inlog.add(usernameinput);
-		inlog.add(password);
-		inlog.add(passwordinput);
-
-		this.add(inlog, BorderLayout.CENTER);
-
-		JPanel buttons = new JPanel();
-		buttons.setLayout(new GridLayout(1,3));
-
-		JButton guest = new JButton("Guest");
-		JButton create = new JButton("Create");
-		JButton login = new JButton("Login");
-
-		buttons.add(guest);
-		buttons.add(create);
-		buttons.add(login);
-
-		this.add(buttons, BorderLayout.SOUTH);
+		add(username);
+		add(usernameinput);
+		add(password);
+		add(passwordinput);
+		add(guest);
+		add(create);
+		add(login);
+	}
+	
+	public void addListener(ActionListener listener) {
+		guest.addActionListener(listener);
+		create.addActionListener(listener);
+		login.addActionListener(listener);
 	}
 }
 
