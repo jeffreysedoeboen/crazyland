@@ -26,11 +26,12 @@ public class Player {
 		this.x = x;
 		this.y = y;
 		
-		try {
-			playerImage = ImageIO.read(new File("../themes/tee/characters/character.png"));
-		} catch (IOException e) {
+		
+			try {
+				playerImage = ImageIO.read(new File("../themes/tee/characters/character.png"));
+			} catch (IOException e) {
 			e.printStackTrace();
-		}
+			}
 		
 		primaryWeapon = new Pistol(this.getMidPlayerX(), this.getMidPlayerY());
 	}
