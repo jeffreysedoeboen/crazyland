@@ -18,6 +18,7 @@ public class Grenade extends Weapon {
 	public Grenade(int x, int y) {
 		super(x, y);
 		maxBullets = 4;
+		currentBullets = 4;
 		try {
 			this.baseImage = ImageIO.read(new File("../themes/tee/weapon/grenade.png"));
 		} catch (IOException e) {
