@@ -35,13 +35,13 @@ public class Player {
 		this.shootCounter = 0;
 		
 		try {
-			playerImage = ImageIO.read(new File("../themes/tee/characters/character.png"));
-			shootImage = ImageIO.read(new File("../themes/tee/characters/charactershoot.png"));
+			playerImage = ImageIO.read(new File("themes/tee/characters/character.png"));
+			shootImage = ImageIO.read(new File("themes/tee/characters/charactershoot.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		//primaryWeapon = new Grenade(this.getMidPlayerX() + 5, this.getMidPlayerY());
+		primaryWeapon = new Pistol(this.getMidPlayerX() + 5, this.getMidPlayerY());
 //		weaponlist.add(new Pistol(this.getMidPlayerX() + 5, this.getMidPlayerY()));
 //		weaponlist.add(new Grenade(this.getMidPlayerX() + 5, this.getMidPlayerY()));
 //		primaryWeapon = weaponlist.get(0);
@@ -148,11 +148,11 @@ public class Player {
 	}
 	
 	public void updateWeaponPosition() {
-		if(this.getWeapon().getWeaponDirection() == 0) {
-			this.getWeapon().setX(this.getMidPlayerX()- 5);
-		} else {
-			this.getWeapon().setX(this.getMidPlayerX() -30);
-		}
+//		if(this.getWeapon().getWeaponDirection() == 0) {
+//			this.getWeapon().setX(this.getMidPlayerX()- 5);
+//		} else {
+//			this.getWeapon().setX(this.getMidPlayerX() -30);
+//		}
 	}
 	
 	public void moveLeft(boolean onGround) {
@@ -166,7 +166,7 @@ public class Player {
 
 	public void moveVertical() {
 		this.y -= this.verticalSpeed;
-		this.getWeapon().setY(this.getMidPlayerY() - 18);
+		//this.getWeapon().setY(this.getMidPlayerY() - 18);
 	}
 
 	public void calcVerticalSpeed(boolean onGround) {
@@ -179,7 +179,7 @@ public class Player {
 			this.verticalSpeed = 0;
 		}
 		
-		this.getWeapon().setY(this.getMidPlayerY() - 18);
+		//this.getWeapon().setY(this.getMidPlayerY() - 18);
 	}
 	
 	public void changeWeapon() {
