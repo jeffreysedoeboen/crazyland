@@ -6,7 +6,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class GrenadeBullet extends Bullet {
-	public GrenadeBullet() {
+	public GrenadeBullet(int inden) {
+		super(inden);
 		try {
 			bulletImage = ImageIO.read(new File("../themes/tee/weapon/grenade.png"));
 		} catch (IOException e) {

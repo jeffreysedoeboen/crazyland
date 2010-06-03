@@ -7,7 +7,8 @@ import javax.imageio.ImageIO;
 
 public class PistolBullet extends Bullet {
 	
-	public PistolBullet() {		
+	public PistolBullet(int inden) {	
+		super(inden);
 		try {
 			bulletImage = ImageIO.read(new File("themes/tee/weapon/bullet.png"));
 		} catch (IOException e) {

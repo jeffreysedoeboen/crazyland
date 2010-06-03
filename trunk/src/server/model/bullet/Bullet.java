@@ -11,7 +11,16 @@ public abstract class Bullet {
 	protected float x, y;
 	protected float verticalSpeed = 0;
 	protected Point destination;
+	protected int indentifier;
 
+	public Bullet(int inden){
+		this.indentifier = inden;
+	}
+	
+	public int getIndentifier(){
+		return this.indentifier;
+	}
+	
 	public float getX() {
 		return x;
 	}
@@ -38,10 +47,10 @@ public abstract class Bullet {
 	}
 	
 	public void move(){
-		this.x -= 5*Math.cos(this.direction);
-		this.y -= 5*Math.sin(this.direction);
+		this.x -= 6*Math.cos(this.direction);
+		this.y -= 6*Math.sin(this.direction);
 		this.y = this.y - verticalSpeed;
-		verticalSpeed += -0.01;
+		verticalSpeed += -0.005;
 	}
 	
 	public void setBullet(float clickedX, float clickedY, float x, float y, double dir) {

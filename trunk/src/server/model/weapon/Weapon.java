@@ -36,14 +36,14 @@ public abstract class Weapon {
 		return posChanged;
 	}
 	
-	public Bullet shoot(){
+	public Bullet shoot(int bCounter){
 		
 		if(isUnlimitedBullets() || currentBullets > 0){
 			//Shoot a bullet
 			if(!unlimitedBullets){
 				currentBullets--;
 			}
-			return this.createBullet();
+			return this.createBullet(bCounter);
 		}
 		return null;
 	}
@@ -80,8 +80,8 @@ public abstract class Weapon {
 		return unlimitedBullets;
 	}
 	
-	public Bullet createBullet(){
-		return this.bulletType;
+	public Bullet createBullet(int bCounter){
+		return null;
 	}
 	
 	public void setX(int x) {

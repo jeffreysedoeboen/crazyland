@@ -60,7 +60,7 @@ public class Player {
 		return this.verticalSpeed;
 	}
 	
-	public Bullet shoot() {
+	public Bullet shoot(int bCounter) {
 
 		float fireRate = primaryWeapon.getFireRate();
 		float timePerShot = 1/fireRate;
@@ -72,7 +72,7 @@ public class Player {
 			
 			shooting = true;
 			shootCounter = 100;
-			return primaryWeapon.shoot();
+			return primaryWeapon.shoot(bCounter);
 		}		
 		
 		return null;		

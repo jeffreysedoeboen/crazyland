@@ -57,7 +57,6 @@ public class GameServer extends Thread{
 			for(Sender s : senderList){
 				s.sendPlayer();
 				s.sendPlayers(world.getPlayerList());
-				s.sendBullets(world.getBullets());
 				s.sendLineOut();
 			}
 		}
@@ -67,6 +66,16 @@ public class GameServer extends Thread{
 			System.out.println("Players in-game: " + senderList.size());
 		}
 		
+	}
+	
+	public void shoot(float x,float y, Player p){
+		Bullet b = world.shoot(x, y, p);
+		if(b != null){
+		System.out.println("test");
+			for(Sender s : senderList){
+				s.sendBullet(b);
+			}
+		}
 	}
 
 	public void addSender(Sender s) {
