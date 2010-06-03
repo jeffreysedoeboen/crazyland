@@ -1,4 +1,4 @@
-package model.bullet;
+package server.model.bullet;
 
 import java.io.File;
 import java.io.IOException;

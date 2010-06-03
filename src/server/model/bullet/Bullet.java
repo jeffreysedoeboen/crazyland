@@ -1,12 +1,12 @@
 package server.model.bullet;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.awt.Point;
 
 public abstract class Bullet {
 
 	protected final float BULLET_SPEED = 1.00F;
-	protected Image bulletImage;
+	protected BufferedImage bulletImage;
 	protected float direction;
 	protected float x, y;
 	protected float verticalSpeed = 0;
@@ -29,8 +29,12 @@ public abstract class Bullet {
 	public void setDirection(float direction) {
 		this.direction = direction;
 	}
+	
+	public float getDirection () {
+		return direction;
+	}
 
-	public Image getBulletImage() {
+	public BufferedImage getBulletImage() {
 		return bulletImage;
 	}
 	
@@ -39,9 +43,10 @@ public abstract class Bullet {
 		this.y -= 3*Math.sin(this.direction);
 	}
 	
-	public void setBullet(float x, float y, double dir) {
+	public void setBullet(float clickedX, float clickedY, float x, float y, double dir) {
 		this.x = x;
 		this.y = y;
+		//this.bulletImage = WorldView.rotateImage(bulletImage, (float) (Math.toDegrees((Math.atan2(Math.toRadians(clickedY - y), Math.toRadians(clickedX - x))))),false);
 		this.direction = (float) dir;
 	}
 	

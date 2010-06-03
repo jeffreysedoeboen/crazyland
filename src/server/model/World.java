@@ -1,11 +1,7 @@
 package server.model;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 
 import server.model.bullet.Bullet;
 import server.model.tile.Tile;
@@ -34,10 +30,16 @@ public class World{
 		float distanceFromPlayerY = p.getY()-x;
 		Bullet b = p.shoot();
 		if(b != null){
-			b.setBullet(p.getX(),p.getY(),Math.atan2(distanceFromPlayerY, distanceFromPlayerX));
+			b.setBullet(x,y,p.getWeapon().getX(),p.getWeapon().getY()+6,Math.atan2(distanceFromPlayerY, distanceFromPlayerX));
 			bullets.add(b);
 		}
 	}
+	
+//	public void moveWeapon(int mouseX, int mouseY) {
+//		player.getWeapon().turnToPoint(mouseX, mouseY);
+//		//player.getWeapon().setX(player.getMidPlayerX() + 5);
+//		player.updateWeaponPosition();
+//	}
 
 	@SuppressWarnings("unchecked")
 	public void move() {
@@ -53,11 +55,12 @@ public class World{
 				if(collisionCeiling(player)){
 					player.setVerticalSpeed(-0.5f);
 				}
-				ArrayList<Bullet> bulletsclone = (ArrayList<Bullet>) bullets.clone();
-				for(Bullet b : bulletsclone){
-					b.move();
-				}
+				
 			}
+		}
+		ArrayList<Bullet> bulletsclone = (ArrayList<Bullet>) bullets.clone();
+		for(Bullet b : bulletsclone){
+			b.move();
 		}
 
 	}
@@ -196,4 +199,8 @@ public class World{
 	public ArrayList<Player> getPlayerList() {
 		return (ArrayList<Player>) this.playerList.clone();
 	}
+	
+//	public void changeWeapon(Player player) {
+//		player.changeWeapon();
+//	}
 }

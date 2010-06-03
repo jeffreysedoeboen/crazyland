@@ -1,11 +1,12 @@
 package server.model;
 
 import java.awt.Image;
-import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import java.util.ArrayList;
 
+import server.model.weapon.Grenade;
 import server.model.bullet.Bullet;
 import server.model.weapon.Pistol;
 import server.model.weapon.Weapon;
@@ -18,23 +19,32 @@ public class Player {
 	private Weapon primaryWeapon;
 	private long lastTimeShot = 0;
 	private int hitpoints = 10;
-	private Image playerImage;
+	private Image playerImage, shootImage;
 	private boolean movingRight = false;
 	private boolean movingLeft = false;
+	private boolean shooting = false;
+	private int shootCounter;
 	private float verticalSpeed = 0;
+	private ArrayList<Weapon> weaponlist;
 	
 	public Player(String name, float x, float y) {
+		weaponlist = new ArrayList<Weapon>();
 		this.name = name;
 		this.x = x;
 		this.y = y;
-		
-		primaryWeapon = new Pistol();
+		this.shootCounter = 0;
 		
 		try {
-			playerImage = ImageIO.read(new File("themes/tee/characters/character.png"));
+			playerImage = ImageIO.read(new File("../themes/tee/characters/character.png"));
+			shootImage = ImageIO.read(new File("../themes/tee/characters/charactershoot.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		//primaryWeapon = new Grenade(this.getMidPlayerX() + 5, this.getMidPlayerY());
+//		weaponlist.add(new Pistol(this.getMidPlayerX() + 5, this.getMidPlayerY()));
+//		weaponlist.add(new Grenade(this.getMidPlayerX() + 5, this.getMidPlayerY()));
+//		primaryWeapon = weaponlist.get(0);
 	}
 	
 	public void setPosition(float x, float y) {
@@ -60,10 +70,20 @@ public class Player {
 
 			lastTimeShot = System.currentTimeMillis();
 			
+			shooting = true;
+			shootCounter = 100;
 			return primaryWeapon.shoot();
 		}		
 		
 		return null;		
+	}
+	
+	public int getMidPlayerX() {
+		return (int) (x + (this.getImage().getWidth(null) / 2));
+	}
+	
+	public int getMidPlayerY() {
+		return (int) (y + ( this.getImage().getHeight(null) / 2));
 	}
 	
 	public float getX(){
@@ -86,7 +106,16 @@ public class Player {
 	}
 
 	public Image getImage() {
-		return playerImage;
+		if(shootCounter > 1) {
+			shootCounter--;
+		} else {
+			shooting = false;
+		}
+		return isShooting() ? shootImage: playerImage;
+	}
+	
+	private boolean isShooting() {
+		return shooting;
 	}
 
 	public void setMovingRight(boolean b) {
@@ -115,6 +144,15 @@ public class Player {
 		}else{
 			this.x += 2;
 		}
+		updateWeaponPosition();
+	}
+	
+	public void updateWeaponPosition() {
+		if(this.getWeapon().getWeaponDirection() == 0) {
+			this.getWeapon().setX(this.getMidPlayerX()- 5);
+		} else {
+			this.getWeapon().setX(this.getMidPlayerX() -30);
+		}
 	}
 	
 	public void moveLeft(boolean onGround) {
@@ -123,10 +161,12 @@ public class Player {
 		}else{
 			this.x -= 2;
 		}
+		updateWeaponPosition();
 	}
 
 	public void moveVertical() {
 		this.y -= this.verticalSpeed;
+		this.getWeapon().setY(this.getMidPlayerY() - 18);
 	}
 
 	public void calcVerticalSpeed(boolean onGround) {
@@ -139,7 +179,21 @@ public class Player {
 			this.verticalSpeed = 0;
 		}
 		
-		
+		this.getWeapon().setY(this.getMidPlayerY() - 18);
+	}
+	
+	public void changeWeapon() {
+		if(weaponlist.size()>1) {
+			if(primaryWeapon.equals(weaponlist.get(weaponlist.size()-1))) {
+				primaryWeapon = weaponlist.get(0);
+			} else {
+				for(int i = 0; i < weaponlist.size()-1; i++) {
+					if(weaponlist.get(i).equals(primaryWeapon)) {
+						primaryWeapon = weaponlist.get(i+1);
+					}
+				}
+			}
+		}
 	}
 	
 }

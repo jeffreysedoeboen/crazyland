@@ -4,11 +4,9 @@ import server.model.tile.Tile;
 
 public class Map {
 	private Tile[][] tiles;
-	private int width;
-	private int height;
 	
 	public Map(){
-		setTiles(Mapfactory.getMap("crazyland1"));
+		setTiles(Mapfactory.getMap("crazyland2"));
 	}
 	
 	public int getWidth() {

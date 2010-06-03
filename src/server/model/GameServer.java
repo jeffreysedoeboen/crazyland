@@ -1,7 +1,5 @@
 package server.model;
 
-import java.awt.Image;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -38,6 +36,11 @@ public class GameServer extends Thread{
 		return this.world;
 	}
 	
+//	public void moveWeapon(int mouseX, int mouseY) {
+//		world.moveWeapon(mouseX, mouseY);
+//		
+//	}
+	
 	ActionListener taskPerformer = new ActionListener() {
 
 		public void actionPerformed(ActionEvent arg0) {
@@ -69,5 +72,9 @@ public class GameServer extends Thread{
 	public void addSender(Sender s) {
 		this.senderList.add(s);		
 	}
+	
+//	public void changeWeapon() {
+//		world.changeWeapon();
+//	}
 		
 }
