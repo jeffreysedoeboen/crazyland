@@ -27,10 +27,10 @@ public class World{
 
 	public void shoot(float x,float y, Player p) {
 		float distanceFromPlayerX = p.getX()-x;
-		float distanceFromPlayerY = p.getY()-x;
+		float distanceFromPlayerY = p.getY()-y;
 		Bullet b = p.shoot();
 		if(b != null){
-			b.setBullet(x,y,p.getWeapon().getX(),p.getWeapon().getY()+6,Math.atan2(distanceFromPlayerY, distanceFromPlayerX));
+			b.setBullet(x,y,p.getX(),p.getY()+6,Math.atan2(distanceFromPlayerY, distanceFromPlayerX));
 			bullets.add(b);
 		}
 	}
