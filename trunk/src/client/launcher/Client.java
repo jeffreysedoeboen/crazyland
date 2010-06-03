@@ -2,13 +2,24 @@ package client.launcher;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.applet.AudioClip;
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.io.IOException;
+import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.MidiUnavailableException;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.Sequencer;
 import javax.swing.JApplet;
 import javax.swing.Timer;
 
@@ -16,13 +27,25 @@ import client.connection.Receiver;
 import client.connection.Sender;
 import client.controller.KeyboardController;
 import client.controller.MouseController;
+import client.controller.ButtonController;
+import client.view.InlogView;
+import client.view.SignupView;
 import client.view.WorldView;
+
+import client.model.MidiPlayer;
+
+import client.view.LobbyView;
+import client.view.WorldView;
+import db.AccountDAO;
 
 @SuppressWarnings("serial")
 public class Client extends JApplet{
 
 	/*LobbyView view;*/
 	private WorldView view;
+	private LobbyView lobbyview;
+	private InlogView inlogview;
+	private SignupView signupview;
 	
 	public void init() {
 		
@@ -50,6 +73,11 @@ public class Client extends JApplet{
 		receiver.start();
 		Sender sender = new Sender(out);
 		
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+    	Image image = toolkit.getImage("../themes/tee/weapon/cursor.png");
+    	Cursor c = toolkit.createCustomCursor(image , new Point(0,0), "cursor");
+    	setCursor (c);
+		
 		this.view = new WorldView(receiver);
 		
 		setContentPane(this.view);
@@ -63,6 +91,15 @@ public class Client extends JApplet{
 		MouseController mouseController = new MouseController(sender,view);
 		this.addMouseListener(mouseController);
 		this.addMouseMotionListener(mouseController);
+		
+		this.addMouseWheelListener(mouseController);
+		
+		AccountDAO accountDao = new AccountDAO();
+		ButtonController buttonController = new ButtonController(signupview, inlogview, accountDao);
+		
+		this.inlogview = new InlogView();
+		inlogview.setVisible(true);
+		inlogview.addListener(buttonController);
 		
 		new Timer(20,taskPerformer).start();
 	}

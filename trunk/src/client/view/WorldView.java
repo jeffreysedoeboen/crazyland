@@ -3,7 +3,12 @@ package client.view;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import javax.swing.JPanel;
-
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import client.connection.Receiver;
 import client.model.Bullet;
 import client.model.Player;
@@ -16,8 +21,19 @@ public class WorldView extends JPanel {
 	private int offsetX = 0;
 	private int offsetY = 0;
 	
+	private BufferedImage bg = null;
+	private int bgWidth, bgHeight;
+	
 	public WorldView(Receiver receiver) {
 		this.receiver = receiver;
+		try {
+			bg = ImageIO.read(new File("../themes/tee/background/background.jpg"));
+			bgWidth = bg.getWidth();
+			bgHeight = bg.getHeight();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void paintComponent(Graphics g){
@@ -37,6 +53,12 @@ public class WorldView extends JPanel {
 			int mapHeight = tilesToPixels(receiver.getMap().getHeight());
 			offsetY = Math.min(offsetY, 0);
 			offsetY = Math.max(offsetY, this.getHeight() - mapHeight);
+			
+			for (int i = offsetX/3; i<=this.getWidth()-offsetX; i += bgWidth) {
+				for (int j = offsetY/3; j<=this.getHeight()-offsetY; j += bgHeight) {	
+					g.drawImage(bg, i, j, null);
+				}
+			}
 			
 			int firstTileX = pixelsToTiles(-offsetX);
 			int lastTileX = firstTileX + pixelsToTiles(this.getWidth()) + 1;
@@ -102,5 +124,28 @@ public class WorldView extends JPanel {
 	
 	public int getOffsetY() {
 		return this.offsetY;
+	}
+	
+	public static BufferedImage verticalflip(BufferedImage img) {   
+        int w = img.getWidth();   
+        int h = img.getHeight();   
+        BufferedImage dimg = new BufferedImage(w, h, img.getColorModel().getTransparency());   
+        Graphics2D g = dimg.createGraphics();   
+        g.drawImage(img, 0, 0, w, h, 0, h, w, 0, null);   
+        g.dispose();   
+        return dimg;   
+    }  
+	
+	public static BufferedImage rotateImage(BufferedImage src, float degrees, boolean isWeapon) {
+        AffineTransform affineTransform = AffineTransform.getRotateInstance(
+            Math.toRadians(degrees),
+            src.getWidth() / 2,
+            src.getHeight() / 2);
+        BufferedImage rotatedImage = new BufferedImage(src.getWidth(), src
+                .getHeight(), src.getType());
+        Graphics2D g = (Graphics2D) rotatedImage.getGraphics();
+        g.setTransform(affineTransform);
+        g.drawImage(src, 0, 0, null);
+        return rotatedImage;
 	}
 }

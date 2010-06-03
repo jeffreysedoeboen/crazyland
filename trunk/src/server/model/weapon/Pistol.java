@@ -14,9 +14,10 @@ public class Pistol extends Weapon {
 	protected float fireRate = 3F;
 	protected boolean unlimitedBullets = true;
 	
-	public Pistol() {	
+	public Pistol(int x, int y) {	
+		super(x,y);
 		try {
-			this.image = ImageIO.read(new File("themes/tee/weapon/gun.png"));
+			this.baseImage = ImageIO.read(new File("../themes/tee/weapon/gun.png"));
 		} catch (IOException e) {
 			System.err.println("Error while reading image for weapon");
 			e.printStackTrace();

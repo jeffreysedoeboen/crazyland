@@ -15,7 +15,26 @@ public abstract class Weapon {
 	protected boolean unlimitedBullets = false;
 	protected int maxBullets = 0;
 	protected int currentBullets = 0;
-	protected BufferedImage image = null;
+	protected BufferedImage image = null, baseImage;
+	protected int x;
+	protected int y;
+	protected float angle;
+	
+	private int weaponDirection  =0 ;
+	private boolean posChanged = false;
+	
+	public Weapon(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	public int getWeaponDirection () {
+		return weaponDirection;
+	}
+	
+	public boolean getPosChanged() {
+		return posChanged;
+	}
 	
 	public Bullet shoot(){
 		
@@ -29,11 +48,25 @@ public abstract class Weapon {
 		return null;
 	}
 
-	public void turnToPoint( Point point ) {
-		Graphics2D g = (Graphics2D) image.getGraphics();
-		g.setTransform(AffineTransform.getRotateInstance(point.getX(), point.getY())); //TODO controleren als view er is
-		g.dispose();
-	}
+//	public BufferedImage turnToPoint( int mouseX, int mouseY ) {
+//		float angle = (float) (Math.toDegrees((Math.atan2(Math.toRadians(mouseY - y), Math.toRadians(mouseX - x)))));
+//		if(Math.abs(angle) > 90.00000f) {
+//			setWeaponDir(1);
+//			image = WorldView.rotateImage(baseImage,angle,true);
+//		} else {
+//			setWeaponDir(0);
+//			image = WorldView.rotateImage(baseImage,angle,true);
+//		}
+//		
+//		return image;
+//	}
+//	
+//	public void setWeaponDir(int value) {
+//		if(weaponDirection != value) {
+//			baseImage = WorldView.verticalflip(baseImage);
+//			weaponDirection = value;
+//		}
+//	}
 	
 	public float getFireRate(){
 		return this.fireRate;
@@ -49,6 +82,23 @@ public abstract class Weapon {
 	
 	public Bullet createBullet(){
 		return this.bulletType;
+	}
+	
+	public void setX(int x) {
+		this.x = x;
+	}
+	
+	public void setY(int y) {
+		this.y = y;
+		
+	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
 	}
 	
 }

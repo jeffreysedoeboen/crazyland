@@ -9,10 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import client.view.InlogView;
+import client.view.SignupView;
+
 import db.AccountDAO;
 
-import view.InlogView;
-import view.SignupView;
 
 public class ButtonController implements ActionListener {
 	

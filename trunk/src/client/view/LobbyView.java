@@ -10,14 +10,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 
-import server.model.GameServer;
-
 
 public class LobbyView extends JPanel {
-	private GameServer server;
 	
-	public LobbyView(GameServer server) {
-		this.server = server;
+	public LobbyView() {
 		
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.BLACK);

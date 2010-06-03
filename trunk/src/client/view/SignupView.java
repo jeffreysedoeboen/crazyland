@@ -1,4 +1,4 @@
-package view;
+package client.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,8 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-import model.GameServer;
 
 public class SignupView extends JFrame {
 	

@@ -1,13 +1,14 @@
-package model.weapon;
+package server.model.weapon;
 
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import model.bullet.Bullet;
-import model.bullet.GrenadeBullet;
-import model.bullet.PistolBullet;
+import server.model.bullet.GrenadeBullet;
+
+import server.model.bullet.Bullet;
+import server.model.weapon.Weapon;
 
 public class Grenade extends Weapon {
 
@@ -18,7 +19,6 @@ public class Grenade extends Weapon {
 	public Grenade(int x, int y) {
 		super(x, y);
 		maxBullets = 4;
-		currentBullets = 4;
 		try {
 			this.baseImage = ImageIO.read(new File("../themes/tee/weapon/grenade.png"));
 		} catch (IOException e) {

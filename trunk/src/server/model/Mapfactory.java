@@ -1,10 +1,8 @@
 package server.model;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,14 +27,14 @@ public class Mapfactory {
 		BufferedImage originalimage;
 		Tile[][] tiles = null;
 		try {
-			originalimage = ImageIO.read(new File("tiles/tiles.png"));
+			originalimage = ImageIO.read(new File("../tiles/tiles.png"));
 			//ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
 			ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
 			
 			
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-            Document doc = docBuilder.parse (new File("maps/" + mapsource + ".tmx"));
+            Document doc = docBuilder.parse (new File("../maps/" + mapsource + ".tmx"));
             doc.getDocumentElement ().normalize ();
             
             NodeList mapNode = doc.getElementsByTagName("map");
