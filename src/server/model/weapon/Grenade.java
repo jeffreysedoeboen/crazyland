@@ -12,7 +12,6 @@ import server.model.weapon.Weapon;
 
 public class Grenade extends Weapon {
 
-	protected final Bullet bulletType = new GrenadeBullet();
 	protected float fireRate = 1F;
 	protected boolean unlimitedBullets = false;
 	
@@ -31,8 +30,8 @@ public class Grenade extends Weapon {
 		return unlimitedBullets;
 	}
 	
-	public Bullet createBullet(){
-		return new GrenadeBullet();
+	public Bullet createBullet(int bCounter){
+		return new GrenadeBullet(bCounter);
 	}
 	
 	public float getFireRate(){

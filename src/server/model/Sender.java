@@ -31,12 +31,10 @@ public class Sender {
 		lineOut += kaas + "players_end%n";
 	}
 	
-	public void sendBullets(ArrayList<Bullet> bulletList){
+	public void sendBullet(Bullet b){
 		String kaas = "bullets_begin%n";
-		for(Bullet b : bulletList){
-			kaas += (int)b.getX() + "," + (int)b.getY() + "%n";
-		}
-		lineOut += kaas + "bullets_end%n";
+		kaas += (int)b.getX() + "," + (int)b.getY() + "," + (int)b.getIndentifier() + "," + b.getDirection() + "%n";
+		lineOut += kaas;
 	}
 	
 	public void sendLineOut(){

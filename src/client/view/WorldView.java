@@ -92,6 +92,7 @@ public class WorldView extends JPanel {
 			ArrayList<Bullet> bullets = receiver.getBullets();
 			for(Bullet b : bullets) {
 				if(b != null) {
+					b.move();
 					g.drawImage(b.getBulletImage(),(int) b.getX() + offsetX,(int) b.getY() + offsetY, null);
 				}
 				

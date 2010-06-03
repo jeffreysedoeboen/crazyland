@@ -10,7 +10,6 @@ import server.model.bullet.PistolBullet;
 
 public class Pistol extends Weapon {
 
-	protected final Bullet bulletType = new PistolBullet();
 	protected float fireRate = 3F;
 	protected boolean unlimitedBullets = true;
 	
@@ -28,8 +27,8 @@ public class Pistol extends Weapon {
 		return unlimitedBullets;
 	}
 	
-	public Bullet createBullet(){
-		return new PistolBullet();
+	public Bullet createBullet(int bCounter){
+		return new PistolBullet(bCounter);
 	}
 	
 	public float getFireRate(){

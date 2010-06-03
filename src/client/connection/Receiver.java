@@ -56,18 +56,8 @@ public class Receiver extends Thread {
 				}
 				this.remotePlayers = tempList;
 			}else if(tempstr.equals("bullets_begin")){
-				boolean bulletEnd = false;
-				ArrayList<Bullet> tempList = new ArrayList<Bullet>();
-				while(!bulletEnd && !terminated && in.hasNext()){
-					String rp = in.nextLine();
-					if(rp.equals("bullets_end")){
-						bulletEnd = true;
-					}else{
-						String[] bulletXY = rp.split(",");
-						tempList.add(new Bullet(Integer.parseInt("" + bulletXY[0]),Integer.parseInt("" + bulletXY[1])));
-					}
-				}
-				this.bulletList = tempList;
+				String[] bulletXY = in.nextLine().split(",");
+				bulletList.add(new Bullet(Integer.parseInt("" + bulletXY[0]),Integer.parseInt("" + bulletXY[1]),Integer.parseInt("" + bulletXY[2]),Float.parseFloat(bulletXY[3])));
 			}
 		}
 	}

@@ -12,6 +12,7 @@ public class World{
 	private Map map;
 	private ArrayList<Player> playerList = new ArrayList<Player>();
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	private int bulletCounter = 1;
 
 	public World(){
 		map = new Map();
@@ -24,15 +25,22 @@ public class World{
 	public Map getMap() {
 		return map;
 	}
+	
+	public int getBulletCounter(){
+		return this.bulletCounter;
+	}
 
-	public void shoot(float x,float y, Player p) {
+	public Bullet shoot(float x,float y, Player p) {
 		float distanceFromPlayerX = p.getX()-x;
 		float distanceFromPlayerY = p.getY()-y;
-		Bullet b = p.shoot();
+		Bullet b = p.shoot(this.bulletCounter);
 		if(b != null){
 			b.setBullet(x,y,p.getX(),p.getY()+6,Math.atan2(distanceFromPlayerY, distanceFromPlayerX));
 			bullets.add(b);
+			bulletCounter++;
+			return b;
 		}
+		return null;
 	}
 	
 //	public void moveWeapon(int mouseX, int mouseY) {
