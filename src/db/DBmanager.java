@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class DBmanager {
 	private static final String driver = "org.apache.derby.jdbc.EmbeddedDriver" ;
-    private static final String url = "jdbc:derby:crazyland;create=true" ;
+    private static final String url = "jdbc:derby:crazyland_db;create=true" ;
 	private static DBmanager uniqueInstance=null;
 	private static Connection con = null ;
 	
