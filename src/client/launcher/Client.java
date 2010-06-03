@@ -97,9 +97,9 @@ public class Client extends JApplet{
 		AccountDAO accountDao = new AccountDAO();
 		ButtonController buttonController = new ButtonController(signupview, inlogview, accountDao);
 		
-		this.inlogview = new InlogView();
-		inlogview.setVisible(true);
-		inlogview.addListener(buttonController);
+//		this.inlogview = new InlogView();
+//		inlogview.setVisible(true);
+//		inlogview.addListener(buttonController);
 		
 		new Timer(20,taskPerformer).start();
 	}
