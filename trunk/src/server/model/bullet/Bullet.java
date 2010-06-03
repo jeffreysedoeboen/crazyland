@@ -10,7 +10,6 @@ public abstract class Bullet {
 	protected float direction;
 	protected float x, y;
 	protected float verticalSpeed = 0;
-	protected float horizontalSpeed = 0;
 	protected Point destination;
 
 	public float getX() {
@@ -39,8 +38,10 @@ public abstract class Bullet {
 	}
 	
 	public void move(){
-		this.x -= 3*Math.cos(this.direction);
-		this.y -= 3*Math.sin(this.direction);
+		this.x -= 5*Math.cos(this.direction);
+		this.y -= 5*Math.sin(this.direction);
+		this.y = this.y - verticalSpeed;
+		verticalSpeed += -0.01;
 	}
 	
 	public void setBullet(float clickedX, float clickedY, float x, float y, double dir) {
