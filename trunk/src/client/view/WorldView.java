@@ -44,15 +44,18 @@ public class WorldView extends JPanel {
 			Tile[][] tiles = receiver.getMap().getTiles();
 			
 			//nieuwe shit
-			offsetX = this.getWidth() / 2 - Math.round(receiver.getPlayer().getX()) - 32;
+			int offsetX = this.getWidth() / 2 - Math.round(receiver.getPlayer().getX()) - 32;
 			int mapWidth = tilesToPixels(receiver.getMap().getWidth());
 			offsetX = Math.min(offsetX, 0);
 			offsetX = Math.max(offsetX, this.getWidth() - mapWidth);
 			
-			offsetY = this.getHeight() / 2 - Math.round(receiver.getPlayer().getY()) - 32;
+			int offsetY = this.getHeight() / 2 - Math.round(receiver.getPlayer().getY()) - 32;
 			int mapHeight = tilesToPixels(receiver.getMap().getHeight());
 			offsetY = Math.min(offsetY, 0);
 			offsetY = Math.max(offsetY, this.getHeight() - mapHeight);
+			
+			this.offsetX = offsetX;
+			this.offsetY = offsetY;
 			
 			for (int i = offsetX/3; i<=this.getWidth()-offsetX; i += bgWidth) {
 				for (int j = offsetY/3; j<=this.getHeight()-offsetY; j += bgHeight) {	
@@ -132,8 +135,8 @@ public class WorldView extends JPanel {
         BufferedImage dimg = new BufferedImage(w, h, img.getColorModel().getTransparency());   
         Graphics2D g = dimg.createGraphics();   
         g.drawImage(img, 0, 0, w, h, 0, h, w, 0, null);   
-        g.dispose();   
-        return dimg;   
+        g.dispose();  
+        return dimg;
     }  
 	
 	public static BufferedImage rotateImage(BufferedImage src, float degrees, boolean isWeapon) {

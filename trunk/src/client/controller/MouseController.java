@@ -30,7 +30,7 @@ public class MouseController implements MouseListener, MouseMotionListener, Mous
 	}
 
 	public void mousePressed(MouseEvent e) {
-		sender.shoot(e.getX()+view.getOffsetX(),e.getY()+view.getOffsetY());
+		sender.shoot(e.getX()-view.getOffsetX(),e.getY()-view.getOffsetY());
 	}
 
 	public void mouseReleased(MouseEvent arg0) {
