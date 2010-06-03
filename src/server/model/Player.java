@@ -140,9 +140,9 @@ public class Player {
 
 	public void moveRight(boolean onGround) {
 		if(onGround){
-			this.x += 2.5;
+			this.x += 2.5; //4
 		}else{
-			this.x += 2;
+			this.x += 2; //3
 		}
 		updateWeaponPosition();
 	}
@@ -157,9 +157,9 @@ public class Player {
 	
 	public void moveLeft(boolean onGround) {
 		if(onGround){
-			this.x -= 2.5;
+			this.x -= 2.5; //4
 		}else{
-			this.x -= 2;
+			this.x -= 2; //3
 		}
 		updateWeaponPosition();
 	}
@@ -172,7 +172,7 @@ public class Player {
 	public void calcVerticalSpeed(boolean onGround) {
 		
 		if(!onGround){
-			if(this.verticalSpeed > -2.5){
+			if(this.verticalSpeed > -2.5){ //4
 				this.verticalSpeed += -0.1;
 			}
 		}else{

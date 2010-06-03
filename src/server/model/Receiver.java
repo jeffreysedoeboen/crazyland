@@ -34,7 +34,7 @@ public class Receiver extends Thread {
 				player.setMovingLeft(false);
 			}else if(tempstr.equals("player_jump")){
 				if(s.getWorld().onGround(player)){
-					player.setVerticalSpeed(4.5f);
+					player.setVerticalSpeed(4.5f);//5.5
 				}
 			}else if(tempstr.equals("player_shoot")){
 				String[] playerXY = in.nextLine().split(",");
