@@ -14,7 +14,7 @@ public class Sender {
 	public Sender(PrintWriter out, Player p){
 		this.out = out;
 		this.player = p;
-		out.println("begin_map\n" + "crazyland1");
+		out.println("begin_map\n" + "crazyland2");
 	}
 	
 	public void sendPlayer(){
