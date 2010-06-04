@@ -42,4 +42,10 @@ public class Sender {
 		lineOut = "";
 	}
 	
+	public void removeBullet(Bullet b){
+		String kaas = "bullets_begin_destroy%n";
+		kaas += (int)b.getIndentifier();
+		lineOut += kaas + "%n";
+	}
+	
 }

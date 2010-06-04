@@ -58,6 +58,7 @@ public abstract class Bullet {
 		this.y = y;
 		//this.bulletImage = WorldView.rotateImage(bulletImage, (float) (Math.toDegrees((Math.atan2(Math.toRadians(clickedY - y), Math.toRadians(clickedX - x))))),false);
 		this.direction = (float) dir;
+		move();
 	}
 	
 }
