@@ -2,24 +2,16 @@ package client.launcher;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.applet.AudioClip;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.io.IOException;
-import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
-
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.MidiUnavailableException;
-import javax.sound.midi.Sequence;
-import javax.sound.midi.Sequencer;
 import javax.swing.JApplet;
 import javax.swing.Timer;
 
@@ -30,14 +22,7 @@ import client.controller.MouseController;
 import client.controller.ButtonController;
 import client.view.InlogView;
 import client.view.LeaderView;
-import client.view.SignupView;
 import client.view.WorldView;
-
-import client.model.MidiPlayer;
-
-import client.view.LobbyView;
-import client.view.WorldView;
-import db.AccountDAO;
 
 @SuppressWarnings("serial")
 public class Client extends JApplet{

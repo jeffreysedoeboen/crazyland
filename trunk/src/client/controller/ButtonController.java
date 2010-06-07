@@ -6,7 +6,6 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import client.view.InlogView;
@@ -54,12 +53,14 @@ public class ButtonController implements ActionListener {
 					JOptionPane.showMessageDialog(signupview, "This username already exists", "username already exists", JOptionPane.ERROR_MESSAGE);
 				}
 			} else if(button.getText().equals("Create Account")) {
+				inlogview.setVisible(false);
 				signupview.setVisible(true);
 			} else if(button.getText().equals("Login")) {
 				String filledInUsername = inlogview.getUsernameinput().getText();
 				String filledInPassword = inlogview.getPasswordinput().getText();
 				if(AccountDAO.login(filledInUsername, filledInPassword)) {
 					inlogview.setVisible(false);
+					signupview.setVisible(false);
 					lobbyview.setVisible(true);
 					JOptionPane.showMessageDialog(lobbyview, "You are logged in!", "log in succesful", JOptionPane.PLAIN_MESSAGE);
 				} else {
@@ -67,13 +68,17 @@ public class ButtonController implements ActionListener {
 				}
 			} else if(button.getText().equals("Guest Account")) {
 				inlogview.setVisible(false);
+				signupview.setVisible(false);
 				lobbyview.setVisible(true);
 			}else if(button.getText().equals("Leaderboard")) {
 				lobbyview.setVisible(false);
 				leaderview.setVisible(true);
-			}else if(button.getText().equals("Back")) {
+			}else if(button.getText().equals("Back") && leaderview.isVisible()) {
 				leaderview.setVisible(false);
 				lobbyview.setVisible(true);
+			}else if(button.getText().equals("Back") && signupview.isVisible()) {
+				signupview.setVisible(false);
+				inlogview.setVisible(true);
 			}else if(button.getText().equals("Quit")) {
 				System.exit(0);
 			}
