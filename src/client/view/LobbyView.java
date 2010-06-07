@@ -51,6 +51,8 @@ public class LobbyView extends JFrame {
 		};
         table.setFillsViewportHeight(true);
         
+        table.getTableHeader().setReorderingAllowed(false);
+        
         JScrollPane scrollPane = new JScrollPane(table);
         
         TableColumn column = null;
