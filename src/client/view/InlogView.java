@@ -64,7 +64,7 @@ public class InlogView extends JFrame {
 		return usernameinput;
 	}
 	
-	public JPasswordField getPasswordinput() {
+	public JTextField getPasswordinput() {
 		return passwordinput;
 	}
 	

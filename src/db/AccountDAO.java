@@ -79,14 +79,6 @@ public class AccountDAO {
 		return false;
 	}
 	
-	public void deleteAccount(int id) {
-		
-	}
-	
-	public void getUsername(int id) {
-		
-	}
-	
 	public void getAccounts() throws SQLException {
 		DBmanager dbManager = DBmanager.getInstance();
 		Connection conn = dbManager.getConnection();

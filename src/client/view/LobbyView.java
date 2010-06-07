@@ -18,6 +18,7 @@ public class LobbyView extends JFrame {
 		
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.BLACK);
+		this.setSize(640, 500);
 		
 		String[] columnNames = {"Naam van Server",
                 "Players",
