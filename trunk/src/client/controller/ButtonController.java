@@ -26,6 +26,8 @@ public class ButtonController implements ActionListener {
 	public ButtonController(InlogView inlogview, AccountDAO accountDao) {
 		this.inlogview = inlogview;
 		this.accountDao = accountDao;
+		this.signupview = new SignupView();
+		this.lobbyview = new LobbyView();
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
@@ -39,23 +41,29 @@ public class ButtonController implements ActionListener {
 					signupview.setVisible(false);
 					JOptionPane.showMessageDialog(inlogview, "You have been registered!", "registration succesful", JOptionPane.PLAIN_MESSAGE);
 				} else if(accountDao.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck) == 1) {
-					JOptionPane.showMessageDialog(inlogview, "You didn't fill in your username", "username not filled in", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(signupview, "You didn't fill in your username", "username not filled in", JOptionPane.ERROR_MESSAGE);
 				} else if(accountDao.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck) == 2) {
-					JOptionPane.showMessageDialog(inlogview, "You didn't fill in your password", "password not filled in", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(signupview, "You didn't fill in your password", "password not filled in", JOptionPane.ERROR_MESSAGE);
 				} else if(accountDao.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck) == 3) {
-					JOptionPane.showMessageDialog(inlogview, "You didn't fill in the same password twice", "password not the same as repeated password", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(signupview, "You didn't fill in the same password twice", "password not the same as repeated password", JOptionPane.ERROR_MESSAGE);
 				} else if(accountDao.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck) == 4) {
-					JOptionPane.showMessageDialog(inlogview, "This username already exists", "username already exists", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(signupview, "This username already exists", "username already exists", JOptionPane.ERROR_MESSAGE);
 				}
 			} else if(button.getText().equals("Create Account")) {
-				this.signupview = new SignupView();
 				signupview.setVisible(true);
 				signupview.addListener(this);
 			} else if(button.getText().equals("Login")) {
-				/*String filledInUsername = inlogview.getUsernameinput().getText();
+				String filledInUsername = inlogview.getUsernameinput().getText();
 				String filledInPassword = inlogview.getPasswordinput().getText();
-				System.out.println(filledInPassword);*/
-				this.lobbyview = new LobbyView();
+				if(accountDao.login(filledInUsername, filledInPassword)) {
+					inlogview.setVisible(false);
+					lobbyview.setVisible(true);
+					JOptionPane.showMessageDialog(lobbyview, "You are logged in!", "log in succesful", JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(inlogview, "You didn't fill in the right username and password", "wrong username or password", JOptionPane.ERROR_MESSAGE);
+				}
+			} else if(button.getText().equals("Guest Account")) {
+				inlogview.setVisible(false);
 				lobbyview.setVisible(true);
 			}
 		} catch (NoSuchAlgorithmException e) {
