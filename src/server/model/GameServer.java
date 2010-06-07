@@ -87,9 +87,5 @@ public class GameServer extends Thread{
 	public void addSender(Sender s) {
 		this.senderList.add(s);		
 	}
-	
-//	public void changeWeapon() {
-//		world.changeWeapon();
-//	}
 		
 }
