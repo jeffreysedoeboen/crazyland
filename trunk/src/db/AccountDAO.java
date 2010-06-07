@@ -46,6 +46,8 @@ public class AccountDAO {
 			psInsert.setString(1, username);
 			psInsert.setString(2, new BigInteger(1,m.digest()).toString(16));
 			psInsert.executeUpdate();
+			
+			LeaderDAO.addPlayer(username, LeaderDAO.getLowestRank() + 1);
 		}
 		finally {
 			conn.close();

@@ -14,7 +14,7 @@ public class LeaderDAO {
 				Connection conn = dbManager.getConnection();
 				
 				PreparedStatement pst = conn.prepareStatement("INSERT INTO leaderboard (rank, username)" +
-						"VALUES(?, ?)");//TODO rank is nog niet goed
+						"VALUES(?, ?)");
 				
 				
 				pst.setLong(1,rank);
@@ -54,6 +54,7 @@ public class LeaderDAO {
 			
 			conn.close();
 		} catch ( SQLException e) {
+			e.printStackTrace();
 		}
 		
 	}
@@ -120,6 +121,26 @@ public class LeaderDAO {
 		}
 		
 		System.out.println(LeaderDAO.getPlayer("dennis"));
+	}
+	
+	public static long getLowestRank() {
+		try {
+			DBmanager dbManager = DBmanager.getInstance();
+			Connection conn = dbManager.getConnection();
+			
+			PreparedStatement pst = conn.prepareStatement("SELECT rank FROM leaderboard ORDER BY rank desc");
+			
+			ResultSet rs = pst.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getLong("rank");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return -1;
 	}
 
 }
