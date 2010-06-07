@@ -10,8 +10,9 @@ import java.sql.SQLWarning;
 import java.util.Properties;
 
 public class DBmanager {
-	private static final String driver = "org.apache.derby.jdbc.EmbeddedDriver" ;
-    private static final String url = "jdbc:derby:crazyland_db;create=true" ;
+	private static final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
+	private static final String FS = System.getProperty("file.separator");
+    private static final String URL = "jdbc:derby:" + System.getProperty("user.dir") + FS + "database" + FS + "crazyland_db;create=true" ;
 	private static DBmanager uniqueInstance=null;
 	private static Connection con = null ;
 	
@@ -74,13 +75,13 @@ public class DBmanager {
 	public Connection getConnection() throws SQLException
 	{
 		try {
-            Class.forName(driver) ;
-            con = DriverManager.getConnection(url);
+            Class.forName(DRIVER) ;
+            con = DriverManager.getConnection(URL);
 
 		} catch (SQLException se) {
             printSQLException(se) ;
         } catch(ClassNotFoundException e){
-            System.out.println("JDBC Driver " + driver + " not found in CLASSPATH") ;
+            System.out.println("JDBC Driver " + DRIVER + " not found in CLASSPATH") ;
         }
         return con;
 	}
