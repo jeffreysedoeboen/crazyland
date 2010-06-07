@@ -101,7 +101,7 @@ public class Client extends JApplet{
 		
 		this.inlogview = new InlogView();
 		
-		ButtonController buttonController = new ButtonController(inlogview, accountDao);
+		ButtonController buttonController = new ButtonController(inlogview);
 		
 		inlogview.setVisible(true);
 		inlogview.addListener(buttonController);
