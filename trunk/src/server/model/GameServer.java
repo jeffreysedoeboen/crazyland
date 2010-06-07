@@ -68,11 +68,17 @@ public class GameServer extends Thread{
 		
 	}
 	
+	public void removeBullet(Bullet b){
+		for(Sender s : (ArrayList<Sender>) senderList.clone()){
+			s.removeBullet(b);
+		}
+	}
+	
 	public void shoot(float x,float y, Player p){
 		Bullet b = world.shoot(x, y, p);
 		if(b != null){
 		System.out.println("test");
-			for(Sender s : senderList){
+			for(Sender s : (ArrayList<Sender>) senderList.clone()){
 				s.sendBullet(b);
 			}
 		}
