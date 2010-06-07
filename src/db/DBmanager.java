@@ -1,14 +1,8 @@
 package db;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.SQLWarning;
-import java.util.Properties;
 
 public class DBmanager {
 	private static final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
