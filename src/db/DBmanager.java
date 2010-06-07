@@ -1,5 +1,6 @@
 package db;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,7 +13,7 @@ import java.util.Properties;
 public class DBmanager {
 	private static final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
 	private static final String FS = System.getProperty("file.separator");
-    private static final String URL = "jdbc:derby:" + System.getProperty("user.dir") + FS + "database" + FS + "crazyland_db;create=true" ;
+    private static final String URL = "jdbc:derby:" + getUrl() + FS + "database" + FS + "crazyland_db;create=true" ;
 	private static DBmanager uniqueInstance=null;
 	private static Connection con = null ;
 	
@@ -22,6 +23,14 @@ public class DBmanager {
 		{
 			System.err.println("de database bestaat niet....");
 		}
+	}
+	
+	public static String getUrl() {
+		String property = System.getProperty("user.dir");
+		if(property.substring(property.length() - 3, property.length()).equals("bin")) {
+			property = property.substring(0, property.length() - 3);
+		}
+		return property;
 	}
 	
 	public static synchronized DBmanager getInstance()
