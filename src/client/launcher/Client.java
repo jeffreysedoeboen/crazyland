@@ -29,6 +29,7 @@ import client.controller.KeyboardController;
 import client.controller.MouseController;
 import client.controller.ButtonController;
 import client.view.InlogView;
+import client.view.LeaderView;
 import client.view.SignupView;
 import client.view.WorldView;
 
@@ -43,6 +44,7 @@ public class Client extends JApplet{
 
 	private WorldView view;
 	private InlogView inlogview;
+	private LeaderView leaderview;
 	
 	public void init() {
 		
@@ -74,6 +76,10 @@ public class Client extends JApplet{
     	Image image = toolkit.getImage("../themes/tee/weapon/cursor.png");
     	Cursor c = toolkit.createCustomCursor(image , new Point(0,0), "cursor");
     	setCursor (c);
+		
+		this.view = new WorldView(receiver);
+		this.leaderview = new LeaderView();
+		leaderview.setVisible(true);
 		
 		this.view = new WorldView(receiver);
 		
