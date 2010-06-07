@@ -12,11 +12,12 @@ public class Player {
 	private float x;
 	private float y;
 	private BufferedImage image,heartImage;
-	private int hitpoints = 10;
+	private int hitpoints = 0;
 	
-	public Player(float x, float y) {
+	public Player(float x, float y, int hitpoints) {
 		this.x = x;
 		this.y = y;
+		this.hitpoints = hitpoints;
 		try {
 			image = ImageIO.read(new File("../themes/tee/characters/character.png"));
 			heartImage = ImageIO.read(new File("../themes/tee/other/heart.png"));

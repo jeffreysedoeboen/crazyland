@@ -41,7 +41,7 @@ public class Receiver extends Thread {
 			}else if(tempstr.equals("player")){
 				tempstr = in.nextLine();
 				String[] playerXY = tempstr.split(",");
-				this.player = new Player(Integer.parseInt("" + playerXY[0]),Integer.parseInt("" + playerXY[1]));
+				this.player = new Player(Integer.parseInt("" + playerXY[0]),Integer.parseInt("" + playerXY[1]),Integer.parseInt("" + playerXY[2]));
 			}else if(tempstr.equals("players_begin")){
 				boolean playerEnd = false;
 				ArrayList<Player> tempList = new ArrayList<Player>();
@@ -51,7 +51,7 @@ public class Receiver extends Thread {
 						playerEnd = true;
 					}else{
 						String[] playerXY = rp.split(",");
-						tempList.add(new Player(Integer.parseInt("" + playerXY[1]),Integer.parseInt("" + playerXY[2])));
+						tempList.add(new Player(Integer.parseInt("" + playerXY[1]),Integer.parseInt("" + playerXY[2]),Integer.parseInt("" + playerXY[1])));
 					}
 				}
 				this.remotePlayers = tempList;
