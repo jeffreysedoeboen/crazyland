@@ -12,11 +12,13 @@ public class Player {
 	private float x;
 	private float y;
 	private BufferedImage image,heartImage;
+	private String name;
 	private int hitpoints = 0;
 	
-	public Player(float x, float y, int hitpoints) {
+	public Player(String name, float x, float y,int hitpoints) {
 		this.x = x;
 		this.y = y;
+		this.name = name;
 		this.hitpoints = hitpoints;
 		try {
 			image = ImageIO.read(new File("../themes/tee/characters/character.png"));
@@ -24,6 +26,10 @@ public class Player {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 	public float getX(){

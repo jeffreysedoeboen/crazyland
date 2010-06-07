@@ -45,6 +45,13 @@ public class Client extends JApplet{
 	private WorldView view;
 	private InlogView inlogview;
 	private LeaderView leaderview;
+	private Sender sender;
+	
+	@Override
+	public void destroy() {
+		sender.removePlayer();
+		super.destroy();
+	};
 	
 	public void init() {
 		
@@ -70,7 +77,7 @@ public class Client extends JApplet{
 		
 		Receiver receiver = new Receiver(in);
 		receiver.start();
-		Sender sender = new Sender(out);
+		sender = new Sender(out);
 		
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
     	Image image = toolkit.getImage("../themes/tee/weapon/cursor.png");

@@ -2,6 +2,8 @@ package client.connection;
 
 import java.io.PrintWriter;
 
+import server.model.Player;
+
 public class Sender {
 
 	private PrintWriter out;
@@ -42,6 +44,10 @@ public class Sender {
 	public void changeWeapon() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void removePlayer () {
+		out.println("player_end");
 	}
 	
 }

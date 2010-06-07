@@ -66,7 +66,9 @@ public class Connector extends Thread {
             Player p = new Player("Henk", 200f,100f);
             
             Sender s = new Sender(out,p);
-            new Receiver(in,p,server).start();
+            Receiver r = new Receiver(in,p,server);
+            r.start();
+            server.addReceiver(r);
             server.addSender(s);
     		server.addPlayer(p);
             
