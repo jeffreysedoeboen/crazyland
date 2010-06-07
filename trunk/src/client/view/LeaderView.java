@@ -59,6 +59,7 @@ public class LeaderView extends JFrame{
 	
     table.setPreferredScrollableViewportSize(new Dimension(500, 70));
     table.setFillsViewportHeight(true);
+    table.getTableHeader().setReorderingAllowed(false);
     
     JScrollPane scrollPane = new JScrollPane(table);
     add(scrollPane);
