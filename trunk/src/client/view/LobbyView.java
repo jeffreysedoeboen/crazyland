@@ -63,14 +63,13 @@ public class LobbyView extends JFrame {
         }
         
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1, 3));
+        panel.setLayout(new GridLayout(1, 4));
         JButton buttonConnect = new JButton("Connect");
-        buttonConnect.setSize(100, 15);
+        JButton buttonLeader = new JButton("Leaderboard");
         JButton buttonSettings = new JButton("Settings");
-        buttonSettings.setSize(300, 15);
         JButton buttonQuit = new JButton("Quit");
-        buttonQuit.setSize(100, 15);
         panel.add(buttonConnect);
+        panel.add(buttonLeader);
         panel.add(buttonSettings);
         panel.add(buttonQuit);
         
