@@ -20,7 +20,7 @@ public class AccountDAO {
 	 * 4: gebruikersnaam staat al in database
 	 * 5: account aanmaken is gelukt!
 	 */
-	public int addAccount(String username, String password, String passwordRepeat) throws SQLException, NoSuchAlgorithmException {
+	public static int addAccount(String username, String password, String passwordRepeat) throws SQLException, NoSuchAlgorithmException {
 		DBmanager dbManager = DBmanager.getInstance();
 		Connection conn = dbManager.getConnection();
 		try
@@ -55,7 +55,7 @@ public class AccountDAO {
 		return 5;
 	}
 	
-	public boolean login(String username, String password) throws SQLException, NoSuchAlgorithmException {
+	public static boolean login(String username, String password) throws SQLException, NoSuchAlgorithmException {
 		DBmanager dbManager = DBmanager.getInstance();
 		Connection conn = dbManager.getConnection();
 		
@@ -79,7 +79,7 @@ public class AccountDAO {
 		return false;
 	}
 	
-	public void getAccounts() throws SQLException {
+	/*public static void getAccounts() throws SQLException {
 		DBmanager dbManager = DBmanager.getInstance();
 		Connection conn = dbManager.getConnection();
 		try
@@ -106,5 +106,5 @@ public class AccountDAO {
 		if(accountDao.login("gromberg5", "lalala")) {
 			System.out.println("test");
 		}
-	}
+	}*/
 }
