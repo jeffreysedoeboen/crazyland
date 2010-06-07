@@ -47,18 +47,28 @@ public class AccountDAO {
 		DBmanager dbManager = DBmanager.getInstance();
 		Connection conn = dbManager.getConnection();
 		
-		MessageDigest m=MessageDigest.getInstance("MD5");
-	    m.update(password.getBytes(),0,password.length());
-		
-		String qSelect = "SELECT * FROM Account WHERE username = ? AND password = ?";
-		PreparedStatement psSelect = conn.prepareStatement(qSelect);
-		psSelect.setString(1, username);
-		psSelect.setString(2, new BigInteger(1,m.digest()).toString(16));
-		ResultSet result = psSelect.executeQuery();
-		while (result.next()) {
-			return true;
+		try
+		{
+			MessageDigest m=MessageDigest.getInstance("MD5");
+		    m.update(password.getBytes(),0,password.length());
+			
+			String qSelect = "SELECT * FROM Account WHERE username = ? AND password = ?";
+			PreparedStatement psSelect = conn.prepareStatement(qSelect);
+			psSelect.setString(1, username);
+			psSelect.setString(2, new BigInteger(1,m.digest()).toString(16));
+			ResultSet result = psSelect.executeQuery();
+			while (result.next()) {
+				return true;
+			}
+		}
+		finally {
+			conn.close();
 		}
 		return false;
+	}
+	
+	public void deleteAccount(int id) {
+		
 	}
 	
 	public void getUsername(int id) {
@@ -83,7 +93,7 @@ public class AccountDAO {
 		}
 	}
 	
-	public static void main(String args[]) throws NoSuchAlgorithmException, SQLException
+	/*public static void main(String args[]) throws NoSuchAlgorithmException, SQLException
 	{
 		AccountDAO accountDao = new AccountDAO();
 		accountDao.addAccount("gromberg9", "lalala2", "lalala2");
@@ -92,5 +102,5 @@ public class AccountDAO {
 		if(accountDao.login("gromberg5", "lalala")) {
 			System.out.println("test");
 		}
-	}
+	}*/
 }

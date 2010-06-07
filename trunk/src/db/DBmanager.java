@@ -19,7 +19,7 @@ public class DBmanager {
 	{
 		if(!dbExists())
 		{
-			System.err.println("de database bestaat niet....") ;
+			System.err.println("de database bestaat niet....");
 		}
 	}
 	

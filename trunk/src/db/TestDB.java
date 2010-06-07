@@ -13,9 +13,9 @@ public class TestDB {
 		Connection conn = dbManager.getConnection();
 		try
 		{
-			String qDelete = "DROP TABLE Account";
+			/*String qDelete = "DROP TABLE Account";
 			PreparedStatement psDelete = conn.prepareStatement(qDelete);
-			psDelete.executeUpdate();
+			psDelete.executeUpdate();*/
 	
 			String qCreate = "CREATE TABLE Account (" +
 					"id INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
