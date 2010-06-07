@@ -3,6 +3,7 @@ package client.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +14,8 @@ import javax.swing.table.TableColumn;
 
 
 public class LobbyView extends JFrame {
+	
+	private JButton buttonConnect, buttonLeader, buttonSettings, buttonQuit;
 	
 	public LobbyView() {
 		
@@ -64,10 +67,10 @@ public class LobbyView extends JFrame {
         
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 4));
-        JButton buttonConnect = new JButton("Connect");
-        JButton buttonLeader = new JButton("Leaderboard");
-        JButton buttonSettings = new JButton("Settings");
-        JButton buttonQuit = new JButton("Quit");
+        buttonConnect = new JButton("Connect");
+        buttonLeader = new JButton("Leaderboard");
+        buttonSettings = new JButton("Settings");
+        buttonQuit = new JButton("Quit");
         panel.add(buttonConnect);
         panel.add(buttonLeader);
         panel.add(buttonSettings);
@@ -78,5 +81,10 @@ public class LobbyView extends JFrame {
         
         this.add(panel, BorderLayout.NORTH);
         this.add(scrollPane, BorderLayout.CENTER);
+	}
+	
+	public void addListener(ActionListener listener) {
+		buttonLeader.addActionListener(listener);
+		buttonQuit.addActionListener(listener);
 	}
 }

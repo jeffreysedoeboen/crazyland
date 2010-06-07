@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,6 +15,8 @@ import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 
 public class LeaderView extends JFrame{
+	
+	private JButton backButton;
 	
 	public LeaderView(){
 	
@@ -61,11 +64,15 @@ public class LeaderView extends JFrame{
     add(scrollPane);
     
     JLabel label = new JLabel("Top 20 Players:");
-    JButton button = new JButton("Back");
+    backButton = new JButton("Back");
   
     this.add(label, BorderLayout.NORTH);
     this.add(scrollPane, BorderLayout.CENTER);
-    this.add(button,BorderLayout.SOUTH);
+    this.add(backButton,BorderLayout.SOUTH);
     
+	}
+	
+	public void addListener(ActionListener listener) {
+		backButton.addActionListener(listener);
 	}
 }

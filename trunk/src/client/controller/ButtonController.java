@@ -12,23 +12,28 @@ import javax.swing.JOptionPane;
 import client.view.InlogView;
 import client.view.LobbyView;
 import client.view.SignupView;
+import client.view.LeaderView;
 
 import db.AccountDAO;
 
 
 public class ButtonController implements ActionListener {
-	
+
 	private SignupView signupview;
 	private InlogView inlogview;
 	private LobbyView lobbyview;
-	
+	private LeaderView leaderview;
+
 	public ButtonController(InlogView inlogview) {
 		this.inlogview = inlogview;
 		this.signupview = new SignupView();
 		signupview.addListener(this);
 		this.lobbyview = new LobbyView();
+		lobbyview.addListener(this);
+		this.leaderview = new LeaderView();
+		leaderview.addListener(this);
 	}
-	
+
 	public void actionPerformed(ActionEvent ae) {
 		try {
 			JButton button = (JButton) ae.getSource();
@@ -63,6 +68,14 @@ public class ButtonController implements ActionListener {
 			} else if(button.getText().equals("Guest Account")) {
 				inlogview.setVisible(false);
 				lobbyview.setVisible(true);
+			}else if(button.getText().equals("Leaderboard")) {
+				lobbyview.setVisible(false);
+				leaderview.setVisible(true);
+			}else if(button.getText().equals("Back")) {
+				leaderview.setVisible(false);
+				lobbyview.setVisible(true);
+			}else if(button.getText().equals("Quit")) {
+				System.exit(0);
 			}
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
