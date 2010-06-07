@@ -84,6 +84,9 @@ public class WorldView extends JPanel {
 			
 			g.drawImage(receiver.getPlayer().getImage(),Math.round(playerX + offsetX),Math.round(playerY + offsetY),null);
 			
+			for(int i = 0; i <= receiver.getPlayer().getHitpoints(); i++){
+			g.drawImage(receiver.getPlayer().getHeartImage(),i*18,0,null);
+			}
 			
 			for(Player p : receiver.getRemotePlayers()){
 				g.drawImage(p.getImage(),Math.round(p.getX() + offsetX),Math.round(p.getY() + offsetY),null);
