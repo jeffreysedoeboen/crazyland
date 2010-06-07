@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 public class InlogView extends JFrame {
 
 	private JButton guest, create, login;
+	private JTextField usernameinput;
+	private JPasswordField passwordinput;
 
 	public InlogView(){
 		this.setTitle("Log in");
@@ -25,7 +27,7 @@ public class InlogView extends JFrame {
 		username.setSize(150, 20);
 		username.setLocation(10, 50);
 		
-		JTextField usernameinput = new JTextField(20);
+		usernameinput = new JTextField(20);
 		usernameinput.setSize(200, 20);
 		usernameinput.setLocation(150, 50);
 
@@ -33,7 +35,7 @@ public class InlogView extends JFrame {
 		password.setSize(150, 20);
 		password.setLocation(10, 100);
 		
-		JPasswordField passwordinput = new JPasswordField(20);
+		passwordinput = new JPasswordField(20);
 		passwordinput.setSize(200, 20);
 		passwordinput.setLocation(150, 100);
 		
@@ -56,6 +58,14 @@ public class InlogView extends JFrame {
 		add(guest);
 		add(create);
 		add(login);
+	}
+	
+	public JTextField getUsernameinput() {
+		return usernameinput;
+	}
+	
+	public JPasswordField getPasswordinput() {
+		return passwordinput;
 	}
 	
 	public void addListener(ActionListener listener) {

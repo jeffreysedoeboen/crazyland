@@ -5,13 +5,14 @@ import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 
 
-public class LobbyView extends JPanel {
+public class LobbyView extends JFrame {
 	
 	public LobbyView() {
 		
@@ -47,7 +48,6 @@ public class LobbyView extends JPanel {
         table.setFillsViewportHeight(true);
         
         JScrollPane scrollPane = new JScrollPane(table);
-        add(scrollPane);
         
         TableColumn column = null;
         for (int i = 0; i < 5; i++) {
@@ -77,6 +77,6 @@ public class LobbyView extends JPanel {
         table.setForeground(Color.WHITE);
         
         this.add(panel, BorderLayout.NORTH);
-        this.add(table, BorderLayout.CENTER);
+        this.add(scrollPane, BorderLayout.CENTER);
 	}
 }

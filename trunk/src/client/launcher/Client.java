@@ -41,11 +41,8 @@ import db.AccountDAO;
 @SuppressWarnings("serial")
 public class Client extends JApplet{
 
-	/*LobbyView view;*/
 	private WorldView view;
-	private LobbyView lobbyview;
 	private InlogView inlogview;
-	private SignupView signupview;
 	
 	public void init() {
 		
@@ -95,11 +92,13 @@ public class Client extends JApplet{
 		this.addMouseWheelListener(mouseController);
 		
 		AccountDAO accountDao = new AccountDAO();
-		ButtonController buttonController = new ButtonController(signupview, inlogview, accountDao);
 		
-//		this.inlogview = new InlogView();
-//		inlogview.setVisible(true);
-//		inlogview.addListener(buttonController);
+		this.inlogview = new InlogView();
+		
+		ButtonController buttonController = new ButtonController(inlogview, accountDao);
+		
+		inlogview.setVisible(true);
+		inlogview.addListener(buttonController);
 		
 		new Timer(20,taskPerformer).start();
 	}
