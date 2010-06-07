@@ -44,7 +44,6 @@ public class Client extends JApplet{
 
 	private WorldView view;
 	private InlogView inlogview;
-	private LeaderView leaderview;
 	private Sender sender;
 	
 	@Override
@@ -85,8 +84,6 @@ public class Client extends JApplet{
     	setCursor (c);
 		
 		this.view = new WorldView(receiver);
-		this.leaderview = new LeaderView();
-		leaderview.setVisible(true);
 		
 		this.view = new WorldView(receiver);
 		

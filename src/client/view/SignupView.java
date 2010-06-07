@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 public class SignupView extends JFrame {
 	
-	private JButton create;
+	private JButton create,back;
 	private JTextField usernameinput;
 	private JPasswordField passwordinput;
 	private JPasswordField passwordcheckinput;
@@ -51,7 +51,11 @@ public class SignupView extends JFrame {
 		
 		create = new JButton("Sign up!");
 		create.setSize(150, 20);
-		create.setLocation(150, 200);
+		create.setLocation(200, 200);
+		
+		back = new JButton("Back");
+		back.setSize(150, 20);
+		back.setLocation(50, 200);
 		
 		add(username);
 		add(usernameinput);
@@ -60,6 +64,7 @@ public class SignupView extends JFrame {
 		add(passwordcheck);
 		add(passwordcheckinput);
 		add(create);
+		add(back);
 	}
 	
 	public JTextField getUsernameinput() {
@@ -76,6 +81,7 @@ public class SignupView extends JFrame {
 	
 	public void addListener(ActionListener listener) {
 		create.addActionListener(listener);
+		back.addActionListener(listener);
 	}
 
 }
