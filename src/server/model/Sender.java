@@ -45,9 +45,6 @@ public class Sender {
 	public void removeBullet(Bullet b){
 		String kaas = "bullets_begin_destroy%n";
 		kaas += (int)b.getIndentifier();
-		if(kaas == null){
-			kaas += 0;
-		}
 		lineOut += kaas + "%n";
 	}
 	
