@@ -21,7 +21,8 @@ public class World{
 	public void addPlayer(Player p){
 		playerList.add(p);
 	}
-
+	
+	
 	public Map getMap() {
 		return map;
 	}
@@ -206,6 +207,10 @@ public class World{
 	@SuppressWarnings("unchecked")
 	public ArrayList<Player> getPlayerList() {
 		return (ArrayList<Player>) this.playerList.clone();
+	}
+
+	public void removePlayer(Player p) {
+		playerList.remove(p);
 	}
 	
 //	public void changeWeapon(Player player) {

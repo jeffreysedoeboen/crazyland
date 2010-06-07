@@ -18,7 +18,7 @@ public class Sender {
 	}
 	
 	public void sendPlayer(){
-		lineOut += "player%n" + (int)player.getX() + "," + (int)player.getY() + "," + (int)player.getHitpoints() + "%n";
+		lineOut += "player%n" + player.getName() + "," + (int)player.getX() + "," + (int)player.getY() + "," + (int)player.getHitpoints() + "%n";
 	}
 	
 	public void sendPlayers(ArrayList<Player> playerList){
@@ -40,12 +40,23 @@ public class Sender {
 	public void sendLineOut(){
 		out.printf(lineOut);
 		lineOut = "";
+		
 	}
 	
 	public void removeBullet(Bullet b){
 		String kaas = "bullets_begin_destroy%n";
 		kaas += (int)b.getIndentifier();
 		lineOut += kaas + "%n";
+	}
+	
+	public void removePlayer(Player p) {
+		String kaas = "player_begin_destroy%n";
+		kaas += p.getName();
+		lineOut += kaas + "%n";
+	}
+	
+	public boolean isPlayer(Player p) {
+		return p.equals(player);
 	}
 	
 }
