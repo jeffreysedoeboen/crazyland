@@ -23,6 +23,13 @@ import server.model.tile.Tile;
 public class Mapfactory {
 /*	private static BufferedImage originalimage;*/
 	
+	/*
+	 * Plaatje met alle subplaatjes wordt ingeladen
+	 * XML-file met posities en eigenschappen van alle Tiles wordt uitgelezen
+	 * subimages worden aangemaakt en in arraylist gezet
+	 * Tiles worden aangemaakt en in tweedimensionale array gezet
+	 * Deze array wordt teruggegeven
+	 */
 	public static Tile[][] getMap(String mapsource) {
 		BufferedImage originalimage;
 		Tile[][] tiles = null;

@@ -37,6 +37,7 @@ public class ButtonController implements ActionListener {
 				if(accountDao.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck)) {
 					JOptionPane.showMessageDialog(signupview,
 						    "Eggs are not supposed to be green.");
+					accountDao.getAccounts();
 				}
 			} else if(button.getText().equals("Create Account")) {
 				this.signupview = new SignupView();
