@@ -59,7 +59,6 @@ public class Receiver extends Thread {
 				String[] bulletXY = in.nextLine().split(",");
 				bulletList.add(new Bullet(Integer.parseInt("" + bulletXY[0]),Integer.parseInt("" + bulletXY[1]),Integer.parseInt("" + bulletXY[2]),Float.parseFloat(bulletXY[3])));
 			}else if(tempstr.equals("bullets_begin_destroy")){
-				String[] bulletXY = in.nextLine().split(",");
 				Bullet b = null;
 				for(Bullet ba : bulletList){
 					if(ba.getIndentifier() == Integer.parseInt(in.nextLine())){
