@@ -34,10 +34,17 @@ public class ButtonController implements ActionListener {
 				String filledInUsername = signupview.getUsernameinput().getText();
 				String filledInPassword = signupview.getPasswordinput().getText();
 				String filledInPasswordcheck = signupview.getPasswordcheckinput().getText();
-				if(accountDao.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck)) {
-					JOptionPane.showMessageDialog(signupview,
-						    "Eggs are not supposed to be green.");
-					accountDao.getAccounts();
+				if(accountDao.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck) == 5) {
+					signupview.setVisible(false);
+					JOptionPane.showMessageDialog(inlogview, "You have been registered!", "registration succesful", JOptionPane.PLAIN_MESSAGE);
+				} else if(accountDao.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck) == 1) {
+					JOptionPane.showMessageDialog(inlogview, "You didn't fill in your username", "username not filled in", JOptionPane.ERROR_MESSAGE);
+				} else if(accountDao.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck) == 2) {
+					JOptionPane.showMessageDialog(inlogview, "You didn't fill in your password", "password not filled in", JOptionPane.ERROR_MESSAGE);
+				} else if(accountDao.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck) == 3) {
+					JOptionPane.showMessageDialog(inlogview, "You didn't fill in the same password twice", "password not the same as repeated password", JOptionPane.ERROR_MESSAGE);
+				} else if(accountDao.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck) == 4) {
+					JOptionPane.showMessageDialog(inlogview, "This username already exists", "username already exists", JOptionPane.ERROR_MESSAGE);
 				}
 			} else if(button.getText().equals("Create Account")) {
 				this.signupview = new SignupView();

@@ -12,21 +12,32 @@ import java.sql.Statement;
 
 public class AccountDAO {
 	
-	public boolean addAccount(String username, String password, String passwordRepeat) throws SQLException, NoSuchAlgorithmException {
+	/*
+	 * return waarde's:
+	 * 1: gebruikersnaam niet ingevuld
+	 * 2: wachtwoord niet ingevuld
+	 * 3: wachtwoord niet gelijk aan herhaling wachtwoord
+	 * 4: gebruikersnaam staat al in database
+	 * 5: account aanmaken is gelukt!
+	 */
+	public int addAccount(String username, String password, String passwordRepeat) throws SQLException, NoSuchAlgorithmException {
 		DBmanager dbManager = DBmanager.getInstance();
 		Connection conn = dbManager.getConnection();
 		try
 		{
-			if(!password.equals(passwordRepeat)) {
-				return false;
-			}
-			
 			String qSelect = "SELECT * FROM Account WHERE username = ?";
 			PreparedStatement psSelect = conn.prepareStatement(qSelect);
 			psSelect.setString(1, username);
 			ResultSet result = psSelect.executeQuery();
-			while (result.next()) {
-				return false;
+			
+			if(username.equals("")) {
+				return 1;
+			} else if(password.equals("")) {
+				return 2;
+			} else if(!password.equals(passwordRepeat)) {
+				return 3;
+			} else if(result.next()) {
+				return 4;
 			}
 			
 		    MessageDigest m=MessageDigest.getInstance("MD5");
@@ -41,7 +52,7 @@ public class AccountDAO {
 		finally {
 			conn.close();
 		}
-		return true;
+		return 5;
 	}
 	
 	public boolean login(String username, String password) throws SQLException, NoSuchAlgorithmException {
