@@ -43,6 +43,7 @@ public class ButtonController implements ActionListener {
 				if(AccountDAO.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck) == 5) {
 					signupview.setVisible(false);
 					JOptionPane.showMessageDialog(inlogview, "You have been registered!", "registration succesful", JOptionPane.PLAIN_MESSAGE);
+					inlogview.setVisible(true);
 				} else if(AccountDAO.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck) == 1) {
 					JOptionPane.showMessageDialog(signupview, "You didn't fill in your username", "username not filled in", JOptionPane.ERROR_MESSAGE);
 				} else if(AccountDAO.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck) == 2) {
