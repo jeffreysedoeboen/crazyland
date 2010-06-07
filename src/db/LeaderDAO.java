@@ -54,7 +54,6 @@ public class LeaderDAO {
 			
 			conn.close();
 		} catch ( SQLException e) {
-			e.printStackTrace();
 		}
 		
 	}
