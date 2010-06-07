@@ -7,12 +7,8 @@ public class Circle extends Ellipse2D.Float {
 
 	private int radius;
 	
-	public Circle(int radius, int x, int y, int w, int h){
-		super(x,y,w,h);
-		if(w != h){
-			System.err.println("NIET GOED Height WORD Width IN CIRCLE");
-		}
-		this.height = this.width;
+	public Circle(int radius, int x, int y){
+		super(x,y,radius*2,radius*2);
 		this.radius = radius;
 	}
 	
@@ -20,6 +16,7 @@ public class Circle extends Ellipse2D.Float {
 		return this.radius;
 	}
 	
+	//Checks if the Circle has an intersection with the other Circle
 	public boolean intersects(Circle c){
 		
 		if(Point2D.distance(this.getCenterX(),this.getCenterY(), c.getCenterX(), c.getCenterY()) <= (this.radius+c.getRadius())){
@@ -27,9 +24,5 @@ public class Circle extends Ellipse2D.Float {
 		}
 		
 		return false;
-	}
-	
-	public void increaseX(){
-		this.x++;
 	}
 }
