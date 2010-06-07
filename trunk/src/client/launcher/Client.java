@@ -97,8 +97,6 @@ public class Client extends JApplet{
 		
 		this.addMouseWheelListener(mouseController);
 		
-		AccountDAO accountDao = new AccountDAO();
-		
 		this.inlogview = new InlogView();
 		
 		ButtonController buttonController = new ButtonController(inlogview);
