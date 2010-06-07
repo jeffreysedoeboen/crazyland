@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import client.view.InlogView;
+import client.view.LobbyView;
 import client.view.SignupView;
 
 import db.AccountDAO;
@@ -19,10 +20,10 @@ public class ButtonController implements ActionListener {
 	
 	private SignupView signupview;
 	private InlogView inlogview;
+	private LobbyView lobbyview;
 	private AccountDAO accountDao;
 	
-	public ButtonController(SignupView signupview, InlogView inlogview, AccountDAO accountDao) {
-		this.signupview = signupview;
+	public ButtonController(InlogView inlogview, AccountDAO accountDao) {
 		this.inlogview = inlogview;
 		this.accountDao = accountDao;
 	}
@@ -50,6 +51,12 @@ public class ButtonController implements ActionListener {
 				this.signupview = new SignupView();
 				signupview.setVisible(true);
 				signupview.addListener(this);
+			} else if(button.getText().equals("Login")) {
+				/*String filledInUsername = inlogview.getUsernameinput().getText();
+				String filledInPassword = inlogview.getPasswordinput().getText();
+				System.out.println(filledInPassword);*/
+				this.lobbyview = new LobbyView();
+				lobbyview.setVisible(true);
 			}
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
