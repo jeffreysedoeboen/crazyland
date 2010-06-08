@@ -13,8 +13,8 @@ public class LeaderDAO {
 				DBmanager dbManager = DBmanager.getInstance();
 				Connection conn = dbManager.getConnection();
 				
-				PreparedStatement pst = conn.prepareStatement("INSERT INTO leaderboard (rank, username)" +
-						"VALUES(?, ?)");
+				PreparedStatement pst = conn.prepareStatement("INSERT INTO leaderboard (rank, username,kills, deaths)" +
+						"VALUES(?, ?,60,20)");
 				
 				
 				pst.setLong(1,rank);
@@ -67,7 +67,7 @@ public class LeaderDAO {
 			
 			Statement st = conn.createStatement();
 			
-			ResultSet rs = st.executeQuery("SELECT * FROM leaderboard ORDER BY rank");
+			ResultSet rs = st.executeQuery("SELECT * FROM leaderboard where deaths > 0 ORDER BY (kills/deaths) desc");
 			
 			int aantal = 0;
 			while( rs.next() && (aantal < 20) ) {
@@ -113,9 +113,9 @@ public class LeaderDAO {
 	}
 	
 	public static void main(String[] args) {
-		LeaderDAO.resetLeaderTable();
-		LeaderDAO.addPlayer("dennis", 2);
-		LeaderDAO.addPlayer("karel",  1);
+//		LeaderDAO.resetLeaderTable();
+//		LeaderDAO.addPlayer("dennis", 2);
+//		LeaderDAO.addPlayer("karel",  1);
 		for(LBPlayer player : LeaderDAO.getTop20()) {
 			System.out.println(player);
 		}

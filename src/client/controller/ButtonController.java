@@ -73,6 +73,7 @@ public class ButtonController implements ActionListener {
 				lobbyview.setVisible(true);
 			}else if(button.getText().equals("Leaderboard")) {
 				lobbyview.setVisible(false);
+				leaderview.updateTable();
 				leaderview.setVisible(true);
 			}else if(button.getText().equals("Back") && leaderview.isVisible()) {
 				leaderview.setVisible(false);

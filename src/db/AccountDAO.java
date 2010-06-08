@@ -79,7 +79,7 @@ public class AccountDAO {
 		return false;
 	}
 	
-	/*public static void getAccounts() throws SQLException {
+/*	public static void getAccounts() throws SQLException {
 		DBmanager dbManager = DBmanager.getInstance();
 		Connection conn = dbManager.getConnection();
 		try
@@ -99,11 +99,10 @@ public class AccountDAO {
 	
 	public static void main(String args[]) throws NoSuchAlgorithmException, SQLException
 	{
-		AccountDAO accountDao = new AccountDAO();
-		accountDao.addAccount("gromberg10", "lala", "lala");
+		AccountDAO.addAccount("gromberg10", "lala", "lala");
 		
-		accountDao.getAccounts();
-		if(accountDao.login("gromberg5", "lalala")) {
+		AccountDAO.getAccounts();
+		if(AccountDAO.login("gromberg5", "lalala")) {
 			System.out.println("test");
 		}
 	}*/

@@ -44,7 +44,7 @@ public class LBPlayer {
 	}
 	
 	public String toString() {
-		return "" + rank + " " + userName + " " + kills + " " + deaths;
+		return "" + rank + " " + userName + " " + kills + " " + deaths + " " + kills/deaths;
 	}
 
 	public float getKd() {
