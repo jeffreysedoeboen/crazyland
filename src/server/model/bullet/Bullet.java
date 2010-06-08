@@ -2,10 +2,13 @@ package server.model.bullet;
 
 import java.awt.image.BufferedImage;
 import java.awt.Point;
+import java.util.ArrayList;
+
+import server.model.WorldObject;
 
 public abstract class Bullet {
 
-	protected final float BULLET_SPEED = 1.00F;
+	//protected final float BULLET_SPEED = 0.20F;
 	protected BufferedImage bulletImage;
 	protected float direction;
 	protected float x, y;
@@ -58,7 +61,14 @@ public abstract class Bullet {
 		this.y = y;
 		//this.bulletImage = WorldView.rotateImage(bulletImage, (float) (Math.toDegrees((Math.atan2(Math.toRadians(clickedY - y), Math.toRadians(clickedX - x))))),false);
 		this.direction = (float) dir;
-		move();
+		
+		for( int i = 0; i < 5; i++ ) {
+			move();
+		}
+	}
+
+	public WorldObject hasCollision(ArrayList<WorldObject> objects) {
+		return null;
 	}
 	
 }

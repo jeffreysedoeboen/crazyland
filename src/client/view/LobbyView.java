@@ -3,26 +3,20 @@ package client.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 
 
-@SuppressWarnings("serial")
-public class LobbyView extends JFrame {
-	
-	private JButton buttonConnect, buttonLeader, buttonSettings, buttonQuit;
+public class LobbyView extends JPanel {
 	
 	public LobbyView() {
 		
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.BLACK);
-		this.setSize(640, 500);
 		
 		String[] columnNames = {"Naam van Server",
                 "Players",
@@ -52,9 +46,8 @@ public class LobbyView extends JFrame {
 		};
         table.setFillsViewportHeight(true);
         
-        table.getTableHeader().setReorderingAllowed(false);
-        
         JScrollPane scrollPane = new JScrollPane(table);
+        add(scrollPane);
         
         TableColumn column = null;
         for (int i = 0; i < 5; i++) {
@@ -69,13 +62,14 @@ public class LobbyView extends JFrame {
         }
         
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1, 4));
-        buttonConnect = new JButton("Connect");
-        buttonLeader = new JButton("Leaderboard");
-        buttonSettings = new JButton("Settings");
-        buttonQuit = new JButton("Quit");
+        panel.setLayout(new GridLayout(1, 3));
+        JButton buttonConnect = new JButton("Connect");
+        buttonConnect.setSize(100, 15);
+        JButton buttonSettings = new JButton("Settings");
+        buttonSettings.setSize(300, 15);
+        JButton buttonQuit = new JButton("Quit");
+        buttonQuit.setSize(100, 15);
         panel.add(buttonConnect);
-        panel.add(buttonLeader);
         panel.add(buttonSettings);
         panel.add(buttonQuit);
         
@@ -83,11 +77,6 @@ public class LobbyView extends JFrame {
         table.setForeground(Color.WHITE);
         
         this.add(panel, BorderLayout.NORTH);
-        this.add(scrollPane, BorderLayout.CENTER);
-	}
-	
-	public void addListener(ActionListener listener) {
-		buttonLeader.addActionListener(listener);
-		buttonQuit.addActionListener(listener);
+        this.add(table, BorderLayout.CENTER);
 	}
 }

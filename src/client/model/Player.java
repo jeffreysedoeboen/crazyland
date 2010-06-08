@@ -11,25 +11,16 @@ public class Player {
 
 	private float x;
 	private float y;
-	private BufferedImage image,heartImage;
-	private String name;
-	private int hitpoints = 0;
+	private BufferedImage image;
 	
-	public Player(String name, float x, float y,int hitpoints) {
+	public Player(float x, float y) {
 		this.x = x;
 		this.y = y;
-		this.name = name;
-		this.hitpoints = hitpoints;
 		try {
 			image = ImageIO.read(new File("../themes/tee/characters/character.png"));
-			heartImage = ImageIO.read(new File("../themes/tee/other/heart.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public String getName() {
-		return name;
 	}
 	
 	public float getX(){
@@ -41,18 +32,6 @@ public class Player {
 	
 	public Image getImage() {
 		return image;
-	}
-	
-	public Image getHeartImage(){
-		return heartImage;
-	}
-	
-	public int getHitpoints(){
-		return hitpoints;
-	}
-	
-	public int setHitpoints(int hitpoints){
-		return this.hitpoints=hitpoints;
 	}
 	
 }

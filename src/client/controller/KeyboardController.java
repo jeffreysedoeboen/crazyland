@@ -46,7 +46,6 @@ public class KeyboardController implements KeyListener {
 			case(KeyEvent.VK_TAB): //TODO score laten zien
 				break;
 			case(KeyEvent.VK_ESCAPE): 
-				sender.removePlayer();
 				System.exit(0);
 				break;
 		}

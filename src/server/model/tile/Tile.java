@@ -1,8 +1,12 @@
 package server.model.tile;
 
+import java.awt.Shape;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-public class Tile {
+import server.model.WorldObject;
+
+public class Tile implements WorldObject {
 	private int x;
 	private int y;
 	private BufferedImage image;
@@ -15,7 +19,7 @@ public class Tile {
 		this.solid = solid;
 	}
 
-	public int getX() {
+	public float getX() {
 		return x;
 	}
 
@@ -23,7 +27,7 @@ public class Tile {
 		this.x = x;
 	}
 
-	public int getY() {
+	public float getY() {
 		return y;
 	}
 
@@ -56,5 +60,39 @@ public class Tile {
 	
 	public boolean isSolid() {
 		return solid;
+	}
+	
+//	public int[] getShapeX() {
+//		
+//		double[] shape = Geometry.createRectangle(x*32, y*32, 32.0, 32.0);
+//		int[] retVal = new int[shape.length];
+//		
+//		int j = 0;
+//		for( int i = 0; i < shape.length; i++ ) {
+//			if( i%2 == 0 ) {
+//				retVal[j] = (int) shape[i];
+//				j++;
+//			}
+//		}
+//		return retVal;
+//	}
+//	
+//	public int[] getShapeY() {
+//		
+//		double[] shape = Geometry.createRectangle(x*32, y*32, 32.0, 32.0);
+//		int[] retVal = new int[shape.length];
+//		
+//		int j = 0;
+//		for( int i = 0; i < shape.length; i++ ) {
+//			if( i%2 != 0 ) {
+//				retVal[j] = (int) shape[i];
+//				j++;
+//			}
+//		}
+//		return retVal;
+//	}
+	
+	public Shape getShape() {
+		return new Rectangle2D.Double(x*32, y*32, 32, 32);
 	}
 }

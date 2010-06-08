@@ -7,35 +7,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class AccountDAO {
 	
-	/*
-	 * return waarde's:
-	 * 1: gebruikersnaam niet ingevuld
-	 * 2: wachtwoord niet ingevuld
-	 * 3: wachtwoord niet gelijk aan herhaling wachtwoord
-	 * 4: gebruikersnaam staat al in database
-	 * 5: account aanmaken is gelukt!
-	 */
-	public static int addAccount(String username, String password, String passwordRepeat) throws SQLException, NoSuchAlgorithmException {
+	public boolean addAccount(String username, String password, String passwordRepeat) throws SQLException, NoSuchAlgorithmException {
 		DBmanager dbManager = DBmanager.getInstance();
 		Connection conn = dbManager.getConnection();
 		try
 		{
+			if(!password.equals(passwordRepeat)) {
+				return false;
+			}
+			
 			String qSelect = "SELECT * FROM Account WHERE username = ?";
 			PreparedStatement psSelect = conn.prepareStatement(qSelect);
 			psSelect.setString(1, username);
 			ResultSet result = psSelect.executeQuery();
-			
-			if(username.equals("")) {
-				return 1;
-			} else if(password.equals("")) {
-				return 2;
-			} else if(!password.equals(passwordRepeat)) {
-				return 3;
-			} else if(result.next()) {
-				return 4;
+			while (result.next()) {
+				return false;
 			}
 			
 		    MessageDigest m=MessageDigest.getInstance("MD5");
@@ -46,16 +36,14 @@ public class AccountDAO {
 			psInsert.setString(1, username);
 			psInsert.setString(2, new BigInteger(1,m.digest()).toString(16));
 			psInsert.executeUpdate();
-			
-			LeaderDAO.addPlayer(username, LeaderDAO.getLowestRank() + 1);
 		}
 		finally {
 			conn.close();
 		}
-		return 5;
+		return true;
 	}
 	
-	public static boolean login(String username, String password) throws SQLException, NoSuchAlgorithmException {
+	public boolean login(String username, String password) throws SQLException, NoSuchAlgorithmException {
 		DBmanager dbManager = DBmanager.getInstance();
 		Connection conn = dbManager.getConnection();
 		
@@ -79,7 +67,15 @@ public class AccountDAO {
 		return false;
 	}
 	
-	/*public static void getAccounts() throws SQLException {
+	public void deleteAccount(int id) {
+		
+	}
+	
+	public void getUsername(int id) {
+		
+	}
+	
+	public void getAccounts() throws SQLException {
 		DBmanager dbManager = DBmanager.getInstance();
 		Connection conn = dbManager.getConnection();
 		try
@@ -106,5 +102,5 @@ public class AccountDAO {
 		if(accountDao.login("gromberg5", "lalala")) {
 			System.out.println("test");
 		}
-	}*/
+	}
 }

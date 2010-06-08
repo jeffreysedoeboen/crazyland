@@ -39,14 +39,8 @@ public class Receiver extends Thread {
 			}else if(tempstr.equals("player_shoot")){
 				String[] playerXY = in.nextLine().split(",");
 				s.shoot(Integer.parseInt("" + playerXY[0]), Integer.parseInt("" + playerXY[1]), player);
-			} else if(tempstr.equals("player_end")) {
-				s.removePlayer(player);
 			}
 		}
-	}
-
-	public boolean isPlayer(Player p) {
-		return player.equals(p);
 	}
 	
 }

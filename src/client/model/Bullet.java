@@ -11,8 +11,7 @@ public class Bullet {
 
 	private float verticalSpeed = 0;
 	private float direction = 0;
-	private int x;
-	private int y;
+	private float x, y;
 	private BufferedImage image;
 	private int indentifier;
 	
@@ -33,8 +32,8 @@ public class Bullet {
 	}
 	
 	public void move(){
-		this.x -= 12*Math.cos(this.direction);
-		this.y -= 12*Math.sin(this.direction);
+		this.x -= 6*Math.cos(this.direction);
+		this.y -= 6*Math.sin(this.direction);
 		this.y = (int) (this.y - verticalSpeed);
 		verticalSpeed += -0.005;
 	}
@@ -43,11 +42,11 @@ public class Bullet {
 		return image;
 	}
 
-	public int getX() {
+	public float getX() {
 		return this.x;
 	}
 
-	public int getY() {
+	public float getY() {
 		return this.y;
 	}
 

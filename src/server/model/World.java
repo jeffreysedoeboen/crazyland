@@ -10,19 +10,20 @@ import server.model.tile.Tile;
 public class World{
 
 	private Map map;
+	private GameServer server;
 	private ArrayList<Player> playerList = new ArrayList<Player>();
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	private int bulletCounter = 1;
 
-	public World(){
+	public World( GameServer server ){
 		map = new Map();
+		this.server = server;
 	}
 	
 	public void addPlayer(Player p){
 		playerList.add(p);
 	}
-	
-	
+
 	public Map getMap() {
 		return map;
 	}
@@ -70,8 +71,38 @@ public class World{
 		ArrayList<Bullet> bulletsclone = (ArrayList<Bullet>) bullets.clone();
 		for(Bullet b : bulletsclone){
 			b.move();
+			if (b.hasCollision( getNextItems(b) ) != null) {
+				server.removeBullet(b);
+				bullets.remove(b);
+			}
 		}
 
+	}
+	
+	public ArrayList<WorldObject> getNextItems(Bullet bullet) {
+		
+		ArrayList<WorldObject> retList = new ArrayList<WorldObject>();
+
+		// doorloop alle spelers
+		for( Player player : playerList ) {
+			if( player.getX()+32 > bullet.getX() && player.getX()-32 < bullet.getX() &&
+					player.getY()+32 > bullet.getY() && player.getY()-32 < bullet.getY() ) {
+				retList.add(player);
+			}
+		}
+		
+		// doorloop alle tiles
+		for( int i = 0; i < map.getTiles().length; i++ ) {
+			if( i*32+32 > bullet.getX() && i*32-32 < bullet.getX() ) {
+				for( Tile tile : map.getTiles()[i] ) {
+					if( tile.isSolid() && tile.getY()*32-32 < bullet.getY() && tile.getY()*32+32 > bullet.getY() ) {
+						retList.add(tile);
+					}
+				}
+			}
+		}
+		
+		return retList;
 	}
 
 	public boolean[][] getPixelMap( BufferedImage image ){
@@ -113,7 +144,7 @@ public class World{
 //			}
 			
 			// left map is voor de rechte kant
-			int i = tileLeft.getX()*32;
+			float i = tileLeft.getX()*32;
 			for( boolean pixel : pixelMapLeft ) {
 				if( i >= playerX && i <= tileLeft.getX()*32+32 && pixel == false ) {
 					return true;
@@ -207,10 +238,6 @@ public class World{
 	@SuppressWarnings("unchecked")
 	public ArrayList<Player> getPlayerList() {
 		return (ArrayList<Player>) this.playerList.clone();
-	}
-
-	public void removePlayer(Player p) {
-		playerList.remove(p);
 	}
 	
 //	public void changeWeapon(Player player) {

@@ -1,19 +1,20 @@
 package client.view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-@SuppressWarnings("serial")
 public class InlogView extends JFrame {
 
 	private JButton guest, create, login;
-	private JTextField usernameinput;
-	private JPasswordField passwordinput;
 
 	public InlogView(){
 		this.setTitle("Log in");
@@ -24,7 +25,7 @@ public class InlogView extends JFrame {
 		username.setSize(150, 20);
 		username.setLocation(10, 50);
 		
-		usernameinput = new JTextField(20);
+		JTextField usernameinput = new JTextField(20);
 		usernameinput.setSize(200, 20);
 		usernameinput.setLocation(150, 50);
 
@@ -32,7 +33,7 @@ public class InlogView extends JFrame {
 		password.setSize(150, 20);
 		password.setLocation(10, 100);
 		
-		passwordinput = new JPasswordField(20);
+		JPasswordField passwordinput = new JPasswordField(20);
 		passwordinput.setSize(200, 20);
 		passwordinput.setLocation(150, 100);
 		
@@ -55,14 +56,6 @@ public class InlogView extends JFrame {
 		add(guest);
 		add(create);
 		add(login);
-	}
-	
-	public JTextField getUsernameinput() {
-		return usernameinput;
-	}
-	
-	public JTextField getPasswordinput() {
-		return passwordinput;
 	}
 	
 	public void addListener(ActionListener listener) {

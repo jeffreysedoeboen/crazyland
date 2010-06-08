@@ -1,5 +1,7 @@
 package client.model;
 
+import java.io.File;
+import java.io.IOException;
 import javax.sound.midi.*;
 
 public class MidiPlayer implements MetaEventListener {
@@ -8,6 +10,9 @@ public class MidiPlayer implements MetaEventListener {
 
     private Sequencer sequencer;
     private boolean loop;
+    private boolean paused;
+
+    public MidiPlayer() {
 //        try {
 //            sequencer = MidiSystem.getSequencer();
 //            sequencer.open();
@@ -16,7 +21,7 @@ public class MidiPlayer implements MetaEventListener {
 //        catch ( MidiUnavailableException ex) {
 //            sequencer = null;
 //        }
-    
+    }
 
     public Sequence getSequence(String filename) {
 		return null;

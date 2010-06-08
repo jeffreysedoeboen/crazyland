@@ -1,15 +1,19 @@
 package server.model;
 
 import java.awt.Image;
+import java.awt.Shape;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
+
+import server.model.weapon.Grenade;
 import server.model.bullet.Bullet;
 import server.model.weapon.Pistol;
 import server.model.weapon.Weapon;
+import server.tools.Circle;
 
-public class Player {
+public class Player implements WorldObject {
 
 	private String name;
 	private float x;
@@ -24,7 +28,7 @@ public class Player {
 	private int shootCounter;
 	private float verticalSpeed = 0;
 	private ArrayList<Weapon> weaponlist;
-	
+
 	public Player(String name, float x, float y) {
 		weaponlist = new ArrayList<Weapon>();
 		this.name = name;
@@ -192,6 +196,40 @@ public class Player {
 				}
 			}
 		}
+	}
+	
+//	public int[] getShapeX() {
+//		
+//		double[] shape = Geometry.createCircle(x + 16, y + 15, 15);
+//		int[] retVal = new int[shape.length];
+//		
+//		int j = 0;
+//		for( int i = 0; i < shape.length; i++ ) {
+//			if( i%2 == 0 ) {
+//				retVal[j] = (int) shape[i];
+//				j++;
+//			}
+//		}
+//		return retVal;
+//	}
+//	
+//	public int[] getShapeY() {
+//		
+//		double[] shape = Geometry.createCircle(x + 16, y + 15, 15);
+//		int[] retVal = new int[shape.length];
+//		
+//		int j = 0;
+//		for( int i = 0; i < shape.length; i++ ) {
+//			if( i%2 != 0 ) {
+//				retVal[j] = (int) shape[i];
+//				j++;
+//			}
+//		}
+//		return retVal;
+//	}
+	
+	public Shape getShape() {
+		return new Circle(15, (int) x+1, (int) y);
 	}
 	
 }

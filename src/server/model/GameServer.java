@@ -13,7 +13,6 @@ public class GameServer extends Thread{
 	
 	private World world;
 	private ArrayList<Sender> senderList = new ArrayList<Sender>();
-	private ArrayList<Receiver> receiverList = new ArrayList<Receiver>(); 
 	private int count = 0;
 	
 	public static void main(String args[]){
@@ -29,7 +28,7 @@ public class GameServer extends Thread{
 	}
 	
 	public GameServer(){
-		this.world = new World();
+		this.world = new World(this);
 		new Timer(10,taskPerformer).start();
 	}
 	
@@ -50,8 +49,7 @@ public class GameServer extends Thread{
 		
 	  };
 	
-	@SuppressWarnings("unchecked")
-	public void run(){
+	public void run() {
 		count++;
 		this.world.move();
 		ArrayList<Sender> senderList = (ArrayList<Sender>) this.senderList.clone();
@@ -65,36 +63,17 @@ public class GameServer extends Thread{
 
 		if(count == 20){
 			count = 0;
-			System.out.println("Players in-game: " + senderList.size());
+			//System.out.println("Players in-game: " + senderList.size());
 		}
 		
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void removeBullet(Bullet b){
 		for(Sender s : (ArrayList<Sender>) senderList.clone()){
 			s.removeBullet(b);
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	public void removePlayer(Player p) {
-		for(Sender s : (ArrayList<Sender>) senderList.clone()){
-			if (s.isPlayer(p)) {
-				senderList.remove(s);
-				world.removePlayer(p);
-				s.removePlayer(p);
-			}
-		}
-		for(Receiver r : (ArrayList<Receiver>) receiverList.clone()){
-			if (r.isPlayer(p)) {
-				receiverList.remove(r);
-				r.terminate();
-			}
-		}
-	}
-	
-	@SuppressWarnings("unchecked")
 	public void shoot(float x,float y, Player p){
 		Bullet b = world.shoot(x, y, p);
 		if(b != null){
@@ -107,11 +86,6 @@ public class GameServer extends Thread{
 
 	public void addSender(Sender s) {
 		this.senderList.add(s);		
-	}
-
-	public void addReceiver(Receiver r) {
-		this.receiverList.add(r);
-		
 	}
 		
 }

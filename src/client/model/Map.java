@@ -4,6 +4,11 @@ import client.model.Tile;
 
 public class Map {
 	private Tile[][] tiles;
+	private int width;
+	private int height;
+	
+	public Map(){
+	}
 	
 	public int getWidth() {
 		return tiles.length;

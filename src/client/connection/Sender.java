@@ -44,8 +44,4 @@ public class Sender {
 		
 	}
 	
-	public void removePlayer () {
-		out.println("player_end");
-	}
-	
 }
