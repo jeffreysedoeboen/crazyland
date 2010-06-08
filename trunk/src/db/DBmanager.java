@@ -1,91 +1,66 @@
 package db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DBmanager {
-	private static final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
-	private static final String FS = System.getProperty("file.separator");
-    private static final String URL = "jdbc:derby:" + getUrl() + FS + "database" + FS + "crazyland_db;create=true" ;
-	private static DBmanager uniqueInstance=null;
-	private static Connection con = null ;
-	
-	private DBmanager()
-	{
-		if(!dbExists())
-		{
-			System.err.println("de database bestaat niet....");
+	private static DBmanager uniqueInstance = null;
+	private static Connection con = null;
+
+	private DBmanager() {
+		if (!dbExists()) {
+			// System.err.println("de database bestaat niet....");
+			try {
+				con = getCon();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	
-	public static String getUrl() {
-		String property = System.getProperty("user.dir");
-		if(property.substring(property.length() - 3, property.length()).equals("bin")) {
-			property = property.substring(0, property.length() - 3);
-		}
-		return property;
-	}
-	
-	public static synchronized DBmanager getInstance()
-	{
-		if (uniqueInstance==null)
-		{
+
+	public static synchronized DBmanager getInstance() {
+		if (uniqueInstance == null) {
 			uniqueInstance = new DBmanager();
 		}
 		return uniqueInstance;
 	}
-	
-	private Boolean dbExists()
-	{
-		try
-		{
-			getConnection();
+
+	private Boolean dbExists() {
+		Boolean exists = false;
+		if (con != null) {
+			exists = true;
 		}
-		catch(SQLException se)
-		{
-			return false;
-		}
-		return(true) ;
+		return exists;
 	}
-	
-	public void close()
-	{
-		try
-		{
+
+	public void close() {
+		try {
 			con.close();
-			uniqueInstance=null;
-			con=null;
-		}
-		catch (SQLException e)
-		{
-			// TODO Auto-generated catch block
+			uniqueInstance = null;
+			con = null;
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void printSQLException(SQLException se) {
-        while(se != null) {
 
-            System.out.print("SQLException: State:   " + se.getSQLState());
-            System.out.println("Severity: " + se.getErrorCode());
-            System.out.println(se.getMessage());            
-            
-            se = se.getNextException();
-        }
-    }
-	
-	public Connection getConnection() throws SQLException
-	{
+	public Connection getConnection(){
+		return con;
+	}
+
+	private static Connection getCon() throws SQLException,
+	ClassNotFoundException {
+		String driver = "org.gjt.mm.mysql.Driver";
+		String url = "jdbc:mysql://www.freesql.org/crazyland?";
+		String username = "crazyland";
+		String password = "EIN2grules";
 		try {
-            Class.forName(DRIVER) ;
-            con = DriverManager.getConnection(URL);
-
-		} catch (SQLException se) {
-            printSQLException(se) ;
-        } catch(ClassNotFoundException e){
-            System.out.println("JDBC Driver " + DRIVER + " not found in CLASSPATH") ;
-        }
-        return con;
+			Class.forName(driver).newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return DriverManager.getConnection(url, username, password);
 	}
 }

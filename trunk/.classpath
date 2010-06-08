@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="lib/derbyrun.jar"/>
 	<classpathentry kind="lib" path="lib/derbytools.jar"/>
 	<classpathentry kind="lib" path="lib/jl1.0.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.0.6-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

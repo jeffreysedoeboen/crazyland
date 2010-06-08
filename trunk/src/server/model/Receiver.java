@@ -41,6 +41,8 @@ public class Receiver extends Thread {
 				s.shoot(Integer.parseInt("" + playerXY[0]), Integer.parseInt("" + playerXY[1]), player);
 			} else if(tempstr.equals("player_end")) {
 				s.removePlayer(player);
+			} else if(tempstr.equals("player_name")) {
+				String userName = in.nextLine();
 			}
 		}
 	}

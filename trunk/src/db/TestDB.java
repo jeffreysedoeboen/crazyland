@@ -1,4 +1,4 @@
-/*package db;
+package db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +18,7 @@ public class TestDB {
 			psDelete.executeUpdate();
 	
 			String qCreate = "CREATE TABLE Account (" +
-					"id INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
+					"id INT NOT NULL AUTO_INCREMENT," +
 					"username VARCHAR(255) NOT NULL," +
 					"password VARCHAR(255) NOT NULL," +
 					"PRIMARY KEY (id)," +
@@ -32,4 +32,3 @@ public class TestDB {
 		}
 	}
 }
-*/
