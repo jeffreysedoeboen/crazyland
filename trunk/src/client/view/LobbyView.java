@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 
 
+@SuppressWarnings("serial")
 public class LobbyView extends JFrame {
 	
 	private JButton buttonConnect, buttonLeader, buttonSettings, buttonQuit;

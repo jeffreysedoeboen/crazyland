@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
-
-import server.model.weapon.Grenade;
 import server.model.bullet.Bullet;
 import server.model.weapon.Pistol;
 import server.model.weapon.Weapon;

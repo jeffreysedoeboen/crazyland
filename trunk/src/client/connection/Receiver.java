@@ -83,6 +83,7 @@ public class Receiver extends Thread {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public synchronized ArrayList<Bullet> getBullets() {
 		return (ArrayList<Bullet>) this.bulletList.clone();
 	}
