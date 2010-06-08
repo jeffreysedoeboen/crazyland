@@ -73,7 +73,7 @@ public class World{
 			b.move();
 			if (b.hasCollision( getNextItems(b) ) != null) {
 				server.removeBullet(b);
-				bullets.remove(b);
+				//bullets.remove(b);
 			}
 		}
 
@@ -81,6 +81,7 @@ public class World{
 	
 	public ArrayList<WorldObject> getNextItems(Bullet bullet) {
 		
+		//TODO: nextItems berekenen in plaats van arrays doorlopen
 		ArrayList<WorldObject> retList = new ArrayList<WorldObject>();
 
 		// doorloop alle spelers

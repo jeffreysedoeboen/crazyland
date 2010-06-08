@@ -58,7 +58,6 @@ public class PistolBullet extends Bullet {
 			}
 			
 			if( intersect ) {
-				System.out.println("Collision");
 				return object;
 			}
 		}

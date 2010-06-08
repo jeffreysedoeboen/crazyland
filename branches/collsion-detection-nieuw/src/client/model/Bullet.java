@@ -32,10 +32,10 @@ public class Bullet {
 	}
 	
 	public void move(){
-		this.x -= 6*Math.cos(this.direction);
-		this.y -= 6*Math.sin(this.direction);
-		this.y = (int) (this.y - verticalSpeed);
-		verticalSpeed += -0.005;
+		this.x -= 12*Math.cos(this.direction);
+		this.y -= 12*Math.sin(this.direction);
+		this.y = this.y - verticalSpeed;
+		verticalSpeed += -0.010;
 	}
 	
 	public Image getBulletImage() {
