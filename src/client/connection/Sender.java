@@ -2,8 +2,6 @@ package client.connection;
 
 import java.io.PrintWriter;
 
-import server.model.Player;
-
 public class Sender {
 
 	private PrintWriter out;

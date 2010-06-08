@@ -21,7 +21,6 @@ import client.controller.KeyboardController;
 import client.controller.MouseController;
 import client.controller.ButtonController;
 import client.view.InlogView;
-import client.view.LeaderView;
 import client.view.WorldView;
 
 @SuppressWarnings("serial")

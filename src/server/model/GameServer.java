@@ -50,6 +50,7 @@ public class GameServer extends Thread{
 		
 	  };
 	
+	@SuppressWarnings("unchecked")
 	public void run(){
 		count++;
 		this.world.move();
@@ -69,12 +70,14 @@ public class GameServer extends Thread{
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void removeBullet(Bullet b){
 		for(Sender s : (ArrayList<Sender>) senderList.clone()){
 			s.removeBullet(b);
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void removePlayer(Player p) {
 		for(Sender s : (ArrayList<Sender>) senderList.clone()){
 			if (s.isPlayer(p)) {
@@ -91,6 +94,7 @@ public class GameServer extends Thread{
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void shoot(float x,float y, Player p){
 		Bullet b = world.shoot(x, y, p);
 		if(b != null){

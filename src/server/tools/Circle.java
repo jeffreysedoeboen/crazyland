@@ -3,6 +3,7 @@ package server.tools;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 
+@SuppressWarnings("serial")
 public class Circle extends Ellipse2D.Float {
 
 	private int radius;
