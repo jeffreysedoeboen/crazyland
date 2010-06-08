@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 import javax.swing.JApplet;
+import javax.swing.JFrame;
 import javax.swing.Timer;
 
 import client.connection.Receiver;
@@ -67,33 +68,36 @@ public class Client extends JApplet {
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Image image = toolkit.getImage("../themes/tee/weapon/cursor.png");
 		Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "cursor");
-		setCursor(c);
+		
 
 		this.view = new WorldView(receiver);
-
-		this.view = new WorldView(receiver);
-
-		setContentPane(this.view);
-		setSize(900, 300);
+		view.setCursor(c);
+		
+		setSize(400, 320);
 		setVisible(true);
-		setFocusable(true);
 
 		KeyboardController keycontroller = new KeyboardController(sender);
-		this.addKeyListener(keycontroller);
+		view.addKeyListener(keycontroller);
+		view.setFocusable(true);
 
 		MouseController mouseController = new MouseController(sender, view);
-		this.addMouseListener(mouseController);
-		this.addMouseMotionListener(mouseController);
+		view.addMouseListener(mouseController);
+		view.addMouseMotionListener(mouseController);
 
-		this.addMouseWheelListener(mouseController);
+		view.addMouseWheelListener(mouseController);
 
 		this.inlogview = new InlogView();
-
-		ButtonController buttonController = new ButtonController(inlogview);
-
+		setContentPane(this.inlogview);
+		ButtonController buttonController = new ButtonController(inlogview, sender);
+		
 		inlogview.setVisible(true);
 		inlogview.addListener(buttonController);
-
+		
+		JFrame f = new JFrame();
+		f.add(view);
+		f.setVisible(true);
+		f.setSize(900, 500);
+		
 		new Timer(20, taskPerformer).start();
 	}
 

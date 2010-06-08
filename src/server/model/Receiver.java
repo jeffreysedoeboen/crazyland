@@ -43,6 +43,8 @@ public class Receiver extends Thread {
 				s.removePlayer(player);
 			} else if(tempstr.equals("player_name")) {
 				String userName = in.nextLine();
+				player.setName(userName);
+				System.out.println(userName);
 			}
 		}
 	}

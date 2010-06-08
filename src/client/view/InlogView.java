@@ -5,19 +5,20 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class InlogView extends JFrame {
+public class InlogView extends JPanel {
 
 	private JButton guest, create, login;
 	private JTextField usernameinput;
 	private JPasswordField passwordinput;
 
 	public InlogView(){
-		this.setTitle("Log in");
-		this.setSize(400, 320);
+//		this.setTitle("Log in");
+//		this.setSize(400, 320);
 		this.setLayout(null);
 
 		JLabel username = new JLabel("Username:");
@@ -70,6 +71,7 @@ public class InlogView extends JFrame {
 		create.addActionListener(listener);
 		login.addActionListener(listener);
 	}
+	
 }
 
 
