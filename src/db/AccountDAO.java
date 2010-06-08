@@ -49,8 +49,7 @@ public class AccountDAO {
 			
 			LeaderDAO.addPlayer(username, LeaderDAO.getLowestRank() + 1);
 		}
-		finally {
-			conn.close();
+		finally {//TODO kijk er ff naar
 		}
 		return 5;
 	}
@@ -73,8 +72,7 @@ public class AccountDAO {
 				return true;
 			}
 		}
-		finally {
-			conn.close();
+		finally {//TODO kijk hier ff naar
 		}
 		return false;
 	}

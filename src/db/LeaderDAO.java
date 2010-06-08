@@ -52,7 +52,6 @@ public class LeaderDAO {
 			psCreate.executeUpdate();
 			
 			
-			conn.close();
 		} catch ( SQLException e) {
 			e.printStackTrace();
 		}
