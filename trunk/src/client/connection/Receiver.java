@@ -51,7 +51,7 @@ public class Receiver extends Thread {
 						playerEnd = true;
 					}else{
 						String[] playerXY = rp.split(",");
-						tempList.add(new Player(player.getName(), Integer.parseInt("" + playerXY[1]),Integer.parseInt("" + playerXY[2]),Integer.parseInt("" + playerXY[1])));
+						tempList.add(new Player(playerXY[0], Integer.parseInt("" + playerXY[1]),Integer.parseInt("" + playerXY[2]),Integer.parseInt("" + playerXY[1])));
 					}
 				}
 				this.remotePlayers = tempList;

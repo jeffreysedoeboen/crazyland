@@ -45,6 +45,10 @@ public class Player {
 //		primaryWeapon = weaponlist.get(0);
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public void setPosition(float x, float y) {
 		this.x = x;
 		this.y = y;

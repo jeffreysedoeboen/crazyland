@@ -8,10 +8,12 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import client.connection.Sender;
 import client.view.InlogView;
 import client.view.LobbyView;
 import client.view.SignupView;
 import client.view.LeaderView;
+import client.view.WorldView;
 
 import db.AccountDAO;
 
@@ -22,8 +24,10 @@ public class ButtonController implements ActionListener {
 	private InlogView inlogview;
 	private LobbyView lobbyview;
 	private LeaderView leaderview;
+	private Sender sender;
 
-	public ButtonController(InlogView inlogview) {
+	public ButtonController(InlogView inlogview, Sender sender) {
+		this.sender = sender;
 		this.inlogview = inlogview;
 		this.signupview = new SignupView();
 		signupview.addListener(this);
@@ -60,6 +64,7 @@ public class ButtonController implements ActionListener {
 				String filledInUsername = inlogview.getUsernameinput().getText();
 				String filledInPassword = inlogview.getPasswordinput().getText();
 				if(AccountDAO.login(filledInUsername, filledInPassword)) {
+					sender.login(filledInUsername);
 					inlogview.setVisible(false);
 					signupview.setVisible(false);
 					lobbyview.setVisible(true);

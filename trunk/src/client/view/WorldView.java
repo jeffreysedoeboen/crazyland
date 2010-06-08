@@ -2,6 +2,8 @@ package client.view;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -34,6 +36,7 @@ public class WorldView extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		setSize(900, 300);
 	}
 	
 	public void paintComponent(Graphics g){

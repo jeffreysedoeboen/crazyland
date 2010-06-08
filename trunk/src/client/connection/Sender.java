@@ -48,8 +48,8 @@ public class Sender {
 		out.println("player_end");
 	}
 	
-	public void login (String userName) {
-		out.println("player_name%n" + userName );
+	public void login(String userName) {
+		out.println("player_name\n" + userName );
 	}
 	
 }
