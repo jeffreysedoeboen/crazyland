@@ -34,9 +34,6 @@ public class LeaderView extends JFrame{
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
 		table.setFillsViewportHeight(true);
 
-		scrollPane = new JScrollPane(table);
-		add(scrollPane);
-
 		JLabel label = new JLabel("Top 20 Players:");
 		backButton = new JButton("Back");
 
@@ -46,6 +43,13 @@ public class LeaderView extends JFrame{
 
 	}
 
+	@Override
+	public void setVisible(boolean b) {
+		if (b)
+			updateTable();
+		super.setVisible(b);
+	};
+	
 	public void updateTable() { //TODO update de tabel nog niet
 		Object[][] data = new  Object[21][21];
 
@@ -74,7 +78,7 @@ public class LeaderView extends JFrame{
 		scrollPane = new JScrollPane(table);
 		
 		scrollPane.updateUI();
-
+		add(scrollPane);
 	}
 
 	public void addListener(ActionListener listener) {
