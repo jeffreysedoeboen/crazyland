@@ -22,7 +22,6 @@ import client.controller.KeyboardController;
 import client.controller.MouseController;
 import client.controller.ButtonController;
 import client.view.InlogView;
-import client.view.ScoreView;
 import client.view.WorldView;
 
 @SuppressWarnings("serial")
@@ -31,7 +30,6 @@ public class Client extends JApplet {
 	private WorldView view;
 	private InlogView inlogview;
 	private Sender sender;
-	private ScoreView scoreview;
 
 	@Override
 	public void destroy() {
@@ -77,10 +75,8 @@ public class Client extends JApplet {
 		
 		setSize(400, 320);
 		setVisible(true);
-		ScoreView sv = new ScoreView();
-		view.add(sv);
 
-		KeyboardController keycontroller = new KeyboardController(sender,sv);
+		KeyboardController keycontroller = new KeyboardController(sender, view);
 		view.addKeyListener(keycontroller);
 		view.setFocusable(true);
 
