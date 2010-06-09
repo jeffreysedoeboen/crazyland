@@ -13,17 +13,20 @@ public class KeyboardController implements KeyListener {
 	
 	public KeyboardController(Sender sender, WorldView wv) {
 		this.wv = wv;
+		this.sender = sender;
 	}
 
+	
 	public void keyPressed(KeyEvent e) {
+
 	}
 
 	public void keyReleased(KeyEvent e) {
-		switch(e.getKeyCode()) {
-			case(KeyEvent.VK_A):
+		switch(e.getKeyChar()) {
+			case('a'):
 				sender.stopMovingLeft();
 				break;
-			case(KeyEvent.VK_D):
+			case('d'):
 				sender.stopMovingRight();
 				break;
 			case(KeyEvent.VK_ENTER): //TODO score laten zien
@@ -33,7 +36,7 @@ public class KeyboardController implements KeyListener {
 	}
 
 	public void keyTyped(KeyEvent e) {
-		System.out.println(e.getKeyChar());
+		
 		switch(e.getKeyChar()) {
 			case(KeyEvent.VK_SPACE):
 				sender.jump();
