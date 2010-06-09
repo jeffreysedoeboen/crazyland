@@ -11,8 +11,10 @@ public class Tile implements WorldObject {
 	private int y;
 	private BufferedImage image;
 	private boolean solid;
+	private Shape shape;
+	private String corner;
 	
-	public Tile(int x, int y, BufferedImage image, boolean solid){
+	public Tile(int x, int y, BufferedImage image, boolean solid, String shape, String corner){
 		this.x = x;
 		this.y = y;
 		this.image = image;
