@@ -15,6 +15,8 @@ public class GameServer extends Thread{
 	private ArrayList<Sender> senderList = new ArrayList<Sender>();
 	private ArrayList<Receiver> receiverList = new ArrayList<Receiver>(); 
 	private int count = 0;
+	private long seconds = 600;
+	private Timer timer;
 	
 	public static void main(String args[]){
 			
@@ -30,7 +32,8 @@ public class GameServer extends Thread{
 	
 	public GameServer(){
 		this.world = new World();
-		new Timer(10,taskPerformer).start();
+		timer = new Timer(10,taskPerformer);
+		timer.start();
 	}
 	
 	public World getWorld(){
@@ -63,9 +66,15 @@ public class GameServer extends Thread{
 			}
 		}
 
-		if(count == 20){
-			count = 0;
+		if(count % 20 == 0){
 			System.out.println("Players in-game: " + senderList.size());
+		}
+		if(count == 100) {
+			count = 0;
+			if (--seconds == 0) {
+				timer.stop();
+				//TODO Timer	
+			}
 		}
 		
 	}
