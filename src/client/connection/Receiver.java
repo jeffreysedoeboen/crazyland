@@ -38,10 +38,19 @@ public class Receiver extends Thread {
 				Tile[][] tiles = Mapfactory.getMap(in.nextLine());
 				map = new Map();
 				map.setTiles(tiles);
+				String playerName = in.nextLine();
+				String[] playerXY = in.nextLine().split(",");
+				int hp = Integer.parseInt(in.nextLine());
+				this.player = new Player(playerName, Float.parseFloat(playerXY[0]), Float.parseFloat(playerXY[1]), hp);
 			}else if(tempstr.equals("player")){
 				tempstr = in.nextLine();
 				String[] playerXY = tempstr.split(",");
-				this.player = new Player(playerXY[0],Integer.parseInt("" + playerXY[1]),Integer.parseInt("" + playerXY[2]),Integer.parseInt("" + playerXY[3]));
+				this.player.setHitpoints(Integer.parseInt("" + playerXY[3]));
+				this.player.setX(Float.parseFloat("" + playerXY[1]));
+				this.player.setY(Float.parseFloat("" + playerXY[2]));
+
+				//this.player = new Player( playerXY[0],Integer.parseInt("" + playerXY[1]),Integer.parseInt("" + playerXY[2]),Integer.parseInt("" + playerXY[3]));
+				//player.getPrimaryWeapon().setImage(player.getPrimaryWeapon().getBaseImage());
 			}else if(tempstr.equals("players_begin")){
 				boolean playerEnd = false;
 				ArrayList<Player> tempList = new ArrayList<Player>();
@@ -79,6 +88,9 @@ public class Receiver extends Thread {
 					}
 				}
 				remotePlayers.remove(p);
+			} else if(tempstr.equals("player_turn_weapon")) {
+				float angle = Float.parseFloat(in.nextLine());
+				player.turnToPoint(angle);
 			}
 		}
 	}

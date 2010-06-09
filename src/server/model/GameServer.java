@@ -122,5 +122,16 @@ public class GameServer extends Thread{
 		this.receiverList.add(r);
 		
 	}
+
+	public void turnWeapon(int mouseX, int mouseY, Player player) {
+		float x = player.getX(), y = player.getY();
+		for(Sender s : senderList) {
+			if(s.isPlayer(player)) {
+				float angle = (float) (Math.toDegrees((Math.atan2(Math.toRadians(mouseY - y), Math.toRadians(mouseX - x)))));
+				s.sendWeaponAngle(angle);
+			}
+		}
+		
+	}
 		
 }
