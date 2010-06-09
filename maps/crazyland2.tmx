@@ -7,6 +7,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="1">
@@ -14,6 +15,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="2">
@@ -21,6 +23,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="3">
@@ -28,6 +31,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="4">
@@ -51,6 +55,7 @@
     <property name="respawn" value="1"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="7">
@@ -58,6 +63,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="1"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="8">
@@ -65,6 +71,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="1"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="9">
@@ -72,6 +79,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="1"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="10">
@@ -79,6 +87,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="1"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="11">
@@ -86,6 +95,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="1"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="12">
@@ -93,6 +103,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="1"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="13">
@@ -100,6 +111,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="1"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="14">
@@ -155,6 +167,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="1"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="21">
@@ -162,6 +175,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="1"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="22">
@@ -169,6 +183,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="1"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="23">
@@ -176,6 +191,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="1"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="24">
@@ -183,6 +199,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="1"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="25">
@@ -190,6 +207,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="1"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="26">
@@ -197,6 +215,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="27">
@@ -204,6 +223,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="28">
@@ -211,6 +231,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="29">
@@ -218,6 +239,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="30">
@@ -225,6 +247,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="32">
@@ -232,6 +255,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="33">
@@ -239,6 +263,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="34">
@@ -246,6 +271,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="35">
@@ -253,6 +279,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="36">
@@ -260,6 +287,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="37">
@@ -267,6 +295,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="38">
@@ -274,6 +303,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="39">
@@ -281,6 +311,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="40">
@@ -288,6 +319,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
   <tile id="41">
@@ -295,6 +327,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+	<property name="corner" value="none"/>
    </properties>
   </tile>
  </tileset>
