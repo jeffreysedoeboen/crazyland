@@ -39,7 +39,7 @@ public class Player {
 			e.printStackTrace();
 		}
 		
-		primaryWeapon = new Pistol(this.getMidPlayerX() + 5, this.getMidPlayerY());
+		primaryWeapon = new Pistol();
 //		weaponlist.add(new Pistol(this.getMidPlayerX() + 5, this.getMidPlayerY()));
 //		weaponlist.add(new Grenade(this.getMidPlayerX() + 5, this.getMidPlayerY()));
 //		primaryWeapon = weaponlist.get(0);
@@ -80,13 +80,7 @@ public class Player {
 		return null;		
 	}
 	
-	public int getMidPlayerX() {
-		return (int) (x + (this.getImage().getWidth(null) / 2));
-	}
 	
-	public int getMidPlayerY() {
-		return (int) (y + ( this.getImage().getHeight(null) / 2));
-	}
 	
 	public float getX(){
 		return this.x;	

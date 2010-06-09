@@ -3,13 +3,18 @@ package client.view;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
+
+import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -34,11 +39,7 @@ public class WorldView extends JPanel {
 		return showHighscore;
 	}
 
-	public void setShowHighscore(boolean showHighscore) {
-		this.showHighscore = showHighscore;
-	}
-
-	public WorldView(Receiver receiver) {
+	public WorldView(Receiver receiver) {        
 		this.receiver = receiver;
 		try {
 			bg = ImageIO.read(new File("../themes/tee/background/background.jpg"));
@@ -48,7 +49,7 @@ public class WorldView extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		setSize(900, 300);
+        setSize(900, 300);
 	}
 	
 	public void paintComponent(Graphics g){
@@ -72,6 +73,15 @@ public class WorldView extends JPanel {
 			this.offsetX = offsetX;
 			this.offsetY = offsetY;
 			
+			Rectangle2D.Double playerRect = new Rectangle2D.Double(
+					receiver.getPlayer().getX(), 
+					receiver.getPlayer().getY(), 
+					receiver.getPlayer().getImage().getWidth(null), 
+					receiver.getPlayer().getImage().getHeight(null)
+			);
+			Area player = new Area(playerRect);
+			
+
 			for (int i = offsetX/3; i<=this.getWidth()-offsetX; i += bgWidth) {
 				for (int j = offsetY/3; j<=this.getHeight()-offsetY; j += bgHeight) {	
 					g.drawImage(bg, i, j, null);
@@ -97,8 +107,14 @@ public class WorldView extends JPanel {
 			float playerX = receiver.getPlayer().getX();
 			float playerY = receiver.getPlayer().getY();
 			
+			float weaponX = receiver.getPlayer().getPrimaryWeapon().getX();
+			float weaponY = receiver.getPlayer().getPrimaryWeapon().getY();
+			
+		
 			g.drawImage(receiver.getPlayer().getImage(),Math.round(playerX + offsetX),Math.round(playerY + offsetY),null);
+			g.drawImage(receiver.getPlayer().getPrimaryWeapon().getImage(), Math.round(weaponX + offsetX),Math.round(weaponY + offsetY),null);
 			g.drawString(receiver.getPlayer().getName(), Math.round(playerX + offsetX + 20), Math.round(playerY + offsetY + 5));
+			
 			
 			for(int i = 0; i <= receiver.getPlayer().getHitpoints(); i++){
 				g.drawImage(receiver.getPlayer().getHeartImage(),i*18,0,null);
@@ -107,7 +123,8 @@ public class WorldView extends JPanel {
 			for(Player p : receiver.getRemotePlayers()){
 				g.drawImage(p.getImage(),Math.round(p.getX() + offsetX),Math.round(p.getY() + offsetY),null);
 				g.drawString(p.getName(), Math.round(p.getX() + offsetX + 20), Math.round(p.getY() + offsetY + 5));
-			}
+				g.drawImage(p.getPrimaryWeapon().getImage(), Math.round(p.getPrimaryWeapon().getX() + offsetX),Math.round(p.getPrimaryWeapon().getY() + offsetY),null);
+			}			
 			
 			ArrayList<Bullet> bullets = receiver.getBullets();
 			for(Bullet b : bullets) {
@@ -176,26 +193,7 @@ public class WorldView extends JPanel {
 		return this.offsetY;
 	}
 	
-	public static BufferedImage verticalflip(BufferedImage img) {   
-        int w = img.getWidth();   
-        int h = img.getHeight();   
-        BufferedImage dimg = new BufferedImage(w, h, img.getColorModel().getTransparency());   
-        Graphics2D g = dimg.createGraphics();   
-        g.drawImage(img, 0, 0, w, h, 0, h, w, 0, null);   
-        g.dispose();  
-        return dimg;
-    }  
-	
-	public static BufferedImage rotateImage(BufferedImage src, float degrees, boolean isWeapon) {
-        AffineTransform affineTransform = AffineTransform.getRotateInstance(
-            Math.toRadians(degrees),
-            src.getWidth() / 2,
-            src.getHeight() / 2);
-        BufferedImage rotatedImage = new BufferedImage(src.getWidth(), src
-                .getHeight(), src.getType());
-        Graphics2D g = (Graphics2D) rotatedImage.getGraphics();
-        g.setTransform(affineTransform);
-        g.drawImage(src, 0, 0, null);
-        return rotatedImage;
-	}
+	 public void setShowHighscore(boolean showHighscore) {
+		this.showHighscore = showHighscore;
+	 }
 }

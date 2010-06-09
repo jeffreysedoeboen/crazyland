@@ -14,7 +14,7 @@ public class Sender {
 	public Sender(PrintWriter out, Player p){
 		this.out = out;
 		this.player = p;
-		out.println("begin_map\n" + "crazyland2");
+		out.println("begin_map\n" + "crazyland2\n" + p.getName() + "\n" + p.getX() + "," + p.getY() + "\n" + p.getHitpoints());
 	}
 	
 	public void sendPlayer(){
@@ -57,6 +57,10 @@ public class Sender {
 	
 	public boolean isPlayer(Player p) {
 		return p.equals(player);
+	}
+
+	public void sendWeaponAngle(float angle) {
+		lineOut = "player_turn_weapon%n" + angle + "%n";
 	}
 	
 }

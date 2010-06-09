@@ -1,8 +1,5 @@
 package server.model.weapon;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-
 import server.model.bullet.*;
 
 public abstract class Weapon {
@@ -12,26 +9,8 @@ public abstract class Weapon {
 	protected boolean unlimitedBullets = false;
 	protected int maxBullets = 0;
 	protected int currentBullets = 0;
-	protected BufferedImage image = null, baseImage;
-	protected int x;
-	protected int y;
-	protected float angle;
 	
-	private int weaponDirection  =0 ;
-	private boolean posChanged = false;
-	
-	public Weapon(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
-	
-	public int getWeaponDirection () {
-		return weaponDirection;
-	}
-	
-	public boolean getPosChanged() {
-		return posChanged;
-	}
+	public Weapon() {}
 	
 	public Bullet shoot(int bCounter){
 		
@@ -69,33 +48,11 @@ public abstract class Weapon {
 		return this.fireRate;
 	}
 	
-	public Image getImage() {
-		return image;
-	}
-	
 	public boolean isUnlimitedBullets() {
 		return unlimitedBullets;
 	}
 	
 	public Bullet createBullet(int bCounter){
 		return null;
-	}
-	
-	public void setX(int x) {
-		this.x = x;
-	}
-	
-	public void setY(int y) {
-		this.y = y;
-		
-	}
-	
-	public int getX() {
-		return x;
-	}
-	
-	public int getY() {
-		return y;
-	}
-	
+	}	
 }

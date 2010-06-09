@@ -15,8 +15,9 @@ public class Sender {
 		out.println(i + "," + j);
 	}
 
-	public void moveWeapon(int x, int y) {
-		// TODO Auto-generated method stub
+	public void turnWeapon(int x, int y) {
+		out.println("player_turn_weapon");
+		out.println(x + "," + y);
 	}
 
 	public void startMovingLeft() {

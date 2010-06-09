@@ -40,7 +40,7 @@ public class MouseController implements MouseListener, MouseMotionListener, Mous
 	}
 
 	public void mouseMoved(MouseEvent e) {
-		sender.moveWeapon(e.getX() - view.getOffsetX(), e.getY() - view.getOffsetY());
+		sender.turnWeapon(e.getX() - view.getOffsetX(), e.getY() - view.getOffsetY());
 	}
 	
 	@Override

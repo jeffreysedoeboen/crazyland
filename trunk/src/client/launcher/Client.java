@@ -2,6 +2,7 @@ package client.launcher;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Point;
@@ -44,7 +45,7 @@ public class Client extends JApplet {
 		OutputStream outStream = null;
 		Scanner in = null;
 		PrintWriter out = null;
-
+		
 		// check if we can talk with the server
 		System.out
 				.println("\nEen verbinding proberen te maken met met de server...");
