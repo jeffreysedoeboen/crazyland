@@ -29,7 +29,7 @@ public class KeyboardController implements KeyListener {
 			case('d'):
 				sender.stopMovingRight();
 				break;
-			case(KeyEvent.VK_ENTER): //TODO score laten zien
+			case('q'): //TODO score laten zien
 				wv.setShowHighscore(false);
 				break;
 		}
@@ -47,7 +47,7 @@ public class KeyboardController implements KeyListener {
 			case('d'):
 				sender.startMovingRight();
 				break;
-			case(KeyEvent.VK_ENTER): //TODO score laten zien
+			case('q'): //TODO score laten zien
 				wv.setShowHighscore(true);
 				break;
 			case(KeyEvent.VK_ESCAPE): 

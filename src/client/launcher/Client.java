@@ -57,8 +57,7 @@ public class Client extends JApplet {
 			in = new Scanner(inStream);
 			out = new PrintWriter(outStream, true /* autoFlush */);
 		} catch (IOException ioe) {
-			System.out
-					.println("\nKon niet met de server een verbinding maken. Check uw internet verbinding of whatever.. =/ .");
+			System.out.println("\nKon niet met de server een verbinding maken. Check uw internet verbinding of whatever.. =/ .");
 		}
 		System.out.println("has connection");
 

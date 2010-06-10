@@ -35,6 +35,10 @@ public class Player {
 		this.primaryWeapon = new Pistol(getMidPlayerX(), getMidPlayerY());
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	private int getMidPlayerX() {
 		return (int) (x + (this.getImage().getWidth(null) / 2) -18);
 	}

@@ -48,6 +48,8 @@ public class Receiver extends Thread {
 				this.player.setHitpoints(Integer.parseInt("" + playerXY[3]));
 				this.player.setX(Float.parseFloat("" + playerXY[1]));
 				this.player.setY(Float.parseFloat("" + playerXY[2]));
+				this.player.setName(playerXY[0]);
+				
 
 				//this.player = new Player( playerXY[0],Integer.parseInt("" + playerXY[1]),Integer.parseInt("" + playerXY[2]),Integer.parseInt("" + playerXY[3]));
 				//player.getPrimaryWeapon().setImage(player.getPrimaryWeapon().getBaseImage());

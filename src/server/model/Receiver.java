@@ -44,7 +44,7 @@ public class Receiver extends Thread {
 			} else if(tempstr.equals("player_name")) {
 				String userName = in.nextLine();
 				player.setName(userName);
-				System.out.println(userName);
+				System.err.println(userName);
 			} else if(tempstr.equals("player_turn_weapon")) {
 				String[] tmp = in.nextLine().split(",");
 				s.turnWeapon(Integer.parseInt(tmp[0]), Integer.parseInt(tmp[1]), player);
