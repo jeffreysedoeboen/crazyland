@@ -2,6 +2,7 @@ package client.controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import client.view.GameFrame;
 
 import client.connection.Sender;
 import client.view.WorldView;
@@ -10,10 +11,12 @@ public class KeyboardController implements KeyListener {
 
 	private Sender sender;
 	private WorldView wv;
+	private GameFrame gameframe;
 	
-	public KeyboardController(Sender sender, WorldView wv) {
+	public KeyboardController(Sender sender, WorldView wv, GameFrame gameframe) {
 		this.wv = wv;
 		this.sender = sender;
+		this.gameframe = gameframe;
 	}
 
 	
@@ -51,8 +54,8 @@ public class KeyboardController implements KeyListener {
 				wv.setShowHighscore(true);
 				break;
 			case(KeyEvent.VK_ESCAPE): 
-				sender.removePlayer();
-				System.exit(0);
+				//sender.removePlayer();
+				gameframe.dispose();
 				break;
 		}
 	}
