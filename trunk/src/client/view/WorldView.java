@@ -290,9 +290,7 @@ public class WorldView extends JPanel {
 
 	};
 	
-//	@Override
-//	public void destroy() {
-//		sender.removePlayer();
-//		super.destroy();
-//	};
+	public void destroy() {
+		sender.removePlayer(); 
+	};
 }
