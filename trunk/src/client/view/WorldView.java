@@ -197,7 +197,9 @@ public class WorldView extends JPanel {
 			for(Bullet b : bullets) {
 				if(b != null) {
 					b.move();
-					g.drawImage(b.getBulletImage(),(int) b.getX() + offsetX,(int) b.getY() + offsetY, null);
+					BufferedImage bulletImage = (BufferedImage) b.getBulletImage();
+					bulletImage = rotateImage(bulletImage, (float) (b.getDirection() * (180 / Math.PI) + 180),false);
+					g.drawImage(bulletImage,(int) b.getX() + offsetX,(int) b.getY() + offsetY, null);
 				}
 				
 			}
