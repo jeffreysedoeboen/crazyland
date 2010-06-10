@@ -1,4 +1,4 @@
-package db;
+package masterserver.db;
 
 import java.sql.*;
 
