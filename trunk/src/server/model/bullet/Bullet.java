@@ -1,7 +1,12 @@
 package server.model.bullet;
 
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.Point;
+import java.awt.Shape;
+
+import server.model.Player;
 
 public abstract class Bullet {
 
@@ -12,6 +17,8 @@ public abstract class Bullet {
 	protected float verticalSpeed = 0;
 	protected Point destination;
 	protected int indentifier;
+	protected Shape shape;
+	protected Player player;
 
 	public Bullet(int inden){
 		this.indentifier = inden;
@@ -53,12 +60,22 @@ public abstract class Bullet {
 		verticalSpeed += -0.005;
 	}
 	
-	public void setBullet(float clickedX, float clickedY, float x, float y, double dir) {
+	public void setBullet(float x, float y, double dir, Player p) {
 		this.x = x;
-		this.y = y;
+		this.y = y - 8;
+		this.player = p;
 		//this.bulletImage = WorldView.rotateImage(bulletImage, (float) (Math.toDegrees((Math.atan2(Math.toRadians(clickedY - y), Math.toRadians(clickedX - x))))),false);
-		this.direction = (float) dir;
-		move();
+		this.direction = (float) dir;	
+		
+	}
+	
+	public Player getOrigin(){
+		return this.player;
+	}
+	
+	public Shape getShape(){
+		
+		return null;
 	}
 	
 }

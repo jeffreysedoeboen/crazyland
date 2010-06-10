@@ -1,18 +1,25 @@
 package server.model.tile;
 
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-public class Tile {
+import server.model.WorldObject;
+
+public class Tile implements WorldObject{
 	private int x;
 	private int y;
 	private BufferedImage image;
 	private boolean solid;
+	private Shape shape;
 	
 	public Tile(int x, int y, BufferedImage image, boolean solid){
 		this.x = x;
 		this.y = y;
 		this.image = image;
 		this.solid = solid;
+		this.shape = new Rectangle2D.Double(x*32,y*32,32,32);
 	}
 
 	public int getX() {
@@ -57,4 +64,9 @@ public class Tile {
 	public boolean isSolid() {
 		return solid;
 	}
+	
+	public Shape getShape(){
+		return this.shape;
+	}
+	
 }

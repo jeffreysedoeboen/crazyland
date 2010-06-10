@@ -39,7 +39,7 @@ public class Bullet {
 		verticalSpeed += -0.005;
 	}
 	
-	public Image getBulletImage() {
+	public BufferedImage getBulletImage() {
 		return image;
 	}
 
@@ -49,6 +49,10 @@ public class Bullet {
 
 	public int getY() {
 		return this.y;
+	}
+
+	public double getDirection() {
+		return this.direction;
 	}
 
 }

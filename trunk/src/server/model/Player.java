@@ -1,6 +1,7 @@
 package server.model;
 
 import java.awt.Image;
+import java.awt.Shape;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -8,8 +9,9 @@ import java.util.ArrayList;
 import server.model.bullet.Bullet;
 import server.model.weapon.Pistol;
 import server.model.weapon.Weapon;
+import server.tools.Circle;
 
-public class Player {
+public class Player implements WorldObject{
 	private float angle;
 	private String name;
 	private float x;
@@ -190,6 +192,10 @@ public class Player {
 				}
 			}
 		}
+	}
+	
+	public Shape getShape(){
+		return new Circle(15,(int)x,(int)y);
 	}
 	
 	public float getAngle() {
