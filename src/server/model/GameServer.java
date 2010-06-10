@@ -40,11 +40,6 @@ public class GameServer extends Thread{
 		return this.world;
 	}
 	
-//	public void moveWeapon(int mouseX, int mouseY) {
-//		world.moveWeapon(mouseX, mouseY);
-//		
-//	}
-	
 	ActionListener taskPerformer = new ActionListener() {
 
 		public void actionPerformed(ActionEvent arg0) {
@@ -128,6 +123,7 @@ public class GameServer extends Thread{
 		for(Sender s : senderList) {
 			if(s.isPlayer(player)) {
 				float angle = (float) (Math.toDegrees((Math.atan2(Math.toRadians(mouseY - y), Math.toRadians(mouseX - x)))));
+				player.setAngle(angle);
 				s.sendWeaponAngle(angle);
 			}
 		}

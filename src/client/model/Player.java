@@ -16,12 +16,14 @@ public class Player {
 
 	private float x;
 	private float y;
+	private float angle;
 	private BufferedImage image,heartImage;
 	private String name;
 	private int hitpoints = 0;
 	private Weapon primaryWeapon;
 	
-	public Player(String name, float x, float y,int hitpoints) {
+	public Player(String name, float x, float y,int hitpoints, float angle) {
+		this.angle = angle;
 		this.x = x;
 		this.y = y;
 		this.name = name;
@@ -33,6 +35,12 @@ public class Player {
 			e.printStackTrace();
 		}
 		this.primaryWeapon = new Pistol(getMidPlayerX(), getMidPlayerY());
+		turnToPoint(angle);
+		if(this.getPrimaryWeapon().getWeaponDirection() == 0) {
+			this.getPrimaryWeapon().setX(this.getMidPlayerX() + 10);
+		} else {
+			this.getPrimaryWeapon().setX(this.getMidPlayerX() - 10);
+		}
 	}
 	
 	public void setName(String name) {
@@ -59,11 +67,6 @@ public class Player {
 	}
 	public void setX(float x) {
 		this.x = x;
-		if(this.getPrimaryWeapon().getWeaponDirection() == 0) {
-			this.getPrimaryWeapon().setX(this.getMidPlayerX() + 10);
-		} else {
-			this.getPrimaryWeapon().setX(this.getMidPlayerX() - 10);
-		}
 		//this.getPrimaryWeapon().setX(this.getMidPlayerX());
 		
 	}

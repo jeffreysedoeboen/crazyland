@@ -10,7 +10,7 @@ import server.model.weapon.Pistol;
 import server.model.weapon.Weapon;
 
 public class Player {
-
+	private float angle;
 	private String name;
 	private float x;
 	private float y;
@@ -190,6 +190,14 @@ public class Player {
 				}
 			}
 		}
+	}
+	
+	public float getAngle() {
+		return angle;
+	}
+
+	public void setAngle(float angle) {
+		this.angle = angle;
 	}
 	
 }

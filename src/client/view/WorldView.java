@@ -122,8 +122,8 @@ public class WorldView extends JPanel {
 			
 			for(Player p : receiver.getRemotePlayers()){
 				g.drawImage(p.getImage(),Math.round(p.getX() + offsetX),Math.round(p.getY() + offsetY),null);
-				g.drawString(p.getName(), Math.round(p.getX() + offsetX + 20), Math.round(p.getY() + offsetY + 5));
 				g.drawImage(p.getPrimaryWeapon().getImage(), Math.round(p.getPrimaryWeapon().getX() + offsetX),Math.round(p.getPrimaryWeapon().getY() + offsetY),null);
+				g.drawString(p.getName(), Math.round(p.getX() + offsetX + 20), Math.round(p.getY() + offsetY + 5));
 			}			
 			
 			ArrayList<Bullet> bullets = receiver.getBullets();
