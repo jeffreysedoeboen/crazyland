@@ -60,7 +60,7 @@ public class Sender {
 	}
 
 	public void sendWeaponAngle(float angle) {
-		lineOut = "player_turn_weapon%n" + angle + "%n";
+		lineOut += "player_turn_weapon%n" + angle + "%n";
 	}
 	
 }
