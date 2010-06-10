@@ -1,21 +1,26 @@
 package server.model;
 
+import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import server.model.bullet.Bullet;
 import server.model.tile.Tile;
+import server.tools.Circle;
 
 
 public class World{
 
+	private GameServer server;
 	private Map map;
 	private ArrayList<Player> playerList = new ArrayList<Player>();
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	private int bulletCounter = 1;
 
-	public World(){
+	public World(GameServer s){
 		map = new Map();
+		this.server = s;
 	}
 	
 	public void addPlayer(Player p){
@@ -36,7 +41,7 @@ public class World{
 		float distanceFromPlayerY = p.getY()-y;
 		Bullet b = p.shoot(this.bulletCounter);
 		if(b != null){
-			b.setBullet(x,y,p.getX(),p.getY()+6,Math.atan2(distanceFromPlayerY, distanceFromPlayerX));
+			b.setBullet(p.getX()+15,p.getY()+15,Math.atan2(distanceFromPlayerY, distanceFromPlayerX),p);
 			bullets.add(b);
 			bulletCounter++;
 			return b;
@@ -69,9 +74,79 @@ public class World{
 		}
 		ArrayList<Bullet> bulletsclone = (ArrayList<Bullet>) bullets.clone();
 		for(Bullet b : bulletsclone){
-			b.move();
+			if(!checkBulletColission(b)){
+				b.move();
+			}else{
+				System.out.println("HIT");
+				bullets.remove(b);
+				server.removeBullet(b);
+			}
 		}
 
+	}
+	
+	public boolean checkBulletColission(Bullet bullet){
+		ArrayList<WorldObject> retList = new ArrayList<WorldObject>();
+
+		// doorloop alle spelers
+		for( Player player : playerList ) {
+			if( player.getX()+32 > bullet.getX() && player.getX()-32 < bullet.getX() &&
+					player.getY()+32 > bullet.getY() && player.getY()-32 < bullet.getY() ) {
+				retList.add(player);
+			}
+		}
+		
+		// doorloop alle tiles
+		for( int i = 0; i < map.getTiles().length; i++ ) {
+			if( i*32+32 > bullet.getX() && i*32-32 < bullet.getX() ) {
+				for( Tile tile : map.getTiles()[i] ) {
+					if( tile.isSolid() && tile.getY()*32-32 < bullet.getY() && tile.getY()*32+32 > bullet.getY() ) {
+						retList.add(tile);
+					}
+				}
+			}
+		}
+		
+		for(WorldObject t : retList){
+			
+			if(bullet.getShape() instanceof Circle){
+				Circle b = (Circle) bullet.getShape();
+				if(t.getShape() instanceof Circle){
+					Circle tile = (Circle) t.getShape();
+					if(b.intersects(tile)){
+						if(bullet.getOrigin() != t){
+							return true;	
+						}
+					}
+				}else{
+					Rectangle2D.Double tile = (Rectangle2D.Double) t.getShape();
+					if(b.intersects(tile)){
+						if(bullet.getOrigin() != t){
+							return true;
+						}
+					}
+				}
+			}else{
+				Rectangle2D.Double b = (Rectangle2D.Double) bullet.getShape();
+				if(t.getShape() instanceof Circle){
+					Circle tile = (Circle) t.getShape();
+					if(tile.intersects(b)){
+						if(bullet.getOrigin() != t){
+							return true;
+						}	
+					}
+				}else{
+					Rectangle2D.Double tile = (Rectangle2D.Double) t.getShape();
+					if(b.intersects(tile)){
+						if(bullet.getOrigin() != t){
+							return true;
+						}
+					}
+				}
+			}
+		}
+		
+		return false;
 	}
 
 	public boolean[][] getPixelMap( BufferedImage image ){

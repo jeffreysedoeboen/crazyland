@@ -36,7 +36,8 @@ import client.controller.MouseController;
 import client.model.Bullet;
 import client.model.GameServer;
 import client.model.Player;
-import client.model.Tile;
+import client.model.Tile; 
+
 
 @SuppressWarnings("serial")
 public class WorldView extends JPanel {

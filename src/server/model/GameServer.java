@@ -31,7 +31,7 @@ public class GameServer extends Thread{
 	}
 	
 	public GameServer(){
-		this.world = new World();
+		this.world = new World(this);
 		timer = new Timer(10,taskPerformer);
 		timer.start();
 	}
