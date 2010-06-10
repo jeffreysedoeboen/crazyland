@@ -1,8 +1,10 @@
 package client.model;
 
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -23,6 +25,13 @@ import client.model.Tile;
 public class Mapfactory {
 /*	private static BufferedImage originalimage;*/
 	
+	/*
+	 * Plaatje met alle subplaatjes wordt ingeladen
+	 * XML-file met posities en eigenschappen van alle Tiles wordt uitgelezen
+	 * subimages worden aangemaakt en in arraylist gezet
+	 * Tiles worden aangemaakt en in tweedimensionale array gezet
+	 * Deze array wordt teruggegeven
+	 */
 	public static Tile[][] getMap(String mapsource) {
 		BufferedImage originalimage;
 		Tile[][] tiles = null;
@@ -43,23 +52,19 @@ public class Mapfactory {
             int height = Integer.valueOf(mapElement.getAttribute("height")).intValue();
             tiles = new Tile[width][height];
             
-            NodeList tilesetNode = doc.getElementsByTagName("tileset");
+            /*NodeList tilesetNode = doc.getElementsByTagName("tileset");
 			Element tilesetElement = (Element) tilesetNode.item(0);
 			NodeList listOfProperties = tilesetElement.getElementsByTagName("tile");
-            HashMap<Integer, Boolean> tileproperties = new HashMap<Integer, Boolean>();
+            HashMap<Integer, Boolean> tileproperties = new HashMap<Integer, Boolean>();*/
+            
+            // create arraylist voor shape en corner
+//            ArrayList<String> shapes = new ArrayList<String>();
+//            ArrayList<String> corners = new ArrayList<String>();
+//            ArrayList<Boolean> solids = new ArrayList<Boolean>();
+            
 			int counter = 0;
 			for(int y = 0; y < 192; y += 32) {
 				for(int x = 0; x < 224; x += 32) {
-					Node propertiesNode = listOfProperties.item(counter);
-					if(propertiesNode != null) {
-						if (propertiesNode.getNodeType() == Node.ELEMENT_NODE) {
-							Element propertiesElement = (Element)propertiesNode;
-			            	Node propertyNode = propertiesElement.getElementsByTagName("property").item(0);
-			            	Element propertyElement = (Element)propertyNode;
-			            	boolean tileproperty = Boolean.valueOf(propertyElement.getAttribute("solid")).booleanValue();
-			            	tileproperties.put(counter, tileproperty);
-						}
-					}
 					BufferedImage img = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB); ;
 					Graphics2D gr = img.createGraphics();
 					gr.drawImage(originalimage.getSubimage(x, y, 32, 32), 0, 0, null);
@@ -68,23 +73,68 @@ public class Mapfactory {
 				}
 			}
 			
+            NodeList propertiesNodes = doc.getElementsByTagName("properties");
+            String[][] propertyNodes = new String[propertiesNodes.getLength()][4];
+            for(int i = 0; i < propertiesNodes.getLength(); i++) {
+            	Node propertiesNode= propertiesNodes.item(i);
+            	Element propertiesElement = (Element) propertiesNode;
+            	NodeList listOfProperties = propertiesElement.getElementsByTagName("property");
+            	System.out.println(i);
+            	for(int s = 0; s < listOfProperties.getLength(); s++) {
+            		Node propertyNode= listOfProperties.item(s);
+            		if (propertyNode.getNodeType() == Node.ELEMENT_NODE) {
+            			Element propertyElement = (Element) propertyNode;
+                		String name = propertyElement.getAttribute("name");
+                		
+                		if(name.equals("solid")) {
+                			propertyNodes[i][0] = propertyElement.getAttribute("value");
+                			System.out.println("solid: " + propertyElement.getAttribute("value"));
+                		} else if(name.equals("shape")) {
+                			propertyNodes[i][1] = propertyElement.getAttribute("value");
+                			System.out.println(propertyElement.getAttribute("value"));
+                		} else if(name.equals("corner")) {
+                			propertyNodes[i][2] = propertyElement.getAttribute("value");
+                			System.out.println(propertyElement.getAttribute("value"));
+                		} else if(name.equals("respawn")) {
+                			propertyNodes[i][3] = propertyElement.getAttribute("value");
+                			System.out.println("respawn: " + propertyElement.getAttribute("value"));
+                		}
+            		}
+            	}
+            	
+            	
+            }
+            
+            // get level data
 			NodeList dataNode = doc.getElementsByTagName("data");
 			Element dataElement = (Element) dataNode.item(0);
-			NodeList listOfTiles = dataElement.getElementsByTagName("tile");
+			NodeList listOfTilesData = dataElement.getElementsByTagName("tile");
+			
             int x = 0;
             int y = 0;
-            for(int s = 0; s < listOfTiles.getLength(); s++) {
-            	Node tileNode = listOfTiles.item(s);
+            for(int s = 0; s < listOfTilesData.getLength(); s++) {
+            	Node tileNode = listOfTilesData.item(s);
             	if (tileNode.getNodeType() == Node.ELEMENT_NODE) {
             		Element firstPersonElement = (Element)tileNode;
                 	
+            		//TODO: mooier oplossen
                 	int tiletype = Integer.valueOf(firstPersonElement.getAttribute("gid")).intValue();
                 	
-                	if (tiletype != 0) {
-                		tiles[x][y] = new Tile(x,y,images.get(tiletype - 1), true);
-                	} else {
-                		tiles[x][y] = new Tile(x,y,images.get(tiletype), false);
-                	}
+                	int min = 0;
+                	if (tiletype != 0) min = 1;
+                	
+                	boolean solid = (Integer.valueOf(propertyNodes[tiletype - min][0]).intValue() == 1);
+                	String shape = propertyNodes[tiletype - min][1];
+                	String corner = propertyNodes[tiletype - min][2];
+                	boolean respawn = (Integer.valueOf(propertyNodes[tiletype - min][3]).intValue() != 0);
+                	
+                	tiles[x][y] = new Tile(x,y,images.get(tiletype - min), solid, shape, corner, respawn);
+//                	if (tiletype != 0) {
+//                		tiles[x][y] = new Tile(x,y,images.get(tiletype - 1), true, shape, corner);
+//                	} else {
+//                		tiles[x][y] = new Tile(x,y,images.get(tiletype), false, shape, corner);
+//                	}
+                	
             	}
             	x += 1;
             	if(x % width == 0) {

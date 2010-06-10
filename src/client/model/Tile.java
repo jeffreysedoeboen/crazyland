@@ -8,7 +8,7 @@ public class Tile {
 	private BufferedImage image;
 	private boolean solid;
 	
-	public Tile(int x, int y, BufferedImage image, boolean solid){
+	public Tile(int x, int y, BufferedImage image, boolean solid, String shape, String corner, boolean respawn){
 		this.x = x;
 		this.y = y;
 		this.image = image;
