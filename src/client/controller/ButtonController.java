@@ -14,6 +14,7 @@ import masterserver.db.AccountDAO;
 import client.connection.MasterConnection;
 import client.connection.Sender;
 import client.model.GameServer;
+import client.view.GameFrame;
 import client.view.InlogView;
 import client.view.LobbyView;
 import client.view.SignupView;
@@ -98,8 +99,8 @@ public class ButtonController implements ActionListener {
 			if (server == null) {
 				JOptionPane.showMessageDialog(lobbyview, "Could not connect. No server selected?", "Could not connect", JOptionPane.ERROR_MESSAGE);
 			} else {
-				JFrame f = new JFrame();
-				f.add(new WorldView(server, lobbyview.getUserName()));
+				GameFrame f = new GameFrame();
+				f.setWorldView(new WorldView(server, lobbyview.getUserName(), f));
 				f.setSize(900, 500);
 				f.setVisible(true);
 			}

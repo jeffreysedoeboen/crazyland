@@ -52,6 +52,7 @@ public class WorldView extends JPanel {
 	private String userName;
 	
 	private Sender sender;
+	private GameFrame gameframe;
 	
 	public boolean isShowHighscore() {
 		return showHighscore;
@@ -61,8 +62,9 @@ public class WorldView extends JPanel {
 		this.showHighscore = showHighscore;
 	}
 
-	public WorldView(GameServer server, String userName) {
+	public WorldView(GameServer server, String userName, GameFrame gameframe) {
 		this.userName = userName;
+		this.gameframe = gameframe;
 		connectAndPrepare(server);
 		setSize(900, 300);
 		new Timer(20, taskPerformer).start();
@@ -114,7 +116,7 @@ public class WorldView extends JPanel {
 		setSize(400, 320);
 		setVisible(true);
 
-		KeyboardController keycontroller = new KeyboardController(sender, this);
+		KeyboardController keycontroller = new KeyboardController(sender, this, gameframe);
 		this.addKeyListener(keycontroller);
 		this.setFocusable(true);
 
@@ -293,7 +295,7 @@ public class WorldView extends JPanel {
 
 	};
 	
-	public void destroy() {
+	public void logoff() {
 		sender.removePlayer(); 
 	};
 }
