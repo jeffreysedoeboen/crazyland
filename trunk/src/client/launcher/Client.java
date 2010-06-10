@@ -1,11 +1,5 @@
 package client.launcher;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.Cursor;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,14 +7,9 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 import javax.swing.JApplet;
-import javax.swing.JFrame;
-import javax.swing.Timer;
 
 import client.connection.MasterConnection;
-import client.connection.Receiver;
 import client.connection.Sender;
-import client.controller.KeyboardController;
-import client.controller.MouseController;
 import client.controller.ButtonController;
 import client.view.InlogView;
 import client.view.WorldView;
