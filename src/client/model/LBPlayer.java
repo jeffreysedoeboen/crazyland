@@ -1,4 +1,4 @@
-package db;
+package client.model;
 
 public class LBPlayer {
 	private long rank, kills, deaths;

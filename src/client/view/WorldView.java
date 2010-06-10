@@ -2,25 +2,43 @@ package client.view;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-import javax.swing.JLayeredPane;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
+
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
 
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
+
 import javax.imageio.ImageIO;
 import client.connection.Receiver;
+import client.connection.Sender;
+import client.controller.KeyboardController;
+import client.controller.MouseController;
 import client.model.Bullet;
+import client.model.GameServer;
 import client.model.Player;
 import client.model.Tile;
 
@@ -34,14 +52,27 @@ public class WorldView extends JPanel {
 	private BufferedImage bg = null;
 	private int bgWidth, bgHeight;
 	private boolean showHighscore;
+	private String userName;
+	
+	private Sender sender;
 	
 	public boolean isShowHighscore() {
 		return showHighscore;
 	}
 
-	public WorldView(Receiver receiver) {        
-		this.receiver = receiver;
-		try {
+	public void setShowHighscore(boolean showHighscore) {
+		this.showHighscore = showHighscore;
+	}
+
+	public WorldView(GameServer server, String userName) {
+		this.userName = userName;
+		connectAndPrepare(server);
+		setSize(900, 300);
+		new Timer(20, taskPerformer).start();
+	}
+	
+	public void connectAndPrepare(GameServer server) {
+		try {			
 			bg = ImageIO.read(new File("../themes/tee/background/background.jpg"));
 			bgWidth = bg.getWidth();
 			bgHeight = bg.getHeight();
@@ -49,7 +80,53 @@ public class WorldView extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        setSize(900, 300);
+		Socket s = null;
+		InputStream inStream = null;
+		OutputStream outStream = null;
+		Scanner in = null;
+		PrintWriter out = null;
+
+		// check if we can talk with the server
+		System.out
+				.println("\ntry to connect with gameserver...");
+
+		try {
+			s = new Socket(server.getIp(), 1337);
+			inStream = s.getInputStream();
+			outStream = s.getOutputStream();
+			in = new Scanner(inStream);
+			out = new PrintWriter(outStream, true /* autoFlush */);
+		} catch (IOException ioe) {
+			System.out
+					.println("\nwas not able to connect with gameserver... check connection!");
+		}
+		System.out.println("has connection with gameserver");
+
+		receiver = new Receiver(in);
+		receiver.start();
+		sender = new Sender(out);
+		
+		sender.login(userName);
+
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Image image = toolkit.getImage("../themes/tee/weapon/cursor.png");
+		Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "cursor");
+		
+		this.setCursor(c);
+		
+		setSize(400, 320);
+		setVisible(true);
+
+		KeyboardController keycontroller = new KeyboardController(sender, this);
+		this.addKeyListener(keycontroller);
+		this.setFocusable(true);
+
+		MouseController mouseController = new MouseController(sender, this);
+		this.addMouseListener(mouseController);
+		this.addMouseMotionListener(mouseController);
+
+		this.addMouseWheelListener(mouseController);
+		
 	}
 	
 	public void paintComponent(Graphics g){
@@ -107,14 +184,8 @@ public class WorldView extends JPanel {
 			float playerX = receiver.getPlayer().getX();
 			float playerY = receiver.getPlayer().getY();
 			
-			float weaponX = receiver.getPlayer().getPrimaryWeapon().getX();
-			float weaponY = receiver.getPlayer().getPrimaryWeapon().getY();
-			
-		
 			g.drawImage(receiver.getPlayer().getImage(),Math.round(playerX + offsetX),Math.round(playerY + offsetY),null);
-			g.drawImage(receiver.getPlayer().getPrimaryWeapon().getImage(), Math.round(weaponX + offsetX),Math.round(weaponY + offsetY),null);
 			g.drawString(receiver.getPlayer().getName(), Math.round(playerX + offsetX + 20), Math.round(playerY + offsetY + 5));
-			
 			
 			for(int i = 0; i <= receiver.getPlayer().getHitpoints(); i++){
 				g.drawImage(receiver.getPlayer().getHeartImage(),i*18,0,null);
@@ -122,9 +193,8 @@ public class WorldView extends JPanel {
 			
 			for(Player p : receiver.getRemotePlayers()){
 				g.drawImage(p.getImage(),Math.round(p.getX() + offsetX),Math.round(p.getY() + offsetY),null);
-				g.drawImage(p.getPrimaryWeapon().getImage(), Math.round(p.getPrimaryWeapon().getX() + offsetX),Math.round(p.getPrimaryWeapon().getY() + offsetY),null);
 				g.drawString(p.getName(), Math.round(p.getX() + offsetX + 20), Math.round(p.getY() + offsetY + 5));
-			}			
+			}
 			
 			ArrayList<Bullet> bullets = receiver.getBullets();
 			for(Bullet b : bullets) {
@@ -193,7 +263,40 @@ public class WorldView extends JPanel {
 		return this.offsetY;
 	}
 	
-	 public void setShowHighscore(boolean showHighscore) {
-		this.showHighscore = showHighscore;
-	 }
+	public static BufferedImage verticalflip(BufferedImage img) {   
+        int w = img.getWidth();   
+        int h = img.getHeight();   
+        BufferedImage dimg = new BufferedImage(w, h, img.getColorModel().getTransparency());   
+        Graphics2D g = dimg.createGraphics();   
+        g.drawImage(img, 0, 0, w, h, 0, h, w, 0, null);   
+        g.dispose();  
+        return dimg;
+    }  
+	
+	public static BufferedImage rotateImage(BufferedImage src, float degrees, boolean isWeapon) {
+        AffineTransform affineTransform = AffineTransform.getRotateInstance(
+            Math.toRadians(degrees),
+            src.getWidth() / 2,
+            src.getHeight() / 2);
+        BufferedImage rotatedImage = new BufferedImage(src.getWidth(), src
+                .getHeight(), src.getType());
+        Graphics2D g = (Graphics2D) rotatedImage.getGraphics();
+        g.setTransform(affineTransform);
+        g.drawImage(src, 0, 0, null);
+        return rotatedImage;
+	}
+	
+	ActionListener taskPerformer = new ActionListener() {
+
+		public void actionPerformed(ActionEvent arg0) {
+			WorldView.this.repaint();
+		}
+
+	};
+	
+//	@Override
+//	public void destroy() {
+//		sender.removePlayer();
+//		super.destroy();
+//	};
 }
