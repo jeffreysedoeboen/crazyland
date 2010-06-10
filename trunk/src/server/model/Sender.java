@@ -18,14 +18,14 @@ public class Sender {
 	}
 	
 	public void sendPlayer(){
-		lineOut += "player%n" + player.getName() + "," + (int)player.getX() + "," + (int)player.getY() + "," + (int)player.getHitpoints() + "%n";
+		lineOut += "player%n" + player.getName() + "," + (int)player.getX() + "," + (int)player.getY() + "," + (int)player.getHitpoints() + "," + (float)player.getAngle() + "%n";
 	}
 	
 	public void sendPlayers(ArrayList<Player> playerList){
 		String kaas = "players_begin%n";
 		for(Player p : playerList){
 			if(p != this.player){
-				kaas += p.getName()+ "," + (int)p.getX() + "," + (int)p.getY() + "," + (int)player.getHitpoints() + "%n";
+				kaas += p.getName()+ "," + (int)p.getX() + "," + (int)p.getY() + "," + (int)player.getHitpoints() + ","  + p.getAngle() + "%n";
 			}
 		}
 		lineOut += kaas + "players_end%n";
@@ -40,7 +40,6 @@ public class Sender {
 	public void sendLineOut(){
 		out.printf(lineOut);
 		lineOut = "";
-		
 	}
 	
 	public void removeBullet(Bullet b){
