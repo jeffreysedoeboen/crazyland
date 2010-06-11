@@ -1,5 +1,6 @@
 package server.model;
 
+import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -150,23 +151,27 @@ public class World{
 				if(t.getShape() instanceof Circle){
 					Circle tile = (Circle) t.getShape();
 					if(b.intersects(tile)){
-						if(bullet.getOrigin() != t){
-							if(t instanceof Player) {
-								Player p = (Player) t;
-								p.decreaseHitpoints(bullet.getDamage());
+						if(bullet.getOrigin() != t){			
+							if(checkCloseBulletColission(bullet, tile)){
+								if(t instanceof Player) {
+									Player p = (Player) t;
+									p.decreaseHitpoints(bullet.getDamage());
+								}
+								return true;	
 							}
-							return true;	
 						}
 					}
 				}else{
 					Rectangle2D.Double tile = (Rectangle2D.Double) t.getShape();
 					if(b.intersects(tile)){
 						if(bullet.getOrigin() != t){
-							if(t instanceof Player) {
-								Player p = (Player) t;
-								p.decreaseHitpoints(bullet.getDamage());
+							if(checkCloseBulletColission(bullet, tile)){
+								if(t instanceof Player) {
+									Player p = (Player) t;
+									p.decreaseHitpoints(bullet.getDamage());
+								}
+								return true;	
 							}
-							return true;
 						}
 					}
 				}
@@ -176,28 +181,85 @@ public class World{
 					Circle tile = (Circle) t.getShape();
 					if(tile.intersects(b)){
 						if(bullet.getOrigin() != t){
-							if(t instanceof Player) {
-								Player p = (Player) t;
-								p.decreaseHitpoints(bullet.getDamage());
+							if(checkCloseBulletColission(bullet, tile)){
+								if(t instanceof Player) {
+									Player p = (Player) t;
+									p.decreaseHitpoints(bullet.getDamage());
+								}
+								return true;	
 							}
-							return true;
 						}	
 					}
 				}else{
 					Rectangle2D.Double tile = (Rectangle2D.Double) t.getShape();
 					if(b.intersects(tile)){
 						if(bullet.getOrigin() != t){
-							if(t instanceof Player) {
-								Player p = (Player) t;
-								p.decreaseHitpoints(bullet.getDamage());
+							if(checkCloseBulletColission(bullet, tile)){
+								if(t instanceof Player) {
+									Player p = (Player) t;
+									p.decreaseHitpoints(bullet.getDamage());
+								}
+								return true;	
 							}
-							return true;
 						}
 					}
 				}
 			}
 		}
 
+		return false;
+	}
+	
+public boolean checkCloseBulletColission(Bullet b, Shape tile){
+		
+		System.out.println("CHECKING");
+		
+		float dir = b.getDirection();
+		Rectangle2D shape = b.getShape().getBounds();
+		
+		if(tile instanceof Circle){
+			Circle e1 = (Circle) tile;
+			Circle c1,c2,c3;
+			
+			c1 = new Circle(2,(int)shape.getCenterX()-2,(int)shape.getCenterY()-2);
+			
+			int posX = (int) (3*Math.cos(dir));
+			int posY = (int) (3*Math.sin(dir));
+			c2 = new Circle(2,(int)shape.getCenterX()+posX-2, (int)shape.getCenterY()+posY-2);
+			
+			posX = (int) (3*Math.cos(dir+Math.PI));
+			posY = (int) (3*Math.sin(dir+Math.PI));
+			c3 = new Circle(2,(int)shape.getCenterX()+posX-2, (int)shape.getCenterY()+posY-2);
+			
+			if(c1.intersects(e1)){
+				return true;
+			}else if(c2.intersects(e1)){
+				return true;
+			}else if(c3.intersects(e1)){
+				return true;
+			}
+		}else{
+			Rectangle2D e1 = (Rectangle2D) tile;
+			Circle c1,c2,c3;
+			
+			c1 = new Circle(2,(int)shape.getCenterX()-2,(int)shape.getCenterY()-2);
+			
+			int posX = (int) (3*Math.cos(dir));
+			int posY = (int) (3*Math.sin(dir));
+			c2 = new Circle(2,(int)shape.getCenterX()+posX-2, (int)shape.getCenterY()+posY-2);
+			
+			posX = (int) (3*Math.cos(dir+Math.PI));
+			posY = (int) (3*Math.sin(dir+Math.PI));
+			c3 = new Circle(2,(int)shape.getCenterX()+posX-2, (int)shape.getCenterY()+posY-2);
+			
+			if(c1.intersects(e1)){
+				return true;
+			}else if(c2.intersects(e1)){
+				return true;
+			}else if(c3.intersects(e1)){
+				return true;
+			}
+		}
 		return false;
 	}
 
