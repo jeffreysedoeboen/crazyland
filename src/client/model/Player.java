@@ -96,6 +96,8 @@ public class Player {
 	}
 	
 	public void turnToPoint( float angle ) {
+		if(this.getPrimaryWeapon().getImage() == null)
+			this.getPrimaryWeapon().setImage(this.getPrimaryWeapon().getBaseImage());
 		if(Math.abs(angle) > 90.00000f) {
 			setWeaponDir(1);
 			this.getPrimaryWeapon().setImage(rotateImage(this.getPrimaryWeapon().getBaseImage(),angle));
