@@ -234,12 +234,18 @@ public class World{
 			if(tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].getShape() instanceof Circle){
 				Circle tile2 = (Circle) tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].getShape();
 				if(tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY())/32)].isSolid() && shape.intersects(tile1) || tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].isSolid() && shape.intersects(tile2)){
-					return false;
+					player.setPosition(player.getX()+1, player.getY());
+					if(!canMoveLeft(player)){
+						return false;
+					}	
 				}
 			}else{
 				Rectangle2D tile2 = (Rectangle2D) tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].getShape();
 				if(tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY())/32)].isSolid() && shape.intersects(tile1) || tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].isSolid() && shape.intersects(tile2)){
-					return false;
+					player.setPosition(player.getX()+1, player.getY());
+					if(!canMoveLeft(player)){
+						return false;
+					}
 				}
 			}
 		}else{
@@ -247,17 +253,21 @@ public class World{
 			if(tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].getShape() instanceof Circle){
 				Circle tile2 = (Circle) tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].getShape();
 				if(tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY())/32)].isSolid() && shape.intersects(tile1) || tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].isSolid() && shape.intersects(tile2)){
-					return false;
+					player.setPosition(player.getX()+1, player.getY());
+					if(!canMoveLeft(player)){
+						return false;
+					}
 				}
 			}else{
 				Rectangle2D tile2 = (Rectangle2D) tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].getShape();
 				if(tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY())/32)].isSolid() && shape.intersects(tile1) || tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].isSolid() && shape.intersects(tile2)){
-					return false;
+					player.setPosition(player.getX()+1, player.getY());
+					if(!canMoveLeft(player)){
+						return false;
+					}
 				}
 			}
 		}
-		System.out.println(tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY())/32)].getX() + "," + tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY())/32)].getY());
-		System.out.println(tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].getX() + "," + tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY()+29)/32)].getY());
 		return true;
 	}
 	
@@ -269,12 +279,18 @@ public class World{
 			if(tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY()+29)/32)].getShape() instanceof Circle){
 				Circle tile2 = (Circle) tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY()+29)/32)].getShape();
 				if(tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY())/32)].isSolid() && shape.intersects(tile1) || tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY()+29)/32)].isSolid() && shape.intersects(tile2)){
-					return false;
+					player.setPosition(player.getX()-1, player.getY());
+					if(!canMoveRight(player)){
+						return false;
+					}
 				}
 			}else{
 				Rectangle2D.Double tile2 = (Rectangle2D.Double) tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY()+29)/32)].getShape();
 				if(tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY())/32)].isSolid() && shape.intersects(tile1) || tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY()+29)/32)].isSolid() && shape.intersects(tile2)){
-					return false;
+					player.setPosition(player.getX()-1, player.getY());
+					if(!canMoveRight(player)){
+						return false;
+					}
 				}
 			}
 		}else{
@@ -282,15 +298,22 @@ public class World{
 			if(tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY()+29)/32)].getShape() instanceof Circle){
 				Circle tile2 = (Circle) tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY()+29)/32)].getShape();
 				if(tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY())/32)].isSolid() && shape.intersects(tile1) || tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY()+29)/32)].isSolid() && shape.intersects(tile2)){
-					return false;
+					player.setPosition(player.getX()-1, player.getY());
+					if(!canMoveRight(player)){
+						return false;
+					}
 				}
 			}else{
 				Rectangle2D.Double tile2 = (Rectangle2D.Double) tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY()+29)/32)].getShape();
 				if(tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY())/32)].isSolid() && shape.intersects(tile1) || tiles[(int) ((player.getX()+35)/32)][(int) ((player.getY()+29)/32)].isSolid() && shape.intersects(tile2)){
-					return false;
+					player.setPosition(player.getX()-1, player.getY());
+					if(!canMoveRight(player)){
+						return false;
+					}
 				}
 			}
 		}
+		System.out.println("move");
 		return true;
 	}
 
