@@ -25,7 +25,6 @@ public class PistolBullet extends Bullet {
 	}
 	
 	public Shape getShape(){
-		System.out.println(this.direction);
 		shape = new Rectangle2D.Double(x,y+5,20,9);
 		AffineTransform tx = new AffineTransform();
 		tx.rotate(Math.PI - direction, x +5,y+5);
