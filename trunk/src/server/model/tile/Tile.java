@@ -1,6 +1,5 @@
 package server.model.tile;
 
-import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -12,7 +11,7 @@ public class Tile implements WorldObject{
 	private int x;
 	private int y;
 	private BufferedImage image;
-	private boolean solid;
+	private boolean solid, respawn;
 	private Shape shape;
 	
 	public Tile(int x, int y, BufferedImage image, boolean solid, String shape, String corner, boolean respawn){
@@ -33,6 +32,7 @@ public class Tile implements WorldObject{
 		}else{
 			this.shape = new Rectangle2D.Double(x*32,y*32,32,32);
 		}
+		this.setRespawn(respawn);
 	}
 
 	public int getX() {
@@ -80,6 +80,14 @@ public class Tile implements WorldObject{
 	
 	public Shape getShape(){
 		return this.shape;
+	}
+
+	public void setRespawn(boolean respawn) {
+		this.respawn = respawn;
+	}
+
+	public boolean isRespawn() {
+		return respawn;
 	}
 	
 }
