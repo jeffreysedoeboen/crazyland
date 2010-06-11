@@ -2,14 +2,10 @@ package client.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import masterserver.db.AccountDAO;
 
 import client.connection.MasterConnection;
 import client.connection.Sender;
@@ -20,8 +16,6 @@ import client.view.LobbyView;
 import client.view.SignupView;
 import client.view.LeaderView;
 import client.view.WorldView;
-
-
 
 public class ButtonController implements ActionListener {
 

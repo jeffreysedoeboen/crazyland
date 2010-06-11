@@ -8,7 +8,6 @@ public class GameFrame extends JFrame {
 	
 	public GameFrame(){
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
 	}
 
 	public void setWorldView(WorldView view) {
