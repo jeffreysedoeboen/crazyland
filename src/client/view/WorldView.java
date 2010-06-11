@@ -183,8 +183,12 @@ public class WorldView extends JPanel {
 			float playerX = receiver.getPlayer().getX();
 			float playerY = receiver.getPlayer().getY();
 			
+			float weaponX = receiver.getPlayer().getPrimaryWeapon().getX();
+			float weaponY = receiver.getPlayer().getPrimaryWeapon().getY();
+			
 			g.drawImage(receiver.getPlayer().getImage(),Math.round(playerX + offsetX),Math.round(playerY + offsetY),null);
 			g.drawString(receiver.getPlayer().getName(), Math.round(playerX + offsetX + 20), Math.round(playerY + offsetY + 5));
+			g.drawImage(receiver.getPlayer().getPrimaryWeapon().getImage(), Math.round(weaponX + offsetX),Math.round(weaponY + offsetY),null);
 			
 			for(int i = 0; i <= receiver.getPlayer().getHitpoints(); i++){
 				g.drawImage(receiver.getPlayer().getHeartImage(),i*18,0,null);
@@ -193,6 +197,7 @@ public class WorldView extends JPanel {
 			for(Player p : receiver.getRemotePlayers()){
 				g.drawImage(p.getImage(),Math.round(p.getX() + offsetX),Math.round(p.getY() + offsetY),null);
 				g.drawString(p.getName(), Math.round(p.getX() + offsetX + 20), Math.round(p.getY() + offsetY + 5));
+				g.drawImage(p.getPrimaryWeapon().getImage(), Math.round(p.getPrimaryWeapon().getX() + offsetX),Math.round(p.getPrimaryWeapon().getY() + offsetY),null);
 			}
 			
 			ArrayList<Bullet> bullets = receiver.getBullets();
