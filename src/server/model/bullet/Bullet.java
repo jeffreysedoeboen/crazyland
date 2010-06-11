@@ -11,6 +11,7 @@ import server.model.Player;
 public abstract class Bullet {
 
 	protected final float BULLET_SPEED = 1.00F;
+	protected final int DAMAGE = 1;
 	protected BufferedImage bulletImage;
 	protected float direction;
 	protected float x, y;
@@ -34,6 +35,10 @@ public abstract class Bullet {
 	
 	public float getY() {
 		return y;
+	}
+	
+	public int getDamage() {
+		return DAMAGE;
 	}
 
 	public void setPosition(float x, float y) {

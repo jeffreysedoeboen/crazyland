@@ -8,6 +8,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
+import server.model.tile.Tile;
+
 public class Connector extends Thread {
 	
 	GameServer server = null;
@@ -63,7 +65,8 @@ public class Connector extends Thread {
     		out = new PrintWriter(outStream, true);	
             in = new Scanner(inStream);
             
-            Player p = new Player("Henk", 200f,100f);
+            Tile t = (Tile)server.getWorld().getRespawns().get((int) (Math.random()*server.getWorld().getRespawns().size()));
+            Player p = new Player("Henk", t.getX() * 32,t.getY() * 32);
             
             Sender s = new Sender(out,p);
             Receiver r = new Receiver(in,p,server);

@@ -1,6 +1,5 @@
 package server.model;
 
-import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ public class World{
 	private GameServer server;
 	private Map map;
 	private ArrayList<Player> playerList = new ArrayList<Player>();
+	private ArrayList<Player> playerWaitList = new ArrayList<Player>();
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	private int bulletCounter = 1;
 
@@ -22,16 +22,26 @@ public class World{
 		map = new Map();
 		this.server = s;
 	}
-	
+
+	public void addPlayerWaitList(Player p) {
+		playerList.remove(p);
+		playerWaitList.add(p);
+	}
+
+	public void RemovePlayerWaitList(Player p) {
+		playerWaitList.remove(p);
+		playerList.add(p);
+	}
+
 	public void addPlayer(Player p){
 		playerList.add(p);
 	}
-	
-	
+
+
 	public Map getMap() {
 		return map;
 	}
-	
+
 	public int getBulletCounter(){
 		return this.bulletCounter;
 	}
@@ -48,12 +58,12 @@ public class World{
 		}
 		return null;
 	}
-	
-//	public void moveWeapon(int mouseX, int mouseY) {
-//		player.getWeapon().turnToPoint(mouseX, mouseY);
-//		//player.getWeapon().setX(player.getMidPlayerX() + 5);
-//		player.updateWeaponPosition();
-//	}
+
+	//	public void moveWeapon(int mouseX, int mouseY) {
+	//		player.getWeapon().turnToPoint(mouseX, mouseY);
+	//		//player.getWeapon().setX(player.getMidPlayerX() + 5);
+	//		player.updateWeaponPosition();
+	//	}
 
 	@SuppressWarnings("unchecked")
 	public void move() {
@@ -69,7 +79,7 @@ public class World{
 				if(collisionCeiling(player)){
 					//player.setVerticalSpeed(-0.5f);
 				}
-				
+
 			}
 		}
 		ArrayList<Bullet> bulletsclone = (ArrayList<Bullet>) bullets.clone();
@@ -81,13 +91,36 @@ public class World{
 					b.moveOpposite();
 				}
 				System.out.println("HIT");
+				ArrayList<Player> players = (ArrayList<Player>)getPlayerList().clone();
+				for(Player p : players) {
+					if(p.getHitpoints() < 1) {
+						addPlayerWaitList(p);
+						p.increaseDeaths();
+						b.getOrigin().increaseKills();
+						System.out.println("dooie: kills" + p.getKills() + " deaths " + p.getDeaths());
+						System.out.println("owner: kills" + b.getOrigin().getKills() + " deaths " + b.getOrigin().getDeaths());
+					}
+				}
 				bullets.remove(b);
 				server.removeBullet(b);
+				
 			}
 		}
 
 	}
-	
+
+	public ArrayList<WorldObject> getRespawns() {
+		ArrayList<WorldObject> respawns = new ArrayList<WorldObject>();
+		for( int i = 0; i < map.getTiles().length; i++ ) {
+			for( Tile tile : map.getTiles()[i] ) {
+				if(tile.isRespawn()) {
+					respawns.add(tile);
+				}
+			}
+		}
+		return respawns;
+	}
+
 	public boolean checkBulletColission(Bullet bullet){
 		ArrayList<WorldObject> retList = new ArrayList<WorldObject>();
 
@@ -98,7 +131,7 @@ public class World{
 				retList.add(player);
 			}
 		}
-		
+
 		// doorloop alle tiles
 		for( int i = 0; i < map.getTiles().length; i++ ) {
 			if( i*32+32 > bullet.getX() && i*32-32 < bullet.getX() ) {
@@ -109,15 +142,19 @@ public class World{
 				}
 			}
 		}
-		
+
 		for(WorldObject t : retList){
-			
+
 			if(bullet.getShape() instanceof Circle){
 				Circle b = (Circle) bullet.getShape();
 				if(t.getShape() instanceof Circle){
 					Circle tile = (Circle) t.getShape();
 					if(b.intersects(tile)){
 						if(bullet.getOrigin() != t){
+							if(t instanceof Player) {
+								Player p = (Player) t;
+								p.decreaseHitpoints(bullet.getDamage());
+							}
 							return true;	
 						}
 					}
@@ -125,6 +162,10 @@ public class World{
 					Rectangle2D.Double tile = (Rectangle2D.Double) t.getShape();
 					if(b.intersects(tile)){
 						if(bullet.getOrigin() != t){
+							if(t instanceof Player) {
+								Player p = (Player) t;
+								p.decreaseHitpoints(bullet.getDamage());
+							}
 							return true;
 						}
 					}
@@ -135,6 +176,10 @@ public class World{
 					Circle tile = (Circle) t.getShape();
 					if(tile.intersects(b)){
 						if(bullet.getOrigin() != t){
+							if(t instanceof Player) {
+								Player p = (Player) t;
+								p.decreaseHitpoints(bullet.getDamage());
+							}
 							return true;
 						}	
 					}
@@ -142,13 +187,17 @@ public class World{
 					Rectangle2D.Double tile = (Rectangle2D.Double) t.getShape();
 					if(b.intersects(tile)){
 						if(bullet.getOrigin() != t){
+							if(t instanceof Player) {
+								Player p = (Player) t;
+								p.decreaseHitpoints(bullet.getDamage());
+							}
 							return true;
 						}
 					}
 				}
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -163,33 +212,33 @@ public class World{
 				}
 			}
 		}
-		
+
 		return pmap;
 	}
-	
+
 	private boolean isCollision(Tile tileLeft, Tile tileRight, boolean ground, Player player) {
-		
+
 		if( tileLeft.isSolid() || tileRight.isSolid()) {
-			
+
 			int playerX  = (int) player.getX();
 			int playerY  = (int) player.getY();
 			int tilePosY = (int) Math.abs(playerY - tileLeft.getY()*32);
-			
+
 			if( ground ) {
 				tilePosY = 32-tilePosY;
 			}
-			
+
 			// create tile pixelmaps
 			boolean[] pixelMapLeft  = getPixelMap(tileLeft.getImage())[tilePosY];
 			boolean[] pixelMapRight = getPixelMap(tileRight.getImage())[tilePosY];
-			
+
 			// create de player pixelmap
-//			try {
-//				boolean[][] pixelMapPlayer = getPixelMap(ImageIO.read(new File("../themes/tee/pixelmaps/character.png")));
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-			
+			//			try {
+			//				boolean[][] pixelMapPlayer = getPixelMap(ImageIO.read(new File("../themes/tee/pixelmaps/character.png")));
+			//			} catch (IOException e) {
+			//				e.printStackTrace();
+			//			}
+
 			// left map is voor de rechte kant
 			int i = tileLeft.getX()*32;
 			for( boolean pixel : pixelMapLeft ) {
@@ -198,7 +247,7 @@ public class World{
 				}
 				i++;
 			}
-			
+
 			// check de links kant (links lopenend)
 			i = tileRight.getX()*32;
 			playerX += 32;
@@ -209,25 +258,26 @@ public class World{
 				i++;
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	public boolean onGround(Player player) {
-		
+
 		Tile[][] tiles = map.getTiles();
-		
+
 		if( isCollision( tiles[(int) (player.getX()/32)] [(int) ((player.getY()+32)/32)],
 				tiles[(int) ((player.getX()+32)/32)][(int) ((player.getY()+32)/32)], true,player)) {
 			return true;
 		}
-		
+
 		return false;
 	}
-	
-	private boolean canMoveLeft(Player player) {	
-		
+
+	private boolean canMoveLeft(Player player) {
+
 		Tile[][] tiles = map.getTiles();
+
 		Circle shape = (Circle) player.getShape();
 		if(tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY())/32)].getShape() instanceof Circle){
 			Circle tile1 = (Circle) tiles[(int) ((player.getX()-3)/32)][(int) ((player.getY())/32)].getShape();
@@ -270,7 +320,7 @@ public class World{
 		}
 		return true;
 	}
-	
+
 	private boolean canMoveRight(Player player) {
 		Tile[][] tiles = map.getTiles();
 		Circle shape = (Circle) player.getShape();
@@ -317,7 +367,7 @@ public class World{
 	}
 
 	private boolean collisionCeiling(Player player) {
-		
+
 		Tile[][] tiles = map.getTiles();
 		Circle shape = (Circle) player.getShape();
 		
@@ -348,7 +398,7 @@ public class World{
 				}
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -387,8 +437,12 @@ public class World{
 	public void removePlayer(Player p) {
 		playerList.remove(p);
 	}
-	
-//	public void changeWeapon(Player player) {
-//		player.changeWeapon();
-//	}
+
+	public ArrayList<Player> getPlayerWaitList() {
+		return playerWaitList;
+	}
+
+	//	public void changeWeapon(Player player) {
+	//		player.changeWeapon();
+	//	}
 }

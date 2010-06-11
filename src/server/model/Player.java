@@ -12,6 +12,7 @@ import server.model.weapon.Weapon;
 import server.tools.Circle;
 
 public class Player implements WorldObject{
+	private final int respawnTime = 5;
 	private float angle;
 	private String name;
 	private float x;
@@ -23,78 +24,119 @@ public class Player implements WorldObject{
 	private boolean movingRight = false;
 	private boolean movingLeft = false;
 	private boolean shooting = false;
-	private int shootCounter;
+	private int shootCounter, kills, deaths, timeToWait;
 	private float verticalSpeed = 0;
 	private ArrayList<Weapon> weaponlist;
 	
+
 	public Player(String name, float x, float y) {
 		weaponlist = new ArrayList<Weapon>();
 		this.name = name;
 		this.x = x;
 		this.y = y;
 		this.shootCounter = 0;
-		
+		this.timeToWait = respawnTime;
+
 		try {
 			playerImage = ImageIO.read(new File("themes/tee/characters/character.png"));
 			shootImage = ImageIO.read(new File("themes/tee/characters/charactershoot.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		primaryWeapon = new Pistol();
-//		weaponlist.add(new Pistol(this.getMidPlayerX() + 5, this.getMidPlayerY()));
-//		weaponlist.add(new Grenade(this.getMidPlayerX() + 5, this.getMidPlayerY()));
-//		primaryWeapon = weaponlist.get(0);
+		//		weaponlist.add(new Pistol(this.getMidPlayerX() + 5, this.getMidPlayerY()));
+		//		weaponlist.add(new Grenade(this.getMidPlayerX() + 5, this.getMidPlayerY()));
+		//		primaryWeapon = weaponlist.get(0);
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	public void decreaseTimeToWait() {
+		timeToWait--;
+	}
+
+	public void decreaseHitpoints(int damage) {
+		hitpoints -= damage;
+	}
+	
+	public void resetHitpoints() {
+		hitpoints = 10;
+	}
+
+	public int getKills() {
+		return kills;
+	}
+
+	public void increaseKills() {
+		kills++;
+	}
+
+	public void resetKills() {
+		kills = 0;
+	}
+
+	public int getDeaths() {
+		return deaths;
+	}
+
+	public void increaseDeaths() {
+		deaths++;
+	}
+
+	public void resetDeaths() {
+		deaths = 0;
+	}
+
+
+
 	public void setPosition(float x, float y) {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	public void setVerticalSpeed(float x){
 		this.verticalSpeed = x;
 	}
-	
+
 	public float getVerticalSpeed(){
 		return this.verticalSpeed;
 	}
-	
+
 	public Bullet shoot(int bCounter) {
+		if(hitpoints > 0) {
+			float fireRate = primaryWeapon.getFireRate();
+			float timePerShot = 1/fireRate;
+			timePerShot = timePerShot*1000;
 
-		float fireRate = primaryWeapon.getFireRate();
-		float timePerShot = 1/fireRate;
-		timePerShot = timePerShot*1000;
-		
-		if(System.currentTimeMillis()-lastTimeShot >= timePerShot){
+			if(System.currentTimeMillis()-lastTimeShot >= timePerShot){
 
-			lastTimeShot = System.currentTimeMillis();
-			
-			shooting = true;
-			shootCounter = 100;
-			return primaryWeapon.shoot(bCounter);
-		}		
-		
+				lastTimeShot = System.currentTimeMillis();
+
+				shooting = true;
+				shootCounter = 100;
+				return primaryWeapon.shoot(bCounter);
+			}		
+		}
+
 		return null;		
 	}
-	
-	
-	
+
+
+
 	public float getX(){
 		return this.x;	
 	}
 	public float getY(){
 		return this.y;
 	}
-	
+
 	public String getName(){
 		return name;
 	}
-	
+
 	public int getHitpoints(){
 		return hitpoints;
 	}
@@ -111,7 +153,7 @@ public class Player implements WorldObject{
 		}
 		return isShooting() ? shootImage: playerImage;
 	}
-	
+
 	private boolean isShooting() {
 		return shooting;
 	}
@@ -123,15 +165,15 @@ public class Player implements WorldObject{
 	public void setMovingLeft(boolean b) {
 		movingLeft = b;
 	}
-	
+
 	public boolean isMovingLeft(){
 		return movingLeft;
 	}
-	
+
 	public boolean isMovingRight(){
 		return movingRight;
 	}
-	
+
 	public boolean onGround(){
 		return true;
 	}
@@ -144,15 +186,15 @@ public class Player implements WorldObject{
 		}
 		updateWeaponPosition();
 	}
-	
+
 	public void updateWeaponPosition() {
-//		if(this.getWeapon().getWeaponDirection() == 0) {
-//			this.getWeapon().setX(this.getMidPlayerX()- 5);
-//		} else {
-//			this.getWeapon().setX(this.getMidPlayerX() -30);
-//		}
+		//		if(this.getWeapon().getWeaponDirection() == 0) {
+		//			this.getWeapon().setX(this.getMidPlayerX()- 5);
+		//		} else {
+		//			this.getWeapon().setX(this.getMidPlayerX() -30);
+		//		}
 	}
-	
+
 	public void moveLeft(boolean onGround) {
 		if(onGround){
 			this.x -= 2.5; //4
@@ -168,7 +210,7 @@ public class Player implements WorldObject{
 	}
 
 	public void calcVerticalSpeed(boolean onGround) {
-		
+
 		if(!onGround){
 			if(this.verticalSpeed > -2.5){ //4
 				this.verticalSpeed += -0.1;
@@ -176,10 +218,10 @@ public class Player implements WorldObject{
 		}else{
 			this.verticalSpeed = 0;
 		}
-		
+
 		//this.getWeapon().setY(this.getMidPlayerY() - 18);
 	}
-	
+
 	public void changeWeapon() {
 		if(weaponlist.size()>1) {
 			if(primaryWeapon.equals(weaponlist.get(weaponlist.size()-1))) {
@@ -193,11 +235,11 @@ public class Player implements WorldObject{
 			}
 		}
 	}
-	
+
 	public Shape getShape(){
 		return new Circle(15,(int)x,(int)y);
 	}
-	
+
 	public float getAngle() {
 		return angle;
 	}
@@ -205,5 +247,17 @@ public class Player implements WorldObject{
 	public void setAngle(float angle) {
 		this.angle = angle;
 	}
+
+	public void setTimeToWait(int timeToWait) {
+		this.timeToWait = timeToWait;
+	}
+
+	public int getTimeToWait() {
+		return timeToWait;
+	}
 	
+	public void resetTimeToWait() {
+		timeToWait = respawnTime;
+	}
+
 }

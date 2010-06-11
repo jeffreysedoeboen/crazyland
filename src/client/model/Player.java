@@ -2,12 +2,15 @@ package client.model;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.Timer;
 
 import client.model.weapon.Pistol;
 import client.model.weapon.Weapon;
@@ -17,10 +20,22 @@ public class Player {
 	private float x;
 	private float y;
 	private float angle;
-	private BufferedImage image,heartImage;
+	private BufferedImage image,heartImage, shootImage, normalImage;
 	private String name;
 	private int hitpoints = 0;
 	private Weapon primaryWeapon;
+	private int kills;
+	private int deaths;
+	private Timer timer;
+	private ActionListener timerPerformer = new ActionListener() {
+
+		public void actionPerformed(ActionEvent arg0) {
+			image = normalImage;
+			timer.stop();
+		}
+
+	}; 
+	
 	
 	public Player(String name, float x, float y,int hitpoints, float angle) {
 		this.angle = angle;
@@ -29,11 +44,14 @@ public class Player {
 		this.name = name;
 		this.hitpoints = hitpoints;
 		try {
-			image = ImageIO.read(new File("../themes/tee/characters/character.png"));
-			heartImage = ImageIO.read(new File("../themes/tee/other/heart.png"));
+			normalImage 		= ImageIO.read(new File("../themes/tee/characters/character.png"));
+			shootImage 	= ImageIO.read(new File("../themes/tee/characters/charactershoot.png"));
+			heartImage 	= ImageIO.read(new File("../themes/tee/other/heart.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		this.image = normalImage;
+		timer = new Timer(2000, timerPerformer);
 		this.primaryWeapon = new Pistol(getMidPlayerX(), getMidPlayerY());
 		turnToPoint(angle);
 		if(this.getPrimaryWeapon().getWeaponDirection() == 0) {
@@ -41,6 +59,28 @@ public class Player {
 		} else {
 			this.getPrimaryWeapon().setX(this.getMidPlayerX() - 10);
 		}
+	}
+	
+	public void setShootImage() {
+		this.image = shootImage;
+		timer.start();
+		
+	}
+	
+	public int getKills() {
+		return kills;
+	}
+	
+	public void setKills(int k) {
+		kills = k;
+	}
+	
+	public int getDeaths() {
+		return deaths;
+	}
+	
+	public void setDeaths(int d) {
+		deaths = d;
 	}
 	
 	public void setName(String name) {

@@ -12,7 +12,6 @@ import client.connection.MasterConnection;
 import client.connection.Sender;
 import client.controller.ButtonController;
 import client.view.InlogView;
-import client.view.WorldView;
 
 @SuppressWarnings("serial")
 public class Client extends JApplet {
