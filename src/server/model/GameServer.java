@@ -62,7 +62,7 @@ public class GameServer extends Thread{
 		}
 
 		if(count % 20 == 0){
-			System.out.println("Players in-game: " + senderList.size());
+			//System.out.println("Players in-game: " + senderList.size());
 		}
 		if(count == 100) {
 			count = 0;

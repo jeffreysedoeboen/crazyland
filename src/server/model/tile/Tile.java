@@ -6,6 +6,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 import server.model.WorldObject;
+import server.tools.Circle;
 
 public class Tile implements WorldObject{
 	private int x;
@@ -19,7 +20,19 @@ public class Tile implements WorldObject{
 		this.y = y;
 		this.image = image;
 		this.solid = solid;
-		this.shape = new Rectangle2D.Double(x*32,y*32,32,32);
+		if(shape.equals("circle")){
+			if(corner.equals("tl")){
+				this.shape = new Circle(32,x*32,y*32);
+			}else if(corner.equals("bl")){
+				this.shape = new Circle(32,x*32,y*32-32);
+			}else if(corner.equals("tr")){
+				this.shape = new Circle(32,x*32-32,y*32);
+			}else{
+				this.shape = new Circle(32,x*32-32,y*32-32);
+			}
+		}else{
+			this.shape = new Rectangle2D.Double(x*32,y*32,32,32);
+		}
 	}
 
 	public int getX() {

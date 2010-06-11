@@ -60,6 +60,11 @@ public abstract class Bullet {
 		verticalSpeed += -0.005;
 	}
 	
+	public void moveOpposite(){
+		this.x += 1*Math.cos(this.direction + Math.PI);
+		this.y += 1*Math.sin(this.direction + Math.PI);
+	}
+	
 	public void setBullet(float x, float y, double dir, Player p) {
 		this.x = x;
 		this.y = y - 8;
