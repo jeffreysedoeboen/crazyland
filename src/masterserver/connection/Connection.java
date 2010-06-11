@@ -1,9 +1,14 @@
 package masterserver.connection;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import javax.swing.Timer;
 
 import masterserver.MasterServer;
 import masterserver.db.AccountDAO;
@@ -17,11 +22,13 @@ public class Connection extends Thread {
 	private MasterServer server;
 	private boolean loggedIn = false, guest = false;
 	private boolean terminated = false;
+	private Timer timer;
 	
 	public  Connection(Scanner in, PrintWriter out, MasterServer s){
 		this.in = in;
 		this.out = out;
 		this.server = s;
+		
 	}
 	
 	public synchronized void terminate(){
@@ -29,10 +36,13 @@ public class Connection extends Thread {
 	}
 	
 	public void run(){	
-		
+		timer = new Timer(100,taskPerformer);
+		timer.start();
+	}
+	public void tick() {
 		try {
-				while(!terminated){
-					if (in.hasNext()){
+				//while(!terminated){
+					//if (in.hasNext()){
 						String input = in.nextLine();
 						
 						// login
@@ -40,9 +50,11 @@ public class Connection extends Thread {
 							String[] credentials = in.nextLine().split(",");
 							boolean loginOK = AccountDAO.login(credentials[0], credentials[1]);
 							if ( loginOK ) {
+								System.out.println("user " + credentials[0] + " logged in successfully");
 								out.println("login_ok");
 								loggedIn = true;
 							} else {
+								System.out.println("false credentials with username " + credentials[0]);
 								out.println("login_false");
 							}
 						} else 
@@ -85,8 +97,10 @@ public class Connection extends Thread {
 								String output = "";
 								output = "guest_access_granted\n";
 								guest = true;
-								output += server.getNewGuestNumber();
+								int number = server.getNewGuestNumber();
+								output += number;
 								out.println(output);
+								System.out.println("guest access granted with number" + number);
 							} else 
 								
 								// sign_up
@@ -97,15 +111,27 @@ public class Connection extends Thread {
 										credentials = in.nextLine().split(",");
 									if (AccountDAO.addAccount(credentials[0], credentials[1])) {
 										output = "sign_up_successful";
+										System.out.println("user signed up with username " + credentials[0]);
 									} else {
 										output = "sign_up_failed";
 									}
 									out.println(output);
 								}
-					}
-			}
+				//	}
+			//}
 		} catch (SQLException ex) {
 			System.err.println("ERROR with Database: " + ex.getMessage());
+		} catch (NoSuchElementException ex) {
+			//do nothing
 		}
 	}
+	
+	ActionListener taskPerformer = new ActionListener() {
+
+		public void actionPerformed(ActionEvent arg0) {
+			//run();
+			tick();
+		}
+		
+	  };
 }
