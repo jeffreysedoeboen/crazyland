@@ -15,7 +15,7 @@ public class Sender {
 	}
 
 	public void turnWeapon(int x, int y) {
-		out.println("tw\n" + x + "," + y); // player_turn_weapon
+		out.printf("tw%n" + x + "," + y + "%n"); // player_turn_weapon
 	}
 
 	public void startMovingLeft() {

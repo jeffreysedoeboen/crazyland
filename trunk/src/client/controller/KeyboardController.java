@@ -25,6 +25,9 @@ public class KeyboardController implements KeyListener {
 		case(KeyEvent.VK_UP):
 			sender.jump();
 		break;
+		case(KeyEvent.VK_W):
+			sender.jump();
+		break;
 		case(KeyEvent.VK_A):
 			sender.startMovingLeft();
 		break;
