@@ -8,7 +8,6 @@ import javax.swing.Timer;
 
 import server.model.bullet.Bullet;
 import server.model.upgrade.Upgrade;
-import server.model.tile.Tile;
 
 public class GameServer extends Thread{
 	
@@ -134,7 +133,6 @@ public class GameServer extends Thread{
 				s.sendWeaponAngle(angle);
 			}
 		}
-		
 	}
 		
 }

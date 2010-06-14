@@ -2,6 +2,7 @@ package server.model;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import server.model.bullet.Bullet;
 import server.model.upgrade.Upgrade;
@@ -11,54 +12,58 @@ public class Sender {
 	private PrintWriter out;
 	private Player player;
 	private String lineOut = "";
+	private String turnWeapon = "";
 		
 	public Sender(PrintWriter out, Player p){
 		this.out = out;
 		this.player = p;
-		out.println("begin_map\n" + "crazyland2\n" + p.getName() + "\n" + p.getX() + "," + p.getY() + "\n" + p.getHitpoints());
+		out.println("m\n" + "crazyland2\n" + p.getName() + "\n" + (int)p.getX() + "," + (int)p.getY() + "\n" + p.getHitpoints());
 	}
 	
 	public void sendPlayer(){
-		lineOut += "player%n" + player.getName() + "," + (int)player.getX() + "," + (int)player.getY() + "," + (int)player.getHitpoints() + "," + (float)player.getAngle() + "%n";
+		lineOut += "p%n" + player.getName() + "," + (int)player.getX() + "," + (int)player.getY() + "," + player.getHitpoints() + "," + String.format((Locale)null, "%.2f", player.getAngle()) + "%n";
 	}
 	
 	public void sendPlayers(ArrayList<Player> playerList){
-		String kaas = "players_begin%n";
+		String kaas = "pb%n";
 		for(Player p : playerList){
 			if(p != this.player){
-				kaas += p.getName()+ "," + (int)p.getX() + "," + (int)p.getY() + "," + (int)player.getHitpoints() + ","  + p.getAngle() + "%n";
+				kaas += p.getName()+ "," + (int)p.getX() + "," + (int)p.getY() + "," + player.getHitpoints() + ","  + String.format((Locale)null, "%.2f", p.getAngle()) + "%n";
 			}
 		}
-		lineOut += kaas + "players_end%n";
+		lineOut += kaas + "pe%n";
 	}
 	
 	public void sendBullet(Bullet b){
-		String kaas = "bullets_begin%n";
-		kaas += (int)b.getX() + "," + (int)b.getY() + "," + (int)b.getIndentifier() + "," + b.getDirection() + "%n";
+		String kaas = "b%n";
+		kaas += (int)b.getX() + "," + (int)b.getY() + "," + (int)b.getIndentifier() + "," + String.format((Locale)null, "%.2f", b.getDirection()) + "%n";
 		lineOut += kaas;
 	}
 	
 	public void sendUpgrades(ArrayList<Upgrade> upgradeList) {
-		String kaas = "upgrades_begin%n";
+		String kaas = "ub%n"; // upgrades_begin
 		for(Upgrade u : upgradeList) {
 			kaas += u.getX() + "," + u.getY() + "%n";
 		}
-		lineOut += kaas + "upgrades_end%n";
+		lineOut += kaas + "ue%n"; // upgrades_end
 	}
 	
 	public void sendLineOut(){
-		out.printf(lineOut);
+		out.printf(lineOut + getWeaponAngle() /*+ "t%n" + System.currentTimeMillis() + "%n" */); //TODO: Timestamp verwijdern
+		//System.out.println(lineOut.length());
+		//System.out.println(getWeaponAngle() + lineOut);
 		lineOut = "";
+		turnWeapon = "";
 	}
 	
 	public void removeBullet(Bullet b){
-		String kaas = "bullets_begin_destroy%n";
-		kaas += (int)b.getIndentifier();
+		String kaas = "bd%n";
+		kaas += b.getIndentifier();
 		lineOut += kaas + "%n";
 	}
 	
 	public void removePlayer(Player p) {
-		String kaas = "player_begin_destroy%n";
+		String kaas = "pd%n";
 		kaas += p.getName();
 		lineOut += kaas + "%n";
 	}
@@ -68,7 +73,13 @@ public class Sender {
 	}
 
 	public void sendWeaponAngle(float angle) {
-		lineOut += "player_turn_weapon%n" + angle + "%n";
+		turnWeapon = String.format((Locale)null, "%.2f", angle);
 	}
 	
+	public String getWeaponAngle() {
+		if (turnWeapon.length() > 0) {
+			return "tw%n" + turnWeapon + "%n";
+		}
+		return "";
+	}
 }

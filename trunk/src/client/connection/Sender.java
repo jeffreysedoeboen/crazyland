@@ -11,33 +11,31 @@ public class Sender {
 	}
 	
 	public void shoot(int i, int j){
-		out.println("player_shoot");
-		out.println(i + "," + j);
+		out.println("s\n" + i + "," + j); // player_shoot
 	}
 
 	public void turnWeapon(int x, int y) {
-		out.println("player_turn_weapon");
-		out.println(x + "," + y);
+		out.println("tw\n" + x + "," + y); // player_turn_weapon
 	}
 
 	public void startMovingLeft() {
-		out.println("player_move_left");
+		out.println("l"); // player_move_left
 	}
 
 	public void startMovingRight() {
-		out.println("player_move_right");
+		out.println("r"); // player_move_right
 	}
 
 	public void jump() {
-		out.println("player_jump");
+		out.println("j"); // player_jump
 	}
 
 	public void stopMovingLeft() {
-		out.println("player_stop_moving_left");
+		out.println("sl"); // player_stop_moving_left
 	}
 
 	public void stopMovingRight() {
-		out.println("player_stop_moving_right");
+		out.println("sr"); // player_stop_moving_right
 	}
 
 	public void changeWeapon() {
@@ -46,11 +44,11 @@ public class Sender {
 	}
 	
 	public void removePlayer () {
-		out.println("player_end");
+		out.println("rm"); // player_end
 	}
 	
 	public void login(String userName) {
-		out.println("player_name\n" + userName );
+		out.println("n\n" + userName ); // player_name
 	}
 	
 }
