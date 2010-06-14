@@ -272,6 +272,7 @@
     <property name="respawn" value="0"/>
     <property name="shape" value="rectangle"/>
     <property name="solid" value="0"/>
+    <property name="upgrade" value="life"/>
    </properties>
   </tile>
   <tile id="34">
