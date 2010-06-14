@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import server.model.bullet.Bullet;
+import server.model.upgrade.Upgrade;
 
 public class Sender {
 
@@ -35,6 +36,14 @@ public class Sender {
 		String kaas = "bullets_begin%n";
 		kaas += (int)b.getX() + "," + (int)b.getY() + "," + (int)b.getIndentifier() + "," + b.getDirection() + "%n";
 		lineOut += kaas;
+	}
+	
+	public void sendUpgrades(ArrayList<Upgrade> upgradeList) {
+		String kaas = "upgrades_begin%n";
+		for(Upgrade u : upgradeList) {
+			kaas += u.getX() + "," + u.getY() + "%n";
+		}
+		lineOut += kaas + "upgrades_end%n";
 	}
 	
 	public void sendLineOut(){

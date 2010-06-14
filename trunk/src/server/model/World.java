@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import server.model.bullet.Bullet;
 import server.model.tile.Tile;
+import server.model.upgrade.Upgrade;
 import server.tools.Circle;
 
 
@@ -17,16 +18,25 @@ public class World{
 	private ArrayList<Player> playerList = new ArrayList<Player>();
 	private ArrayList<Player> playerWaitList = new ArrayList<Player>();
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	private ArrayList<Upgrade> upgrades = new ArrayList<Upgrade>();
 	private int bulletCounter = 1;
 
 	public World(GameServer s){
 		map = new Map();
 		this.server = s;
+		//initialiseren van upgrades (actueel 14)
+		for(int i = 0; i < 13; i++)  {
+			upgrades.add(new Upgrade(map));
+		}
 	}
 
 	public void addPlayerWaitList(Player p) {
 		playerList.remove(p);
 		playerWaitList.add(p);
+	}
+	
+	public void addUpgrade(Upgrade u) {
+		upgrades.add(u);
 	}
 
 	public void RemovePlayerWaitList(Player p) {
@@ -37,12 +47,11 @@ public class World{
 	public void addPlayer(Player p){
 		playerList.add(p);
 	}
-
-
+	
 	public Map getMap() {
 		return map;
 	}
-
+	
 	public int getBulletCounter(){
 		return this.bulletCounter;
 	}
@@ -59,18 +68,26 @@ public class World{
 		}
 		return null;
 	}
-
-	//	public void moveWeapon(int mouseX, int mouseY) {
-	//		player.getWeapon().turnToPoint(mouseX, mouseY);
-	//		//player.getWeapon().setX(player.getMidPlayerX() + 5);
-	//		player.updateWeaponPosition();
-	//	}
+	
+//	public void moveWeapon(int mouseX, int mouseY) {
+//		player.getWeapon().turnToPoint(mouseX, mouseY);
+//		//player.getWeapon().setX(player.getMidPlayerX() + 5);
+//		player.updateWeaponPosition();
+//	}
 
 	@SuppressWarnings("unchecked")
 	public void move() {
+		for(Upgrade u : upgrades) {
+			if(u.getRespawnCountdown() > 0) {
+				u.tick();
+				//System.out.println(u.getRespawnCountdown());
+			} else {
+				u.updatePosition();
+				u.reset();
+			}
+		}
 		for(Player player : this.getPlayerList()){
 			if(player != null){
-				
 				if(player.isMovingLeft() && canMoveLeft(player)){
 					player.moveLeft(onGround(player));
 				}else if(player.isMovingRight() && canMoveRight(player)){
@@ -78,10 +95,10 @@ public class World{
 				}
 				player.moveVertical();
 				player.calcVerticalSpeed(onGround(player));
-				
 				if(collisionCeiling(player)){
 					player.setVerticalSpeed(-0.5f);
 				}
+
 
 			}
 		}
@@ -106,10 +123,16 @@ public class World{
 				}
 				bullets.remove(b);
 				server.removeBullet(b);
-				
 			}
 		}
-
+		ArrayList<Upgrade> upgradeclone = (ArrayList<Upgrade>) upgrades.clone();
+		for(Upgrade u : upgradeclone) {
+			if(u.getRespawnCountdown() > 0) {
+				u.tick();
+			} else {
+				u.reset();
+			}
+		}
 	}
 
 	public ArrayList<WorldObject> getRespawns() {
@@ -145,9 +168,9 @@ public class World{
 				}
 			}
 		}
-
+		
 		for(WorldObject t : retList){
-
+			
 			if(bullet.getShape() instanceof Circle){
 				Circle b = (Circle) bullet.getShape();
 				if(t.getShape() instanceof Circle){
@@ -219,6 +242,7 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 		float dir = b.getDirection();
 		Rectangle2D shape = b.getShape().getBounds();
 		
+
 		if(tile instanceof Circle){
 			Circle e1 = (Circle) tile;
 			Circle c1,c2,c3;
@@ -276,26 +300,26 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 				}
 			}
 		}
-
+		
 		return pmap;
 	}
-
+	
 	private boolean isCollision(Tile tileLeft, Tile tileRight, boolean ground, Player player) {
-
+		
 		if( tileLeft.isSolid() || tileRight.isSolid()) {
-
+			
 			int playerX  = (int) player.getX();
 			int playerY  = (int) player.getY();
 			int tilePosY = (int) Math.abs(playerY - tileLeft.getY()*32);
-
+			
 			if( ground ) {
 				tilePosY = 32-tilePosY;
 			}
-
+			
 			// create tile pixelmaps
 			boolean[] pixelMapLeft  = getPixelMap(tileLeft.getImage())[tilePosY];
 			boolean[] pixelMapRight = getPixelMap(tileRight.getImage())[tilePosY];
-
+			
 			// create de player pixelmap
 			//			try {
 			//				boolean[][] pixelMapPlayer = getPixelMap(ImageIO.read(new File("../themes/tee/pixelmaps/character.png")));
@@ -311,7 +335,7 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 				}
 				i++;
 			}
-
+			
 			// check de links kant (links lopenend)
 			i = tileRight.getX()*32;
 			playerX += 32;
@@ -322,14 +346,14 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 				i++;
 			}
 		}
-
+		
 		return false;
 	}
 	
 	/*public boolean onGround(Player player) {
 		
 		Tile[][] tiles = map.getTiles();
-
+		
 		if( isCollision( tiles[(int) (player.getX()/32)] [(int) ((player.getY()+32)/32)],
 				tiles[(int) ((player.getX()+32)/32)][(int) ((player.getY()+32)/32)], true,player)) {
 			return true;
@@ -430,7 +454,7 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 		player.setPosition(player.getX()+2, player.getY());
 		return true;
 	}
-
+	
 	private boolean canMoveRight(Player player) {
 		player.setPosition(player.getX()+2, player.getY());
 		
@@ -522,7 +546,7 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 		player.setPosition(player.getX(), player.getY() + 2.5F);
 		return false;
 	}
-
+	
 	public void startMovingRight(Player p) {
 		p.setMovingRight(true);
 	}
@@ -554,7 +578,12 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 	public ArrayList<Player> getPlayerList() {
 		return (ArrayList<Player>) this.playerList.clone();
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<Upgrade> getUpgradeList() {
+		return (ArrayList<Upgrade>) this.upgrades.clone();
+	}
+	
 	public void removePlayer(Player p) {
 		playerList.remove(p);
 	}

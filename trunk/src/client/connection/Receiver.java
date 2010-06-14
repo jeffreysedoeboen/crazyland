@@ -9,6 +9,8 @@ import client.model.Map;
 import client.model.Bullet;
 import client.model.Player;
 import client.model.Tile;
+import client.model.upgrades.ExtraLife;
+import client.model.upgrades.Upgrade;
 
 public class Receiver extends Thread {
 
@@ -18,6 +20,7 @@ public class Receiver extends Thread {
 	private Player player = null;
 	private ArrayList<Player> remotePlayers = new ArrayList<Player>();
 	private ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
+	private ArrayList<Upgrade> upgradeList = new ArrayList<Upgrade>();
 	
 	public  Receiver(Scanner in){
 		this.in = in;
@@ -58,6 +61,20 @@ public class Receiver extends Thread {
 			}else if(tempstr.equals("bullets_begin")){
 				String[] bulletXY = in.nextLine().split(",");
 				bulletList.add(new Bullet(Integer.parseInt("" + bulletXY[0]),Integer.parseInt("" + bulletXY[1]),Integer.parseInt("" + bulletXY[2]),Float.parseFloat(bulletXY[3])));
+			}else if(tempstr.equals("upgrades_begin")) {
+				boolean upgradeEnd = false;
+				ArrayList<Upgrade> tempList = new ArrayList<Upgrade>();
+				
+				while(!upgradeEnd && !terminated && in.hasNext()){
+					String rp = in.nextLine();
+					if(rp.equals("upgrades_end")){
+						upgradeEnd = true;
+					}else{
+						String[] upgradeXY = rp.split(",");
+						tempList.add(new ExtraLife(Float.parseFloat("" + upgradeXY[0]),Float.parseFloat("" + upgradeXY[1])));
+					}
+				}
+				this.upgradeList = tempList;
 			}else if(tempstr.equals("bullets_begin_destroy")){
 				Bullet b = null;
 				int tmp = Integer.parseInt(in.nextLine());
@@ -95,9 +112,15 @@ public class Receiver extends Thread {
 		return this.player;
 	}
 	
+	public ArrayList<Upgrade> getUpgrades() {
+		return this.upgradeList;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public ArrayList<Player> getRemotePlayers(){
 		return (ArrayList<Player>) this.remotePlayers.clone();
 	}
+	
+	
 	
 }
