@@ -21,7 +21,6 @@ public class KeyboardController implements KeyListener {
 
 	
 	public void keyPressed(KeyEvent e) {
-		System.out.println(e.getKeyCode()+ " - " + KeyEvent.VK_SPACE);
 		switch(e.getKeyCode()) {
 			case(KeyEvent.VK_UP):
 				sender.jump();
