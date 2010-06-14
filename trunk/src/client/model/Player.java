@@ -125,7 +125,6 @@ public class Player {
 	}
 
 	public Image getImage() {
-		System.out.println(angle);
 		if (Math.abs(angle) < 90.0f)
 			return rightImage;
 		return leftImage;
@@ -148,15 +147,15 @@ public class Player {
 	}
 	
 	public void turnToPoint( float angle ) {
-//		if(this.getPrimaryWeapon().getImage() == null)
-//			this.getPrimaryWeapon().setImage(this.getPrimaryWeapon().getBaseImage());
-//		if(Math.abs(angle) > 90.00000f) {
-//			setWeaponDir(1);
-//			this.getPrimaryWeapon().setImage(rotateImage(this.getPrimaryWeapon().getBaseImage(),angle));
-//		} else {
-//			setWeaponDir(0);
-//			this.getPrimaryWeapon().setImage(rotateImage(this.getPrimaryWeapon().getBaseImage(),angle));
-//		}
+		if(this.getPrimaryWeapon().getImage() == null)
+			this.getPrimaryWeapon().setImage(this.getPrimaryWeapon().getBaseImage());
+		if(Math.abs(angle) > 90.00000f) {
+			setWeaponDir(1);
+			this.getPrimaryWeapon().setImage(rotateImage(this.getPrimaryWeapon().getBaseImage(),angle));
+		} else {
+			setWeaponDir(0);
+			this.getPrimaryWeapon().setImage(rotateImage(this.getPrimaryWeapon().getBaseImage(),angle));
+		}
 	}
 	
 	public void setWeaponDir(int value) {

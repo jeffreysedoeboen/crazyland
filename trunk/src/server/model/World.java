@@ -18,16 +18,16 @@ public class World{
 	private ArrayList<Player> playerList = new ArrayList<Player>();
 	private ArrayList<Player> playerWaitList = new ArrayList<Player>();
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-	private ArrayList<Upgrade> upgrades = new ArrayList<Upgrade>();
+//	private ArrayList<Upgrade> upgrades = new ArrayList<Upgrade>();
 	private int bulletCounter = 1;
 
 	public World(GameServer s){
 		map = new Map();
 		this.server = s;
 		//initialiseren van upgrades (actueel 14)
-		for(int i = 0; i < 13; i++)  {
-			upgrades.add(new Upgrade(map));
-		}
+//		for(int i = 0; i < 1; i++)  {
+//			upgrades.add(new Upgrade(map));
+//		}
 	}
 
 	public void addPlayerWaitList(Player p) {
@@ -35,9 +35,9 @@ public class World{
 		playerWaitList.add(p);
 	}
 	
-	public void addUpgrade(Upgrade u) {
-		upgrades.add(u);
-	}
+//	public void addUpgrade(Upgrade u) {
+//		upgrades.add(u);
+//	}
 
 	public void RemovePlayerWaitList(Player p) {
 		playerWaitList.remove(p);
@@ -77,15 +77,15 @@ public class World{
 
 	@SuppressWarnings("unchecked")
 	public void move() {
-		for(Upgrade u : upgrades) {
-			if(u.getRespawnCountdown() > 0) {
-				u.tick();
-				//System.out.println(u.getRespawnCountdown());
-			} else {
-				u.updatePosition();
-				u.reset();
-			}
-		}
+//		for(Upgrade u : upgrades) {
+//			if(u.getRespawnCountdown() > 0) {
+//				u.tick();
+//				//System.out.println(u.getRespawnCountdown());
+//			} else {
+//				u.updatePosition();
+//				u.reset();
+//			}
+//		}
 		for(Player player : this.getPlayerList()){
 			if(player != null){
 				if(player.isMovingLeft() && canMoveLeft(player)){
@@ -107,9 +107,9 @@ public class World{
 			if(!checkBulletColission(b)){
 				b.move();
 			}else{
-				while(checkBulletColission(b)){
-					b.moveOpposite();
-				}
+//				while(checkBulletColission(b)){
+//					b.moveOpposite();
+//				}
 				System.out.println("HIT");
 				ArrayList<Player> players = (ArrayList<Player>)getPlayerList().clone();
 				for(Player p : players) {
@@ -125,14 +125,14 @@ public class World{
 				server.removeBullet(b);
 			}
 		}
-		ArrayList<Upgrade> upgradeclone = (ArrayList<Upgrade>) upgrades.clone();
-		for(Upgrade u : upgradeclone) {
-			if(u.getRespawnCountdown() > 0) {
-				u.tick();
-			} else {
-				u.reset();
-			}
-		}
+//		ArrayList<Upgrade> upgradeclone = (ArrayList<Upgrade>) upgrades.clone();
+//		for(Upgrade u : upgradeclone) {
+//			if(u.getRespawnCountdown() > 0) {
+//				u.tick();
+//			} else {
+//				u.reset();
+//			}
+//		}
 	}
 
 	public ArrayList<WorldObject> getRespawns() {
@@ -580,9 +580,9 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<Upgrade> getUpgradeList() {
-		return (ArrayList<Upgrade>) this.upgrades.clone();
-	}
+//	public ArrayList<Upgrade> getUpgradeList() {
+//		return (ArrayList<Upgrade>) this.upgrades.clone();
+//	}
 	
 	public void removePlayer(Player p) {
 		playerList.remove(p);
