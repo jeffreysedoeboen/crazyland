@@ -20,7 +20,7 @@ public class Player {
 	private float x;
 	private float y;
 	private float angle;
-	private BufferedImage image,heartImage, shootImage, normalImage;
+	private BufferedImage heartImage, shootImage, leftImage, rightImage;
 	private String name;
 	private int hitpoints = 0;
 	private Weapon primaryWeapon;
@@ -30,7 +30,7 @@ public class Player {
 	private ActionListener timerPerformer = new ActionListener() {
 
 		public void actionPerformed(ActionEvent arg0) {
-			image = normalImage;
+			//image = normalImage;
 			timer.stop();
 		}
 
@@ -44,13 +44,14 @@ public class Player {
 		this.name = name;
 		this.hitpoints = hitpoints;
 		try {
-			normalImage 		= ImageIO.read(new File("../themes/tee/characters/character.png"));
+			leftImage 		= ImageIO.read(new File("../themes/tee/characters/character_left.png"));
+			rightImage 		= ImageIO.read(new File("../themes/tee/characters/character_right.png"));
 			shootImage 	= ImageIO.read(new File("../themes/tee/characters/charactershoot.png"));
 			heartImage 	= ImageIO.read(new File("../themes/tee/other/heart.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.image = normalImage;
+		//this.image = normalImage;
 		timer = new Timer(2000, timerPerformer);
 		this.primaryWeapon = new Pistol(getMidPlayerX(), getMidPlayerY());
 		turnToPoint(angle);
@@ -61,11 +62,11 @@ public class Player {
 		}
 	}
 	
-	public void setShootImage() {
-		this.image = shootImage;
-		timer.start();
-		
-	}
+//	public void setShootImage() {
+//		this.image = shootImage;
+//		timer.start();
+//		
+//	}
 	
 	public int getKills() {
 		return kills;
@@ -116,7 +117,9 @@ public class Player {
 	}
 
 	public Image getImage() {
-		return image;
+		if (Math.abs(angle) < 90.0f)
+			return rightImage;
+		return leftImage;
 	}
 	
 	public Image getHeartImage(){
