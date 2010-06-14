@@ -105,6 +105,10 @@ public class Player implements WorldObject{
 		return this.verticalSpeed;
 	}
 
+	public void addToHitpoints(int value) {
+		hitpoints += value;
+	}
+	
 	public Bullet shoot(int bCounter) {
 		if(hitpoints > 0) {
 			float fireRate = primaryWeapon.getFireRate();
