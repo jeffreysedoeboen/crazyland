@@ -21,36 +21,18 @@ public class KeyboardController implements KeyListener {
 
 	
 	public void keyPressed(KeyEvent e) {
-
-	}
-
-	public void keyReleased(KeyEvent e) {
-		switch(e.getKeyChar()) {
-			case('a'):
-				sender.stopMovingLeft();
-				break;
-			case('d'):
-				sender.stopMovingRight();
-				break;
-			case('q'): //TODO score laten zien
-				wv.setShowHighscore(false);
-				break;
-		}
-	}
-
-	public void keyTyped(KeyEvent e) {
-		
-		switch(e.getKeyChar()) {
-			case(KeyEvent.VK_SPACE):
+		System.out.println(e.getKeyCode()+ " - " + KeyEvent.VK_SPACE);
+		switch(e.getKeyCode()) {
+			case(KeyEvent.VK_UP):
 				sender.jump();
 				break;
-			case('a'):
+			case(KeyEvent.VK_LEFT):
 				sender.startMovingLeft();
 				break;
-			case('d'):
+			case(KeyEvent.VK_RIGHT):
 				sender.startMovingRight();
 				break;
-			case('q'): //TODO score laten zien
+			case(KeyEvent.VK_CONTROL):
 				wv.setShowHighscore(true);
 				break;
 			case(KeyEvent.VK_ESCAPE): 
@@ -58,6 +40,23 @@ public class KeyboardController implements KeyListener {
 				gameframe.dispose();
 				break;
 		}
+	}
+
+	public void keyReleased(KeyEvent e) {
+		switch(e.getKeyCode()) {
+			case(KeyEvent.VK_LEFT):
+				sender.stopMovingLeft();
+				break;
+			case(KeyEvent.VK_RIGHT):
+				sender.stopMovingRight();
+				break;
+			case(KeyEvent.VK_CONTROL):
+				wv.setShowHighscore(false);
+				break;
+		}
+	}
+
+	public void keyTyped(KeyEvent e) {
 	}
 
 }
