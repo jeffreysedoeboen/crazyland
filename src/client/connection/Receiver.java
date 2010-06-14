@@ -51,6 +51,7 @@ public class Receiver extends Thread {
 					this.player.setX(Integer.parseInt("" + playerXY[1]));
 					this.player.setY(Integer.parseInt("" + playerXY[2]));
 					this.player.setHitpoints(Integer.parseInt("" + playerXY[3]));
+					this.player.setAngle(Float.parseFloat(playerXY[4]));
 					this.player.turnToPoint(Float.parseFloat(playerXY[4]));
 				}
 			}else if(tempstr.equals("pb")){ // player begin (list)

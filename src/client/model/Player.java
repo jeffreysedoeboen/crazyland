@@ -20,6 +20,14 @@ public class Player {
 	private float x;
 	private float y;
 	private float angle;
+	public float getAngle() {
+		return angle;
+	}
+
+	public void setAngle(float angle) {
+		this.angle = angle;
+	}
+
 	private BufferedImage heartImage, shootImage, leftImage, rightImage;
 	private String name;
 	private int hitpoints = 0;
@@ -117,6 +125,7 @@ public class Player {
 	}
 
 	public Image getImage() {
+		System.out.println(angle);
 		if (Math.abs(angle) < 90.0f)
 			return rightImage;
 		return leftImage;
