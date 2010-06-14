@@ -108,7 +108,7 @@ public class Player {
 	}
 	public void setX(float x) {
 		this.x = x;
-		//this.getPrimaryWeapon().setX(this.getMidPlayerX());
+		this.getPrimaryWeapon().setX(this.getMidPlayerX());
 		
 	}
 	public void setY(float y) {
@@ -139,15 +139,15 @@ public class Player {
 	}
 	
 	public void turnToPoint( float angle ) {
-		if(this.getPrimaryWeapon().getImage() == null)
-			this.getPrimaryWeapon().setImage(this.getPrimaryWeapon().getBaseImage());
-		if(Math.abs(angle) > 90.00000f) {
-			setWeaponDir(1);
-			this.getPrimaryWeapon().setImage(rotateImage(this.getPrimaryWeapon().getBaseImage(),angle));
-		} else {
-			setWeaponDir(0);
-			this.getPrimaryWeapon().setImage(rotateImage(this.getPrimaryWeapon().getBaseImage(),angle));
-		}
+//		if(this.getPrimaryWeapon().getImage() == null)
+//			this.getPrimaryWeapon().setImage(this.getPrimaryWeapon().getBaseImage());
+//		if(Math.abs(angle) > 90.00000f) {
+//			setWeaponDir(1);
+//			this.getPrimaryWeapon().setImage(rotateImage(this.getPrimaryWeapon().getBaseImage(),angle));
+//		} else {
+//			setWeaponDir(0);
+//			this.getPrimaryWeapon().setImage(rotateImage(this.getPrimaryWeapon().getBaseImage(),angle));
+//		}
 	}
 	
 	public void setWeaponDir(int value) {
