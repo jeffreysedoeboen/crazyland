@@ -42,7 +42,7 @@ import client.model.Tile;
 @SuppressWarnings("serial")
 public class WorldView extends JPanel {
 
-	private Receiver receiver;
+	private Receiver receiver; 
 	private int offsetX = 0;
 	private int offsetY = 0;
 	private BufferedImage bg = null;
