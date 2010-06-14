@@ -37,37 +37,46 @@ public class Receiver extends Thread {
 	public void run(){	
 		while(!terminated && in.hasNext()){
 			String tempstr = in.nextLine();
-			if(tempstr.equals("begin_map")){
+			if(tempstr.equals("m")){ // map
 				Tile[][] tiles = Mapfactory.getMap(in.nextLine());
 				map = new Map();
 				map.setTiles(tiles);
-			}else if(tempstr.equals("player")){
+			}else if(tempstr.equals("p")){ // player
 				tempstr = in.nextLine();
 				String[] playerXY = tempstr.split(",");
-				this.player = new Player( playerXY[0],Integer.parseInt("" + playerXY[1]),Integer.parseInt("" + playerXY[2]),Integer.parseInt("" + playerXY[3]), Float.parseFloat(playerXY[4]));
-			}else if(tempstr.equals("players_begin")){
+				if (this.player == null) {
+					this.player = new Player( playerXY[0], Integer.parseInt("" + playerXY[1]), Integer.parseInt("" + playerXY[2]), Integer.parseInt("" + playerXY[3]), Float.parseFloat(playerXY[4]));
+				} else {
+					this.player.setName(playerXY[0]);
+					this.player.setX(Integer.parseInt("" + playerXY[1]));
+					this.player.setY(Integer.parseInt("" + playerXY[2]));
+					this.player.setHitpoints(Integer.parseInt("" + playerXY[3]));
+					this.player.turnToPoint(Float.parseFloat(playerXY[4]));
+				}
+			}else if(tempstr.equals("pb")){ // player begin (list)
 				boolean playerEnd = false;
 				ArrayList<Player> tempList = new ArrayList<Player>();
 				while(!playerEnd && !terminated && in.hasNext()){
 					String rp = in.nextLine();
-					if(rp.equals("players_end")){
+					if(rp.equals("pe")){ // player end
 						playerEnd = true;
 					}else{
 						String[] playerXY = rp.split(",");
+						//TODO: het aanmaken van de speler moet verbeterd worden -> niet iedere keer een nieuwe speler aanmaken
 						tempList.add(new Player(playerXY[0], Integer.parseInt("" + playerXY[1]),Integer.parseInt("" + playerXY[2]),Integer.parseInt("" + playerXY[3]), Float.parseFloat(playerXY[4])));
 					}
 				}
 				this.remotePlayers = tempList;
-			}else if(tempstr.equals("bullets_begin")){
+			}else if(tempstr.equals("b")){ // bullet
 				String[] bulletXY = in.nextLine().split(",");
 				bulletList.add(new Bullet(Integer.parseInt("" + bulletXY[0]),Integer.parseInt("" + bulletXY[1]),Integer.parseInt("" + bulletXY[2]),Float.parseFloat(bulletXY[3])));
-			}else if(tempstr.equals("upgrades_begin")) {
+			}else if(tempstr.equals("ub")) { // upgrades_begin
 				boolean upgradeEnd = false;
 				ArrayList<Upgrade> tempList = new ArrayList<Upgrade>();
 				
 				while(!upgradeEnd && !terminated && in.hasNext()){
 					String rp = in.nextLine();
-					if(rp.equals("upgrades_end")){
+					if(rp.equals("ue")){ // upgrades_end
 						upgradeEnd = true;
 					}else{
 						String[] upgradeXY = rp.split(",");
@@ -75,7 +84,7 @@ public class Receiver extends Thread {
 					}
 				}
 				this.upgradeList = tempList;
-			}else if(tempstr.equals("bullets_begin_destroy")){
+			}else if(tempstr.equals("bd")){ // destroy bullet
 				Bullet b = null;
 				int tmp = Integer.parseInt(in.nextLine());
 				for(Bullet ba : bulletList){
@@ -85,7 +94,7 @@ public class Receiver extends Thread {
 					}
 				}
 				bulletList.remove(b);
-			} else if(tempstr.equals("player_begin_destroy")){
+			} else if(tempstr.equals("pd")){ // destroy player
 				Player p = null;
 				String tmp = in.nextLine();
 				for(Player pl : remotePlayers){
@@ -96,9 +105,12 @@ public class Receiver extends Thread {
 					}
 				}
 				remotePlayers.remove(p);
-			} else if(tempstr.equals("player_turn_weapon")) {
+			} else if(tempstr.equals("tw")) { //turn weapon
 				float angle = Float.parseFloat(in.nextLine());
 				player.turnToPoint(angle);
+			} else if(tempstr.equals("t")) {
+				// TODO: Timestamp verwijdern
+//				System.out.println(System.currentTimeMillis() - Long.parseLong(in.nextLine()));
 			}
 		}
 	}
@@ -120,7 +132,5 @@ public class Receiver extends Thread {
 	public ArrayList<Player> getRemotePlayers(){
 		return (ArrayList<Player>) this.remotePlayers.clone();
 	}
-	
-	
 	
 }
