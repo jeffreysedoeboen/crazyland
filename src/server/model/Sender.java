@@ -41,11 +41,11 @@ public class Sender {
 	}
 	
 	public void sendUpgrades(ArrayList<Upgrade> upgradeList) {
-		String kaas = "ub%n"; // upgrades_begin
-		for(Upgrade u : upgradeList) {
-			kaas += u.getX() + "," + u.getY() + "%n";
-		}
-		lineOut += kaas + "ue%n"; // upgrades_end
+//		String kaas = "ub%n"; // upgrades_begin
+//		for(Upgrade u : upgradeList) {
+//			kaas += u.getX() + "," + u.getY() + "%n";
+//		}
+//		lineOut += kaas + "ue%n"; // upgrades_end
 	}
 	
 	public void sendLineOut(){
