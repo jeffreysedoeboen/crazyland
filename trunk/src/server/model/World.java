@@ -223,15 +223,15 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 			Circle e1 = (Circle) tile;
 			Circle c1,c2,c3;
 			
-			c1 = new Circle(3,(int)shape.getCenterX()-5,(int)shape.getCenterY()-5);
+			c1 = new Circle(4,(int)shape.getCenterX()-5,(int)shape.getCenterY()-5);
 			
-			int posX = (int) (3*Math.cos(dir));
-			int posY = (int) (3*Math.sin(dir));
-			c2 = new Circle(3,(int)shape.getCenterX()+posX-5, (int)shape.getCenterY()+posY-5);
+			int posX = (int) (5*Math.cos(dir));
+			int posY = (int) (5*Math.sin(dir));
+			c2 = new Circle(4,(int)shape.getCenterX()+posX-5, (int)shape.getCenterY()+posY-5);
 			
-			posX = (int) (3*Math.cos(dir+Math.PI));
-			posY = (int) (3*Math.sin(dir+Math.PI));
-			c3 = new Circle(3,(int)shape.getCenterX()+posX-5, (int)shape.getCenterY()+posY-5);
+			posX = (int) (5*Math.cos(dir+Math.PI));
+			posY = (int) (5*Math.sin(dir+Math.PI));
+			c3 = new Circle(4,(int)shape.getCenterX()+posX-5, (int)shape.getCenterY()+posY-5);
 			
 			if(c1.intersects(e1)){
 				return true;
