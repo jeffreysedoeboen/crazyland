@@ -26,13 +26,13 @@ public class KeyboardController implements KeyListener {
 
 	public void keyReleased(KeyEvent e) {
 		switch(e.getKeyChar()) {
-			case('a'):
+			case(KeyEvent.VK_LEFT):
 				sender.stopMovingLeft();
 				break;
-			case('d'):
+			case(KeyEvent.VK_RIGHT):
 				sender.stopMovingRight();
 				break;
-			case('q'): //TODO score laten zien
+			case(KeyEvent.VK_CONTROL):
 				wv.setShowHighscore(false);
 				break;
 		}
@@ -44,13 +44,13 @@ public class KeyboardController implements KeyListener {
 			case(KeyEvent.VK_SPACE):
 				sender.jump();
 				break;
-			case('a'):
+			case(KeyEvent.VK_LEFT):
 				sender.startMovingLeft();
 				break;
-			case('d'):
+			case(KeyEvent.VK_RIGHT):
 				sender.startMovingRight();
 				break;
-			case('q'): //TODO score laten zien
+			case(KeyEvent.VK_CONTROL):
 				wv.setShowHighscore(true);
 				break;
 			case(KeyEvent.VK_ESCAPE): 
