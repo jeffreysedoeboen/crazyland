@@ -39,7 +39,7 @@ public class Sender {
 	
 	public void sendBullet(Bullet b){
 		String kaas = "b%n";
-		kaas += (int)b.getX() + "," + (int)b.getY() + "," + (int)b.getIndentifier() + "," + String.format((Locale)null, "%.2f", b.getDirection()) + "%n";
+		kaas += (int)b.getX() + "," + (int)b.getY() + "," + (int)b.getIndentifier() + "," + String.format((Locale)null, "%.10f", b.getDirection()) + "%n";
 		lineOut += kaas;
 	}
 	
