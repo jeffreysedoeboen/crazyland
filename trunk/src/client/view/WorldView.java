@@ -293,7 +293,7 @@ public class WorldView extends JPanel {
 	}
 	
 	public int tilesToPixels(int numTiles) {
-		return numTiles * 32;
+		return numTiles * 16;
 	}
 
 	public int getOffsetX() {
