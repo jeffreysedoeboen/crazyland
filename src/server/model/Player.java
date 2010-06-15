@@ -1,12 +1,16 @@
 package server.model;
 
+import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Shape;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import server.model.bullet.Bullet;
+import server.model.upgrade.Upgrade;
 import server.model.weapon.Pistol;
 import server.model.weapon.Weapon;
 import server.tools.Circle;
@@ -264,4 +268,7 @@ public class Player implements WorldObject{
 		timeToWait = respawnTime;
 	}
 
+	public void setHitpoints(int value) {
+		hitpoints += value;
+	}
 }
