@@ -1,5 +1,8 @@
 package server.model;
 
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -101,8 +104,7 @@ public class World{
 				if(collisionCeiling(player)){
 					player.setVerticalSpeed(-0.5f);
 				}
-
-
+				upgrades = colideWithUpgrade(player, upgrades);
 			}
 		}
 		ArrayList<Bullet> bulletsclone = (ArrayList<Bullet>) bullets.clone();
@@ -128,6 +130,7 @@ public class World{
 				server.removeBullet(b);
 			}
 		}
+		
 //		ArrayList<Upgrade> upgradeclone = (ArrayList<Upgrade>) upgrades.clone();
 //		for(Upgrade u : upgradeclone) {
 //			if(u.getRespawnCountdown() > 0) {
@@ -137,7 +140,22 @@ public class World{
 //			}
 //		}
 	}
-
+	
+	public ArrayList<Upgrade> colideWithUpgrade(Player p, ArrayList<Upgrade> upgrades) {
+		Rectangle speler = new Rectangle(new Point((int)p.getX(),(int)p.getY()), new Dimension(20,20));
+		for(Upgrade u : upgrades) {
+			Rectangle heartje = new Rectangle(new Point(u.getX() * 16, u.getY() * 16), new Dimension(5,5));
+			
+			if (speler.intersects(heartje)) {
+				if(!u.isUsed()) {
+					p.setHitpoints(1);
+					u.setIsUsed(true);
+				}
+			}
+		}
+		return upgrades;
+	}
+	
 	public ArrayList<WorldObject> getRespawns() {
 		ArrayList<WorldObject> respawns = new ArrayList<WorldObject>();
 		for( int i = 0; i < map.getTiles().length; i++ ) {
