@@ -14,7 +14,6 @@ public class Connector extends Thread {
 	
 	GameServer server = null;
 	
-	
 	public Connector(GameServer s){
 		this.server = s;
 	}
@@ -68,7 +67,7 @@ public class Connector extends Thread {
             Tile t = (Tile)server.getWorld().getRespawns().get((int) (Math.random()*server.getWorld().getRespawns().size()));
             Player p = new Player("Henk", t.getX() * 16,t.getY() * 16);
             
-            Sender s = new Sender(out,p);
+            Sender s = new Sender(out,p, server.getRemainingTimeInSeconds());
             Receiver r = new Receiver(in,p,server);
             r.start();
             server.addReceiver(r);

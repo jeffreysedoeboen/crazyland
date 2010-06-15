@@ -19,6 +19,7 @@ public class Receiver extends Thread {
 	private boolean terminated = false;
 	private Map map = null;
 	private Player player = null;
+	private int remainingTime = 0;
 	private ArrayList<Player> remotePlayers = new ArrayList<Player>();
 	private ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 	private ArrayList<Upgrade> upgradeList = new ArrayList<Upgrade>();
@@ -39,22 +40,29 @@ public class Receiver extends Thread {
 	public void run(){	
 		while(!terminated && in.hasNext()){
 			String tempstr = in.nextLine();
+			// TODO: chars in plaats van strings en dus switch in plaats van if else construction
 			if(tempstr.equals("m")){ // map
 				Tile[][] tiles = Mapfactory.getMap(in.nextLine());
 				map = new Map();
 				map.setTiles(tiles);
-			}else if(tempstr.equals("p")){ // player
+			} else if (tempstr.equals("t")) { // time
+				tempstr = in.nextLine();
+				remainingTime = Integer.parseInt(tempstr);
+			} else if(tempstr.equals("p")){ // player
 				tempstr = in.nextLine();
 				String[] playerXY = tempstr.split(",");
 				if (this.player == null) {
-					this.player = new Player( playerXY[0], Integer.parseInt("" + playerXY[1]), Integer.parseInt("" + playerXY[2]), Integer.parseInt("" + playerXY[3]), Float.parseFloat(playerXY[4]));
+					this.player = new Player( playerXY[0], Integer.parseInt(playerXY[1]), Integer.parseInt(playerXY[2]), Integer.parseInt(playerXY[3]), Float.parseFloat(playerXY[4]), Integer.parseInt(playerXY[5]), Integer.parseInt(playerXY[6]));
 				} else {
 					this.player.setName(playerXY[0]);
-					this.player.setX(Integer.parseInt("" + playerXY[1]));
-					this.player.setY(Integer.parseInt("" + playerXY[2]));
-					this.player.setHitpoints(Integer.parseInt("" + playerXY[3]));
+					this.player.setX(Integer.parseInt(playerXY[1]));
+					this.player.setY(Integer.parseInt(playerXY[2]));
+					this.player.setHitpoints(Integer.parseInt(playerXY[3]));
 					this.player.setAngle(Float.parseFloat(playerXY[4]));
 					this.player.turnToPoint(Float.parseFloat(playerXY[4]));
+					this.player.setKills(Integer.parseInt(playerXY[5]));
+					this.player.setDeaths(Integer.parseInt(playerXY[6]));
+					
 				}
 			}else if(tempstr.equals("pb")){ // player begin (list)
 				boolean playerEnd = false;
@@ -66,7 +74,7 @@ public class Receiver extends Thread {
 					}else{
 						String[] playerXY = rp.split(",");
 						//TODO: het aanmaken van de speler moet verbeterd worden -> niet iedere keer een nieuwe speler aanmaken
-						tempList.add(new Player(playerXY[0], Integer.parseInt("" + playerXY[1]),Integer.parseInt("" + playerXY[2]),Integer.parseInt("" + playerXY[3]), Float.parseFloat(playerXY[4])));
+						tempList.add(new Player(playerXY[0], Integer.parseInt(playerXY[1]),Integer.parseInt(playerXY[2]),Integer.parseInt(playerXY[3]), Float.parseFloat(playerXY[4]), Integer.parseInt(playerXY[5]), Integer.parseInt(playerXY[6])));
 					}
 				}
 				this.remotePlayers = tempList;
@@ -140,7 +148,17 @@ public class Receiver extends Thread {
 		return (ArrayList<Player>) this.remotePlayers.clone();
 	}
 	
-
+	public int getTimeRemaining() {
+		return remainingTime;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<Player> getPlayerStats() {
+		ArrayList<Player> allPlayer = (ArrayList<Player>) remotePlayers.clone();
+		allPlayer.add(player);
+		return allPlayer;
+	}
+	
 	public ArrayList<Explosion> getExplosions() {
 		return explosionList;
 	}

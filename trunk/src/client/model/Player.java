@@ -45,12 +45,14 @@ public class Player {
 	}; 
 	
 	
-	public Player(String name, float x, float y,int hitpoints, float angle) {
+	public Player(String name, float x, float y,int hitpoints, float angle, int kills, int deaths) {
 		this.angle = angle;
 		this.x = x;
 		this.y = y;
 		this.name = name;
 		this.hitpoints = hitpoints;
+		this.kills = kills;
+		this.deaths = deaths;
 		try {
 			leftImage 		= ImageIO.read(new File("../themes/tee/characters/character_left.png"));
 			rightImage 		= ImageIO.read(new File("../themes/tee/characters/character_right.png"));
