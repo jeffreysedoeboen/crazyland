@@ -28,8 +28,7 @@ public class Client extends JApplet {
 		PrintWriter out = null;
 
 		// check if we can talk with the masterserver
-		System.out
-				.println("\ntry to connect with masterserver...");
+		System.out.println("\ntry to connect with masterserver...");
 
 		try {
 			s = new Socket("127.0.0.1", 1338);
