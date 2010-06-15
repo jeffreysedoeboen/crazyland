@@ -17,7 +17,7 @@ public class Sender {
 	public Sender(PrintWriter out, Player p){
 		this.out = out;
 		this.player = p;
-		out.println("m\n" + "crazyland4\n" + p.getName() + "\n" + (int)p.getX() + "," + (int)p.getY() + "\n" + p.getHitpoints());
+		out.println("m\n" + "crazyland5\n" + p.getName() + "\n" + (int)p.getX() + "," + (int)p.getY() + "\n" + p.getHitpoints());
 	}
 	
 	public void sendPlayer(){

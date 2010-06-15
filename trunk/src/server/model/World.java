@@ -160,9 +160,9 @@ public class World{
 
 		// doorloop alle tiles
 		for( int i = 0; i < map.getTiles().length; i++ ) {
-			if( i*32+32 > bullet.getX() && i*32-32 < bullet.getX() ) {
+			if( i*16+16 > bullet.getX() && i*16-16 < bullet.getX() ) {
 				for( Tile tile : map.getTiles()[i] ) {
-					if( tile.isSolid() && tile.getY()*32-32 < bullet.getY() && tile.getY()*32+32 > bullet.getY() ) {
+					if( tile.isSolid() && tile.getY()*16-16 < bullet.getY() && tile.getY()*16+16 > bullet.getY() ) {
 						retList.add(tile);
 					}
 				}
