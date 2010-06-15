@@ -180,7 +180,7 @@ public class World{
 								Player p = (Player) t;
 								p.decreaseHitpoints(bullet.getDamage());
 							}
-							return true;	
+							return true;	 
 						}
 					}	
 				}

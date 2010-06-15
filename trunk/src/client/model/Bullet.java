@@ -36,7 +36,7 @@ public class Bullet {
 		this.x -= 12*Math.cos(this.direction);
 		this.y -= 12*Math.sin(this.direction);
 		this.y = (int) (this.y - verticalSpeed);
-		verticalSpeed += -0.005;
+		verticalSpeed += -0.01;
 	}
 	
 	public BufferedImage getBulletImage() {
