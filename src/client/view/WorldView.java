@@ -208,10 +208,6 @@ public class WorldView extends JPanel {
 				if (y < pixelsToTiles(mapHeight)){
 				    for (int x=firstTileX; x <= lastTileX; x++) {
 				    	if(x < pixelsToTiles(mapWidth)){
-				        	if(x % 2 == 0 && y % 2 == 0){
-				        		g.setFont(new Font("Arial", 1, 10));
-				        		g.drawString(x + "," + y,tilesToPixels(x) + offsetX, tilesToPixels(y) + offsetY);
-				        	}
 				    		g.drawImage(tiles[x][y].getImage(),tilesToPixels(x) + offsetX, tilesToPixels(y) + offsetY, null);
 				        }
 				    }
