@@ -162,7 +162,7 @@ public class World{
 		for( int i = 0; i < map.getTiles().length; i++ ) {
 			if( i*16+16 > bullet.getX() && i*16-16 < bullet.getX() ) {
 				for( Tile tile : map.getTiles()[i] ) {
-					if( tile.isSolid() && tile.getY()*16-16 < bullet.getY() && tile.getY()*16+16 > bullet.getY() ) {
+					if( tile.isSolid() && tile.getY()*16-32 < bullet.getY() && tile.getY()*16+32 > bullet.getY() && tile.getX()*16-32 < bullet.getX() && tile.getX()*16+32 > bullet.getX() ) {
 						retList.add(tile);
 					}
 				}
@@ -186,14 +186,20 @@ public class World{
 				}
 			}else{
 				Rectangle2D.Double tile = (Rectangle2D.Double) t.getShape();
-				if(b.intersects(tile)){
-					if(bullet.getOrigin() != t){
-						if(checkCloseBulletColission(bullet, tile)){
-							if(t instanceof Player) {
-								Player p = (Player) t;
-								p.decreaseHitpoints(bullet.getDamage());
+				if(t instanceof Tile){
+					if(b.intersects(tile)){
+						return true;
+					}
+				}else{
+					if(b.intersects(tile)){
+						if(bullet.getOrigin() != t){
+							if(checkCloseBulletColission(bullet, tile)){
+								if(t instanceof Player) {
+									Player p = (Player) t;
+									p.decreaseHitpoints(bullet.getDamage());
+								}
+								return true;	
 							}
-							return true;	
 						}
 					}
 				}
