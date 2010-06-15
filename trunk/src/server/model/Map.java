@@ -6,7 +6,7 @@ public class Map {
 	private Tile[][] tiles;
 	
 	public Map(){
-		setTiles(Mapfactory.getMap("crazyland2"));
+		setTiles(Mapfactory.getMap("crazyland4"));
 	}
 	
 	public int getWidth() {

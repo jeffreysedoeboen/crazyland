@@ -160,12 +160,12 @@ public class WorldView extends JPanel {
 			Tile[][] tiles = receiver.getMap().getTiles();
 			
 			//nieuwe shit
-			int offsetX = this.getWidth() / 2 - Math.round(receiver.getPlayer().getX()) - 32;
+			int offsetX = this.getWidth() / 2 - Math.round(receiver.getPlayer().getX()) - 16;
 			int mapWidth = tilesToPixels(receiver.getMap().getWidth());
 			offsetX = Math.min(offsetX, 0);
 			offsetX = Math.max(offsetX, this.getWidth() - mapWidth);
 			
-			int offsetY = this.getHeight() / 2 - Math.round(receiver.getPlayer().getY()) - 32;
+			int offsetY = this.getHeight() / 2 - Math.round(receiver.getPlayer().getY()) - 16;
 			int mapHeight = tilesToPixels(receiver.getMap().getHeight());
 			offsetY = Math.min(offsetY, 0);
 			offsetY = Math.max(offsetY, this.getHeight() - mapHeight);
@@ -188,7 +188,7 @@ public class WorldView extends JPanel {
 				}
 			}
 			
-			int firstTileX = pixelsToTiles(-offsetX);
+			int firstTileX = pixelsToTiles(offsetX);
 			int lastTileX = firstTileX + pixelsToTiles(this.getWidth()) + 1;
 			int firstTileY = pixelsToTiles(-offsetY);
 			int lastTileY = firstTileY + pixelsToTiles(this.getHeight()) + 1;
