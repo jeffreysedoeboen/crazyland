@@ -2,6 +2,7 @@ package client.view;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -84,7 +85,7 @@ public class WorldView extends JPanel {
 		this.userName = userName;
 		this.gameframe = gameframe;
 		connectAndPrepare(server);
-		setSize(900, 300);
+		setSize(600, 300);
 		new Timer(20, taskPerformer).start();
 		
 //		timeRemaining = receiver.getTimeRemaining();//TODO
@@ -188,7 +189,7 @@ public class WorldView extends JPanel {
 				}
 			}
 			
-			int firstTileX = pixelsToTiles(offsetX);
+			int firstTileX = pixelsToTiles(-offsetX);
 			int lastTileX = firstTileX + pixelsToTiles(this.getWidth()) + 1;
 			int firstTileY = pixelsToTiles(-offsetY);
 			int lastTileY = firstTileY + pixelsToTiles(this.getHeight()) + 1;

@@ -1,5 +1,6 @@
 package client.controller;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -95,7 +96,7 @@ public class ButtonController implements ActionListener {
 			} else {
 				GameFrame f = new GameFrame();
 				f.setWorldView(new WorldView(server, lobbyview.getUserName(), f));
-				f.setSize(900, 500);
+				f.setSize(600, 300);
 				f.setVisible(true);
 			}
 		}else if(button.getText().equals("Back") && leaderview.isVisible()) {
