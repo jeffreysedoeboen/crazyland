@@ -66,8 +66,8 @@ public class WorldView extends JPanel {
 				
 			}
 			if(timeRemaining == -5) {
-//				timeRemaining = receiver.getTimeRemaining();//TODO
-				timeRemaining = 570;
+				timeRemaining = receiver.getTimeRemaining();
+				//timeRemaining = 570;
 				showHighscore = false;
 			}
 			
@@ -99,8 +99,8 @@ public class WorldView extends JPanel {
 		setSize(600, 300);
 		new Timer(20, taskPerformer).start();
 		
-//		timeRemaining = receiver.getTimeRemaining();//TODO
-		timeRemaining = 600;
+		timeRemaining = receiver.getTimeRemaining();
+		//timeRemaining = 600;
 		
 		Timer gameTimer = new Timer(1000, gameTimerPerformer);
 		gameTimer.start();
@@ -112,7 +112,6 @@ public class WorldView extends JPanel {
 			bgWidth = bg.getWidth();
 			bgHeight = bg.getHeight();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Socket s = null;
@@ -191,7 +190,7 @@ public class WorldView extends JPanel {
 					receiver.getPlayer().getImage().getWidth(null), 
 					receiver.getPlayer().getImage().getHeight(null)
 			);
-			Area player = new Area(playerRect);
+			// Area player = new Area(playerRect);
 			
 
 			for (int i = offsetX/3; i<=this.getWidth()-offsetX; i += bgWidth) {
@@ -295,11 +294,11 @@ public class WorldView extends JPanel {
 		int y = yPos + 30;
 		g.drawString("Score:", xPos + 20 , y);
 		g.setFont(new Font("sansserif", Font.PLAIN, 16));
-//		for(Player p : receiver.getPlayerStats()){//TODO
-//			y += 20;
-//			String s = String.format("%-20s Kills: %3d Deaths: %3d", p.getName(), p.getKills(), p.getDeaths());
-//			g.drawString(s, xPos + 20, y);
-//		}		
+		for(Player p : receiver.getPlayerStats()){
+			y += 20;
+			String s = String.format("%-20s Kills: %3d Deaths: %3d", p.getName(), p.getKills(), p.getDeaths());
+			g.drawString(s, xPos + 20, y);
+		}		
 	}
 	
 	public int pixelsToTiles(float pixels) {

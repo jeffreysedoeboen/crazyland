@@ -14,21 +14,24 @@ public class Sender {
 	private String lineOut = "";
 	private String turnWeapon = "";
 		
-	public Sender(PrintWriter out, Player p){
+	public Sender(PrintWriter out, Player p, long remainingTime){
 		this.out = out;
 		this.player = p;
-		out.println("m\n" + "crazyland5\n" + p.getName() + "\n" + (int)p.getX() + "," + (int)p.getY() + "\n" + p.getHitpoints());
+		out.println("m\n" + "crazyland2\nt\n" + remainingTime);
+		//out.println("m\n" + "crazyland2\n" + p.getName() + "\n" + (int)p.getX() + "," + (int)p.getY() + "\n" + p.getHitpoints());
 	}
 	
 	public void sendPlayer(){
-		lineOut += "p%n" + player.getName() + "," + (int)player.getX() + "," + (int)player.getY() + "," + player.getHitpoints() + "," + String.format((Locale)null, "%.2f", player.getAngle()) + "%n";
+		//lineOut += "p%n" + player.getName() + "," + (int)player.getX() + "," + (int)player.getY() + "," + player.getHitpoints() + "," + String.format((Locale)null, "%.2f", player.getAngle()) + "%n";
+		lineOut += String.format((Locale)null, "p%n%s,%d,%d,%d,%.2f,%d,%d%n", player.getName(), (int)player.getX(), (int)player.getY(), player.getHitpoints(), player.getAngle(), player.getKills(), player.getDeaths());
 	}
 	
 	public void sendPlayers(ArrayList<Player> playerList){
 		String kaas = "pb%n";
-		for(Player p : playerList){
-			if(p != this.player){
-				kaas += p.getName()+ "," + (int)p.getX() + "," + (int)p.getY() + "," + player.getHitpoints() + ","  + String.format((Locale)null, "%.2f", p.getAngle()) + "%n";
+		for(Player player : playerList){
+			if(player != this.player){
+				kaas += String.format((Locale)null, "p%n%s,%d,%d,%d,%.2f,%d,%d%n", player.getName(), (int)player.getX(), (int)player.getY(), player.getHitpoints(), player.getAngle(), player.getKills(), player.getDeaths());
+				//kaas += p.getName()+ "," + (int)p.getX() + "," + (int)p.getY() + "," + player.getHitpoints() + ","  + String.format((Locale)null, "%.2f", p.getAngle()) + "%n";
 			}
 		}
 		lineOut += kaas + "pe%n";
@@ -49,9 +52,9 @@ public class Sender {
 	}
 	
 	public void sendLineOut(){
-		out.printf(lineOut + getWeaponAngle() /*+ "t%n" + System.currentTimeMillis() + "%n" */); //TODO: Timestamp verwijdern
+		out.printf(lineOut + getWeaponAngle() /*+ "ts%n" + System.currentTimeMillis() + "%n" */); //TODO: Timestamp verwijdern
 		//System.out.println(lineOut.length());
-		//System.out.println(getWeaponAngle() + lineOut);
+		//System.out.println( lineOut + getWeaponAngle());
 		lineOut = "";
 		turnWeapon = "";
 	}

@@ -26,9 +26,9 @@ public class GameServer extends Thread{
 	public static void main(String args[]){
 
 		GameServer server = new GameServer();
-
 		new Connector(server).start();
 	}
+	
 	private ActionListener gameTimerPerformer = new ActionListener() {
 
 		public void actionPerformed(ActionEvent arg0) {
@@ -73,9 +73,9 @@ public class GameServer extends Thread{
 
 	public GameServer(){
 		this.world = new World(this);
-		timer = new Timer(10,taskPerformer);
+		timer = new Timer(10, taskPerformer);
 		timer.start();
-		Timer gameTimer = new Timer(1000,gameTimerPerformer);
+		Timer gameTimer = new Timer(1000, gameTimerPerformer);
 		gameTimer.start();
 
 	}
@@ -192,5 +192,9 @@ public class GameServer extends Thread{
 					s.sendWeaponAngle(angle);
 				}
 			}
+		}
+		
+		public long getRemainingTimeInSeconds() {
+			return seconds;
 		}
 	}
