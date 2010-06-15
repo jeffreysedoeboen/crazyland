@@ -257,9 +257,13 @@ public class WorldView extends JPanel {
 		if(timeRemaining > 0 ){
 			int minutes = (int) (timeRemaining/60);
 			int seconds = (int) (timeRemaining%60);
-			time = minutes + ":" + seconds;
+			if(!(seconds < 10)) {
+				time = minutes + ":" + seconds;
+			} else {
+				time = minutes + ":0" + seconds;
+			}
 		} else {
-			time = "0:0";
+			time = "0:00";
 		}
 		g.drawString(time, (getWidth()/2), 20);
 	}
