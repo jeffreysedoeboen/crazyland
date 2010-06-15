@@ -289,7 +289,7 @@ public class WorldView extends JPanel {
 	}
 	
 	public int pixelsToTiles(int pixels) {
-		return (int) Math.floor((float) pixels / 32);
+		return (int) Math.floor((float) pixels / 16);
 	}
 	
 	public int tilesToPixels(int numTiles) {
