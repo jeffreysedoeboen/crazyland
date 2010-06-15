@@ -171,15 +171,30 @@ public class World{
 		
 		for(WorldObject t : retList){
 			Rectangle2D.Double b = (Rectangle2D.Double) bullet.getShape();
-			Rectangle2D.Double tile = (Rectangle2D.Double) t.getShape();
-			if(b.intersects(tile)){
-				if(bullet.getOrigin() != t){
-					if(checkCloseBulletColission(bullet, tile)){
-						if(t instanceof Player) {
-							Player p = (Player) t;
-							p.decreaseHitpoints(bullet.getDamage());
+			if(t.getShape() instanceof Circle){
+				Circle tile = (Circle) t.getShape();
+				if(tile.intersects(b)){
+					if(bullet.getOrigin() != t){
+						if(checkCloseBulletColission(bullet, tile)){
+							if(t instanceof Player) {
+								Player p = (Player) t;
+								p.decreaseHitpoints(bullet.getDamage());
+							}
+							return true;	
 						}
-						return true;	
+					}	
+				}
+			}else{
+				Rectangle2D.Double tile = (Rectangle2D.Double) t.getShape();
+				if(b.intersects(tile)){
+					if(bullet.getOrigin() != t){
+						if(checkCloseBulletColission(bullet, tile)){
+							if(t instanceof Player) {
+								Player p = (Player) t;
+								p.decreaseHitpoints(bullet.getDamage());
+							}
+							return true;	
+						}
 					}
 				}
 			}
@@ -195,25 +210,49 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 		float dir = b.getDirection();
 		Rectangle2D shape = b.getShape().getBounds();
 		
-		Rectangle2D e1 = (Rectangle2D) tile;
-		Circle c1,c2,c3;
-		
-		c1 = new Circle(4,(int)shape.getCenterX()-5,(int)shape.getCenterY()-5);
-		
-		int posX = (int) (5*Math.cos(dir));
-		int posY = (int) (5*Math.sin(dir));
-		c2 = new Circle(4,(int)shape.getCenterX()+posX-5, (int)shape.getCenterY()+posY-5);
-		
-		posX = (int) (5*Math.cos(dir+Math.PI));
-		posY = (int) (5*Math.sin(dir+Math.PI));
-		c3 = new Circle(4,(int)shape.getCenterX()+posX-5, (int)shape.getCenterY()+posY-5);
-		
-		if(c1.intersects(e1)){
-			return true;
-		}else if(c2.intersects(e1)){
-			return true;
-		}else if(c3.intersects(e1)){
-			return true;
+
+		if(tile instanceof Circle){
+			Circle e1 = (Circle) tile;
+			Circle c1,c2,c3;
+			
+			c1 = new Circle(4,(int)shape.getCenterX()-5,(int)shape.getCenterY()-5);
+			
+			int posX = (int) (5*Math.cos(dir));
+			int posY = (int) (5*Math.sin(dir));
+			c2 = new Circle(4,(int)shape.getCenterX()+posX-5, (int)shape.getCenterY()+posY-5);
+			
+			posX = (int) (5*Math.cos(dir+Math.PI));
+			posY = (int) (5*Math.sin(dir+Math.PI));
+			c3 = new Circle(4,(int)shape.getCenterX()+posX-5, (int)shape.getCenterY()+posY-5);
+			
+			if(c1.intersects(e1)){
+				return true;
+			}else if(c2.intersects(e1)){
+				return true;
+			}else if(c3.intersects(e1)){
+				return true;
+			}
+		}else{
+			Rectangle2D e1 = (Rectangle2D) tile;
+			Circle c1,c2,c3;
+			
+			c1 = new Circle(4,(int)shape.getCenterX()-5,(int)shape.getCenterY()-5);
+			
+			int posX = (int) (5*Math.cos(dir));
+			int posY = (int) (5*Math.sin(dir));
+			c2 = new Circle(4,(int)shape.getCenterX()+posX-5, (int)shape.getCenterY()+posY-5);
+			
+			posX = (int) (5*Math.cos(dir+Math.PI));
+			posY = (int) (5*Math.sin(dir+Math.PI));
+			c3 = new Circle(4,(int)shape.getCenterX()+posX-5, (int)shape.getCenterY()+posY-5);
+			
+			if(c1.intersects(e1)){
+				return true;
+			}else if(c2.intersects(e1)){
+				return true;
+			}else if(c3.intersects(e1)){
+				return true;
+			}
 		}
 		return false;
 	}
