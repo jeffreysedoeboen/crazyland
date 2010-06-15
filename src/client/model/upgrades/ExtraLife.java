@@ -7,8 +7,8 @@ import javax.imageio.ImageIO;
 
 public class ExtraLife extends Upgrade {
 	
-	public ExtraLife(float x, float y) {
-		super(x, y);
+	public ExtraLife(int x, int y) {
+		super(x * 16, y * 16);
 		try {
 			image = ImageIO.read(new File("../themes/tee/other/heart.png"));
 		} catch (IOException e) {

@@ -8,7 +8,6 @@ import javax.swing.Timer;
 
 import server.model.bullet.Bullet;
 import server.model.tile.Tile;
-import server.model.upgrade.Upgrade;
 
 public class GameServer extends Thread{
 
@@ -108,7 +107,7 @@ public class GameServer extends Thread{
 			for(Sender s : senderList){
 				s.sendPlayer();
 				s.sendPlayers(world.getPlayerList());
-				//				s.sendUpgrades(world.getUpgradeList());
+				s.sendUpgrades(world.getUpgradeList());
 				s.sendLineOut();
 			}
 		}

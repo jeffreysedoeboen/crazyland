@@ -84,14 +84,13 @@ public class Receiver extends Thread {
 			}else if(tempstr.equals("ub")) { // upgrades_begin
 				boolean upgradeEnd = false;
 				ArrayList<Upgrade> tempList = new ArrayList<Upgrade>();
-				
 				while(!upgradeEnd && !terminated && in.hasNext()){
 					String rp = in.nextLine();
 					if(rp.equals("ue")){ // upgrades_end
 						upgradeEnd = true;
 					}else{
 						String[] upgradeXY = rp.split(",");
-						tempList.add(new ExtraLife(Float.parseFloat("" + upgradeXY[0]),Float.parseFloat("" + upgradeXY[1])));
+						tempList.add(new ExtraLife(Integer.parseInt("" + upgradeXY[0]),Integer.parseInt("" + upgradeXY[1])));
 					}
 				}
 				this.upgradeList = tempList;

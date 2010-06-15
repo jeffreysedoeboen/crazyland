@@ -1,39 +1,30 @@
 package server.model.upgrade;
 
+import java.security.Timestamp;
 import java.util.Random;
 
 import server.model.Map;
 
 public class Upgrade {
-	private float x,y;
-	private int width, height;
+	private int x,y;
 	protected int actionValue;
-	private int respawnCountdown = 0;
 	private boolean isUsed = false;
-	private Map map;
+	private Timestamp timeStamp;
 	
-	public Upgrade(Map map) {
-		this.map = map;
-		updatePosition();
+	public Upgrade(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 	
 	public int getActionValue() {
 		return actionValue;
 	}
 	
-	public int getHeight() {
-		return height;
-	}
-	
-	public int getWidth() {
-		return width;
-	}
-	
-	public float getX() {
+	public int getX() {
 		return x;
 	}
 	
-	public float getY() {
+	public int getY() {
 		return y;
 	}
 	
@@ -41,24 +32,15 @@ public class Upgrade {
 		return isUsed;
 	}
 	
-	public void reset() {
-		respawnCountdown = 1000;
+	public void setIsUsed(boolean value) {
+		this.isUsed = value;
 	}
 	
-	public int getRespawnCountdown() {
-		return respawnCountdown;
+	public Timestamp getTimestamp() {
+		return timeStamp;
 	}
 	
-	public void tick() {
-		respawnCountdown -= 1;
-	}
-	
-	public void updatePosition() {
-		Random rnd = new Random();
-		x = rnd.nextFloat() * (map.getWidth() * 32);
-		y = rnd.nextFloat() * (map.getHeight() * 32);
-		if(map.getTiles()[(int)(x / 32)][(int)(y /32)].isSolid()) {
-			updatePosition();
-		}
+	public void setTimestamp(Timestamp timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 }

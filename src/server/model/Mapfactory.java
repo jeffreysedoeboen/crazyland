@@ -90,6 +90,9 @@ public class Mapfactory {
                 		} else if(name.equals("respawn")) {
                 			propertyNodes[i][3] = propertyElement.getAttribute("value");
                 			System.out.println("respawn: " + propertyElement.getAttribute("value"));
+                		} else if(name.equals("upgrade")) {
+                			propertyNodes[i][2] = propertyElement.getAttribute("value");
+                			System.out.println("upgrade: " + propertyElement.getAttribute("value"));
                 		}
             		}
             	}
@@ -117,8 +120,9 @@ public class Mapfactory {
                 	
                 	boolean solid = (Integer.valueOf(propertyNodes[tiletype - min][0]).intValue() == 1);
                 	boolean respawn = (Integer.valueOf(propertyNodes[tiletype - min][3]).intValue() != 0);
+                	String upgrade = propertyNodes[tiletype - min][2];
                 	
-                	tiles[x][y] = new Tile(x,y,images.get(tiletype - min), solid, respawn);
+                	tiles[x][y] = new Tile(x,y,images.get(tiletype - min), solid, respawn, upgrade);
 //                	if (tiletype != 0) {
 //                		tiles[x][y] = new Tile(x,y,images.get(tiletype - 1), true, shape, corner);
 //                	} else {
