@@ -18,7 +18,7 @@ public class Bullet {
 	
 	public Bullet(int x, int y, int indentifier, float dir){
 		this.x = x;
-		this.y = y;
+		this.y = y - 8;
 		this.direction = dir;
 		this.indentifier = indentifier;
 		try {
