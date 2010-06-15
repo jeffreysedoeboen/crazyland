@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import client.model.Mapfactory;
 
+import client.model.Explosion;
 import client.model.Map;
 import client.model.Bullet;
 import client.model.Player;
@@ -21,6 +22,7 @@ public class Receiver extends Thread {
 	private ArrayList<Player> remotePlayers = new ArrayList<Player>();
 	private ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 	private ArrayList<Upgrade> upgradeList = new ArrayList<Upgrade>();
+	private ArrayList<Explosion> explosionList = new ArrayList<Explosion>();
 	
 	public  Receiver(Scanner in){
 		this.in = in;
@@ -94,6 +96,8 @@ public class Receiver extends Thread {
 						break;
 					}
 				}
+				if(b != null) 
+					explosionList.add(new Explosion(b.getX(), b.getY()));
 				bulletList.remove(b);
 			} else if(tempstr.equals("pd")){ // destroy player
 				Player p = null;
@@ -136,4 +140,12 @@ public class Receiver extends Thread {
 		return (ArrayList<Player>) this.remotePlayers.clone();
 	}
 	
+
+	public ArrayList<Explosion> getExplosions() {
+		return explosionList;
+	}
+	
+	public void removeExplosion(Explosion ex) {
+		explosionList.remove(ex);
+	}
 }

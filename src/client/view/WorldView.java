@@ -35,6 +35,7 @@ import client.connection.Sender;
 import client.controller.KeyboardController;
 import client.controller.MouseController;
 import client.model.Bullet;
+import client.model.Explosion;
 import client.model.GameServer;
 import client.model.Player;
 import client.model.Tile; 
@@ -69,6 +70,14 @@ public class WorldView extends JPanel {
 				timeRemaining = 570;
 				showHighscore = false;
 			}
+			
+			ArrayList<Explosion> explosions = (ArrayList<Explosion>) receiver.getExplosions().clone();
+			for(Explosion ex : explosions) {
+				ex.decreaseTime();
+				if(ex.getTimeVisible() < 1) {
+					receiver.removeExplosion(ex);
+				}
+			}
 		}
 
 	};
@@ -76,6 +85,8 @@ public class WorldView extends JPanel {
 	public boolean isShowHighscore() {
 		return showHighscore;
 	}
+	
+	
 
 	public void setShowHighscore(boolean showHighscore) {
 		this.showHighscore = showHighscore;
@@ -243,6 +254,8 @@ public class WorldView extends JPanel {
 				
 			}
 			
+			drawExplosions(g);
+			
 			if(isShowHighscore()) {
 				drawHighscore(g);
 			}
@@ -342,5 +355,11 @@ public class WorldView extends JPanel {
 	
 	public void logoff() {
 		sender.removePlayer(); 
-	};
+	}
+	
+	private void drawExplosions(Graphics g) {
+		for(Explosion ex : receiver.getExplosions()) {
+			g.drawImage(ex.getImage(), ex.getX() + offsetX, ex.getY() + offsetY, null);
+		}
+	}
 }
