@@ -5,9 +5,9 @@ import java.awt.image.BufferedImage;
 public class Upgrade {
 	protected int value;
 	protected BufferedImage image = null;
-	protected float x, y; 
+	protected int x, y; 
 	
-	public Upgrade(float x, float y) {
+	public Upgrade(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}

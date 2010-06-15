@@ -11,13 +11,16 @@ public class Tile implements WorldObject{
 	private int x;
 	private int y;
 	private BufferedImage image;
-	private boolean solid, respawn;
+	private boolean solid;
+	private boolean respawn;
+	private String upgrade;
 	
-	public Tile(int x, int y, BufferedImage image, boolean solid, boolean respawn){
+	public Tile(int x, int y, BufferedImage image, boolean solid, boolean respawn, String upgrade){
 		this.x = x;
 		this.y = y;
 		this.image = image;
 		this.solid = solid;
+		this.setUpgrade(upgrade);
 		this.setRespawn(respawn);
 	}
 
@@ -60,6 +63,14 @@ public class Tile implements WorldObject{
 	@Override
 	public Shape getShape() {
 		return new Rectangle2D.Double(x*16,y*16,16,16);
+	}
+	
+	public void setUpgrade(String value) {
+		this.upgrade = value;
+	}
+	
+	public String getUpgrade() {
+		return upgrade;
 	}
 	
 }

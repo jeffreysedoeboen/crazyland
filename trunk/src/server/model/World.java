@@ -18,16 +18,19 @@ public class World{
 	private ArrayList<Player> playerList = new ArrayList<Player>();
 	private ArrayList<Player> playerWaitList = new ArrayList<Player>();
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-//	private ArrayList<Upgrade> upgrades = new ArrayList<Upgrade>();
+	private ArrayList<Upgrade> upgrades = new ArrayList<Upgrade>();
 	private int bulletCounter = 1;
 
 	public World(GameServer s){
 		map = new Map();
 		this.server = s;
 		//initialiseren van upgrades (actueel 14)
-//		for(int i = 0; i < 1; i++)  {
-//			upgrades.add(new Upgrade(map));
-//		}
+		for(WorldObject wo : getUpgrades()) {
+			Tile tile = ((Tile) wo);
+			if(tile.getUpgrade().equals("life")) {
+				upgrades.add(new Upgrade(tile.getX(), tile.getY()));
+			}
+		}
 	}
 
 	public void addPlayerWaitList(Player p) {
@@ -145,6 +148,18 @@ public class World{
 			}
 		}
 		return respawns;
+	}
+	
+	public ArrayList<WorldObject> getUpgrades() {
+		ArrayList<WorldObject> upgradeList = new ArrayList<WorldObject>();
+		for( int i = 0; i < map.getTiles().length; i++ ) {
+			for( Tile tile : map.getTiles()[i] ) {
+				if(tile.getUpgrade().equals("life")) {
+					upgradeList.add(tile);
+				}
+			}
+		}
+		return upgradeList;
 	}
 
 	public boolean checkBulletColission(Bullet bullet){
@@ -354,6 +369,10 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 
 	public ArrayList<Player> getPlayerWaitList() {
 		return playerWaitList;
+	}
+
+	public ArrayList<Upgrade> getUpgradeList() {
+		return upgrades;
 	}
 
 	//	public void changeWeapon(Player player) {
