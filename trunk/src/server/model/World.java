@@ -187,6 +187,10 @@ public class World{
 			}else{
 				Rectangle2D.Double tile = (Rectangle2D.Double) t.getShape();
 				if(t instanceof Tile){
+					System.out.println(b.getX() + "," + b.getY() + "," + b.getHeight() + "," + b.getWidth());
+					System.out.println(bullet.getX() + "," + bullet.getY());
+					System.out.println("Checking with: " + tile.getX() + "," + tile.getY() + "," + tile.getHeight() + "," + tile.getWidth());
+					
 					if(b.intersects(tile)){
 						return true;
 					}
