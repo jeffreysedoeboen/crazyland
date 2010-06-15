@@ -74,6 +74,7 @@ public class Receiver extends Thread {
 					if(rp.equals("pe")){ // player end
 						playerEnd = true;
 					}else{
+						System.out.println(rp);
 						String[] playerXY = rp.split(",");
 						//TODO: het aanmaken van de speler moet verbeterd worden -> niet iedere keer een nieuwe speler aanmaken
 						tempList.add(new Player(playerXY[0], Integer.parseInt(playerXY[1]),Integer.parseInt(playerXY[2]),Integer.parseInt(playerXY[3]), Float.parseFloat(playerXY[4]), Integer.parseInt(playerXY[5]), Integer.parseInt(playerXY[6])));
