@@ -17,7 +17,7 @@ public class Sender {
 	public Sender(PrintWriter out, Player p, long remainingTime){
 		this.out = out;
 		this.player = p;
-		out.println("m\n" + "crazyland2\nt\n" + remainingTime);
+		out.println("m\n" + "crazyland5\nt\n" + remainingTime);
 		//out.println("m\n" + "crazyland2\n" + p.getName() + "\n" + (int)p.getX() + "," + (int)p.getY() + "\n" + p.getHitpoints());
 	}
 	
