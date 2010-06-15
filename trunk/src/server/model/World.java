@@ -204,7 +204,8 @@ public class World{
 				if(t instanceof Tile){
 					System.out.println(b.getX() + "," + b.getY() + "," + b.getHeight() + "," + b.getWidth());
 					System.out.println(bullet.getX() + "," + bullet.getY());
-					System.out.println("Checking with: " + tile.getX() + "," + tile.getY() + "," + tile.getHeight() + "," + tile.getWidth());
+					System.out.println("Checking with: " + tile.getX()/16 + "," + tile.getY()/16 + "," + tile.getHeight() + "," + tile.getWidth());
+					System.out.println(((Tile) t).isSolid());
 					
 					if(b.intersects(tile)){
 						return true;
