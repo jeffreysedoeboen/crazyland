@@ -80,7 +80,7 @@ public class Receiver extends Thread {
 				this.remotePlayers = tempList;
 			}else if(tempstr.equals("b")){ // bullet
 				String[] bulletXY = in.nextLine().split(",");
-				bulletList.add(new Bullet(Integer.parseInt("" + bulletXY[0]),Integer.parseInt("" + bulletXY[1]),Integer.parseInt("" + bulletXY[2]),Float.parseFloat(bulletXY[3])));
+				bulletList.add(new Bullet(Integer.parseInt("" + bulletXY[0])+15,Integer.parseInt("" + bulletXY[1])+15,Integer.parseInt("" + bulletXY[2]),Float.parseFloat(bulletXY[3])));
 			}else if(tempstr.equals("ub")) { // upgrades_begin
 				boolean upgradeEnd = false;
 				ArrayList<Upgrade> tempList = new ArrayList<Upgrade>();
