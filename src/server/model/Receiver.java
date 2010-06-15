@@ -21,7 +21,7 @@ public class Receiver extends Thread {
 		this.terminated = true;
 	}
 	
-	public void run(){	
+	public void run(){
 		while(!terminated && in.hasNext()){
 			String tempstr = in.nextLine();
 			if(tempstr.equals("r")){
@@ -34,7 +34,7 @@ public class Receiver extends Thread {
 				player.setMovingLeft(false);
 			}else if(tempstr.equals("j")){ // player_jump
 				if(s.getWorld().onGround(player)){
-					player.setVerticalSpeed(4.5f);//5.5
+					player.setVerticalSpeed(45.5f);//5.5
 				}
 			}else if(tempstr.equals("s")){ // player_shoot
 				String[] playerXY = in.nextLine().split(",");
