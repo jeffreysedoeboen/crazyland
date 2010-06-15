@@ -54,10 +54,10 @@ public class Player {
 		this.kills = kills;
 		this.deaths = deaths;
 		try {
-			leftImage 		= ImageIO.read(new File("../themes/tee/characters/character_left.png"));
-			rightImage 		= ImageIO.read(new File("../themes/tee/characters/character_right.png"));
-			shootImage 	= ImageIO.read(new File("../themes/tee/characters/charactershoot.png"));
-			heartImage 	= ImageIO.read(new File("../themes/tee/other/heart.png"));
+			leftImage 		= ImageIO.read(new File("themes/tee/characters/character_left.png"));
+			rightImage 		= ImageIO.read(new File("themes/tee/characters/character_right.png"));
+			shootImage 	= ImageIO.read(new File("themes/tee/characters/charactershoot.png"));
+			heartImage 	= ImageIO.read(new File("themes/tee/other/heart.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

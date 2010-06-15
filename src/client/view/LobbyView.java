@@ -33,6 +33,7 @@ public class LobbyView extends JFrame {
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.BLACK);
 		this.setSize(640, 500);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 4));

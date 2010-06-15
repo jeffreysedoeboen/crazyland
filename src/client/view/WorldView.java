@@ -103,7 +103,7 @@ public class WorldView extends JPanel {
 	
 	public void connectAndPrepare(GameServer server) {
 		try {			
-			bg = ImageIO.read(new File("../themes/tee/background/background.jpg"));
+			bg = ImageIO.read(new File("themes/tee/background/background.jpg"));
 			bgWidth = bg.getWidth();
 			bgHeight = bg.getHeight();
 		} catch (IOException e) {
@@ -138,7 +138,7 @@ public class WorldView extends JPanel {
 		sender.login(userName);
 
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Image image = toolkit.getImage("../themes/tee/weapon/cursor.png");
+		Image image = toolkit.getImage("themes/tee/weapon/cursor.png");
 		Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "cursor");
 		
 		this.setCursor(c);

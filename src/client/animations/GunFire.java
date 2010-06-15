@@ -16,7 +16,7 @@ public class GunFire implements Animation{
 		this.y = y;
 		try {
 			//TODO hoeft eigelijk niet elke keer opnieuw ingelezen te worden
-			image = ImageIO.read(new File("../themes/tee/other/gunfire.png"));
+			image = ImageIO.read(new File("themes/tee/other/gunfire.png"));
 		} catch (IOException e) {
 			System.err.println("Fout in gunFire inladen plaatje");
 			e.printStackTrace();

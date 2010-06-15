@@ -10,16 +10,17 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class InlogView extends JPanel {
+public class InlogView extends JFrame {
 
 	private JButton guest, create, login;
 	private JTextField usernameinput;
 	private JPasswordField passwordinput;
 
 	public InlogView(){
-//		this.setTitle("Log in");
-//		this.setSize(400, 320);
+		this.setTitle("Log in");
+		this.setSize(400, 320);
 		this.setLayout(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JLabel username = new JLabel("Username:");
 		username.setSize(150, 20);

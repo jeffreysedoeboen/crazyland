@@ -14,13 +14,13 @@ import client.controller.ButtonController;
 import client.view.InlogView;
 
 @SuppressWarnings("serial")
-public class Client extends JApplet {
+public class Client {
 
-	private InlogView inlogview;
-	private Sender sender;
+	public static void main(String[] args) {
 
-	public void init() {
-
+		InlogView inlogview;
+		Sender sender = null;
+		
 		Socket s = null;
 		InputStream inStream = null;
 		OutputStream outStream = null;
@@ -44,11 +44,12 @@ public class Client extends JApplet {
 
 		MasterConnection masterConnection = new MasterConnection(out, in);
 			
-		setSize(400, 320);
-		setVisible(true);
+		//setSize(400, 320);
+		//setVisible(true);
 
-		this.inlogview = new InlogView();
-		setContentPane(this.inlogview);
+		inlogview = new InlogView();
+		///setContentPane(this.inlogview);
+		inlogview.setVisible(true);
 		ButtonController buttonController = new ButtonController(inlogview, sender, masterConnection);
 
 		inlogview.setVisible(true);

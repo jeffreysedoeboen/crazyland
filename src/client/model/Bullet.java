@@ -22,7 +22,7 @@ public class Bullet {
 		this.direction = dir;
 		this.indentifier = indentifier;
 		try {
-			image = ImageIO.read(new File("../themes/tee/weapon/bullet.png"));
+			image = ImageIO.read(new File("themes/tee/weapon/bullet.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

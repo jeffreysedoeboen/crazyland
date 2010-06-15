@@ -36,14 +36,14 @@ public class Mapfactory {
 		BufferedImage originalimage;
 		Tile[][] tiles = null;
 		try {
-			originalimage = ImageIO.read(new File("../tiles/tiles.png"));
+			originalimage = ImageIO.read(new File("tiles/tiles.png"));
 			//ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
 			ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
 			
 			
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-            Document doc = docBuilder.parse (new File("../maps/" + mapsource + ".tmx"));
+            Document doc = docBuilder.parse (new File("maps/" + mapsource + ".tmx"));
             doc.getDocumentElement ().normalize ();
             
             NodeList mapNode = doc.getElementsByTagName("map");
