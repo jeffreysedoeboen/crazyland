@@ -108,7 +108,9 @@ public class Receiver extends Thread {
 				remotePlayers.remove(p);
 			} else if(tempstr.equals("tw")) { //turn weapon
 				float angle = Float.parseFloat(in.nextLine());
-				player.turnToPoint(angle);
+				if(player != null) {
+					player.turnToPoint(angle);
+				}
 			} else if(tempstr.equals("t")) {
 				// TODO: Timestamp verwijdern
 //				System.out.println(System.currentTimeMillis() - Long.parseLong(in.nextLine()));

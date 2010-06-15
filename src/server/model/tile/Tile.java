@@ -12,26 +12,12 @@ public class Tile implements WorldObject{
 	private int y;
 	private BufferedImage image;
 	private boolean solid, respawn;
-	private Shape shape;
 	
-	public Tile(int x, int y, BufferedImage image, boolean solid, String shape, String corner, boolean respawn){
+	public Tile(int x, int y, BufferedImage image, boolean solid, boolean respawn){
 		this.x = x;
 		this.y = y;
 		this.image = image;
 		this.solid = solid;
-		if(shape.equals("circle")){
-			if(corner.equals("tl")){
-				this.shape = new Circle(32,x*32,y*32);
-			}else if(corner.equals("bl")){
-				this.shape = new Circle(32,x*32,y*32-32);
-			}else if(corner.equals("tr")){
-				this.shape = new Circle(32,x*32-32,y*32);
-			}else{
-				this.shape = new Circle(32,x*32-32,y*32-32);
-			}
-		}else{
-			this.shape = new Rectangle2D.Double(x*32,y*32,32,32);
-		}
 		this.setRespawn(respawn);
 	}
 
@@ -77,10 +63,6 @@ public class Tile implements WorldObject{
 	public boolean isSolid() {
 		return solid;
 	}
-	
-	public Shape getShape(){
-		return this.shape;
-	}
 
 	public void setRespawn(boolean respawn) {
 		this.respawn = respawn;
@@ -88,6 +70,11 @@ public class Tile implements WorldObject{
 
 	public boolean isRespawn() {
 		return respawn;
+	}
+
+	@Override
+	public Shape getShape() {
+		return new Rectangle2D.Double(x*16,y*16,16,16);
 	}
 	
 }
