@@ -177,7 +177,7 @@ public class Player {
 		return dimg;
 	}  
 
-	private static BufferedImage rotateImage(BufferedImage src, float degrees) {
+	public static BufferedImage rotateImage(BufferedImage src, float degrees) {
 		AffineTransform affineTransform = AffineTransform.getRotateInstance(
 				Math.toRadians(degrees),
 				src.getWidth() / 2,

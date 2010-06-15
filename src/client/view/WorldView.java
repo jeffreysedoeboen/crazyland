@@ -30,12 +30,15 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 import javax.imageio.ImageIO;
+
+import client.animations.Animation;
+import client.animations.Explosion;
+import client.animations.GunFire;
 import client.connection.Receiver;
 import client.connection.Sender;
 import client.controller.KeyboardController;
 import client.controller.MouseController;
 import client.model.Bullet;
-import client.model.Explosion;
 import client.model.GameServer;
 import client.model.Player;
 import client.model.Tile; 
@@ -69,14 +72,6 @@ public class WorldView extends JPanel {
 				timeRemaining = receiver.getTimeRemaining();
 				//timeRemaining = 570;
 				showHighscore = false;
-			}
-			
-			ArrayList<Explosion> explosions = (ArrayList<Explosion>) receiver.getExplosions().clone();
-			for(Explosion ex : explosions) {
-				ex.decreaseTime();
-				if(ex.getTimeVisible() < 1) {
-					receiver.removeExplosion(ex);
-				}
 			}
 		}
 
@@ -253,7 +248,7 @@ public class WorldView extends JPanel {
 				
 			}
 			
-			drawExplosions(g);
+			drawAnimations(g);
 			
 			if(isShowHighscore()) {
 				drawHighscore(g);
@@ -346,8 +341,17 @@ public class WorldView extends JPanel {
 	
 	ActionListener taskPerformer = new ActionListener() {
 
+		@SuppressWarnings("unchecked")
 		public void actionPerformed(ActionEvent arg0) {
 			WorldView.this.repaint();
+			
+			ArrayList<Animation> animations = (ArrayList<Animation>) receiver.getAnimtions().clone();
+			for(Animation a : animations) {
+				a.decreaseTime();
+				if(a.getTimeVisible() < 1) {
+					receiver.removeAnimation(a);
+				}
+			}
 		}
 
 	};
@@ -356,9 +360,17 @@ public class WorldView extends JPanel {
 		sender.removePlayer(); 
 	}
 	
-	private void drawExplosions(Graphics g) {
-		for(Explosion ex : receiver.getExplosions()) {
-			g.drawImage(ex.getImage(), ex.getX() + offsetX, ex.getY() + offsetY, null);
+	@SuppressWarnings("unchecked")
+	private void drawAnimations(Graphics g) {
+		
+		for(Animation a : (ArrayList<Animation>) receiver.getAnimtions().clone()) {
+			if(a instanceof GunFire) {
+				Player p = receiver.getPlayer();
+				Image image = rotateImage(a.getImage(), p.getAngle(), false);
+				g.drawImage(image, (int)((p.getPrimaryWeapon().getX() + offsetX) - 12*Math.cos(p.getAngle())), (int)((p.getPrimaryWeapon().getY() + offsetY) - 12*Math.cos(p.getAngle())), null);
+			} else {
+				g.drawImage(a.getImage(), a.getX() + offsetX, a.getY() + offsetY, null);
+			}
 		}
 	}
 }
