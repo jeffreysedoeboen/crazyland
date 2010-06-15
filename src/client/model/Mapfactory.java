@@ -63,8 +63,8 @@ public class Mapfactory {
 //            ArrayList<Boolean> solids = new ArrayList<Boolean>();
             
 			int counter = 0;
-			for(int y = 0; y < 192; y += 16) {
-				for(int x = 0; x < 224; x += 16) {
+			for(int y = 0; y < 96; y += 16) {
+				for(int x = 0; x < 112; x += 16) {
 					BufferedImage img = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB); ;
 					Graphics2D gr = img.createGraphics();
 					gr.drawImage(originalimage.getSubimage(x, y, 16, 16), 0, 0, null);

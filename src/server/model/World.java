@@ -295,9 +295,9 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 		Tile mid = tiles[(int) ((player.getX()+16)/16)][(int) ((player.getY()+35)/16)];
 		Tile botRight = tiles[(int) ((player.getX()+32)/16)][(int) ((player.getY()+35)/16)];
 		if(botLeft.isSolid() || mid.isSolid() || botRight.isSolid()){
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	private boolean canMoveLeft(Player player) {			
@@ -323,42 +323,13 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 	}
 
 	private boolean collisionCeiling(Player player) {
-		player.setPosition(player.getX(), player.getY() - 2.5F);
-		
 		Tile[][] tiles = map.getTiles();
-		Circle shape = (Circle) player.getShape();
-		if(tiles[(int) ((player.getX())/32)][(int) ((player.getY()-3)/32)].getShape() instanceof Circle){
-			Circle tile1 = (Circle) tiles[(int) ((player.getX())/32)][(int) ((player.getY()-3)/32)].getShape();
-			if(tiles[(int) ((player.getX()+29)/32)][(int) ((player.getY()-3)/32)].getShape() instanceof Circle){
-				Circle tile2 = (Circle) tiles[(int) ((player.getX()+29)/32)][(int) ((player.getY()-3)/32)].getShape();
-				if(tiles[(int) ((player.getX())/32)][(int) ((player.getY()-3)/32)].isSolid() && shape.intersects(tile1) || tiles[(int) ((player.getX()+29)/32)][(int) ((player.getY()-3)/32)].isSolid() && shape.intersects(tile2)){
-					player.setPosition(player.getX(), player.getY() + 2.5F);
-					return true;
-				}
-			}else{
-				Rectangle2D tile2 = (Rectangle2D) tiles[(int) ((player.getX()+29)/32)][(int) ((player.getY()-3)/32)].getShape();
-				if(tiles[(int) ((player.getX())/32)][(int) ((player.getY()-3)/32)].isSolid() && shape.intersects(tile1) || tiles[(int) ((player.getX()+29)/32)][(int) ((player.getY()-3)/32)].isSolid() && shape.intersects(tile2)){
-					player.setPosition(player.getX(), player.getY() + 2.5F);
-					return true;
-				}
-			}
-		}else{
-			Rectangle2D tile1 = (Rectangle2D) tiles[(int) ((player.getX())/32)][(int) ((player.getY()-3)/32)].getShape();
-			if(tiles[(int) ((player.getX()+29)/32)][(int) ((player.getY()-3)/32)].getShape() instanceof Circle){
-				Circle tile2 = (Circle) tiles[(int) ((player.getX()+29)/32)][(int) ((player.getY()-3)/32)].getShape();
-				if(tiles[(int) ((player.getX())/32)][(int) ((player.getY()-3)/32)].isSolid() && shape.intersects(tile1) || tiles[(int) ((player.getX()+29)/32)][(int) ((player.getY()-3)/32)].isSolid() && shape.intersects(tile2)){
-					player.setPosition(player.getX(), player.getY() + 2.5F);
-					return true;
-				}
-			}else{
-				Rectangle2D tile2 = (Rectangle2D) tiles[(int) ((player.getX()+29)/32)][(int) ((player.getY()-3)/32)].getShape();
-				if(tiles[(int) ((player.getX())/32)][(int) ((player.getY()-3)/32)].isSolid() && shape.intersects(tile1) || tiles[(int) ((player.getX()+29)/32)][(int) ((player.getY()-3)/32)].isSolid() && shape.intersects(tile2)){
-					player.setPosition(player.getX(), player.getY() + 2.5F);
-					return true;
-				}
-			}
+		Tile topLeft = tiles[(int) ((player.getX())/16)][(int) ((player.getY()-3)/16)];
+		Tile mid = tiles[(int) ((player.getX()+16)/16)][(int) ((player.getY()-3)/16)];
+		Tile topRight = tiles[(int) ((player.getX()+32)/16)][(int) ((player.getY()-3)/16)];
+		if(topLeft.isSolid() || mid.isSolid() || topRight.isSolid()){
+			return true;
 		}
-		player.setPosition(player.getX(), player.getY() + 2.5F);
 		return false;
 	}
 	
