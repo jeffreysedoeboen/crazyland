@@ -63,11 +63,11 @@ public class Mapfactory {
 //            ArrayList<Boolean> solids = new ArrayList<Boolean>();
             
 			int counter = 0;
-			for(int y = 0; y < 192; y += 32) {
-				for(int x = 0; x < 224; x += 32) {
-					BufferedImage img = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB); ;
+			for(int y = 0; y < 192; y += 16) {
+				for(int x = 0; x < 224; x += 16) {
+					BufferedImage img = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB); ;
 					Graphics2D gr = img.createGraphics();
-					gr.drawImage(originalimage.getSubimage(x, y, 32, 32), 0, 0, null);
+					gr.drawImage(originalimage.getSubimage(x, y, 16, 16), 0, 0, null);
 					images.add(img);
 					counter++;
 				}
@@ -89,12 +89,6 @@ public class Mapfactory {
                 		if(name.equals("solid")) {
                 			propertyNodes[i][0] = propertyElement.getAttribute("value");
                 			System.out.println("solid: " + propertyElement.getAttribute("value"));
-                		} else if(name.equals("shape")) {
-                			propertyNodes[i][1] = propertyElement.getAttribute("value");
-                			System.out.println(propertyElement.getAttribute("value"));
-                		} else if(name.equals("corner")) {
-                			propertyNodes[i][2] = propertyElement.getAttribute("value");
-                			System.out.println(propertyElement.getAttribute("value"));
                 		} else if(name.equals("respawn")) {
                 			propertyNodes[i][3] = propertyElement.getAttribute("value");
                 			System.out.println("respawn: " + propertyElement.getAttribute("value"));
@@ -124,11 +118,9 @@ public class Mapfactory {
                 	if (tiletype != 0) min = 1;
                 	
                 	boolean solid = (Integer.valueOf(propertyNodes[tiletype - min][0]).intValue() == 1);
-                	String shape = propertyNodes[tiletype - min][1];
-                	String corner = propertyNodes[tiletype - min][2];
                 	boolean respawn = (Integer.valueOf(propertyNodes[tiletype - min][3]).intValue() != 0);
                 	
-                	tiles[x][y] = new Tile(x,y,images.get(tiletype - min), solid, shape, corner, respawn);
+                	tiles[x][y] = new Tile(x,y,images.get(tiletype - min), solid, respawn);
 //                	if (tiletype != 0) {
 //                		tiles[x][y] = new Tile(x,y,images.get(tiletype - 1), true, shape, corner);
 //                	} else {
