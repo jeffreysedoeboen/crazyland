@@ -27,14 +27,14 @@ public class Sender {
 	}
 	
 	public void sendPlayers(ArrayList<Player> playerList){
-		String kaas = "pb%n";
+		String kaas = String.format("pb%n");
 		for(Player player : playerList){
 			if(player != this.player){
 				kaas += String.format((Locale)null, "p%n%s,%d,%d,%d,%.2f,%d,%d%n", player.getName(), (int)player.getX(), (int)player.getY(), player.getHitpoints(), player.getAngle(), player.getKills(), player.getDeaths());
 				//kaas += p.getName()+ "," + (int)p.getX() + "," + (int)p.getY() + "," + player.getHitpoints() + ","  + String.format((Locale)null, "%.2f", p.getAngle()) + "%n";
 			}
 		}
-		lineOut += kaas + "pe%n";
+		lineOut += kaas + String.format("pe%n");
 	}
 	
 	public void sendBullet(Bullet b){
