@@ -104,7 +104,7 @@ public class Receiver extends Thread {
 					}
 				}
 				if(b != null) 
-					explosionList.add(new Explosion(b.getX(), b.getY()));
+					explosionList.add(new Explosion((int) b.getX(), (int) b.getY()));
 				bulletList.remove(b);
 			} else if(tempstr.equals("pd")){ // destroy player
 				Player p = null;
