@@ -52,7 +52,7 @@ public class GameServer extends Thread{
 			player.resetTimeToWait();
 
 			Tile respawn = (Tile)world.getRespawns().get(i++);
-			player.setPosition(respawn.getX() * 32, respawn.getY() * 32);
+			player.setPosition(respawn.getX() * 16, respawn.getY() * 16);
 		}
 
 		//Bullets weghalen
@@ -123,7 +123,7 @@ public class GameServer extends Thread{
 			if(p.getTimeToWait() < 1) {
 				Tile respawn = (Tile) respawns.get((int) ((respawns.size() * Math.random())));
 				System.out.println("Player word gersespawn op: " + respawn.getX() + ", " + respawn.getY());
-				p.setPosition(respawn.getX() * 32, respawn.getY() * 32);
+				p.setPosition(respawn.getX() * 16, respawn.getY() * 16);
 				p.resetHitpoints();
 				p.resetTimeToWait();
 				world.RemovePlayerWaitList(p);
