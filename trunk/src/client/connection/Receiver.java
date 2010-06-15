@@ -3,9 +3,11 @@ package client.connection;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import client.animations.Animation;
+import client.animations.Explosion;
+import client.animations.GunFire;
 import client.model.Mapfactory;
 
-import client.model.Explosion;
 import client.model.Map;
 import client.model.Bullet;
 import client.model.Player;
@@ -23,7 +25,7 @@ public class Receiver extends Thread {
 	private ArrayList<Player> remotePlayers = new ArrayList<Player>();
 	private ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 	private ArrayList<Upgrade> upgradeList = new ArrayList<Upgrade>();
-	private ArrayList<Explosion> explosionList = new ArrayList<Explosion>();
+	private ArrayList<Animation> animationList = new ArrayList<Animation>();
 	
 	public  Receiver(Scanner in){
 		this.in = in;
@@ -80,7 +82,9 @@ public class Receiver extends Thread {
 				this.remotePlayers = tempList;
 			}else if(tempstr.equals("b")){ // bullet
 				String[] bulletXY = in.nextLine().split(",");
-				bulletList.add(new Bullet(Integer.parseInt("" + bulletXY[0])+15,Integer.parseInt("" + bulletXY[1])+15,Integer.parseInt("" + bulletXY[2]),Float.parseFloat(bulletXY[3])));
+				Bullet b = new Bullet(Integer.parseInt("" + bulletXY[0]),Integer.parseInt("" + bulletXY[1] +15),Integer.parseInt("" + bulletXY[2]),Float.parseFloat(bulletXY[3]));
+				animationList.add(new GunFire((int)b.getX(),(int) b.getY()));
+				bulletList.add(b);
 			}else if(tempstr.equals("ub")) { // upgrades_begin
 				boolean upgradeEnd = false;
 				ArrayList<Upgrade> tempList = new ArrayList<Upgrade>();
@@ -104,7 +108,7 @@ public class Receiver extends Thread {
 					}
 				}
 				if(b != null) 
-					explosionList.add(new Explosion((int) b.getX(), (int) b.getY()));
+					animationList.add(new Explosion((int)b.getX(),(int) b.getY()));
 				bulletList.remove(b);
 			} else if(tempstr.equals("pd")){ // destroy player
 				Player p = null;
@@ -158,11 +162,11 @@ public class Receiver extends Thread {
 		return allPlayer;
 	}
 	
-	public ArrayList<Explosion> getExplosions() {
-		return explosionList;
+	public ArrayList<Animation> getAnimtions() {
+		return animationList;
 	}
 	
-	public void removeExplosion(Explosion ex) {
-		explosionList.remove(ex);
+	public void removeAnimation(Animation a) {
+		animationList.remove(a);
 	}
 }
