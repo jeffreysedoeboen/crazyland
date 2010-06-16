@@ -92,7 +92,6 @@ public class World{
 			if(!checkBulletColission(b)){
 				b.move();
 			}else{
-				System.out.println("HIT");
 				ArrayList<Player> players = (ArrayList<Player>)getPlayerList().clone();
 				for(Player p : players) {
 					if(p.getHitpoints() < 1) {
@@ -199,10 +198,6 @@ public class World{
 			}else{
 				Rectangle2D.Double tile = (Rectangle2D.Double) t.getShape();
 				if(t instanceof Tile){
-					System.out.println(b.getX() + "," + b.getY() + "," + b.getHeight() + "," + b.getWidth());
-					System.out.println(bullet.getX() + "," + bullet.getY());
-					System.out.println("Checking with: " + tile.getX()/16 + "," + tile.getY()/16 + "," + tile.getHeight() + "," + tile.getWidth());
-					System.out.println(((Tile) t).isSolid());
 					
 					if(b.intersects(tile)){
 						return true;
@@ -226,13 +221,10 @@ public class World{
 		return false;
 	}
 	
-public boolean checkCloseBulletColission(Bullet b, Shape tile){
-		
-		System.out.println("CHECKING");
+public boolean checkCloseBulletColission(Bullet b, Shape tile){	
 		
 		float dir = b.getDirection();
 		Rectangle2D shape = b.getShape().getBounds();
-		
 
 		if(tile instanceof Circle){
 			Circle e1 = (Circle) tile;

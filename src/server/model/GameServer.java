@@ -150,7 +150,6 @@ public class GameServer extends Thread{
 	public void shoot(float x,float y, Player p){
 		Bullet b = world.shoot(x, y, p);
 		if(b != null){
-			System.out.println("test");
 			for(Sender s : (ArrayList<Sender>) senderList.clone()){
 				s.sendBullet(b);
 			}

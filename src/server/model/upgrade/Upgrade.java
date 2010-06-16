@@ -1,8 +1,5 @@
 package server.model.upgrade;
 
-import java.sql.Time;
-import java.util.Date;
-
 public class Upgrade {
 	private int x,y;
 	protected int actionValue;
