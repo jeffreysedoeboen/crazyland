@@ -33,8 +33,6 @@ public class LeaderView extends JFrame{
 		
 		this.master = master;
 
-		//updateTable();
-
 		JLabel label = new JLabel("Top 20 Players:");
 		backButton = new JButton("Back");
 
@@ -46,12 +44,13 @@ public class LeaderView extends JFrame{
 
 	@Override
 	public void setVisible(boolean b) {
-		if (b)
+		if (b){
 			updateTable();
+		}
 		super.setVisible(b);
-	};
+	}
 	
-	public void updateTable() { //TODO update de tabel nog niet
+	public void updateTable() {
 		Object[][] data = new  Object[21][21];
 		LBPlayer[] player = master.getLeaderboard();
 		for(int i = 0; i <= 19; i++ ) {
@@ -69,8 +68,7 @@ public class LeaderView extends JFrame{
 		table = new JTable(data, columnNames){
 			private static final long serialVersionUID = 1L;
 
-			public boolean isCellEditable(int row, int column)
-			{
+			public boolean isCellEditable(int row, int column){
 				return false;
 			}
 		};

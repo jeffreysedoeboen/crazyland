@@ -1,7 +1,5 @@
 package server.model.bullet;
 
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.Point;
 import java.awt.Shape;
@@ -74,7 +72,6 @@ public abstract class Bullet {
 		this.x = x;
 		this.y = y - 8;
 		this.player = p;
-		//this.bulletImage = WorldView.rotateImage(bulletImage, (float) (Math.toDegrees((Math.atan2(Math.toRadians(clickedY - y), Math.toRadians(clickedX - x))))),false);
 		this.direction = (float) dir;	
 		
 	}

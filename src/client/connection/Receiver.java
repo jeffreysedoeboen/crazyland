@@ -42,7 +42,6 @@ public class Receiver extends Thread {
 	public void run(){	
 		while(!terminated && in.hasNext()){
 			String tempstr = in.nextLine();
-			// TODO: chars in plaats van strings en dus switch in plaats van if else construction
 			if(tempstr.equals("m")){ // map
 				Tile[][] tiles = Mapfactory.getMap(in.nextLine());
 				map = new Map();
@@ -76,7 +75,6 @@ public class Receiver extends Thread {
 					}else{
 						System.out.println(rp);
 						String[] playerXY = rp.split(",");
-						//TODO: het aanmaken van de speler moet verbeterd worden -> niet iedere keer een nieuwe speler aanmaken
 						tempList.add(new Player(playerXY[0], Integer.parseInt(playerXY[1]),Integer.parseInt(playerXY[2]),Integer.parseInt(playerXY[3]), Float.parseFloat(playerXY[4]), Integer.parseInt(playerXY[5]), Integer.parseInt(playerXY[6])));
 					}
 				}
@@ -129,7 +127,6 @@ public class Receiver extends Thread {
 					player.turnToPoint(angle);
 				}
 			} else if(tempstr.equals("t")) {
-				// TODO: Timestamp verwijdern
 //				System.out.println(System.currentTimeMillis() - Long.parseLong(in.nextLine()));
 			}
 		}

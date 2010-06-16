@@ -43,13 +43,13 @@ public class LeaderDAO {
 			psDelete.executeUpdate();
 
 			String qCreate = "CREATE TABLE leaderboard (" +
-			"rank bigint NOT NULL," +
-			"username VARCHAR(255) NOT NULL," +
-			"kills bigint NOT NULL DEFAULT 0," +
-			"deaths bigint NOT NULL DEFAULT 0," +
-			"PRIMARY KEY (username)," +
-			"UNIQUE (rank)" +
-			")";
+				"rank bigint NOT NULL," +
+				"username VARCHAR(255) NOT NULL," +
+				"kills bigint NOT NULL DEFAULT 0," +
+				"deaths bigint NOT NULL DEFAULT 0," +
+				"PRIMARY KEY (username)," +
+				"UNIQUE (rank)" +
+				")";
 			PreparedStatement psCreate = conn.prepareStatement(qCreate);
 			psCreate.executeUpdate();
 			
@@ -114,9 +114,6 @@ public class LeaderDAO {
 	}
 	
 	public static void main(String[] args) {
-//		LeaderDAO.resetLeaderTable();
-//		LeaderDAO.addPlayer("dennis", 2);
-//		LeaderDAO.addPlayer("karel",  1);
 		for(LBPlayer player : LeaderDAO.getTop20()) {
 			System.out.println(player);
 		}

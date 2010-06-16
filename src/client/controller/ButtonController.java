@@ -1,6 +1,5 @@
 package client.controller;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,7 +8,6 @@ import javax.swing.JOptionPane;
 
 
 import client.connection.MasterConnection;
-import client.connection.Sender;
 import client.model.GameServer;
 import client.view.GameFrame;
 import client.view.InlogView;
@@ -24,11 +22,9 @@ public class ButtonController implements ActionListener {
 	private InlogView inlogview;
 	private LobbyView lobbyview;
 	private LeaderView leaderview;
-	private Sender sender;
 	private MasterConnection master;
 
-	public ButtonController(InlogView inlogview, Sender sender, MasterConnection masterConnection) {
-		this.sender = sender;
+	public ButtonController(InlogView inlogview, MasterConnection masterConnection) {
 		this.inlogview = inlogview;
 		this.signupview = new SignupView();
 		this.master = masterConnection;
@@ -54,15 +50,6 @@ public class ButtonController implements ActionListener {
 			} else {
 				JOptionPane.showMessageDialog(inlogview, "Registration failed!", "registration failed", JOptionPane.PLAIN_MESSAGE);
 			}
-//				} else if(master.addAccount(filledInUsername, filledInPassword) == 1) {
-//					JOptionPane.showMessageDialog(signupview, "You didn't fill in your username", "username not filled in", JOptionPane.ERROR_MESSAGE);
-//				} else if(AccountDAO.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck) == 2) {
-//					JOptionPane.showMessageDialog(signupview, "You didn't fill in your password", "password not filled in", JOptionPane.ERROR_MESSAGE);
-//				} else if(AccountDAO.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck) == 3) {
-//					JOptionPane.showMessageDialog(signupview, "You didn't fill in the same password twice", "password not the same as repeated password", JOptionPane.ERROR_MESSAGE);
-//				} else if(AccountDAO.addAccount(filledInUsername, filledInPassword, filledInPasswordcheck) == 4) {
-//					JOptionPane.showMessageDialog(signupview, "This username already exists", "username already exists", JOptionPane.ERROR_MESSAGE);
-//				}
 		} else if(button.getText().equals("Create Account")) {
 			inlogview.setVisible(false);
 			signupview.setVisible(true);

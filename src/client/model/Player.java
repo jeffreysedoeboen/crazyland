@@ -28,7 +28,7 @@ public class Player {
 		this.angle = angle;
 	}
 
-	private BufferedImage heartImage, shootImage, leftImage, rightImage;
+	private BufferedImage heartImage, leftImage, rightImage;
 	private String name;
 	private int hitpoints = 0;
 	private Weapon primaryWeapon;
@@ -56,7 +56,6 @@ public class Player {
 		try {
 			leftImage 		= ImageIO.read(new File("themes/tee/characters/character_left.png"));
 			rightImage 		= ImageIO.read(new File("themes/tee/characters/character_right.png"));
-			shootImage 	= ImageIO.read(new File("themes/tee/characters/charactershoot.png"));
 			heartImage 	= ImageIO.read(new File("themes/tee/other/heart.png"));
 		} catch (IOException e) {
 			e.printStackTrace();

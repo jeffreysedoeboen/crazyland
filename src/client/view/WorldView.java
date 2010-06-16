@@ -60,29 +60,21 @@ public class WorldView extends JPanel {
 	private int timeRemaining;
 	private ActionListener gameTimerPerformer = new ActionListener() {
 	
-	
 		public void actionPerformed(ActionEvent arg0) {
 			if (--timeRemaining == 0) {
 				showHighscore = true;
-
-				
-				
 			}
 			if(timeRemaining == -5) {
 				timeRemaining = receiver.getTimeRemaining();
-				//timeRemaining = 570;
 				showHighscore = false;
 			}
 		}
-
 	};
 
 	public boolean isShowHighscore() {
 		return showHighscore;
 	}
 	
-	
-
 	public void setShowHighscore(boolean showHighscore) {
 		this.showHighscore = showHighscore;
 	}
@@ -95,7 +87,6 @@ public class WorldView extends JPanel {
 		new Timer(20, taskPerformer).start();
 		
 		timeRemaining = receiver.getTimeRemaining();
-		//timeRemaining = 600;
 		
 		Timer gameTimer = new Timer(1000, gameTimerPerformer);
 		gameTimer.start();
@@ -115,10 +106,6 @@ public class WorldView extends JPanel {
 		Scanner in = null;
 		PrintWriter out = null;
 
-		// check if we can talk with the server
-		System.out
-				.println("\ntry to connect with gameserver...");
-
 		try {
 			s = new Socket(server.getIp(), 1337);
 			inStream = s.getInputStream();
@@ -126,10 +113,8 @@ public class WorldView extends JPanel {
 			in = new Scanner(inStream);
 			out = new PrintWriter(outStream, true /* autoFlush */);
 		} catch (IOException ioe) {
-			System.out
-					.println("\nwas not able to connect with gameserver... check connection!");
+			System.out.println("\nwas not able to connect with gameserver... check connection!");
 		}
-		System.out.println("has connection with gameserver");
 
 		receiver = new Receiver(in);
 		receiver.start();
@@ -165,7 +150,6 @@ public class WorldView extends JPanel {
 		if(receiver.getMap() != null && receiver.getPlayer() != null){
 			Tile[][] tiles = receiver.getMap().getTiles();
 			
-			//nieuwe shit
 			int offsetX = this.getWidth() / 2 - Math.round(receiver.getPlayer().getX()) - 16;
 			int mapWidth = tilesToPixels(receiver.getMap().getWidth());
 			offsetX = Math.min(offsetX, 0);
@@ -184,9 +168,7 @@ public class WorldView extends JPanel {
 					receiver.getPlayer().getY(), 
 					receiver.getPlayer().getImage().getWidth(null), 
 					receiver.getPlayer().getImage().getHeight(null)
-			);
-			// Area player = new Area(playerRect);
-			
+			);	
 
 			for (int i = offsetX/3; i<=this.getWidth()-offsetX; i += bgWidth) {
 				for (int j = offsetY/3; j<=this.getHeight()-offsetY; j += bgHeight) {	
@@ -232,9 +214,7 @@ public class WorldView extends JPanel {
 			}
 			
 			for(Upgrade u : receiver.getUpgrades()) {	
-				//System.out.println("x: "+ u.getX() + ", y:" + u.getY());
 				g.drawImage(u.getImage(), Math.round(u.getX()+offsetX),Math.round(u.getY()+offsetY),null);
-				//g.drawString(u.g, Math.round(p.getX() + offsetX + 20), Math.round(p.getY() + offsetY + 5));
 			}
 			
 			ArrayList<Bullet> bullets = receiver.getBullets();
@@ -245,7 +225,6 @@ public class WorldView extends JPanel {
 					bulletImage = rotateImage(bulletImage, (float) (b.getDirection() * (180 / Math.PI) + 180),false);
 					g.drawImage(bulletImage,(int) b.getX() + offsetX,(int) b.getY() + offsetY, null);
 				}
-				
 			}
 			
 			drawAnimations(g);

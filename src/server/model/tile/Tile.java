@@ -5,7 +5,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 import server.model.WorldObject;
-import server.tools.Circle;
 
 public class Tile implements WorldObject{
 	private int x;

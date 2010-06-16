@@ -5,14 +5,12 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import server.model.bullet.Bullet;
 import server.model.tile.Tile;
 import server.model.upgrade.Upgrade;
 import server.tools.Circle;
-
 
 public class World{
 
@@ -40,10 +38,6 @@ public class World{
 		playerList.remove(p);
 		playerWaitList.add(p);
 	}
-	
-//	public void addUpgrade(Upgrade u) {
-//		upgrades.add(u);
-//	}
 
 	public void RemovePlayerWaitList(Player p) {
 		playerWaitList.remove(p);
@@ -74,24 +68,9 @@ public class World{
 		}
 		return null;
 	}
-	
-//	public void moveWeapon(int mouseX, int mouseY) {
-//		player.getWeapon().turnToPoint(mouseX, mouseY);
-//		//player.getWeapon().setX(player.getMidPlayerX() + 5);
-//		player.updateWeaponPosition();
-//	}
 
 	@SuppressWarnings("unchecked")
 	public void move() {
-//		for(Upgrade u : upgrades) {
-//			if(u.getRespawnCountdown() > 0) {
-//				u.tick();
-//				//System.out.println(u.getRespawnCountdown());
-//			} else {
-//				u.updatePosition();
-//				u.reset();
-//			}
-//		}
 		for(Player player : this.getPlayerList()){
 			if(player != null){
 				if(player.isMovingLeft() && canMoveLeft(player)){
@@ -113,9 +92,6 @@ public class World{
 			if(!checkBulletColission(b)){
 				b.move();
 			}else{
-//				while(checkBulletColission(b)){
-//					b.moveOpposite();
-//				}
 				System.out.println("HIT");
 				ArrayList<Player> players = (ArrayList<Player>)getPlayerList().clone();
 				for(Player p : players) {
@@ -131,15 +107,6 @@ public class World{
 				server.removeBullet(b);
 			}
 		}
-		
-//		ArrayList<Upgrade> upgradeclone = (ArrayList<Upgrade>) upgrades.clone();
-//		for(Upgrade u : upgradeclone) {
-//			if(u.getRespawnCountdown() > 0) {
-//				u.tick();
-//			} else {
-//				u.reset();
-//			}
-//		}
 	}
 	
 	private ArrayList<Upgrade> checkIfUpgradesAvailable(ArrayList<Upgrade> upgrades) {
@@ -389,11 +356,6 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 		return (ArrayList<Player>) this.playerList.clone();
 	}
 	
-	@SuppressWarnings("unchecked")
-//	public ArrayList<Upgrade> getUpgradeList() {
-//		return (ArrayList<Upgrade>) this.upgrades.clone();
-//	}
-	
 	public void removePlayer(Player p) {
 		playerList.remove(p);
 	}
@@ -405,8 +367,4 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 	public ArrayList<Upgrade> getUpgradeList() {
 		return upgrades;
 	}
-
-	//	public void changeWeapon(Player player) {
-	//		player.changeWeapon();
-	//	}
 }

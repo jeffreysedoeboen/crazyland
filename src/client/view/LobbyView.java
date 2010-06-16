@@ -68,7 +68,6 @@ public class LobbyView extends JFrame {
 		
 		Object[][] data = new Object[gameservers.size()][5];
 		for(int i = 0; i < gameservers.size(); i++) {
-			//ToDo andere gegevens opvragen
 			data[i][0] = gameservers.get(i).getName(); 
 			data[i][1] = "xx";
 			data[i][2] = "mode";
@@ -77,8 +76,7 @@ public class LobbyView extends JFrame {
 		}
 
 		table = new JTable(data, columnNames) {
-			public boolean isCellEditable(int row, int column)
-			{
+			public boolean isCellEditable(int row, int column){
 				return false;
 			}
 		};
@@ -119,8 +117,9 @@ public class LobbyView extends JFrame {
 	}
 
 	public GameServer getSelectedGameserver() {
-		if (table.getSelectedRow() >= 0)
+		if (table.getSelectedRow() >= 0){
 			return gameservers.get(table.getSelectedRow());
+		}
 		return null;
 	}
 }

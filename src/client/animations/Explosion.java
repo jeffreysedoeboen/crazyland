@@ -16,7 +16,6 @@ public class Explosion implements Animation{
 		this.x = x - 32;
 		this.y = y - 32;
 		try {
-			//TODO hoeft eigelijk niet elke keer opnieuw ingelezen te worden
 			image = ImageIO.read(new File("themes/tee/other/explosion.png"));
 		} catch (IOException e) {
 			System.err.println("Fout in Explosie inladen plaatje");
