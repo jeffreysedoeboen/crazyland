@@ -24,7 +24,7 @@ public class Client {
 		PrintWriter out = null;
 
 		try {
-			s = new Socket("localhost", 1338);
+			s = new Socket("192.168.1.100", 1338);
 			inStream = s.getInputStream();
 			outStream = s.getOutputStream();
 			in = new Scanner(inStream);

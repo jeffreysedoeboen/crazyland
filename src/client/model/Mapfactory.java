@@ -22,12 +22,13 @@ import client.model.Tile;
 public class Mapfactory {
 /*	private static BufferedImage originalimage;*/
 	
-	/*
+	/**
 	 * Plaatje met alle subplaatjes wordt ingeladen
 	 * XML-file met posities en eigenschappen van alle Tiles wordt uitgelezen
 	 * subimages worden aangemaakt en in arraylist gezet
 	 * Tiles worden aangemaakt en in tweedimensionale array gezet
-	 * Deze array wordt teruggegeven
+	 * @param mapsource Dit is de directory naar het plaatje met de Tiles.
+	 * @return Tile[][] Dit is een 2D-representatie van alle Tiles van een Level.
 	 */
 	public static Tile[][] getMap(String mapsource) {
 		BufferedImage originalimage;
