@@ -22,7 +22,6 @@ public class Connection extends Thread {
 	private MasterServer server;
 	private boolean loggedIn = false, guest = false;
 	private boolean terminated = false;
-	private Timer timer;
 	
 	public  Connection(Scanner in, PrintWriter out, MasterServer s){
 		this.in = in;
