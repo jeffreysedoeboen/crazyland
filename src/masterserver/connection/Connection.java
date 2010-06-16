@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import javax.swing.Timer;
-
 import masterserver.MasterServer;
 import masterserver.db.AccountDAO;
 import masterserver.db.GameServerDAO;
