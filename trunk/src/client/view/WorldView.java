@@ -11,6 +11,7 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.sound.midi.Sequence;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -40,6 +41,7 @@ import client.controller.KeyboardController;
 import client.controller.MouseController;
 import client.model.Bullet;
 import client.model.GameServer;
+import client.model.MidiPlayer;
 import client.model.Player;
 import client.model.Tile; 
 import client.model.upgrades.Upgrade;
@@ -90,6 +92,10 @@ public class WorldView extends JPanel {
 		
 		Timer gameTimer = new Timer(1000, gameTimerPerformer);
 		gameTimer.start();
+		
+		MidiPlayer mp = new MidiPlayer();
+		Sequence sequence = mp.getSequence("sound/zelda.mid");
+		mp.play(sequence, true);
 	}
 	
 	public void connectAndPrepare(GameServer server) {
