@@ -2,6 +2,8 @@ package masterserver.model;
 
 public class GameServer {
 	private String name;
+	private String ip;
+	
 	public String getName() {
 		return name;
 	}
@@ -17,8 +19,6 @@ public class GameServer {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-
-	private String ip;
 	
 	public GameServer (String ip, String name) {
 		this.ip = ip;
