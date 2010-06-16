@@ -1,4 +1,4 @@
-package server.model;
+package server.model.map;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -17,6 +17,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import server.model.tile.Tile;
+
 
 public class Mapfactory {
 /*	private static BufferedImage originalimage;*/

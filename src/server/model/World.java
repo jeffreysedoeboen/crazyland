@@ -8,6 +8,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import server.model.bullet.Bullet;
+import server.model.map.Map;
 import server.model.tile.Tile;
 import server.model.upgrade.Upgrade;
 import server.tools.Circle;

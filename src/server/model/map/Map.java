@@ -1,6 +1,7 @@
-package server.model;
+package server.model.map;
 
 import server.model.tile.Tile;
+
 
 public class Map {
 	private Tile[][] tiles;

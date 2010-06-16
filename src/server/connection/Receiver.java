@@ -1,7 +1,8 @@
-package server.model;
+package server.connection;
 
 import java.util.Scanner;
 
+import server.model.GameServer;
 import server.model.Player;
 
 public class Receiver extends Thread {
