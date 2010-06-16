@@ -58,14 +58,16 @@ public class Connector extends Thread {
                 inStream = socket.getInputStream();
     		} catch (IOException e) {
     			//print detailed information about the whereabouts of the error and what caused it.
-    			System.out.println("Exception Caught in Login.java line 59. Trying to get OutputStream and InpuStream from socket.");
+    			System.out.println("Exception. Trying to get OutputStream and InpuStream from socket.");
     			e.printStackTrace();
     		} 
     		
     		out = new PrintWriter(outStream, true);	
             in = new Scanner(inStream);
  
-            Connection c = new Connection(in, out, server);
+            
+            Connection c = null; 
+            c = new Connection(in, out, server);
             c.start();
             server.addConnection(c);
             
