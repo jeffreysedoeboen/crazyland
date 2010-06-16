@@ -20,6 +20,7 @@ public class MasterConnection {
 		this.in = in;
 	}
 	
+	
 	public ArrayList<GameServer> getGameServers() {
 		out.println("get_gameservers");
 		ArrayList<GameServer> serverlist = new ArrayList<GameServer>();

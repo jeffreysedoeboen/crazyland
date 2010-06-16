@@ -7,15 +7,15 @@ import java.sql.SQLException;
 
 public class AccountDAO {
 	
-	/*
-	 * return waarde's:
+	/**
+	 * @param passwordHash de hashcode van het wachtwoord
+	 * @return :
 	 * 1: gebruikersnaam niet ingevuld
 	 * 2: wachtwoord niet ingevuld
 	 * 3: wachtwoord niet gelijk aan herhaling wachtwoord
 	 * 4: gebruikersnaam staat al in database
 	 * 5: account aanmaken is gelukt!
 	 */
-	
 	public static boolean addAccount(String username, String passwordHash) {
 		DBmanager dbManager = DBmanager.getInstance();
 		Connection conn = dbManager.getConnection();

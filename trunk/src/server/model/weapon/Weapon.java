@@ -32,6 +32,11 @@ public abstract class Weapon {
 		return unlimitedBullets;
 	}
 	
+	
+	/**
+	 * @param bCounter Het aantal bullets dat al zijn aangemaakt
+	 * @return De bullet die gemaakt word;
+	 */
 	public Bullet createBullet(int bCounter){
 		return null;
 	}	
