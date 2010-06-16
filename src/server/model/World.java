@@ -104,6 +104,7 @@ public class World{
 				if(collisionCeiling(player)){
 					player.setVerticalSpeed(-0.5f);
 				}
+				upgrades = checkIfUpgradesAvailable(upgrades);
 				upgrades = colideWithUpgrade(player, upgrades);
 			}
 		}
@@ -139,6 +140,17 @@ public class World{
 //				u.reset();
 //			}
 //		}
+	}
+	
+	private ArrayList<Upgrade> checkIfUpgradesAvailable(ArrayList<Upgrade> upgrades) {
+		for(Upgrade u : upgrades) {
+			if(u.isUsed()) {
+				if((System.currentTimeMillis() / 1000) - u.getTimestamp() > 15) {
+					u.setIsUsed(false);
+				}
+			}
+		}
+		return upgrades;
 	}
 	
 	public ArrayList<Upgrade> colideWithUpgrade(Player p, ArrayList<Upgrade> upgrades) {
