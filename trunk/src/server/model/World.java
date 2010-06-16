@@ -70,6 +70,11 @@ public class World{
 		return null;
 	}
 
+	/**
+	 * Deze methode word continu aangeroepen.
+	 * Hier word gekeken of de Player op de grond staat en of deze naar links of rechts kan lopen.
+	 * Ook word er gekeken naar of de bestaande Bullets iets raken en wat er moet gebeuren als ze iets raken.
+	 */
 	@SuppressWarnings("unchecked")
 	public void move() {
 		for(Player player : this.getPlayerList()){
@@ -159,6 +164,13 @@ public class World{
 		return upgradeList;
 	}
 
+	/**
+	 * Alle Players en alle Tiles worden in een ArrayList gestopt.
+	 * Van deze Objecten word gekeken of het een Player is (shape is Circle) of dat het een Tile is.
+	 * Als de Player of Tile Collision heeft met de Bullet, dan worden de benodigde acties verricht
+	 * @param bullet Van deze Bullet wordt gekeken of deze Collission heeft
+	 * @return Boolean Als de Bullet collision heeft word true gereturned
+	 */
 	public boolean checkBulletColission(Bullet bullet){
 		ArrayList<WorldObject> retList = new ArrayList<WorldObject>();
 
@@ -222,7 +234,16 @@ public class World{
 		return false;
 	}
 	
-public boolean checkCloseBulletColission(Bullet b, Shape tile){	
+/**
+ * Deze methode kijkt precieser of een Bullet en een Shape Collision hebben.
+ * De Bullet bestaat uit 3 rondjes.
+ * Als de Bounding Box Collision heeft met een Shape, dan wordt deze methode aangeroepen.
+ * Daarna word gekeken of de rondjes ook Collision hebben met de Shape.
+ * @param b De Bullet waarvan gekeken word of deze Collision heeft
+ * @param tile De Shape waarvan gekeken word of deze Collision heeft
+ * @return Boolean Als de Bullet en de Shape Collision hebben, word true gereturned
+ */
+public boolean checkCloseBulletColission(Bullet b, Shape tile){
 		
 		float dir = b.getDirection();
 		Rectangle2D shape = b.getShape().getBounds();
@@ -273,6 +294,12 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 		return false;
 	}
 	
+	/**
+	 * Deze methode neemt de 3 tiles onder de Player en kijkt of deze solid zijn.
+	 * Als dit het geval is, staat de Player op de grond.
+	 * @param player Van deze Player word gekeken of deze op de grond staat
+	 * @return Boolean Er wordt true gereturned als de Player op de grond staat
+	 */
 	public boolean onGround(Player player) {
 		Tile[][] tiles = map.getTiles();
 		Tile botLeft = tiles[(int) ((player.getX())/16)][(int) ((player.getY()+35)/16)];
@@ -284,6 +311,12 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 		return false;
 	}
 	
+	/**
+	 * Deze methode neemt de 3 tiles links van de Player en kijkt of deze solid zijn.
+	 * Als dit het geval is, kan de player niet meer naar links lopen.
+	 * @param player Van deze Player word gekeken of deze naar links kan lopen
+	 * @return Boolean Er word false gereturned als de Player niet meer naar links kan lopen
+	 */
 	private boolean canMoveLeft(Player player) {			
 		Tile[][] tiles = map.getTiles();
 		Tile topLeft = tiles[(int) ((player.getX()-3)/16)][(int) ((player.getY())/16)];
@@ -295,6 +328,12 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 		return true;
 	}
 	
+	/**
+	 * Deze methode neemt de 3 tiles rechts van de Player en kijkt of deze solid zijn.
+	 * Als dit het geval is, kan de player niet meer naar rechts lopen.
+	 * @param player Van deze Player word gekeken of deze naar rechts kan lopen
+	 * @return Boolean Er word false gereturned als de Player niet meer naar rechts kan lopen
+	 */
 	private boolean canMoveRight(Player player) {
 		Tile[][] tiles = map.getTiles();
 		Tile topRight = tiles[(int) ((player.getX()+35)/16)][(int) ((player.getY())/16)];
@@ -306,6 +345,12 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 		return true;
 	}
 
+	/**
+	 * Deze methode neemt de 3 tiles boven de Player en kijkt of deze solid zijn.
+	 * Als dit het geval is, kan de player niet verder omhoog (springen).
+	 * @param player Van deze Player word gekeken of deze nog verder omhoog kan
+	 * @return Boolean Er word true gereturned als de Player het plafond bereikt heeft
+	 */
 	private boolean collisionCeiling(Player player) {
 		Tile[][] tiles = map.getTiles();
 		Tile topLeft = tiles[(int) ((player.getX())/16)][(int) ((player.getY()-3)/16)];
