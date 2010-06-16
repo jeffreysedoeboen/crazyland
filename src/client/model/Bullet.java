@@ -17,6 +17,7 @@ public class Bullet {
 	private int indentifier;
 	
 	public Bullet(int x, int y, int indentifier, float dir){
+		System.out.println(y);
 		this.x = x;
 		this.y = y - 8;
 		this.direction = dir;
@@ -37,8 +38,6 @@ public class Bullet {
 		this.y -= 12*Math.sin(this.direction);
 		this.y = this.y - verticalSpeed;
 		verticalSpeed += -0.005;
-		System.out.println(this.x + ", " + this.y);
-		System.out.println(this.direction);
 	}
 	
 	public BufferedImage getBulletImage() {
