@@ -1,6 +1,7 @@
 package server.model.upgrade;
 
-import java.security.Timestamp;
+import java.sql.Time;
+import java.util.Date;
 import java.util.Random;
 
 import server.model.Map;
@@ -9,7 +10,7 @@ public class Upgrade {
 	private int x,y;
 	protected int actionValue;
 	private boolean isUsed = false;
-	private Timestamp timeStamp;
+	private long timeStamp;
 	
 	public Upgrade(int x, int y) {
 		this.x = x;
@@ -33,14 +34,12 @@ public class Upgrade {
 	}
 	
 	public void setIsUsed(boolean value) {
+		this.timeStamp = System.currentTimeMillis() / 1000;
 		this.isUsed = value;
 	}
 	
-	public Timestamp getTimestamp() {
+	public long getTimestamp() {
 		return timeStamp;
 	}
 	
-	public void setTimestamp(Timestamp timeStamp) {
-		this.timeStamp = timeStamp;
-	}
 }
