@@ -104,6 +104,11 @@ public class Player implements WorldObject{
 		hitpoints += value;
 	}
 	
+	/**
+	 * Hier word de Bullet afgeschoten.
+	 * @param bCounter Dit is de Identifier van de Bullet die aangemaakt word
+	 * @return Bullet Dit is de Bullet die afgeschoten word
+	 */
 	public Bullet shoot(int bCounter) {
 		if(hitpoints > 0) {
 			float fireRate = primaryWeapon.getFireRate();
