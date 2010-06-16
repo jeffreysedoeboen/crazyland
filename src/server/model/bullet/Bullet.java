@@ -56,6 +56,10 @@ public abstract class Bullet {
 		return bulletImage;
 	}
 	
+	
+	/**
+	 * De bullet een stap verder zetten
+	 */
 	public void move(){
 		this.x -= 6*Math.cos(this.direction);
 		this.y -= 6*Math.sin(this.direction);
@@ -63,25 +67,39 @@ public abstract class Bullet {
 		verticalSpeed += -0.005;
 	}
 	
+	
+	/**
+	 * De kogel achteruit laten gaan
+	 */
 	public void moveOpposite(){
 		this.x += 1*Math.cos(this.direction + Math.PI);
 		this.y += 1*Math.sin(this.direction + Math.PI);
 	}
 	
+	/**
+	 * @param x-coordinaat van de kogel
+	 * @param y-coordinaat van de kogel
+	 * @param dir De richting waar de kogel heen gaat 
+	 * @param p De player de de kogel afschiet
+	 */
 	public void setBullet(float x, float y, double dir, Player p) {
 		this.x = x;
-		this.y = y - 8;
+		this.y = y;
 		this.player = p;
 		this.direction = (float) dir;	
 		
 	}
 	
+	
+	/**
+	 * @return De player die de kogel afschoot
+	 */
 	public Player getOrigin(){
 		return this.player;
 	}
 	
-	public Shape getShape(){
-		
+	
+	public Shape getShape(){	
 		return null;
 	}
 	

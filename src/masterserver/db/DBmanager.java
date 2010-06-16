@@ -6,6 +6,10 @@ public class DBmanager {
 	private static DBmanager uniqueInstance = null;
 	private static Connection con = null;
 
+	/**
+	 * Er word gekeken of er geen connectie is met de database, zoniet dan word
+	 * de methode getCon() aangeroepen
+	 */
 	private DBmanager() {
 		if (!dbExists()) {
 			try {
@@ -18,13 +22,25 @@ public class DBmanager {
 		}
 	}
 
+	/**
+	 * Deze methode zorgt dat er maar één verbinding met de database mag zijn.
+	 * Als er nog geen verbinding is wordt die hier aangemaakt anders wordt de
+	 * bestaande verbinding gereturned
+	 * 
+	 * @return uniqueInstance De dbmanager
+	 */
 	public static synchronized DBmanager getInstance() {
 		if (uniqueInstance == null) {
 			uniqueInstance = new DBmanager();
 		}
 		return uniqueInstance;
 	}
-
+	
+	
+	/**
+	 * Kijkt of er een verbinding is met de database
+	 * @return exists: true als er een verbindig is : false als dat niet zo is
+	 */
 	private Boolean dbExists() {
 		Boolean exists = false;
 		if (con != null) {
@@ -33,6 +49,10 @@ public class DBmanager {
 		return exists;
 	}
 
+	
+	/**
+	 * Sluit de verbinding met de database helemaal af
+	 */
 	public void close() {
 		try {
 			con.close();
@@ -43,12 +63,18 @@ public class DBmanager {
 		}
 	}
 
-	public Connection getConnection(){
+	public Connection getConnection() {
 		return con;
 	}
 
+	/**
+	 * Deze methode zorgt voor het verbinding maken met de database
+	 * @return De connectie met de database
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	private static Connection getCon() throws SQLException,
-	ClassNotFoundException {
+			ClassNotFoundException {
 		String driver = "org.gjt.mm.mysql.Driver";
 		String url = "jdbc:mysql://www.freesql.org/crazyland?";
 		String username = "crazyland";
