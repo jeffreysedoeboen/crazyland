@@ -2,7 +2,6 @@ package client.view;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -20,8 +19,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 
-import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +30,6 @@ import java.net.Socket;
 import javax.imageio.ImageIO;
 
 import client.animations.Animation;
-import client.animations.Explosion;
 import client.animations.GunFire;
 import client.connection.Receiver;
 import client.connection.Sender;
@@ -168,13 +164,6 @@ public class WorldView extends JPanel {
 			
 			this.offsetX = offsetX;
 			this.offsetY = offsetY;
-			
-			Rectangle2D.Double playerRect = new Rectangle2D.Double(
-					receiver.getPlayer().getX(), 
-					receiver.getPlayer().getY(), 
-					receiver.getPlayer().getImage().getWidth(null), 
-					receiver.getPlayer().getImage().getHeight(null)
-			);	
 
 			for (int i = offsetX/3; i<=this.getWidth()-offsetX; i += bgWidth) {
 				for (int j = offsetY/3; j<=this.getHeight()-offsetY; j += bgHeight) {	

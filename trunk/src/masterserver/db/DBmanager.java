@@ -50,9 +50,9 @@ public class DBmanager {
 	private static Connection getCon() throws SQLException,
 	ClassNotFoundException {
 		String driver = "org.gjt.mm.mysql.Driver";
-		String url = "jdbc:mysql://www.freesql.org/crazyland?";
-		String username = "crazyland";
-		String password = "EIN2grules";
+		String url = "jdbc:mysql://127.0.0.1/crazyland?";
+		String username = "root";
+		String password = "vertrigo";
 		try {
 			Class.forName(driver).newInstance();
 		} catch (InstantiationException e) {
