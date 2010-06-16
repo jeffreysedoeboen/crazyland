@@ -41,7 +41,7 @@ public class ButtonController implements ActionListener {
 			String filledInUsername = signupview.getUsernameinput().getText();
 			String filledInPassword = signupview.getPasswordinput().getText();
 			String filledInPasswordcheck = signupview.getPasswordcheckinput().getText();
-			if (filledInPassword != filledInPasswordcheck) {
+			if (!filledInPassword.equals(filledInPasswordcheck)) {
 				JOptionPane.showMessageDialog(signupview, "You didn't fill in the same password twice", "password not the same as repeated password", JOptionPane.ERROR_MESSAGE);
 			} else if(master.addAccount(filledInUsername, filledInPassword)) {
 				signupview.setVisible(false);
