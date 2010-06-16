@@ -83,7 +83,8 @@ public class Receiver extends Thread {
 				this.remotePlayers = tempList;
 			}else if(tempstr.equals("b")){ // bullet
 				String[] bulletXY = in.nextLine().split(",");
-				Bullet b = new Bullet(Integer.parseInt("" + bulletXY[0]),Integer.parseInt("" + bulletXY[1] +15),Integer.parseInt("" + bulletXY[2]),Float.parseFloat(bulletXY[3]));
+				System.out.println(Integer.parseInt(bulletXY[1])+15);
+				Bullet b = new Bullet(Integer.parseInt(bulletXY[0]),Integer.parseInt(bulletXY[1])+15,Integer.parseInt("" + bulletXY[2]),Float.parseFloat(bulletXY[3]));
 				animationList.add(new GunFire((int)b.getX(),(int) b.getY()));
 				bulletList.add(b);
 			}else if(tempstr.equals("ub")) { // upgrades_begin
