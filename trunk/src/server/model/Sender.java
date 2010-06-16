@@ -29,9 +29,8 @@ public class Sender {
 	public void sendPlayers(ArrayList<Player> playerList){
 		String kaas = String.format("pb%n");
 		for(Player player : playerList){
-			if(player != this.player){
-				kaas += String.format((Locale)null, "p%n%s,%d,%d,%d,%.2f,%d,%d%n", player.getName(), (int)player.getX(), (int)player.getY(), player.getHitpoints(), player.getAngle(), player.getKills(), player.getDeaths());
-				//kaas += p.getName()+ "," + (int)p.getX() + "," + (int)p.getY() + "," + player.getHitpoints() + ","  + String.format((Locale)null, "%.2f", p.getAngle()) + "%n";
+			if(!player.equals(this.player)){
+				kaas += String.format((Locale)null, "%s,%d,%d,%d,%.2f,%d,%d%n", player.getName(), (int)player.getX(), (int)player.getY(), player.getHitpoints(), player.getAngle(), player.getKills(), player.getDeaths());
 			}
 		}
 		lineOut += kaas + String.format("pe%n");
