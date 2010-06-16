@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 import javax.swing.Timer;
 
+import server.connection.Connector;
+import server.connection.Receiver;
+import server.connection.Sender;
 import server.model.bullet.Bullet;
 import server.model.tile.Tile;
 

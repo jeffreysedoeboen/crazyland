@@ -1,4 +1,4 @@
-package server.model;
+package server.connection;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,7 +8,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
+import server.model.GameServer;
+import server.model.Player;
 import server.model.tile.Tile;
+
 
 public class Connector extends Thread {
 	

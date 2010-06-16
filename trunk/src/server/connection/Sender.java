@@ -1,9 +1,10 @@
-package server.model;
+package server.connection;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import server.model.Player;
 import server.model.bullet.Bullet;
 import server.model.upgrade.Upgrade;
 
