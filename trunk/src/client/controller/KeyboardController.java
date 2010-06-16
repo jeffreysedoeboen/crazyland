@@ -47,7 +47,6 @@ public class KeyboardController implements KeyListener {
 			wv.setShowHighscore(true);
 		break;
 		case(KeyEvent.VK_ESCAPE): 
-			//sender.removePlayer();
 			gameframe.dispose();
 		break;
 		}

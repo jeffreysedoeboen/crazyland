@@ -8,7 +8,6 @@ public class DBmanager {
 
 	private DBmanager() {
 		if (!dbExists()) {
-			// System.err.println("de database bestaat niet....");
 			try {
 				con = getCon();
 			} catch (SQLException e) {

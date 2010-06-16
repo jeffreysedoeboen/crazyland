@@ -1,17 +1,11 @@
 package client.connection;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.math.BigInteger;
-import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import javax.print.attribute.standard.OutputDeviceAssigned;
 
 import client.model.GameServer;
 import client.model.LBPlayer;
@@ -33,9 +27,7 @@ public class MasterConnection {
 		if(in.hasNext()) {
 			line = in.nextLine();
 		}
-		if (line.equals("access_denied")) {
-			System.out.println("access denied for getting game servers");
-		} else if (line.equals("gameservers_begin")) {
+		if (line.equals("gameservers_begin")) {
 			boolean gameserversEnd = false;
 			while (!gameserversEnd && in.hasNext()) {
 				String tmp = in.nextLine();
@@ -46,8 +38,6 @@ public class MasterConnection {
 					serverlist.add(new GameServer(server[0], server[1]));
 				}
 			}
-		} else {
-			System.out.println("unexpected response from server:" + line);
 		}
 		return serverlist;
 	}
@@ -59,9 +49,7 @@ public class MasterConnection {
 		if(in.hasNext()) {
 			line = in.nextLine();
 		}
-		if (line.equals("access_denied")) {
-			System.out.println("access denied for getting leaderboard");
-		} else if (line.equals("leaderboard_begin")) {
+		if (line.equals("leaderboard_begin")) {
 			boolean leaderboardEnd = false;
 			int i = 0;
 			while (!leaderboardEnd && in.hasNext()) {
@@ -73,8 +61,6 @@ public class MasterConnection {
 					leaderboard[i++] = new LBPlayer(Long.parseLong(lbplayer[0]), lbplayer[1], Long.parseLong(lbplayer[2]), Long.parseLong(lbplayer[3]));
 				}
 			}
-		} else {
-			System.out.println("unexpected response from server:" + line);
 		}
 		return leaderboard;
 	}
@@ -103,8 +89,6 @@ public class MasterConnection {
 			return true;
 		} else if (line.equals("login_false")) {
 			return false;
-		} else {
-			System.out.println("unexpected response from server");
 		}
 		return false;
 	}
@@ -122,45 +106,8 @@ public class MasterConnection {
 			if(in.hasNext()) {
 				guestNumber = Integer.parseInt(in.nextLine());
 			}
-		} else {
-			System.out.println("unexpected response from server");
 		}
 		return guestNumber;
-	}
-	
-	public static void main (String[] a){
-		Socket s = null;
-		InputStream inStream = null;
-		OutputStream outStream = null;
-		Scanner in = null;
-		PrintWriter out = null;
-
-		// check if we can talk with the server
-		System.out
-				.println("\nEen verbinding proberen te maken met met de server...");
-
-		try {
-			s = new Socket("127.0.0.1", 1338);
-			inStream = s.getInputStream();
-			outStream = s.getOutputStream();
-			in = new Scanner(inStream);
-			out = new PrintWriter(outStream, true /* autoFlush */);
-		} catch (IOException ioe) {
-			System.out
-					.println("\nKon niet met de server een verbinding maken. Check uw internet verbinding of whatever.. =/ .");
-		}
-		System.out.println("has connection");
-
-		MasterConnection c = new MasterConnection(out, in);
-		
-		if (c.login("jef", "lol"))
-			System.out.println("true");
-		else
-			System.out.println("false");
-		
-		for(GameServer g : c.getGameServers()) {
-			System.out.println(g.getName() + " " +g.getIp());
-		}
 	}
 
 	public boolean addAccount(String userName, String password) {
@@ -187,8 +134,6 @@ public class MasterConnection {
 			return true;
 		} else if (line.equals("sign_up_failed")) {
 			return false;
-		} else {
-			System.out.println("unexpected response from server");
 		}
 		return false;
 	}

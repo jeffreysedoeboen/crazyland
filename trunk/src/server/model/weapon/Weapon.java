@@ -23,26 +23,6 @@ public abstract class Weapon {
 		}
 		return null;
 	}
-
-//	public BufferedImage turnToPoint( int mouseX, int mouseY ) {
-//		float angle = (float) (Math.toDegrees((Math.atan2(Math.toRadians(mouseY - y), Math.toRadians(mouseX - x)))));
-//		if(Math.abs(angle) > 90.00000f) {
-//			setWeaponDir(1);
-//			image = WorldView.rotateImage(baseImage,angle,true);
-//		} else {
-//			setWeaponDir(0);
-//			image = WorldView.rotateImage(baseImage,angle,true);
-//		}
-//		
-//		return image;
-//	}
-//	
-//	public void setWeaponDir(int value) {
-//		if(weaponDirection != value) {
-//			baseImage = WorldView.verticalflip(baseImage);
-//			weaponDirection = value;
-//		}
-//	}
 	
 	public float getFireRate(){
 		return this.fireRate;

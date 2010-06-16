@@ -2,9 +2,6 @@ package server.model.upgrade;
 
 import java.sql.Time;
 import java.util.Date;
-import java.util.Random;
-
-import server.model.Map;
 
 public class Upgrade {
 	private int x,y;

@@ -77,7 +77,7 @@ public class Connector extends Thread {
             //we don't want 500 connections in 2 seconds.....
 			try{
 				Thread.currentThread();
-				Thread.sleep(1000); //TODO: fix me
+				Thread.sleep(1000);
 			}catch(InterruptedException ie){
 				
 			}

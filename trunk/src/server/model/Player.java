@@ -1,16 +1,12 @@
 package server.model;
 
-import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.Shape;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import server.model.bullet.Bullet;
-import server.model.upgrade.Upgrade;
 import server.model.weapon.Pistol;
 import server.model.weapon.Weapon;
 import server.tools.Circle;
@@ -49,9 +45,6 @@ public class Player implements WorldObject{
 		}
 
 		primaryWeapon = new Pistol();
-		//		weaponlist.add(new Pistol(this.getMidPlayerX() + 5, this.getMidPlayerY()));
-		//		weaponlist.add(new Grenade(this.getMidPlayerX() + 5, this.getMidPlayerY()));
-		//		primaryWeapon = weaponlist.get(0);
 	}
 
 	public void setName(String name) {
@@ -93,9 +86,7 @@ public class Player implements WorldObject{
 	public void resetDeaths() {
 		deaths = 0;
 	}
-
-
-
+	
 	public void setPosition(float x, float y) {
 		this.x = x;
 		this.y = y;
@@ -131,8 +122,6 @@ public class Player implements WorldObject{
 
 		return null;		
 	}
-
-
 
 	public float getX(){
 		return this.x;	
@@ -192,15 +181,6 @@ public class Player implements WorldObject{
 		}else{
 			this.x += 2; //3
 		}
-		updateWeaponPosition();
-	}
-
-	public void updateWeaponPosition() {
-		//		if(this.getWeapon().getWeaponDirection() == 0) {
-		//			this.getWeapon().setX(this.getMidPlayerX()- 5);
-		//		} else {
-		//			this.getWeapon().setX(this.getMidPlayerX() -30);
-		//		}
 	}
 
 	public void moveLeft(boolean onGround) {
@@ -209,12 +189,10 @@ public class Player implements WorldObject{
 		}else{
 			this.x -= 2; //3
 		}
-		updateWeaponPosition();
 	}
 
 	public void moveVertical() {
 		this.y -= this.verticalSpeed;
-		//this.getWeapon().setY(this.getMidPlayerY() - 18);
 	}
 
 	public void calcVerticalSpeed(boolean onGround) {
@@ -226,8 +204,6 @@ public class Player implements WorldObject{
 		}else{
 			this.verticalSpeed = 0;
 		}
-
-		//this.getWeapon().setY(this.getMidPlayerY() - 18);
 	}
 
 	public void changeWeapon() {

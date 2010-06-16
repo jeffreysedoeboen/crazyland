@@ -18,11 +18,9 @@ public class Sender {
 		this.out = out;
 		this.player = p;
 		out.println("m\n" + "crazyland5\nt\n" + remainingTime);
-		//out.println("m\n" + "crazyland2\n" + p.getName() + "\n" + (int)p.getX() + "," + (int)p.getY() + "\n" + p.getHitpoints());
 	}
 	
 	public void sendPlayer(){
-		//lineOut += "p%n" + player.getName() + "," + (int)player.getX() + "," + (int)player.getY() + "," + player.getHitpoints() + "," + String.format((Locale)null, "%.2f", player.getAngle()) + "%n";
 		lineOut += String.format((Locale)null, "p%n%s,%d,%d,%d,%.2f,%d,%d%n", player.getName(), (int)player.getX(), (int)player.getY(), player.getHitpoints(), player.getAngle(), player.getKills(), player.getDeaths());
 	}
 	
@@ -53,9 +51,7 @@ public class Sender {
 	}
 	
 	public void sendLineOut(){
-		out.printf(lineOut + getWeaponAngle() /*+ "ts%n" + System.currentTimeMillis() + "%n" */); //TODO: Timestamp verwijdern
-		//System.out.println(lineOut.length());
-		//System.out.println( lineOut + getWeaponAngle());
+		out.printf(lineOut + getWeaponAngle() /*+ "ts%n" + System.currentTimeMillis() + "%n" */);
 		lineOut = "";
 		turnWeapon = "";
 	}

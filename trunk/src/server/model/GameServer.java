@@ -15,12 +15,9 @@ public class GameServer extends Thread{
 	private World world;
 	private ArrayList<Sender> senderList = new ArrayList<Sender>();
 	private ArrayList<Receiver> receiverList = new ArrayList<Receiver>();
-	//private ArrayList<Upgrade> upgradeList = new ArrayList<Upgrade>();
 	private int count = 0;
 	private long seconds = GAME_TIME;
 	private Timer timer;
-
-
 
 	public static void main(String args[]){
 
@@ -36,7 +33,6 @@ public class GameServer extends Thread{
 				restartGame();
 			}
 		}
-
 	};
 
 	private void restartGame() {
@@ -60,15 +56,9 @@ public class GameServer extends Thread{
 		seconds = GAME_TIME;
 	}
 
-
-
 	public void addPlayer(Player p){
 		this.world.addPlayer(p);
 	}
-
-	//	public void addUpgrade(Upgrade u) {
-	//		this.world.addUpgrade(u);
-	//	}
 
 	public GameServer(){
 		this.world = new World(this);
@@ -95,7 +85,6 @@ public class GameServer extends Thread{
 		public void actionPerformed(ActionEvent arg0) {
 			run();
 		}
-
 	};
 
 	@SuppressWarnings("unchecked")
@@ -110,10 +99,6 @@ public class GameServer extends Thread{
 				s.sendUpgrades(world.getUpgradeList());
 				s.sendLineOut();
 			}
-		}
-
-		if(count % 20 == 0){
-			//System.out.println("Players in-game: " + senderList.size());
 		}
 
 		ArrayList<Player> waitingPlayers = (ArrayList<Player>)world.getPlayerWaitList().clone();
@@ -131,69 +116,68 @@ public class GameServer extends Thread{
 					count = 0;
 					if (--seconds == 0) {
 						timer.stop();
-						//TODO Timer	
 					}
 				}
 			}
 		}
 	}
 
-		@SuppressWarnings("unchecked")
-		public void removeBullet(Bullet b){
-			for(Sender s : (ArrayList<Sender>) senderList.clone()){
-				s.removeBullet(b);
-			}
-		}
-
-		@SuppressWarnings("unchecked")
-		public void removePlayer(Player p) {
-			for(Sender s : (ArrayList<Sender>) senderList.clone()){
-				if (s.isPlayer(p)) {
-					senderList.remove(s);
-					world.removePlayer(p);
-					s.removePlayer(p);
-				}
-			}
-			for(Receiver r : (ArrayList<Receiver>) receiverList.clone()){
-				if (r.isPlayer(p)) {
-					receiverList.remove(r);
-					r.terminate();
-				}
-			}
-		}
-
-		@SuppressWarnings("unchecked")
-		public void shoot(float x,float y, Player p){
-			Bullet b = world.shoot(x, y, p);
-			if(b != null){
-				System.out.println("test");
-				for(Sender s : (ArrayList<Sender>) senderList.clone()){
-					s.sendBullet(b);
-				}
-			}
-		}
-
-		public void addSender(Sender s) {
-			this.senderList.add(s);		
-		}
-
-		public void addReceiver(Receiver r) {
-			this.receiverList.add(r);
-
-		}
-
-		public void turnWeapon(int mouseX, int mouseY, Player player) {
-			float x = player.getX(), y = player.getY();
-			for(Sender s : senderList) {
-				if(s.isPlayer(player)) {
-					float angle = (float) (Math.toDegrees((Math.atan2(Math.toRadians(mouseY - y), Math.toRadians(mouseX - x)))));
-					player.setAngle(angle);
-					s.sendWeaponAngle(angle);
-				}
-			}
-		}
-		
-		public long getRemainingTimeInSeconds() {
-			return seconds;
+	@SuppressWarnings("unchecked")
+	public void removeBullet(Bullet b){
+		for(Sender s : (ArrayList<Sender>) senderList.clone()){
+			s.removeBullet(b);
 		}
 	}
+
+	@SuppressWarnings("unchecked")
+	public void removePlayer(Player p) {
+		for(Sender s : (ArrayList<Sender>) senderList.clone()){
+			if (s.isPlayer(p)) {
+				senderList.remove(s);
+				world.removePlayer(p);
+				s.removePlayer(p);
+			}
+		}
+		for(Receiver r : (ArrayList<Receiver>) receiverList.clone()){
+			if (r.isPlayer(p)) {
+				receiverList.remove(r);
+				r.terminate();
+			}
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public void shoot(float x,float y, Player p){
+		Bullet b = world.shoot(x, y, p);
+		if(b != null){
+			System.out.println("test");
+			for(Sender s : (ArrayList<Sender>) senderList.clone()){
+				s.sendBullet(b);
+			}
+		}
+	}
+
+	public void addSender(Sender s) {
+		this.senderList.add(s);		
+	}
+
+	public void addReceiver(Receiver r) {
+		this.receiverList.add(r);
+
+	}
+
+	public void turnWeapon(int mouseX, int mouseY, Player player) {
+		float x = player.getX(), y = player.getY();
+		for(Sender s : senderList) {
+			if(s.isPlayer(player)) {
+				float angle = (float) (Math.toDegrees((Math.atan2(Math.toRadians(mouseY - y), Math.toRadians(mouseX - x)))));
+				player.setAngle(angle);
+				s.sendWeaponAngle(angle);
+			}
+		}
+	}
+	
+	public long getRemainingTimeInSeconds() {
+		return seconds;
+	}
+}

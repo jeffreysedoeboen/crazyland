@@ -1,6 +1,5 @@
 package server.model.bullet;
 
-import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
@@ -20,7 +19,6 @@ public class PistolBullet extends Bullet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//shape = ;
 
 	}
 	

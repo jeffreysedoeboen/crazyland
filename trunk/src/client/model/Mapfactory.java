@@ -1,12 +1,9 @@
 package client.model;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
@@ -36,8 +33,7 @@ public class Mapfactory {
 		BufferedImage originalimage;
 		Tile[][] tiles = null;
 		try {
-			originalimage = ImageIO.read(new File("tiles/tiles.png"));
-			//ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
+			originalimage = ImageIO.read(new File("tiles/tiles.png"));;
 			ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
 			
 			
@@ -51,16 +47,6 @@ public class Mapfactory {
             int width = Integer.valueOf(mapElement.getAttribute("width")).intValue();
             int height = Integer.valueOf(mapElement.getAttribute("height")).intValue();
             tiles = new Tile[width][height];
-            
-            /*NodeList tilesetNode = doc.getElementsByTagName("tileset");
-			Element tilesetElement = (Element) tilesetNode.item(0);
-			NodeList listOfProperties = tilesetElement.getElementsByTagName("tile");
-            HashMap<Integer, Boolean> tileproperties = new HashMap<Integer, Boolean>();*/
-            
-            // create arraylist voor shape en corner
-//            ArrayList<String> shapes = new ArrayList<String>();
-//            ArrayList<String> corners = new ArrayList<String>();
-//            ArrayList<Boolean> solids = new ArrayList<Boolean>();
             
 			int counter = 0;
 			for(int y = 0; y < 96; y += 16) {
@@ -94,9 +80,7 @@ public class Mapfactory {
                 			System.out.println("respawn: " + propertyElement.getAttribute("value"));
                 		}
             		}
-            	}
-            	
-            	
+            	}	
             }
             
             // get level data
@@ -111,7 +95,6 @@ public class Mapfactory {
             	if (tileNode.getNodeType() == Node.ELEMENT_NODE) {
             		Element firstPersonElement = (Element)tileNode;
                 	
-            		//TODO: mooier oplossen
                 	int tiletype = Integer.valueOf(firstPersonElement.getAttribute("gid")).intValue();
                 	
                 	int min = 0;
@@ -121,11 +104,6 @@ public class Mapfactory {
                 	boolean respawn = (Integer.valueOf(propertyNodes[tiletype - min][3]).intValue() != 0);
                 	
                 	tiles[x][y] = new Tile(x,y,images.get(tiletype - min), solid, respawn);
-//                	if (tiletype != 0) {
-//                		tiles[x][y] = new Tile(x,y,images.get(tiletype - 1), true, shape, corner);
-//                	} else {
-//                		tiles[x][y] = new Tile(x,y,images.get(tiletype), false, shape, corner);
-//                	}
                 	
             	}
             	x += 1;
@@ -136,18 +114,14 @@ public class Mapfactory {
             }
 
 		} catch (SAXParseException err) {
-        System.out.println ("** Parsing error" + ", line " 
-             + err.getLineNumber () + ", uri " + err.getSystemId ());
-        System.out.println(" " + err.getMessage ());
-
+	        System.out.println ("** Parsing error" + ", line " + err.getLineNumber () + ", uri " + err.getSystemId ());
+	        System.out.println(" " + err.getMessage ());
         }catch (SAXException e) {
-        Exception x = e.getException ();
-        ((x == null) ? e : x).printStackTrace ();
-
+	        Exception x = e.getException ();
+	        ((x == null) ? e : x).printStackTrace ();
         }catch (Throwable t) {
-        t.printStackTrace ();
+        	t.printStackTrace ();
         }
-        
         return tiles;
 	}
 }
