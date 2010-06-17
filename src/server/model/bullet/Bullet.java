@@ -84,7 +84,7 @@ public abstract class Bullet {
 	 */
 	public void setBullet(float x, float y, double dir, Player p) {
 		this.x = x;
-		this.y = y;
+		this.y = y - 8;
 		this.player = p;
 		this.direction = (float) dir;	
 		
