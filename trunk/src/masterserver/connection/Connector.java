@@ -67,9 +67,8 @@ public class Connector extends Thread {
  
             
             Connection c = null; 
-            c = new Connection(in, out, server);
-            c.start();
-            server.addConnection(c);
+            new Connection(in, out, server).start();
+//            server.addConnection(c);
             
             //we don't want 500 connections in 2 seconds.....
 			try{
