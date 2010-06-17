@@ -82,7 +82,7 @@ public class ButtonController implements ActionListener {
 				JOptionPane.showMessageDialog(lobbyview, "Could not connect. No server selected?", "Could not connect", JOptionPane.ERROR_MESSAGE);
 			} else {
 				GameFrame f = new GameFrame();
-				f.setWorldView(new WorldView(server, lobbyview.getUserName(), f));
+				f.setWorldView(new WorldView(server, lobbyview.getUserName(), f, master));
 				f.setSize(600, 300);
 				f.setVisible(true);
 			}
