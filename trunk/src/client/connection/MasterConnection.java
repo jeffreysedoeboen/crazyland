@@ -139,4 +139,10 @@ public class MasterConnection {
 		return false;
 	}
 	
+	public void sendStats(int kills, int deaths) {
+		String output = "update_stats\n" + kills + "," + deaths;
+		
+		out.println(output);
+	}
+	
 }

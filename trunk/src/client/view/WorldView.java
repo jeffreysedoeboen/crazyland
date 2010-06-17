@@ -31,6 +31,7 @@ import javax.imageio.ImageIO;
 
 import client.animations.Animation;
 import client.animations.GunFire;
+import client.connection.MasterConnection;
 import client.connection.Receiver;
 import client.connection.Sender;
 import client.controller.KeyboardController;
@@ -53,6 +54,7 @@ public class WorldView extends JPanel {
 	private int bgWidth, bgHeight;
 	private boolean showHighscore;
 	private String userName;
+	private MasterConnection master;
 	private Sender sender;
 	private GameFrame gameframe;
 	private int timeRemaining;
@@ -61,6 +63,8 @@ public class WorldView extends JPanel {
 		public void actionPerformed(ActionEvent arg0) {
 			if (--timeRemaining == 0) {
 				showHighscore = true;
+				Player player = receiver.getPlayer();
+				master.sendStats(player.getKills(), player.getDeaths());
 			}
 			if(timeRemaining == -5) {
 				timeRemaining = receiver.getTimeRemaining();
@@ -77,9 +81,10 @@ public class WorldView extends JPanel {
 		this.showHighscore = showHighscore;
 	}
 
-	public WorldView(GameServer server, String userName, GameFrame gameframe) {
+	public WorldView(GameServer server, String userName, GameFrame gameframe, MasterConnection master) {
 		this.userName = userName;
 		this.gameframe = gameframe;
+		this.master = master;
 		connectAndPrepare(server);
 		setSize(600, 300);
 		new Timer(20, taskPerformer).start();
