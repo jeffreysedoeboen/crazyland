@@ -26,7 +26,7 @@ public class World{
 	public World(GameServer s){
 		map = new Map();
 		this.server = s;
-		//initialiseren van upgrades (actueel 14)
+		//initialiseren van upgrades
 		for(WorldObject wo : getUpgrades()) {
 			Tile tile = ((Tile) wo);
 			if(tile.getUpgrade().equals("life")) {
