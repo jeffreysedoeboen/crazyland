@@ -124,8 +124,6 @@ public class Receiver extends Thread {
 				if(player != null) {
 					player.turnToPoint(angle);
 				}
-			} else if(tempstr.equals("t")) {
-//				System.out.println(System.currentTimeMillis() - Long.parseLong(in.nextLine()));
 			}
 		}
 	}

@@ -52,7 +52,7 @@ public class Sender {
 	}
 	
 	public void sendLineOut(){
-		out.printf(lineOut + getWeaponAngle() /*+ "ts%n" + System.currentTimeMillis() + "%n" */);
+		out.printf(lineOut + getWeaponAngle());
 		lineOut = "";
 		turnWeapon = "";
 	}
