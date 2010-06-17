@@ -39,6 +39,9 @@ public class ButtonController implements ActionListener {
 		JButton button = (JButton) ae.getSource();
 		if(button.getText().equals("Sign up!")){
 			String filledInUsername = signupview.getUsernameinput().getText();
+			if(filledInUsername.length() > 10){
+				filledInUsername = filledInUsername.substring(0,10);
+			}
 			String filledInPassword = signupview.getPasswordinput().getText();
 			String filledInPasswordcheck = signupview.getPasswordcheckinput().getText();
 			if (!filledInPassword.equals(filledInPasswordcheck)) {
