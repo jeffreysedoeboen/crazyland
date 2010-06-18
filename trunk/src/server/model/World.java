@@ -22,6 +22,7 @@ public class World{
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	private ArrayList<Upgrade> upgrades = new ArrayList<Upgrade>();
 	private int bulletCounter = 1;
+	private int playerCounter = 1;
 
 	public World(GameServer s){
 		map = new Map();
@@ -404,5 +405,13 @@ public boolean checkCloseBulletColission(Bullet b, Shape tile){
 
 	public ArrayList<Upgrade> getUpgradeList() {
 		return upgrades;
+	}
+	
+	public int getPlayerCounter() {
+		return playerCounter;
+	}
+	
+	public void increasePlayerCounter() {
+		playerCounter++;
 	}
 }
