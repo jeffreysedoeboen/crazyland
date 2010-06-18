@@ -65,10 +65,7 @@ public class Connector extends Thread {
     		out = new PrintWriter(outStream, true);	
             in = new Scanner(inStream);
  
-            
-            Connection c = null; 
             new Connection(in, out, server).start();
-//            server.addConnection(c);
             
             //we don't want 500 connections in 2 seconds.....
 			try{

@@ -14,7 +14,8 @@ import client.view.InlogView;
 public class Client {
 
 	public static void main(String[] args) {
-
+		assert(args.length>0);
+		
 		InlogView inlogview;
 		
 		Socket s = null;
@@ -24,7 +25,7 @@ public class Client {
 		PrintWriter out = null;
 
 		try {
-			s = new Socket("192.168.1.100", 1338);
+			s = new Socket(args[0], 1338);
 			inStream = s.getInputStream();
 			outStream = s.getOutputStream();
 			in = new Scanner(inStream);
