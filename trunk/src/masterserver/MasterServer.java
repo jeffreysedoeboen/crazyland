@@ -1,7 +1,5 @@
 package masterserver;
 
-import java.util.ArrayList;
-
 import masterserver.connection.*;
 
 public class MasterServer extends Thread{
