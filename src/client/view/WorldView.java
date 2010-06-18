@@ -61,6 +61,7 @@ public class WorldView extends JPanel {
 	private ActionListener gameTimerPerformer = new ActionListener() {
 	
 		public void actionPerformed(ActionEvent arg0) {
+			timeRemaining = receiver.getTimeRemaining();
 			if (--timeRemaining == 0) {
 				showHighscore = true;
 				Player player = receiver.getPlayer();

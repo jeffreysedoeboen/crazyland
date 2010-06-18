@@ -14,7 +14,7 @@ import server.model.tile.Tile;
 
 public class GameServer extends Thread{
 
-	private final int GAME_TIME = 600;
+	private final int GAME_TIME = 60;
 	private World world;
 	private ArrayList<Sender> senderList = new ArrayList<Sender>();
 	private ArrayList<Receiver> receiverList = new ArrayList<Receiver>();
@@ -35,6 +35,8 @@ public class GameServer extends Thread{
 			if (--seconds == -5) {
 				restartGame();
 			}
+			for (Sender s : senderList)
+				s.sendTime(seconds);
 			System.out.println(seconds);
 		}
 	};
@@ -46,8 +48,8 @@ public class GameServer extends Thread{
 		world.getPlayerWaitList().clear();
 		for(Player player : world.getPlayerList()) {
 			player.resetKills();
+			player.resetDeaths();
 			player.resetHitpoints();
-			player.resetKills();
 			player.resetTimeToWait();
 
 			Tile respawn = (Tile)world.getRespawns().get(i++);
