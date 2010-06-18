@@ -31,6 +31,7 @@ import javax.imageio.ImageIO;
 
 import client.animations.Animation;
 import client.animations.GunFire;
+import client.animations.Poefje;
 import client.connection.MasterConnection;
 import client.connection.Receiver;
 import client.connection.Sender;
@@ -353,8 +354,17 @@ public class WorldView extends JPanel {
 		public void actionPerformed(ActionEvent arg0) {
 			WorldView.this.repaint();
 			
-			ArrayList<Animation> animations = (ArrayList<Animation>) receiver.getAnimtions().clone();
-			for(Animation a : animations) {
+			ArrayList<Animation> animations = (ArrayList<Animation>) receiver.getAnimtions();
+			
+			for(Bullet b : (ArrayList<Bullet>) receiver.getBullets().clone()) {
+				if(b != null) {
+					animations.add(new Poefje((int) b.getX(), (int) b.getY()));
+				}
+			}
+			
+			ArrayList<Animation> animationsClone = (ArrayList<Animation>) animations.clone();
+			
+			for(Animation a : animationsClone) {
 				a.decreaseTime();
 				if(a.getTimeVisible() < 1) {
 					receiver.removeAnimation(a);

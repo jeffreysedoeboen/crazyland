@@ -113,7 +113,6 @@ public class Receiver extends Thread {
 				Player p = null;
 				String tmp = in.nextLine();
 				for(Player pl : remotePlayers){
-					System.out.println(tmp);
 					if(pl.getName().equals(tmp)){
 						p = pl;
 						break;
