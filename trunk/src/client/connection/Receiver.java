@@ -62,8 +62,7 @@ public class Receiver extends Thread {
 					this.player.setAngle(Float.parseFloat(playerXY[4]));
 					this.player.turnToPoint(Float.parseFloat(playerXY[4]));
 					this.player.setKills(Integer.parseInt(playerXY[5]));
-					this.player.setDeaths(Integer.parseInt(playerXY[6]));
-					
+					this.player.setDeaths(Integer.parseInt(playerXY[6]));	
 				}
 			}else if(tempstr.equals("pb")){ // player begin (list)
 				boolean playerEnd = false;
@@ -81,7 +80,7 @@ public class Receiver extends Thread {
 			}else if(tempstr.equals("b")){ // bullet
 				String[] bulletXY = in.nextLine().split(",");
 				Bullet b = new Bullet(Integer.parseInt(bulletXY[0]),Integer.parseInt(bulletXY[1])+15,Integer.parseInt("" + bulletXY[2]),Float.parseFloat(bulletXY[3]));
-				animationList.add(new GunFire((int)b.getX(),(int) b.getY()));
+				//animationList.add(new GunFire((int)b.getX(),(int) b.getY()));
 				bulletList.add(b);
 			}else if(tempstr.equals("ub")) { // upgrades_begin
 				boolean upgradeEnd = false;
@@ -92,7 +91,9 @@ public class Receiver extends Thread {
 						upgradeEnd = true;
 					}else{
 						String[] upgradeXY = rp.split(",");
-						tempList.add(new ExtraLife(Integer.parseInt("" + upgradeXY[0]),Integer.parseInt("" + upgradeXY[1])));
+						if(!upgradeExists(new Upgrade(Integer.parseInt(upgradeXY[0]), Integer.parseInt(upgradeXY[1])))) {
+							tempList.add(new ExtraLife(Integer.parseInt("" + upgradeXY[0]),Integer.parseInt("" + upgradeXY[1])));
+						}
 					}
 				}
 				this.upgradeList = tempList;
@@ -127,7 +128,16 @@ public class Receiver extends Thread {
 			}
 		}
 	}
-
+	
+	private boolean upgradeExists(Upgrade u) {
+		for(Upgrade upg : upgradeList) {
+			if(upg.getX() == u.getX() && upg.getY() == u.getY()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public synchronized ArrayList<Bullet> getBullets() {
 		return (ArrayList<Bullet>) this.bulletList.clone();
