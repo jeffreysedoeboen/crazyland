@@ -11,6 +11,7 @@ import server.connection.Receiver;
 import server.connection.Sender;
 import server.model.bullet.Bullet;
 import server.model.tile.Tile;
+import server.model.upgrade.Upgrade;
 
 public class GameServer extends Thread{
 
@@ -58,7 +59,12 @@ public class GameServer extends Thread{
 
 		//Bullets weghalen
 		world.getBullets().clear();
-
+		
+		//Upgrades reseten
+		for(Upgrade u : world.getUpgradeList()) {
+			u.setIsUsed(false);
+		}
+		
 		seconds = GAME_TIME;
 		for (Sender s : senderList) {
 			s.sendTime(seconds);
