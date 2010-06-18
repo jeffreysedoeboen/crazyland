@@ -13,8 +13,8 @@ public class Explosion implements Animation{
 	private int timeVisible = 50;
 
 	public Explosion(int x, int y) {
-		this.x = x - 32;
-		this.y = y - 32;
+		this.x = x - 16;
+		this.y = y - 16;
 		try {
 			image = ImageIO.read(new File("themes/tee/other/explosion.png"));
 		} catch (IOException e) {
