@@ -53,30 +53,49 @@ public class Receiver extends Thread {
 				tempstr = in.nextLine();
 				String[] playerXY = tempstr.split(",");
 				if (this.player == null) {
-					this.player = new Player( playerXY[0], Integer.parseInt(playerXY[1]), Integer.parseInt(playerXY[2]), Integer.parseInt(playerXY[3]), Float.parseFloat(playerXY[4]), Integer.parseInt(playerXY[5]), Integer.parseInt(playerXY[6]));
+					this.player = new Player( playerXY[0], Integer.parseInt(playerXY[1]), Integer.parseInt(playerXY[2]), Integer.parseInt(playerXY[3]), Float.parseFloat(playerXY[4]), Integer.parseInt(playerXY[5]), Integer.parseInt(playerXY[6]), Integer.parseInt(playerXY[7]));
 				} else {
-					this.player.setName(playerXY[0]);
-					this.player.setX(Integer.parseInt(playerXY[1]));
-					this.player.setY(Integer.parseInt(playerXY[2]));
-					this.player.setHitpoints(Integer.parseInt(playerXY[3]));
-					this.player.setAngle(Float.parseFloat(playerXY[4]));
-					this.player.turnToPoint(Float.parseFloat(playerXY[4]));
-					this.player.setKills(Integer.parseInt(playerXY[5]));
-					this.player.setDeaths(Integer.parseInt(playerXY[6]));	
+					this.player.setX(Integer.parseInt(playerXY[0]));
+					this.player.setY(Integer.parseInt(playerXY[1]));
+					this.player.setHitpoints(Integer.parseInt(playerXY[2]));
+					this.player.setAngle(Float.parseFloat(playerXY[3]));
+					this.player.turnToPoint(Float.parseFloat(playerXY[3]));
+					this.player.setKills(Integer.parseInt(playerXY[4]));
+					this.player.setDeaths(Integer.parseInt(playerXY[5]));
+					//this.player.setIndentifier(Integer.parseInt(playerXY[6]));
 				}
 			}else if(tempstr.equals("pb")){ // player begin (list)
+				long start = System.currentTimeMillis();
 				boolean playerEnd = false;
-				ArrayList<Player> tempList = new ArrayList<Player>();
+				//ArrayList<Player> tempList = new ArrayList<Player>();
 				while(!playerEnd && !terminated && in.hasNext()){
 					String rp = in.nextLine();
 					if(rp.equals("pe")){ // player end
 						playerEnd = true;
 					}else{
+						// alle durchlaufen -> neue hinzufügen
+						// alte anpassen
+						// muss auch bei versturen berücksichtigt werden
 						String[] playerXY = rp.split(",");
-						tempList.add(new Player(playerXY[0], Integer.parseInt(playerXY[1]),Integer.parseInt(playerXY[2]),Integer.parseInt(playerXY[3]), Float.parseFloat(playerXY[4]), Integer.parseInt(playerXY[5]), Integer.parseInt(playerXY[6])));
+						if (playerXY.length == 8) {
+							remotePlayers.add(new Player(playerXY[0], Float.parseFloat(playerXY[1]),Float.parseFloat(playerXY[2]),Integer.parseInt(playerXY[3]), Float.parseFloat(playerXY[4]), Integer.parseInt(playerXY[5]), Integer.parseInt(playerXY[6]), Integer.parseInt(playerXY[7])));
+						} else {
+							for (Player p : remotePlayers) {
+								if (p.getIndentifier() == Integer.parseInt(playerXY[6])) {
+									p.setX(Integer.parseInt(playerXY[0]));
+									p.setY(Integer.parseInt(playerXY[1]));
+									p.setHitpoints(Integer.parseInt(playerXY[2]));
+									p.setAngle(Float.parseFloat(playerXY[3]));
+									p.turnToPoint(Float.parseFloat(playerXY[3]));
+									p.setKills(Integer.parseInt(playerXY[4]));
+									p.setDeaths(Integer.parseInt(playerXY[5]));
+								}
+							}
+						}
 					}
 				}
-				this.remotePlayers = tempList;
+				//this.remotePlayers = tempList;
+				System.out.println(System.currentTimeMillis() - start);
 			}else if(tempstr.equals("b")){ // bullet
 				String[] bulletXY = in.nextLine().split(",");
 				Bullet b = new Bullet(Integer.parseInt(bulletXY[0]),Integer.parseInt(bulletXY[1])+15,Integer.parseInt("" + bulletXY[2]),Float.parseFloat(bulletXY[3]));

@@ -35,6 +35,7 @@ public class Player {
 	private int kills;
 	private int deaths;
 	private Timer timer;
+	private int indentifier;
 	private ActionListener timerPerformer = new ActionListener() {
 
 		public void actionPerformed(ActionEvent arg0) {
@@ -44,8 +45,7 @@ public class Player {
 
 	}; 
 	
-	
-	public Player(String name, float x, float y,int hitpoints, float angle, int kills, int deaths) {
+	public Player(String name, float x, float y,int hitpoints, float angle, int kills, int deaths, int indentifier) {
 		this.angle = angle;
 		this.x = x;
 		this.y = y;
@@ -53,6 +53,7 @@ public class Player {
 		this.hitpoints = hitpoints;
 		this.kills = kills;
 		this.deaths = deaths;
+		this.indentifier = indentifier;
 		try {
 			leftImage 		= ImageIO.read(new File("themes/tee/characters/character_left.png"));
 			rightImage 		= ImageIO.read(new File("themes/tee/characters/character_right.png"));
@@ -189,4 +190,11 @@ public class Player {
 		return rotatedImage;
 	}
 	
+	public void setIndentifier(int indentifier) {
+		this.indentifier = indentifier;
+	}
+	
+	public int getIndentifier() {
+		return indentifier;
+	}
 }

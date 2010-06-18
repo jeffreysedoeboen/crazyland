@@ -68,7 +68,8 @@ public class Connector extends Thread {
             in = new Scanner(inStream);
             
             Tile t = (Tile)server.getWorld().getRespawns().get((int) (Math.random()*server.getWorld().getRespawns().size()));
-            Player p = new Player("Henk", t.getX() * 16,t.getY() * 16);
+            Player p = new Player("Henk", t.getX() * 16,t.getY() * 16, server.getWorld().getPlayerCounter());
+            server.getWorld().increasePlayerCounter();
             
             Sender s = new Sender(out,p, server.getRemainingTimeInSeconds());
             Receiver r = new Receiver(in,p,server);

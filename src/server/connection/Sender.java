@@ -14,12 +14,14 @@ public class Sender {
 	private Player player;
 	private String lineOut = "";
 	private String turnWeapon = "";
+	private int playerCounter = 0;
 		
 	public Sender(PrintWriter out, Player p, long remainingTime){
 		this.out = out;
 		this.player = p;
-		out.println("t\n" + remainingTime + "\n");
-		out.println("m\n" + "crazyland5\n");
+		// stuur player met naam
+		lineOut += String.format((Locale)null, "p%n%s,%d,%d,%d,%.2f,%d,%d,%d%n", player.getName(), (int)player.getX(), (int)player.getY(), player.getHitpoints(), player.getAngle(), player.getKills(), player.getDeaths(), player.getIndentifier());
+		out.println("m\n" + "crazyland5\nt\n" + remainingTime);
 	}
 	
 	public void sendTime(long remainingTime){
@@ -27,14 +29,19 @@ public class Sender {
 	}
 	
 	public void sendPlayer(){
-		lineOut += String.format((Locale)null, "p%n%s,%d,%d,%d,%.2f,%d,%d%n", player.getName(), (int)player.getX(), (int)player.getY(), player.getHitpoints(), player.getAngle(), player.getKills(), player.getDeaths());
+		lineOut += String.format((Locale)null, "p%n%d,%d,%d,%.2f,%d,%d,%d%n", (int)player.getX(), (int)player.getY(), player.getHitpoints(), player.getAngle(), player.getKills(), player.getDeaths(), player.getIndentifier());
 	}
 	
 	public void sendPlayers(ArrayList<Player> playerList){
 		String kaas = String.format("pb%n");
 		for(Player player : playerList){
-			if(!player.equals(this.player)){
-				kaas += String.format((Locale)null, "%s,%d,%d,%d,%.2f,%d,%d%n", player.getName(), (int)player.getX(), (int)player.getY(), player.getHitpoints(), player.getAngle(), player.getKills(), player.getDeaths());
+			if(!player.equals(this.player)) {
+				if(player.getIndentifier() > playerCounter) {
+					playerCounter++;
+					kaas += String.format((Locale)null, "%s,%d,%d,%d,%.2f,%d,%d%n", player.getName(), (int)player.getX(), (int)player.getY(), player.getHitpoints(), player.getAngle(), player.getKills(), player.getDeaths(), player.getIndentifier());
+				} else {
+					kaas += String.format((Locale)null, "%d,%d,%d,%.2f,%d,%d%n", (int)player.getX(), (int)player.getY(), player.getHitpoints(), player.getAngle(), player.getKills(), player.getDeaths(), player.getIndentifier());
+				}
 			}
 		}
 		lineOut += kaas + String.format("pe%n");
@@ -42,7 +49,7 @@ public class Sender {
 	
 	public void sendBullet(Bullet b){
 		String kaas = "b%n";
-		kaas += (int)b.getX() + "," + (int)b.getY() + "," + (int)b.getIndentifier() + "," + String.format((Locale)null, "%.10f", b.getDirection()) + "%n";
+		kaas += (int)b.getX() + "," + (int)b.getY() + "," + (int)b.getIndentifier() + "," + String.format((Locale)null, "%.5f", b.getDirection()) + "%n";
 		lineOut += kaas;
 	}
 	

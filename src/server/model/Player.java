@@ -27,15 +27,16 @@ public class Player implements WorldObject{
 	private int shootCounter, kills, deaths, timeToWait;
 	private float verticalSpeed = 0;
 	private ArrayList<Weapon> weaponlist;
-	
+	protected int indentifier;
 
-	public Player(String name, float x, float y) {
+	public Player(String name, float x, float y, int indentifier) {
 		weaponlist = new ArrayList<Weapon>();
 		this.name = name;
 		this.x = x;
 		this.y = y;
 		this.shootCounter = 0;
 		this.timeToWait = respawnTime;
+		this.indentifier = indentifier;
 
 		try {
 			playerImage = ImageIO.read(new File("themes/tee/characters/character.png"));
@@ -251,5 +252,9 @@ public class Player implements WorldObject{
 
 	public void setHitpoints(int value) {
 		hitpoints += value;
+	}
+	
+	public int getIndentifier() {
+		return indentifier;
 	}
 }
