@@ -58,8 +58,10 @@ public class WorldView extends JPanel {
 	private Sender sender;
 	private GameFrame gameframe;
 	private int timeRemaining;
-	private ActionListener gameTimerPerformer = new ActionListener() {
+	private boolean showLeaveTime;
+	private int leaveTime;
 	
+	private ActionListener gameTimerPerformer = new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 			timeRemaining = receiver.getTimeRemaining();
 			if (--timeRemaining == 0) {
@@ -76,6 +78,14 @@ public class WorldView extends JPanel {
 
 	public boolean isShowHighscore() {
 		return showHighscore;
+	}
+	
+	public void setShowLeaveTime(boolean b) {
+		this.showLeaveTime = b;
+	}
+	
+	public void setLeaveTime(int i){
+		this.leaveTime = i;
 	}
 	
 	public void setShowHighscore(boolean showHighscore) {
@@ -233,7 +243,9 @@ public class WorldView extends JPanel {
 			if(isShowHighscore()) {
 				drawHighscore(g);
 			}
-			
+			if(showLeaveTime) {
+				drawLeaveTime(g);
+			}
 			drawTime(g);
 		}	
 	}
@@ -254,6 +266,22 @@ public class WorldView extends JPanel {
 			time = "0:00";
 		}
 		g.drawString(time, (getWidth()/2), 20);
+	}
+	
+	private void drawLeaveTime(Graphics g) {
+		Color color = new Color(1, 0, 0, 0.75f); //Red 
+		g.setColor(color);
+
+		int xPos   = (getWidth()/4);
+		int yPos   = (getHeight()/4);
+		g.fillRect(xPos, yPos, 350, 100);
+		g.setColor(Color.CYAN);
+
+		g.setFont(new Font("sansserif", Font.PLAIN, 18));
+		int y = yPos + 30;
+		g.drawString("Weet u zeker dat u wilt stoppen?     " + leaveTime, xPos + 20 , y);
+		g.setFont(new Font("sansserif", Font.PLAIN, 13));
+		g.drawString("Druk escape om door te gaan en enter om te stoppen", xPos + 20, y + 30);
 	}
 
 	private void drawHighscore(Graphics g) {

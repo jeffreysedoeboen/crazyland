@@ -25,7 +25,7 @@ public class Client {
 		PrintWriter out = null;
 
 		try {
-			s = new Socket("145.76.109.11", 1338);
+			s = new Socket("127.0.0.1", 1338);
 //			s = new Socket(args[0], 1338);
 			inStream = s.getInputStream();
 			outStream = s.getOutputStream();
