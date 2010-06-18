@@ -16,7 +16,7 @@ public class LeaderDAO {
 			Connection conn = dbManager.getConnection();
 
 			PreparedStatement pst = conn.prepareStatement("INSERT INTO leaderboard (rank, username,kills, deaths)" +
-			"VALUES(?, ?,60,20)");
+			"VALUES(?, ?,0,0)");
 
 
 			pst.setLong(1,rank);
