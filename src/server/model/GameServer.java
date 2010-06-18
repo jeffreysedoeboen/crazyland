@@ -35,6 +35,7 @@ public class GameServer extends Thread{
 			if (--seconds == -5) {
 				restartGame();
 			}
+			System.out.println(seconds);
 		}
 	};
 
@@ -57,6 +58,9 @@ public class GameServer extends Thread{
 		world.getBullets().clear();
 
 		seconds = GAME_TIME;
+		for (Sender s : senderList) {
+			s.sendTime(seconds);
+		}
 	}
 
 	public void addPlayer(Player p){

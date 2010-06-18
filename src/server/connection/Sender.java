@@ -18,7 +18,12 @@ public class Sender {
 	public Sender(PrintWriter out, Player p, long remainingTime){
 		this.out = out;
 		this.player = p;
-		out.println("m\n" + "crazyland5\nt\n" + remainingTime);
+		out.println("t\n" + remainingTime + "\n");
+		out.println("m\n" + "crazyland5\n");
+	}
+	
+	public void sendTime(long remainingTime){
+		lineOut += "t\n" + remainingTime + "\n";
 	}
 	
 	public void sendPlayer(){
