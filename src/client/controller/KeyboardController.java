@@ -49,6 +49,9 @@ public class KeyboardController implements KeyListener {
 		case(KeyEvent.VK_ESCAPE): 
 			gameframe.dispose();
 		break;
+		case(KeyEvent.VK_ENTER): 
+			gameframe.setLeaving();
+		break;
 		}
 	}
 

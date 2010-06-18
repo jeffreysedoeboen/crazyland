@@ -75,14 +75,14 @@ public class DBmanager {
 	 */
 	private static Connection getCon() throws SQLException,
 			ClassNotFoundException {
-//		String driver = "org.gjt.mm.mysql.Driver";
-//		String url = "jdbc:mysql://www.freesql.org/crazyland?";
-//		String username = "crazyland";
-//		String password = "EIN2grules";
 		String driver = "org.gjt.mm.mysql.Driver";
-		String url = "jdbc:mysql://localhost/crazyland?";
-		String username = "root";
-		String password = "";
+		String url = "jdbc:mysql://www.freesql.org/crazyland?";
+		String username = "crazyland";
+		String password = "EIN2grules";
+//		String driver = "org.gjt.mm.mysql.Driver";
+//		String url = "jdbc:mysql://localhost/crazyland?";
+//		String username = "root";
+//		String password = "";
 		try {
 			Class.forName(driver).newInstance();
 		} catch (InstantiationException e) {
